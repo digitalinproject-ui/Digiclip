@@ -2240,8 +2240,10 @@ def _run_gemini_stage(client, model_name, prompt, schema):
         response_mime_type="application/json",
         response_schema=schema,
     )
-    max_attempts = 4
+    fallback_chain = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"]
     curr_model = model_name
+    fallback_idx = 0
+    max_attempts = 6
     for attempt in range(1, max_attempts + 1):
         try:
             if use_local:
@@ -2266,28 +2268,39 @@ def _run_gemini_stage(client, model_name, prompt, schema):
             raise  # deterministic policy block — never retry
         except Exception as e:
             msg = str(e)
-            # Auto-fallback: if Google returns 503 UNAVAILABLE (high demand), switch to a stable model
-            if not use_local and any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded')):
-                fallback = 'gemini-2.5-flash' if curr_model != 'gemini-2.5-flash' else 'gemini-1.5-flash'
-                if fallback != curr_model:
-                    print(f"🔄 Gemini {curr_model} is unavailable (503 / high demand). Automatically falling back to {fallback}...")
-                    curr_model = fallback
-                    time.sleep(2)
-                    continue
-            transient = any(tok in msg for tok in (
-                '503', 'UNAVAILABLE', '429', 'RESOURCE_EXHAUSTED',
-                '500', 'INTERNAL', 'overloaded', 'Deadline',
+            is_503 = any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded', 'ResourceExhausted', '429', 'RESOURCE_EXHAUSTED'))
+            is_404 = any(tok in msg for tok in ('404', 'NOT_FOUND', 'not found', 'no longer available'))
+
+            # Fallback handling:
+            # - If 404 (model not found / deprecated): switch immediately
+            # - If 503 / high demand: retry current model first (attempt 1), switch on attempt >= 2
+            if not use_local and (is_404 or (is_503 and attempt >= 2)):
+                if fallback_idx < len(fallback_chain):
+                    next_model = fallback_chain[fallback_idx]
+                    fallback_idx += 1
+                    while next_model == curr_model and fallback_idx < len(fallback_chain):
+                        next_model = fallback_chain[fallback_idx]
+                        fallback_idx += 1
+                    if next_model != curr_model:
+                        reason = "not found / deprecated (404)" if is_404 else "high demand (503)"
+                        print(f"🔄 Gemini {curr_model} {reason}. Automatically falling back to {next_model}...")
+                        curr_model = next_model
+                        time.sleep(2)
+                        continue
+
+            transient = is_503 or any(tok in msg for tok in (
+                '500', 'INTERNAL', 'Deadline',
                 'empty response body', 'did not contain a JSON object',
                 'Failed to parse Gemini JSON response',
                 # OpenAI-compatible servers: model still loading, busy, or a
                 # small model that skipped a required field this time.
                 'ConnectError', 'ReadTimeout', 'RemoteProtocolError', '502', '504',
                 'validation error'))
-            if attempt == max_attempts or not transient:
+            if attempt == max_attempts or (not transient and not is_404):
                 raise
-            wait = 5 * (2 ** (attempt - 1))
+            wait = 3 * (attempt if attempt <= 3 else 3)
             who = "LLM server" if use_local else "Gemini"
-            print(f"⚠️ {who} transient error (attempt {attempt}/{max_attempts}), retrying in {wait}s: {msg[:150]}")
+            print(f"⚠️ {who} ({curr_model}) temporary error (attempt {attempt}/{max_attempts}), retrying in {wait}s: {msg[:150]}")
             time.sleep(wait)
 
 
@@ -2521,7 +2534,7 @@ def get_viral_clips(transcript_result, video_duration, viewer_clips=None):
         raise
     except Exception as e:
         print(f"❌ Gemini Error: {e}")
-        return None
+        raise RuntimeError(f"Gemini analysis failed: {e}") from e
 
 
 # --- Speech too sparse to clip by transcript -------------------------------
@@ -2636,8 +2649,10 @@ def _visual_pass(client, model_name, video_path, duration, language,
             response_mime_type="application/json",
             response_schema=gemini_worker.VisualResponse,
         )
+        fallback_chain = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"]
         curr_model = model_name
-        max_attempts = 4
+        fallback_idx = 0
+        max_attempts = 6
         for attempt in range(1, max_attempts + 1):
             try:
                 response = client.models.generate_content(
@@ -2655,16 +2670,26 @@ def _visual_pass(client, model_name, video_path, duration, language,
                 raise
             except Exception as e:
                 msg = str(e)
-                if any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded')):
-                    fallback = 'gemini-2.5-flash' if curr_model != 'gemini-2.5-flash' else 'gemini-1.5-flash'
-                    if fallback != curr_model:
-                        print(f"🔄 Visual analysis: {curr_model} unavailable (503). Falling back to {fallback}...")
-                        curr_model = fallback
-                        time.sleep(2)
-                        continue
-                if attempt == max_attempts:
+                is_503 = any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded', 'ResourceExhausted', '429', 'RESOURCE_EXHAUSTED'))
+                is_404 = any(tok in msg for tok in ('404', 'NOT_FOUND', 'not found', 'no longer available'))
+                if is_404 or (is_503 and attempt >= 2):
+                    if fallback_idx < len(fallback_chain):
+                        next_model = fallback_chain[fallback_idx]
+                        fallback_idx += 1
+                        while next_model == curr_model and fallback_idx < len(fallback_chain):
+                            next_model = fallback_chain[fallback_idx]
+                            fallback_idx += 1
+                        if next_model != curr_model:
+                            reason = "not found / deprecated (404)" if is_404 else "high demand (503)"
+                            print(f"🔄 Visual analysis: {curr_model} {reason}. Falling back to {next_model}...")
+                            curr_model = next_model
+                            time.sleep(2)
+                            continue
+                if attempt == max_attempts or (not is_503 and not is_404):
                     raise
-                time.sleep(4)
+                wait = 3 * (attempt if attempt <= 3 else 3)
+                print(f"⚠️ Gemini visual pass ({curr_model}) temporary error (attempt {attempt}/{max_attempts}), retrying in {wait}s: {msg[:150]}")
+                time.sleep(wait)
     finally:
         if file_upload is not None:
             try:

@@ -586,7 +586,7 @@ def main() -> int:
     parser.add_argument("--input", dest="input_path", required=True)
     parser.add_argument("--output", dest="output_path", required=True)
     parser.add_argument("--strategy", default="structured-schema")
-    parser.add_argument("--model", default="gemini-2.5-flash")
+    parser.add_argument("--model", default="gemini-3.1-flash-lite")
     args = parser.parse_args()
 
     api_key = os.getenv("GEMINI_API_KEY")
@@ -615,8 +615,10 @@ def main() -> int:
         fmt["min_secs"], fmt["max_secs"] = clip_duration_bounds()
     prompt = template.format(**fmt)
 
+    fallback_chain = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"]
     curr_model = model_name
-    max_attempts = 4
+    fallback_idx = 0
+    max_attempts = 6
     for attempt in range(1, max_attempts + 1):
         try:
             _log(f"🤖 Gemini worker request: mode={args.mode} strategy={args.strategy} model={curr_model} items={len(payload.get('windows', []))}")
@@ -628,16 +630,26 @@ def main() -> int:
             break
         except Exception as e:
             msg = str(e)
-            if any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded')):
-                fallback = 'gemini-2.5-flash' if curr_model != 'gemini-2.5-flash' else 'gemini-1.5-flash'
-                if fallback != curr_model:
-                    _log(f"🔄 Gemini worker {curr_model} unavailable (503). Falling back to {fallback}...")
-                    curr_model = fallback
-                    time.sleep(2)
-                    continue
-            if attempt == max_attempts:
+            is_503 = any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded', 'ResourceExhausted', '429', 'RESOURCE_EXHAUSTED'))
+            is_404 = any(tok in msg for tok in ('404', 'NOT_FOUND', 'not found', 'no longer available'))
+            if is_404 or (is_503 and attempt >= 2):
+                if fallback_idx < len(fallback_chain):
+                    next_model = fallback_chain[fallback_idx]
+                    fallback_idx += 1
+                    while next_model == curr_model and fallback_idx < len(fallback_chain):
+                        next_model = fallback_chain[fallback_idx]
+                        fallback_idx += 1
+                    if next_model != curr_model:
+                        reason = "not found / deprecated (404)" if is_404 else "high demand (503)"
+                        _log(f"🔄 Gemini worker {curr_model} {reason}. Falling back to {next_model}...")
+                        curr_model = next_model
+                        time.sleep(2)
+                        continue
+            if attempt == max_attempts or (not is_503 and not is_404):
                 raise
-            time.sleep(4)
+            wait = 3 * (attempt if attempt <= 3 else 3)
+            _log(f"⚠️ Gemini worker ({curr_model}) temporary error (attempt {attempt}/{max_attempts}), retrying in {wait}s: {msg[:150]}")
+            time.sleep(wait)
 
     raw_text = _get_response_text(response)
     # With response_schema the SDK returns an already-validated object; fall
