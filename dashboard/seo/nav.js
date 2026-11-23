@@ -146,11 +146,11 @@ export function renderNav({ lang = 'en', signedIn = false, showLogin = true } = 
 
 /* Apple HIG styling: Clean light background, high-contrast dark text, Digiclip Electric Blue (#0000fb) */
 export const NAV_CSS = `
-.osn{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid #e5e5ea;
+.osn{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,sans-serif;font-size:.875rem;line-height:1.4}
 .osn *{box-sizing:border-box}
 .osn a{text-decoration:none}
-.osn-bar{max-width:76rem;margin:0 auto;padding:0 1.5rem;height:4.25rem;display:flex;align-items:center;gap:1.5rem;position:relative}
+.osn-bar{max-width:76rem;margin:0 auto;padding:0 1.5rem;height:3.85rem;display:flex;align-items:center;gap:1.5rem;position:relative}
 .osn-brand{display:flex;align-items:center;gap:.65rem;font-weight:700;font-size:1.25rem;
   letter-spacing:-.02em;color:#1d1d1f;white-space:nowrap;flex-shrink:0}
 .osn-brand img{width:30px;height:30px;display:block;border-radius:6px}
@@ -176,11 +176,11 @@ export const NAV_CSS = `
 .osn-panel a:hover{background:#f5f5f7;color:#0000fb}
 .osn-panel small{display:block;font-size:.75rem;color:#71717a;font-weight:400}
 .osn-actions{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-.osn-donate{background:#fff1f2;color:#e11d48;border:1px solid #fecdd3;padding:.45rem .85rem;border-radius:9999px;font-size:.8125rem;font-weight:600;display:flex;align-items:center;gap:.35rem;transition:all .15s}
-.osn-donate:hover{background:#ffe4e6;color:#be123c}
-.osn-cta{background:#0000fb;color:#ffffff;padding:.5rem 1.2rem;border-radius:9999px;font-weight:600;
+.osn-donate{background:#f5f5f7;color:#1d1d1f;border:1px solid #e5e5ea;padding:.42rem .85rem;border-radius:9999px;font-size:.8125rem;font-weight:600;display:flex;align-items:center;gap:.35rem;transition:all .15s}
+.osn-donate:hover{background:#ebebeb;color:#000000;border-color:#d1d1d6}
+.osn-cta{background:#0000fb;color:#ffffff;padding:.45rem 1.15rem;border-radius:9999px;font-weight:600;font-size:.8125rem;
   white-space:nowrap;flex-shrink:0;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,251,0.2)}
-.osn-cta:hover{background:#0000d6;color:#ffffff;box-shadow:0 4px 14px rgba(0,0,251,0.3)}
+.osn-cta:hover{background:#0000d6;color:#ffffff;box-shadow:0 4px 14px rgba(0,0,251,0.3);transform:translateY(-0.5px)}
 .osn-toggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;margin:0}
 .osn-burger{display:none;color:#1d1d1f;cursor:pointer;padding:.4rem;margin-right:-.4rem;border-radius:6px}
 .osn-toggle:focus-visible+.osn-burger{outline:2px solid #0000fb;outline-offset:2px}

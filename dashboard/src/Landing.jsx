@@ -4,7 +4,6 @@ import SiteNav from './components/SiteNav';
 import { useAuth } from './contexts/AuthContext';
 import './landing.css';
 
-const APPARATUS_CALLOUTS = ['RATIO · 9:16', 'CLIPS · 8 VIRAL CLIPS', 'HOOK · AUTO DETECT', 'SUBS · WORD-LEVEL'];
 
 // Real clips Digiclip made from Creative Commons (CC BY) sources. `video` is
 // the original and the clip side by side, in sync; `vertical` is the clip on
@@ -557,87 +556,103 @@ export default function Landing({ onLaunchApp }) {
       {/* Navigation: the shared site nav (seo/nav.js), same items as every page */}
       <SiteNav className="fixed top-0 w-full z-50" />
 
-      {/* Hero — Marquee Hero: blueprint grid, content left, apparatus right */}
-      <section className="hero-blueprint relative overflow-clip border-b border-rule pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-14 items-center">
+      {/* Hero — Apple HIG Clean Minimalist Hero */}
+      <section className="hero-blueprint relative overflow-clip border-b border-rule pt-28 pb-16 px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_auto] gap-12 lg:gap-16 items-center">
           <div className="min-w-0">
-            <p className="eyebrow mb-6 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">DIGICLIP STUDIO · AI VIDEO CLIP GENERATOR · 8 VIRAL SHORTS</p>
+            {/* Subtle Pill Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-xs font-semibold text-neutral-800 mb-6 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#0000fb] ring-4 ring-[#0000fb]/15"></span>
+              <span>AI Video Clip Maker</span>
+              <span className="text-neutral-300">|</span>
+              <span className="text-neutral-600 font-medium">8 Viral Shorts Per Video</span>
+            </div>
 
-            <h1 className="hero-h1 mb-6 font-bold">
-              <span className="block">AI Video Clip Maker:</span>{' '}
-              <span className="block">Long Video In,</span>{' '}
-              <span className="block"><em>Viral Shorts</em> Out.</span>
+            <h1 className="hero-h1 mb-5">
+              <span className="block">AI Video Clip Maker:</span>
+              <span className="text-neutral-900">Long Video In, </span>
+              <span className="text-[#0000fb]">Viral Shorts Out.</span>
             </h1>
 
-            <p className="hero-description text-neutral-600 max-w-2xl mb-8 leading-relaxed text-base sm:text-lg">
-              Paste a YouTube link or upload a podcast, stream, or interview. Digiclip AI automatically picks the top 8 viral moments,
-              reframes them to 9:16 around active speakers, and burns in animated subtitles—ready for TikTok, Reels, and YouTube Shorts in minutes.
+            <p className="text-neutral-600 max-w-xl mb-8 leading-relaxed text-base sm:text-lg font-normal">
+              Turn long videos, podcasts, and streams into 8 high-engagement vertical shorts. Automatically reframed to 9:16 with animated subtitles and viral hooks—ready to post in minutes.
             </p>
 
-            {/* The hero CTA is the product itself: paste a link and land in the
-                app with it loaded. Sign-in is asked for at generate time, not
-                before the user has seen anything. */}
-            <form onSubmit={handleHeroSubmit} className="mb-5">
-              <div className="hero-input-row flex flex-col sm:flex-row items-stretch gap-3">
-                <div className="relative flex-1 min-w-0">
-                  <Link2 size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+            {/* Apple Spotlight-Style Unified Capsule Input */}
+            <form onSubmit={handleHeroSubmit} className="mb-6 max-w-2xl">
+              <div className="p-1.5 sm:p-2 bg-white border border-neutral-200/90 rounded-2xl shadow-sm hover:shadow-md focus-within:shadow-md focus-within:border-[#0000fb]/40 transition-all flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                <div className="relative flex-1 min-w-0 flex items-center">
+                  <Link2 size={18} className="absolute left-3.5 text-neutral-400 pointer-events-none" />
                   <input
                     type="url"
                     value={heroUrl}
                     onChange={(e) => setHeroUrl(e.target.value)}
-                    placeholder="Paste a video link (YouTube, Twitch, Kick)..."
-                    className="input-field pl-11 bg-white border border-neutral-300 focus:border-[#0000fb] rounded-xl text-neutral-900"
+                    placeholder="Paste YouTube, Twitch, or Kick URL..."
+                    className="w-full pl-10 pr-3 py-2.5 bg-transparent text-sm sm:text-base text-neutral-900 placeholder-neutral-400 focus:outline-none"
                     aria-label="Video link"
                   />
                 </div>
-                <button type="submit" className="btn-primary whitespace-nowrap font-bold bg-[#0000fb] hover:bg-[#0000d6] text-white px-6 py-3 rounded-xl shadow-md">
-                  Get Free Clips
-                  <ArrowRight size={16} />
-                </button>
-                <button type="button" onClick={onLaunchApp} className="btn-ghost whitespace-nowrap font-semibold bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-800 px-5 py-3 rounded-xl">
-                  <Upload size={16} />
-                  Upload a File
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="submit"
+                    className="flex-1 sm:flex-none whitespace-nowrap font-semibold bg-[#0000fb] hover:bg-[#0000d6] text-white px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-sm"
+                  >
+                    <span>Get Free Clips</span>
+                    <ArrowRight size={15} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onLaunchApp}
+                    className="flex-1 sm:flex-none whitespace-nowrap font-medium bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 px-4 py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 text-sm"
+                  >
+                    <Upload size={15} />
+                    <span>Upload</span>
+                  </button>
+                </div>
               </div>
             </form>
 
-            {/* Trust line right under the CTA: the objection this removes
-                (a card) is the whole point of the free plan. */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5 text-sm">
-              <span className="badge-ok whitespace-nowrap font-semibold">
-                <Check size={14} className="text-emerald-600" /> 100% Free &amp; Open Source
+            {/* Apple-style Guarantee Badges Tier */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-neutral-700 mb-4">
+              <span className="inline-flex items-center gap-1.5">
+                <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 100% Free &amp; Open Source
               </span>
-              <span className="text-neutral-600">8 viral clips generated per video · No subscription · No watermark</span>
+              <span className="text-neutral-300">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 8 Viral Clips Guaranteed
+              </span>
+              <span className="text-neutral-300">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> No Watermarks or Paywalls
+              </span>
             </div>
 
-            <p className="text-sm text-neutral-600">
-              <span className="font-semibold text-neutral-900">Zero cost. Zero paywalls.</span> Built for creators, editors, and developers.{' '}
+            {/* Platform Compatibility Chips */}
+            <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+              <span className="text-neutral-400 font-medium">Compatible with:</span>
+              {['YouTube', 'Twitch', 'Kick', 'TikTok', 'Podcasts'].map((platform) => (
+                <span key={platform} className="px-2.5 py-0.5 rounded-lg bg-neutral-100/90 text-neutral-700 font-medium">
+                  {platform}
+                </span>
+              ))}
+              <span className="mx-1 text-neutral-300">|</span>
               <a
                 href="https://github.com/digitalinproject-ui/Digiclip"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#0000fb] font-semibold underline hover:text-[#0000d6] transition-colors"
+                className="inline-flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
               >
-                Contribute on GitHub →
+                <Github size={13} />
+                <span>GitHub Repository</span>
               </a>
-            </p>
-
-            <p className="mt-4 text-sm text-neutral-500">
-              Works with links from{' '}
-              {WORKS_WITH.map(([href, label], i) => (
-                <React.Fragment key={href}>
-                  {i > 0 && ' · '}
-                  <a href={href} className={LINK}>{label}</a>
-                </React.Fragment>
-              ))}
-            </p>
+            </div>
           </div>
 
-          {/* Apparatus — instrument bezel holding a real 9:16 clip */}
-          <figure className="apparatus" aria-label="example vertical clip generated by Digiclip">
-            <div className="apparatus-shell">
-              <span className="apparatus-glow" aria-hidden="true" />
-              <div className="apparatus-chamber">
+          {/* Clean Apple Smartphone Preview with Floating Status Widgets */}
+          <div className="relative flex justify-center items-center py-4 lg:py-0">
+            <div className="device-mockup">
+              <div className="device-island" />
+              <div className="device-screen">
                 <video
                   key={DEMOS[heroDemo].id}
                   src={DEMOS[heroDemo].vertical}
@@ -648,17 +663,32 @@ export default function Landing({ onLaunchApp }) {
                   onEnded={() => setHeroDemo((i) => (i + 1) % DEMOS.length)}
                   playsInline
                   preload="metadata"
-                  className="w-full h-full object-cover"
                 />
-                <span className="apparatus-stencil">DIGICLIP-9:16</span>
+              </div>
+
+              {/* Floating pill 1: Viral Score */}
+              <div className="floating-badge -top-2 -right-3 sm:-right-6">
+                <div className="w-7 h-7 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs ring-2 ring-emerald-500/20">
+                  98
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Viral Score</div>
+                  <div className="text-xs font-bold text-neutral-900">High Retention</div>
+                </div>
+              </div>
+
+              {/* Floating pill 2: Auto 9:16 Clips */}
+              <div className="floating-badge -bottom-3 -left-3 sm:-left-6">
+                <div className="w-7 h-7 rounded-full bg-[#0000fb]/10 text-[#0000fb] flex items-center justify-center">
+                  <Scissors size={14} />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Smart Reframe</div>
+                  <div className="text-xs font-bold text-neutral-900">8 Clips Ready</div>
+                </div>
               </div>
             </div>
-            <ul className="apparatus-callouts" aria-hidden="true">
-              {APPARATUS_CALLOUTS.map((c) => (
-                <li key={c}><span className="apparatus-leader" />{c}</li>
-              ))}
-            </ul>
-          </figure>
+          </div>
         </div>
       </section>
 
