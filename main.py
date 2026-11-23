@@ -2227,7 +2227,7 @@ def transcribe_video(video_path, slot_timeout=None):
     return transcript
 
 def _run_gemini_stage(client, model_name, prompt, schema):
-    """One schema-enforced model call with transient-error backoff.
+    """One schema-enforced model call with transient-error backoff and auto-fallback.
     Returns (parsed_dict, cost_analysis).
 
     With an OpenAI-compatible server configured (``llm_backend.active()``)
@@ -2240,12 +2240,13 @@ def _run_gemini_stage(client, model_name, prompt, schema):
         response_mime_type="application/json",
         response_schema=schema,
     )
-    max_attempts = 3
+    max_attempts = 4
+    curr_model = model_name
     for attempt in range(1, max_attempts + 1):
         try:
             if use_local:
-                return llm_backend.generate_json(prompt, schema, model=model_name)
-            response = client.models.generate_content(model=model_name, contents=prompt, config=config)
+                return llm_backend.generate_json(prompt, schema, model=curr_model)
+            response = client.models.generate_content(model=curr_model, contents=prompt, config=config)
             # Policy blocks are deterministic — retrying only burns quota and
             # time, and the user deserves the real reason instead of a generic
             # "empty response" (prod 23-jul: PROHIBITED_CONTENT on every try).
@@ -2260,11 +2261,19 @@ def _run_gemini_stage(client, model_name, prompt, schema):
             else:
                 parsed = gemini_worker._parse_json_response_text(
                     gemini_worker._get_response_text(response))
-            return parsed, gemini_worker._calculate_cost_analysis(response, model_name)
+            return parsed, gemini_worker._calculate_cost_analysis(response, curr_model)
         except gemini_worker.GeminiBlockedError:
             raise  # deterministic policy block — never retry
         except Exception as e:
             msg = str(e)
+            # Auto-fallback: if Google returns 503 UNAVAILABLE (high demand), switch to a stable model
+            if not use_local and any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded')):
+                fallback = 'gemini-2.5-flash' if curr_model != 'gemini-2.5-flash' else 'gemini-1.5-flash'
+                if fallback != curr_model:
+                    print(f"🔄 Gemini {curr_model} is unavailable (503 / high demand). Automatically falling back to {fallback}...")
+                    curr_model = fallback
+                    time.sleep(2)
+                    continue
             transient = any(tok in msg for tok in (
                 '503', 'UNAVAILABLE', '429', 'RESOURCE_EXHAUSTED',
                 '500', 'INTERNAL', 'overloaded', 'Deadline',
@@ -2627,17 +2636,35 @@ def _visual_pass(client, model_name, video_path, duration, language,
             response_mime_type="application/json",
             response_schema=gemini_worker.VisualResponse,
         )
-        response = client.models.generate_content(
-            model=model_name, contents=[file_upload, prompt], config=config)
-        gemini_worker.raise_if_blocked(response)
-        parsed = json.loads(response.text)
-        clean = []
-        for s in parsed.get("shorts") or []:
-            s["start"] = max(0.0, float(s.get("start", 0)))
-            s["end"] = min(float(duration), float(s.get("end", 0)))
-            if s["end"] - s["start"] >= 1.0:
-                clean.append(s)
-        return clean, gemini_worker._calculate_cost_analysis(response, model_name)
+        curr_model = model_name
+        max_attempts = 4
+        for attempt in range(1, max_attempts + 1):
+            try:
+                response = client.models.generate_content(
+                    model=curr_model, contents=[file_upload, prompt], config=config)
+                gemini_worker.raise_if_blocked(response)
+                parsed = json.loads(response.text)
+                clean = []
+                for s in parsed.get("shorts") or []:
+                    s["start"] = max(0.0, float(s.get("start", 0)))
+                    s["end"] = min(float(duration), float(s.get("end", 0)))
+                    if s["end"] - s["start"] >= 1.0:
+                        clean.append(s)
+                return clean, gemini_worker._calculate_cost_analysis(response, curr_model)
+            except gemini_worker.GeminiBlockedError:
+                raise
+            except Exception as e:
+                msg = str(e)
+                if any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded')):
+                    fallback = 'gemini-2.5-flash' if curr_model != 'gemini-2.5-flash' else 'gemini-1.5-flash'
+                    if fallback != curr_model:
+                        print(f"🔄 Visual analysis: {curr_model} unavailable (503). Falling back to {fallback}...")
+                        curr_model = fallback
+                        time.sleep(2)
+                        continue
+                if attempt == max_attempts:
+                    raise
+                time.sleep(4)
     finally:
         if file_upload is not None:
             try:

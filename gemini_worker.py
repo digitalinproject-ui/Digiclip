@@ -615,12 +615,29 @@ def main() -> int:
         fmt["min_secs"], fmt["max_secs"] = clip_duration_bounds()
     prompt = template.format(**fmt)
 
-    _log(f"🤖 Gemini worker request: mode={args.mode} strategy={args.strategy} model={model_name} items={len(payload.get('windows', []))}")
-    response = client.models.generate_content(
-        model=model_name,
-        contents=prompt,
-        config=config,
-    )
+    curr_model = model_name
+    max_attempts = 4
+    for attempt in range(1, max_attempts + 1):
+        try:
+            _log(f"🤖 Gemini worker request: mode={args.mode} strategy={args.strategy} model={curr_model} items={len(payload.get('windows', []))}")
+            response = client.models.generate_content(
+                model=curr_model,
+                contents=prompt,
+                config=config,
+            )
+            break
+        except Exception as e:
+            msg = str(e)
+            if any(tok in msg for tok in ('503', 'UNAVAILABLE', 'overloaded')):
+                fallback = 'gemini-2.5-flash' if curr_model != 'gemini-2.5-flash' else 'gemini-1.5-flash'
+                if fallback != curr_model:
+                    _log(f"🔄 Gemini worker {curr_model} unavailable (503). Falling back to {fallback}...")
+                    curr_model = fallback
+                    time.sleep(2)
+                    continue
+            if attempt == max_attempts:
+                raise
+            time.sleep(4)
 
     raw_text = _get_response_text(response)
     # With response_schema the SDK returns an already-validated object; fall
@@ -633,7 +650,7 @@ def main() -> int:
     result = {
         "mode": args.mode,
         "payload": parsed,
-        "cost_analysis": _calculate_cost_analysis(response, model_name),
+        "cost_analysis": _calculate_cost_analysis(response, curr_model),
         "raw_text": raw_text,
     }
     with open(args.output_path, "w", encoding="utf-8") as f:
