@@ -2338,37 +2338,42 @@ function App() {
               {/* On a phone the hero used to fill the fold on its own and push
                   the uploader — the whole point of the screen — below it. The
                   eyebrow, the display size and the gaps all shrink first. */}
-              <div className="max-w-xl w-full text-center space-y-5 sm:space-y-8">
-                <div className="space-y-2.5 sm:space-y-4">
-                  <p className="eyebrow hidden sm:block">01 · CLIP GENERATOR</p>
-                  <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-neutral-900 tracking-tight">
+              <div className="max-w-2xl w-full text-center">
+                {/* Header Block with Proportional Apple Hierarchy & Vertical Rhythm */}
+                <div className="mb-6 sm:mb-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-[11px] font-semibold text-neutral-700 mb-3 shadow-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0000fb]"></span>
+                    <span>01 · CLIP GENERATOR</span>
+                  </div>
+
+                  <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] tracking-tight leading-tight">
                     Smart AI Clipping for Creators
                   </h1>
-                  <p className="text-neutral-600 text-[15px] sm:text-lg leading-relaxed max-w-sm sm:max-w-none mx-auto">
+
+                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-lg mx-auto mt-2.5 font-normal">
                     Drop your podcast, stream, or video below to automatically extract 8 viral moments with AI.
                   </p>
-                  {/* The same pipeline is an MCP server: point people at the
-                      one place that explains how to drive it from an agent. */}
+
                   {!tutorialLock && (
-                  <p className="text-xs text-neutral-500">
-                    Or let an agent do it:{' '}
-                    <a
-                      href={billingEnabled ? '#/account' : '#app'}
-                      onClick={(e) => { if (!billingEnabled) { e.preventDefault(); goToTab('settings'); } }}
-                      className="text-neutral-700 underline underline-offset-2 hover:text-[#0000fb] transition-colors"
-                    >
-                      connect Claude, ChatGPT or n8n →
-                    </a>
-                  </p>
+                    <p className="text-xs text-neutral-400 mt-2">
+                      Or let an agent do it:{' '}
+                      <a
+                        href={billingEnabled ? '#/account' : '#app'}
+                        onClick={(e) => { if (!billingEnabled) { e.preventDefault(); goToTab('settings'); } }}
+                        className="text-neutral-600 hover:text-[#0000fb] font-medium underline underline-offset-2 transition-colors"
+                      >
+                        connect Claude, ChatGPT or n8n →
+                      </a>
+                    </p>
                   )}
                 </div>
 
                 <MediaInput onProcess={handleProcess} isProcessing={status === 'processing'} />
 
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-muted text-xs sm:text-sm">
-                  <span className="flex items-center gap-2"><Youtube size={16} /> YouTube</span>
-                  <span className="flex items-center gap-2"><Instagram size={16} /> Instagram</span>
-                  <span className="flex items-center gap-2"><TikTokIcon size={16} /> TikTok</span>
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-neutral-400 text-xs sm:text-sm">
+                  <span className="flex items-center gap-2 text-neutral-500"><Youtube size={16} /> YouTube</span>
+                  <span className="flex items-center gap-2 text-neutral-500"><Instagram size={16} /> Instagram</span>
+                  <span className="flex items-center gap-2 text-neutral-500"><TikTokIcon size={16} /> TikTok</span>
                 </div>
               </div>
               </div>
