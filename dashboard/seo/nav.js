@@ -129,7 +129,7 @@ export function renderNav({ lang = 'en', signedIn = false, showLogin = true } = 
   const login = signedIn || !showLogin ? '' : `<a class="osn-login" href="${LOGIN_HREF}">${esc(t.login)}</a>`
   return `<header class="osn" data-osn>
 <div class="osn-bar">
-  <a class="osn-brand" href="/"><img src="/logo-black.png" alt="Digiclip logo" width="30" height="30"><span>Digiclip</span><span class="osn-brand-badge">STUDIO</span></a>
+  <a class="osn-brand" href="/"><img src="/logo-full.png" alt="Digiclip" class="osn-brand-img"><span class="osn-brand-badge">STUDIO</span></a>
   <input type="checkbox" id="osn-toggle" class="osn-toggle" aria-label="${esc(t.menu)}">
   <label for="osn-toggle" class="osn-burger" title="${esc(t.menu)}">${BURGER}</label>
   <nav class="osn-menu" aria-label="${esc(t.main)}">
@@ -151,10 +151,9 @@ export const NAV_CSS = `
 .osn *{box-sizing:border-box}
 .osn a{text-decoration:none}
 .osn-bar{max-width:76rem;margin:0 auto;padding:0 1.5rem;height:3.85rem;display:flex;align-items:center;gap:1.5rem;position:relative}
-.osn-brand{display:flex;align-items:center;gap:.65rem;font-weight:700;font-size:1.25rem;
-  letter-spacing:-.02em;color:#1d1d1f;white-space:nowrap;flex-shrink:0}
-.osn-brand img{width:30px;height:30px;display:block;border-radius:6px}
-.osn-brand-badge{background:#0000fb;color:#ffffff;font-size:9px;font-weight:700;letter-spacing:0.06em;padding:1px 6px;border-radius:4px;margin-left:2px}
+.osn-brand{display:flex;align-items:center;gap:.5rem;color:#1d1d1f;white-space:nowrap;flex-shrink:0}
+.osn-brand-img{height:28px;width:auto;display:block;object-fit:contain}
+.osn-brand-badge{background:#0000fb;color:#ffffff;font-size:9px;font-weight:700;letter-spacing:0.06em;padding:1px 6px;border-radius:4px}
 .osn-menu{flex:1;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-width:0}
 .osn-list{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:1.4rem}
 .osn-item{margin:0;position:relative}
