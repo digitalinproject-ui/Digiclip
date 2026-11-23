@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers, Search, Bell, HelpCircle, User, Play, SlidersHorizontal, MoreHorizontal, Scissors } from 'lucide-react';
+import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers, Search, Bell, HelpCircle, User, Play, SlidersHorizontal, MoreHorizontal, Scissors, Heart } from 'lucide-react';
 import KeyInput from './components/KeyInput';
 import MediaInput from './components/MediaInput';
 import McpConnectCard from './components/McpConnectCard';
@@ -1579,7 +1579,18 @@ function App() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-[#e5e5ea] space-y-1 text-xs">
+      <div className="p-3 border-t border-[#e5e5ea] space-y-1 text-xs">
+        <a
+          href="https://saweria.co/Digitalin"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2.5 px-3 py-2 text-rose-600 hover:text-rose-700 bg-rose-50/70 hover:bg-rose-100/80 rounded-xl transition-all font-semibold group"
+          title="Donasi / Dukung Developer via Saweria"
+        >
+          <Heart size={16} className="shrink-0 text-rose-500 fill-rose-500 group-hover:scale-110 transition-transform" />
+          <span className="hidden lg:inline">Donasi Dev</span>
+          <span className="hidden lg:inline ml-auto text-[9px] font-bold uppercase bg-rose-200/80 text-rose-900 px-1.5 py-0.2 rounded-full">Saweria</span>
+        </a>
         <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg hover:bg-neutral-100/60 transition-colors">
           <HelpCircle size={16} /> <span className="hidden lg:inline">Help & Support</span>
         </a>
@@ -1647,7 +1658,17 @@ function App() {
           })}
         </nav>
 
-        <div className="px-3 py-3 border-t border-[#e5e5ea] space-y-0.5 safe-bottom shrink-0 text-xs">
+        <div className="px-3 py-3 border-t border-[#e5e5ea] space-y-1 safe-bottom shrink-0 text-xs">
+          <a
+            href="https://saweria.co/Digitalin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 px-3 py-2 text-rose-600 bg-rose-50/70 hover:bg-rose-100/80 rounded-xl transition-all font-semibold"
+          >
+            <Heart size={16} className="text-rose-500 fill-rose-500" />
+            <span>Donasi Dev (Saweria)</span>
+            <span className="ml-auto text-[9px] font-bold uppercase bg-rose-200 text-rose-900 px-1.5 py-0.5 rounded-full">Saweria</span>
+          </a>
           <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg transition-colors">
             <HelpCircle size={16} /> <span>Help & Support</span>
           </a>
@@ -1731,6 +1752,18 @@ function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Donate Developer Button (Saweria) */}
+            <a
+              href="https://saweria.co/Digitalin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100/80 border border-rose-200 text-rose-700 text-xs sm:text-sm font-semibold px-3 py-2 rounded-xl transition-all shadow-2xs shrink-0"
+              title="Donasi & Dukung Developer via Saweria"
+            >
+              <Heart size={15} className="text-rose-500 fill-rose-500" />
+              <span className="hidden md:inline">Donasi Dev</span>
+            </a>
+
             {/* Primary Action Button (Generate New Clip / New Project) */}
             <button
               onClick={handleReset}
@@ -2341,37 +2374,37 @@ function App() {
             </div>
           )}
 
-          {/* View: Clip Results - Apple HIG Layout matching Reference Image */}
+          {/* View: Clip Results - 4 across, 2 rows down (8 clips in 1 screen) */}
           {activeTab === 'dashboard' && status === 'complete' && (
-            <div className="h-full overflow-y-auto custom-scrollbar p-4 sm:p-8 animate-fade">
-              <div className="max-w-7xl mx-auto space-y-6">
+            <div className="h-full overflow-hidden flex flex-col p-3 sm:p-4 lg:p-5 animate-fade">
+              <div className="w-full max-w-[1720px] mx-auto flex flex-col h-full space-y-2 sm:space-y-2.5">
 
                 {/* Header Row: Clip Results + Actions */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
                   <div>
-                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+                    <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900">
                       Clip Results
                     </h1>
-                    <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-                      Your generated clips are here. Download, edit, or share them.
+                    <p className="text-xs text-neutral-500 mt-0.5">
+                      Your 8 generated clips are ready. Download, edit, or share them.
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2.5 flex-wrap">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <button
                       onClick={handleDownloadAll}
                       disabled={downloadingAll}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-700 rounded-xl text-xs sm:text-sm font-medium transition-colors shadow-2xs"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-700 rounded-xl text-xs font-medium transition-colors shadow-2xs"
                       title="Download all clips as a ZIP"
                     >
                       {downloadingAll ? (
                         <>
-                          <Loader2 size={15} className="animate-spin text-[#0000fb]" />
+                          <Loader2 size={13} className="animate-spin text-[#0000fb]" />
                           <span>Zipping...</span>
                         </>
                       ) : (
                         <>
-                          <Download size={15} />
+                          <Download size={13} />
                           <span>Download All (ZIP)</span>
                         </>
                       )}
@@ -2380,86 +2413,86 @@ function App() {
                     {results?.clips?.length > 1 && (
                       <button
                         onClick={() => setShowScheduleWeek(true)}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-700 rounded-xl text-xs sm:text-sm font-medium transition-colors shadow-2xs"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-700 rounded-xl text-xs font-medium transition-colors shadow-2xs"
                       >
-                        <Calendar size={15} />
+                        <Calendar size={13} />
                         <span>Schedule Week</span>
                       </button>
                     )}
 
                     <button
                       onClick={handleReset}
-                      className="inline-flex items-center gap-1.5 bg-[#0000fb] hover:bg-[#0000d6] text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl shadow-sm transition-all"
+                      className="inline-flex items-center gap-1.5 bg-[#0000fb] hover:bg-[#0000d6] text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-sm transition-all"
                     >
-                      <Plus size={16} />
+                      <Plus size={14} />
                       <span>Generate New Clip</span>
                     </button>
                   </div>
                 </div>
 
-                {/* Filter and Sort Pills Row matching Reference Image */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-                  <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 custom-scrollbar">
+                {/* Filter and Sort Pills Row */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 custom-scrollbar">
                     <button
                       onClick={() => setFilterStatus('all')}
-                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                         filterStatus === 'all'
                           ? 'bg-[#0000fb] text-white shadow-sm'
                           : 'bg-white border border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
                       }`}
                     >
                       <span>All Clips</span>
-                      <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${
+                      <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                         filterStatus === 'all' ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-600'
                       }`}>
-                        {rankedClips.length}
+                        {Math.min(8, rankedClips.length)}
                       </span>
                     </button>
 
                     <button
                       onClick={() => setFilterStatus('completed')}
-                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                         filterStatus === 'completed'
                           ? 'bg-[#0000fb] text-white shadow-sm'
                           : 'bg-white border border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
                       }`}
                     >
                       <span>Completed</span>
-                      <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${
+                      <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
                         filterStatus === 'completed' ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-600'
                       }`}>
-                        {rankedClips.length}
+                        {Math.min(8, rankedClips.length)}
                       </span>
                     </button>
 
                     <button
                       onClick={() => setFilterStatus('processing')}
-                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                         filterStatus === 'processing'
                           ? 'bg-[#0000fb] text-white shadow-sm'
                           : 'bg-white border border-neutral-200 text-neutral-500 hover:text-neutral-900'
                       }`}
                     >
                       <span>Processing</span>
-                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-500">0</span>
+                      <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-500">0</span>
                     </button>
 
                     <button
                       onClick={() => setFilterStatus('failed')}
-                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                         filterStatus === 'failed'
                           ? 'bg-[#0000fb] text-white shadow-sm'
                           : 'bg-white border border-neutral-200 text-neutral-500 hover:text-neutral-900'
                       }`}
                     >
                       <span>Failed</span>
-                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-500">0</span>
+                      <span className="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-500">0</span>
                     </button>
 
                     {/* Source Video & Logs Inspector Toggle */}
                     <button
                       onClick={() => setShowSourceModal(true)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-neutral-200 text-neutral-600 hover:text-[#0000fb] hover:border-[#0000fb]/40 transition-colors ml-auto sm:ml-2"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white border border-neutral-200 text-neutral-600 hover:text-[#0000fb] hover:border-[#0000fb]/40 transition-colors ml-auto sm:ml-2"
                       title="Inspect original source video and system processing logs"
                     >
                       <Terminal size={12} className="text-[#0000fb]" />
@@ -2467,52 +2500,36 @@ function App() {
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2 self-end sm:self-auto">
-                    <button className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
-                      <Calendar size={13} className="text-neutral-500" />
+                  <div className="flex items-center gap-1.5 self-end sm:self-auto">
+                    <button className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-neutral-200 rounded-xl text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+                      <Calendar size={12} className="text-neutral-500" />
                       <span>Last 7 days</span>
-                      <ChevronDown size={13} className="text-neutral-400" />
+                      <ChevronDown size={12} className="text-neutral-400" />
                     </button>
 
-                    <button className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+                    <button className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-neutral-200 rounded-xl text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
                       <span>Sort by: Newest</span>
-                      <ChevronDown size={13} className="text-neutral-400" />
+                      <ChevronDown size={12} className="text-neutral-400" />
                     </button>
                   </div>
                 </div>
 
                 {/* Notifications & Nudges */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {partialJob && !partialJob.chosen && (
                     <button
                       onClick={() => openUpsell({ source: 'partial_banner', partialJob })}
-                      className="w-full text-left px-4 py-3 rounded-xl bg-white border border-[#0000fb]/30 hover:border-[#0000fb] text-sm transition-colors shadow-2xs"
+                      className="w-full text-left px-3 py-2 rounded-xl bg-white border border-[#0000fb]/30 hover:border-[#0000fb] text-xs transition-colors shadow-2xs"
                     >
                       <span className="text-neutral-900">These clips come from the first {partialJob.processed_minutes} of {partialJob.total_minutes} minutes.</span>{' '}
                       <span className="text-[#0000fb] font-semibold">Clip the whole video →</span>
                     </button>
                   )}
-                  {showAutopilotNudge && (
-                    <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 rounded-xl bg-white border border-neutral-200 text-sm shadow-2xs">
-                      <div className="flex items-center gap-3">
-                        <Rocket size={18} className="text-[#0000fb] shrink-0" />
-                        <div>
-                          <span className="font-semibold text-neutral-900">Autopilot Video Clipper</span> — Automatically monitor your YouTube channel and generate clips on every upload.
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => { dismissAutopilotNudge('AutopilotNudgeClicked'); setActiveTab('autopilot'); }}
-                        className="btn-quiet text-xs shrink-0 self-end sm:self-auto"
-                      >
-                        Set up Autopilot →
-                      </button>
-                    </div>
-                  )}
                 </div>
 
-                {/* 3-Column Responsive Grid matching Reference Image */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
-                  {displayClips.map(({ clip, index: i }) => (
+                {/* 4 across, 2 rows down grid - exactly 8 clips fitting in 1 page without vertical scrolling */}
+                <div className="flex-1 min-h-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-2.5 sm:gap-3 overflow-y-auto lg:overflow-hidden pb-1">
+                  {displayClips.slice(0, 8).map(({ clip, index: i }) => (
                     <ResultCard
                       key={`${jobId}-${i}-${clip.video_url || ''}`}
                       clip={clip}

@@ -48,12 +48,6 @@ def clip_count_targets(n_windows):
     import os
 
     n = max(1, int(n_windows or 1))
-    # Floor grows with the material: 3 windows -> 3, 5 -> 4, 10+ -> 6.
-    low = max(2, min(6, n // 2 + 2))
-    # Ceiling allows a rich window to yield more than one without inviting padding.
-    high = min(12, max(4, n * 2))
-    low = min(low, high)
-
     def _override(name, current):
         raw = os.environ.get(name)
         if not raw:
@@ -63,8 +57,9 @@ def clip_count_targets(n_windows):
         except ValueError:
             return current
 
-    low = _override("CLIP_TARGET_MIN", low)
-    high = _override("CLIP_TARGET_MAX", high)
+    # Target 8 clips to fill the 4x2 grid (4 across, 2 rows down in 1 screen)
+    low = _override("CLIP_TARGET_MIN", 8)
+    high = _override("CLIP_TARGET_MAX", 8)
     return low, max(low, high)
 
 
