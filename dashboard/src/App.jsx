@@ -2342,20 +2342,20 @@ function App() {
                 <div className="space-y-2.5 sm:space-y-4">
                   <p className="eyebrow hidden sm:block">01 · CLIP GENERATOR</p>
                   <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-neutral-900 tracking-tight">
-                    Create Viral Shorts
+                    Turn Long Videos Into Viral Shorts
                   </h1>
-                  <p className="text-muted text-[15px] sm:text-lg leading-snug sm:leading-normal max-w-sm sm:max-w-none mx-auto">
-                    Drop your long-form video below to instantly generate viral clips with AI.
+                  <p className="text-neutral-600 text-[15px] sm:text-lg leading-relaxed max-w-sm sm:max-w-none mx-auto">
+                    Drop your podcast, stream, or video below to automatically extract 8 viral moments with AI.
                   </p>
                   {/* The same pipeline is an MCP server: point people at the
                       one place that explains how to drive it from an agent. */}
                   {!tutorialLock && (
-                  <p className="text-xs text-muted">
+                  <p className="text-xs text-neutral-500">
                     Or let an agent do it:{' '}
                     <a
                       href={billingEnabled ? '#/account' : '#app'}
                       onClick={(e) => { if (!billingEnabled) { e.preventDefault(); goToTab('settings'); } }}
-                      className="text-ink2 underline underline-offset-2 hover:text-brass transition-colors"
+                      className="text-neutral-700 underline underline-offset-2 hover:text-[#0000fb] transition-colors"
                     >
                       connect Claude, ChatGPT or n8n →
                     </a>
