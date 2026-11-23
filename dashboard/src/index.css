@@ -268,3 +268,71 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   DIGICLIP APPLE HIG EXPLICIT THEME OVERRIDES
+   Guarantees zero orange, pure white cards, high-contrast dark text,
+   and electric blue (#0000fb) accents everywhere.
+   ========================================================================== */
+
+:root {
+  --color-paper: #f5f5f7 !important;
+  --color-paper-2: #ffffff !important;
+  --color-paper-3: #f2f2f7 !important;
+  --color-ink: #1d1d1f !important;
+  --color-ink-2: #1d1d1f !important;
+  --color-muted: #52525b !important;
+  --color-rule: #e5e5ea !important;
+  --color-rule-2: #d1d1d6 !important;
+  --color-accent: #0000fb !important;
+  --color-accent-2: #0000fb !important;
+  --color-warn: #0000fb !important;
+  --color-focus: #0000fb !important;
+}
+
+/* Force high-contrast typography across all menus */
+.text-ink {
+  color: #1d1d1f !important;
+}
+.text-ink2 {
+  color: #1d1d1f !important;
+}
+.text-muted {
+  color: #52525b !important;
+}
+
+/* Force electric blue brand accents and eliminate orange completely */
+.text-brass, .text-warn, .text-coral {
+  color: #0000fb !important;
+}
+.border-brass, .border-warn, .border-coral {
+  border-color: #0000fb !important;
+}
+.bg-brass, .bg-warn, .bg-coral {
+  background-color: #0000fb !important;
+}
+
+/* Force clean Apple light surfaces */
+.bg-paper {
+  background-color: #f5f5f7 !important;
+}
+.bg-paper2, .card, .glass-panel {
+  background-color: #ffffff !important;
+  border-color: #e5e5ea !important;
+  color: #1d1d1f !important;
+}
+.bg-paper3 {
+  background-color: #f2f2f7 !important;
+}
+
+/* Badges */
+.badge-brass, .badge-warn {
+  color: #0000fb !important;
+  background-color: rgba(0, 0, 251, 0.08) !important;
+  border: 1px solid rgba(0, 0, 251, 0.2) !important;
+}
+.badge-ok {
+  color: #059669 !important;
+  background-color: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+}

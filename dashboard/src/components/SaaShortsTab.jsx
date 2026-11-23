@@ -401,16 +401,16 @@ export default function SaaShortsTab({ geminiApiKey, elevenLabsKey, falKey, uplo
         {/* Header */}
         <div className="flex items-end justify-between mb-2">
           <div>
-            <p className="eyebrow mb-2">03 · AI SHORTS</p>
-            <h1 className="font-display lowercase text-2xl text-ink">AI Shorts</h1>
+            <p className="text-[11px] font-mono uppercase font-bold tracking-wider text-[#0000fb] mb-1">03 · AI SHORTS</p>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">AI Shorts</h1>
           </div>
           {step > 0 && (
-            <button onClick={handleReset} className="text-xs lowercase text-muted hover:text-ink flex items-center gap-1 transition-colors">
+            <button onClick={handleReset} className="text-xs text-neutral-500 hover:text-neutral-900 flex items-center gap-1 transition-colors font-medium">
               <RefreshCw size={12} /> Start over
             </button>
           )}
         </div>
-        <p className="text-sm lowercase text-muted mb-6">
+        <p className="text-sm text-neutral-500 mb-6">
           Generate viral UGC videos for any product or business
         </p>
 
@@ -425,33 +425,33 @@ export default function SaaShortsTab({ geminiApiKey, elevenLabsKey, falKey, uplo
             <div className="card p-4 sm:p-8 space-y-6">
               {/* Video Mode Selector */}
               <div>
-                <label className="eyebrow block mb-3">Video Mode</label>
+                <label className="text-xs font-mono uppercase font-bold text-neutral-800 block mb-3">Video Mode</label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <button
                     onClick={() => setVideoMode('lowcost')}
-                    className={`card card-hover p-4 text-left ${
-                      videoMode === 'lowcost' ? 'border-brass' : ''
+                    className={`card card-hover p-4 text-left transition-all ${
+                      videoMode === 'lowcost' ? 'border-2 border-[#0000fb] bg-[#0000fb]/5 shadow-xs' : 'border border-neutral-200 bg-white hover:border-neutral-300'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1.5 gap-2">
-                      <span className={`text-sm font-medium lowercase ${videoMode === 'lowcost' ? 'text-ink' : 'text-ink2'}`}>Low Cost</span>
-                      <span className="badge-ok">recommended</span>
+                      <span className="text-sm font-bold text-neutral-900">Low Cost</span>
+                      <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase">recommended</span>
                     </div>
-                    <p className="readout mb-1.5">~$0.80 / VIDEO</p>
-                    <p className="text-xs text-muted leading-relaxed">Hailuo 2.3 img2video + VEED Lipsync. Good movement + lip-sync.</p>
+                    <p className="font-mono text-xs font-semibold text-neutral-800 mb-1.5">~$0.80 / VIDEO</p>
+                    <p className="text-xs text-neutral-500 leading-relaxed">Hailuo 2.3 img2video + VEED Lipsync. Good movement + lip-sync.</p>
                   </button>
                   <button
                     onClick={() => setVideoMode('premium')}
-                    className={`card card-hover p-4 text-left ${
-                      videoMode === 'premium' ? 'border-brass' : ''
+                    className={`card card-hover p-4 text-left transition-all ${
+                      videoMode === 'premium' ? 'border-2 border-[#0000fb] bg-[#0000fb]/5 shadow-xs' : 'border border-neutral-200 bg-white hover:border-neutral-300'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1.5 gap-2">
-                      <span className={`text-sm font-medium lowercase ${videoMode === 'premium' ? 'text-ink' : 'text-ink2'}`}>Premium</span>
-                      <span className="badge-brass">best quality</span>
+                      <span className="text-sm font-bold text-neutral-900">Premium</span>
+                      <span className="bg-[#0000fb]/10 text-[#0000fb] border border-[#0000fb]/20 text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase">best quality</span>
                     </div>
-                    <p className="readout mb-1.5">~$2.00 / VIDEO</p>
-                    <p className="text-xs text-muted leading-relaxed">Kling Avatar v2 Standard. Full integrated movement.</p>
+                    <p className="font-mono text-xs font-semibold text-neutral-800 mb-1.5">~$2.00 / VIDEO</p>
+                    <p className="text-xs text-neutral-500 leading-relaxed">Kling Avatar v2 Standard. Full integrated movement.</p>
                   </button>
                 </div>
               </div>

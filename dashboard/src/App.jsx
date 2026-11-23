@@ -2114,23 +2114,23 @@ function App() {
 
                 {/* Header */}
                 <div className="space-y-3">
-                  <p className="eyebrow flex items-center gap-2">
-                    <Bot size={12} /> 03 · AI AGENT · AUTONOMOUS SKILL
+                  <p className="text-xs font-mono uppercase font-bold tracking-wider text-[#0000fb] flex items-center gap-2">
+                    <Bot size={14} /> 03 · AI AGENT · AUTONOMOUS CLIPPING
                   </p>
-                  <h1 className="font-display lowercase text-3xl md:text-4xl text-ink">
+                  <h1 className="font-bold text-3xl md:text-4xl tracking-tight text-neutral-900">
                     Your Personal Clipping Team
                   </h1>
-                  <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+                  <p className="text-neutral-600 text-base md:text-lg leading-relaxed max-w-2xl">
                     Drop your videos in a folder and a team of AI clippers picks the viral moments, edits them, and queues them for your approval — like having a 24/7 short-form editing crew on autopilot.
                   </p>
                 </div>
 
                 {/* Mobile-format warning */}
-                <div className="px-4 py-3 rounded-card border border-rule bg-paper2 flex items-start gap-3">
-                  <Smartphone size={18} className="text-warn shrink-0 mt-0.5" />
-                  <div className="text-sm text-ink2">
-                    <p className="font-medium text-ink mb-1">Upload videos already in vertical (9:16) mobile format.</p>
-                    <p className="text-muted leading-relaxed">
+                <div className="px-4 py-3 rounded-2xl border border-neutral-200 bg-white flex items-start gap-3 shadow-2xs">
+                  <Smartphone size={18} className="text-[#0000fb] shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <p className="font-bold text-neutral-900 mb-1">Upload videos already in vertical (9:16) mobile format.</p>
+                    <p className="text-neutral-500 leading-relaxed">
                       The agent does not reframe horizontal footage. Make sure every source video is shot or pre-cropped to mobile/portrait format before dropping it into the input folder.
                     </p>
                   </div>
@@ -2138,48 +2138,48 @@ function App() {
 
                 {/* Workflow */}
                 <div className="grid md:grid-cols-3 gap-4">
-                  <div className="card p-5 space-y-2">
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center">
-                      <Upload size={18} className="text-brass" />
+                  <div className="bg-white border border-neutral-200 rounded-2xl p-5 space-y-2.5 shadow-2xs">
+                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center">
+                      <Upload size={18} className="text-[#0000fb]" />
                     </div>
-                    <h3 className="font-medium text-ink lowercase">1. Drop your videos</h3>
-                    <p className="text-xs text-muted leading-relaxed">
+                    <h3 className="font-bold text-neutral-900 text-base">1. Drop your videos</h3>
+                    <p className="text-xs text-neutral-500 leading-relaxed">
                       Put your long-form vertical footage in the watched folder. The skill picks one video per run.
                     </p>
                   </div>
 
-                  <div className="card p-5 space-y-2">
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center">
-                      <Users size={18} className="text-brass" />
+                  <div className="bg-white border border-neutral-200 rounded-2xl p-5 space-y-2.5 shadow-2xs">
+                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center">
+                      <Users size={18} className="text-[#0000fb]" />
                     </div>
-                    <h3 className="font-medium text-ink lowercase">2. AI clippers work</h3>
-                    <p className="text-xs text-muted leading-relaxed">
-                      Whisper transcribes, Gemini 3 Flash spots viral beats, FFmpeg cuts each clip and adds a hook overlay.
+                    <h3 className="font-bold text-neutral-900 text-base">2. AI clippers work</h3>
+                    <p className="text-xs text-neutral-500 leading-relaxed">
+                      Whisper transcribes, Gemini spots viral beats, FFmpeg cuts each clip and adds a hook overlay.
                     </p>
                   </div>
 
-                  <div className="card p-5 space-y-2">
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center">
-                      <CheckCircle2 size={18} className="text-brass" />
+                  <div className="bg-white border border-neutral-200 rounded-2xl p-5 space-y-2.5 shadow-2xs">
+                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center">
+                      <CheckCircle2 size={18} className="text-[#0000fb]" />
                     </div>
-                    <h3 className="font-medium text-ink lowercase">3. You validate, it ships</h3>
-                    <p className="text-xs text-muted leading-relaxed">
+                    <h3 className="font-bold text-neutral-900 text-base">3. You validate, it ships</h3>
+                    <p className="text-xs text-neutral-500 leading-relaxed">
                       Approve the candidates you like and the skill auto-publishes them to TikTok, Reels and YouTube Shorts via Upload-Post.
                     </p>
                   </div>
                 </div>
 
                 {/* Repo CTA */}
-                <div className="card p-6 md:p-8 space-y-5">
+                <div className="bg-white border border-neutral-200 rounded-2xl p-6 md:p-8 space-y-5 shadow-2xs">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div>
-                      <h2 className="font-display lowercase text-xl text-ink mb-1">skill-autoshorts</h2>
-                      <p className="text-sm text-muted">
-                        The Claude Code skill that powers this workflow. Install it once and trigger it whenever you want a fresh batch of clips.
+                      <h2 className="font-bold text-xl text-neutral-900 mb-1">Digiclip Autonomous Agent</h2>
+                      <p className="text-sm text-neutral-500">
+                        Autonomous background worker that powers this workflow. Install it once and trigger it whenever you want a fresh batch of clips.
                       </p>
                     </div>
                     <a
-                      href="https://github.com/mutonby/skill-autoshorts"
+                      href="https://github.com/digitalinproject-ui/Digiclip"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-primary py-2 px-4 text-sm shrink-0"
@@ -2188,11 +2188,11 @@ function App() {
                     </a>
                   </div>
 
-                  <div className="bg-paper border border-rule rounded-card p-4 font-mono text-xs text-ink2 flex items-center justify-between gap-3">
-                    <span className="truncate">git clone https://github.com/mutonby/skill-autoshorts</span>
+                  <div className="bg-neutral-50 border border-neutral-200 rounded-xl p-4 font-mono text-xs text-neutral-800 flex items-center justify-between gap-3">
+                    <span className="truncate">git clone https://github.com/digitalinproject-ui/Digiclip.git</span>
                     <button
-                      onClick={() => navigator.clipboard.writeText('git clone https://github.com/mutonby/skill-autoshorts')}
-                      className="text-muted hover:text-ink transition-colors shrink-0"
+                      onClick={() => navigator.clipboard.writeText('git clone https://github.com/digitalinproject-ui/Digiclip.git')}
+                      className="text-neutral-500 hover:text-neutral-900 transition-colors shrink-0"
                       title="Copy"
                     >
                       <Copy size={14} />
@@ -2200,20 +2200,20 @@ function App() {
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-start gap-2 text-ink2">
-                      <Check size={16} className="text-brass shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2 text-neutral-700">
+                      <Check size={16} className="text-[#0000fb] shrink-0 mt-0.5" />
                       <span>Daily batch — picks one long video per run</span>
                     </div>
-                    <div className="flex items-start gap-2 text-ink2">
-                      <Check size={16} className="text-brass shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2 text-neutral-700">
+                      <Check size={16} className="text-[#0000fb] shrink-0 mt-0.5" />
                       <span>Whisper transcription with word-level timing</span>
                     </div>
-                    <div className="flex items-start gap-2 text-ink2">
-                      <Check size={16} className="text-brass shrink-0 mt-0.5" />
-                      <span>Gemini 3 Flash multimodal moment detection</span>
+                    <div className="flex items-start gap-2 text-neutral-700">
+                      <Check size={16} className="text-[#0000fb] shrink-0 mt-0.5" />
+                      <span>Gemini multimodal viral moment detection</span>
                     </div>
-                    <div className="flex items-start gap-2 text-ink2">
-                      <Check size={16} className="text-brass shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2 text-neutral-700">
+                      <Check size={16} className="text-[#0000fb] shrink-0 mt-0.5" />
                       <span>Auto-publish to TikTok, Reels & YouTube Shorts</span>
                     </div>
                   </div>
