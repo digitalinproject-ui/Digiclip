@@ -242,8 +242,8 @@ export default function MediaInput({ onProcess, isProcessing }) {
                         ) : null}
                         {file && fileTooShort ? (
                             <p className="text-danger text-sm mt-3" role="alert">
-                                This video is {Math.round(fileSeconds)}s long. Clip generation needs at least {MIN_SOURCE_SECONDS}s
-                                of footage to cut from: it already is a short. Pick a longer video.
+                                This video is {Math.round(fileSeconds)}s long. Digiclip needs at least {MIN_SOURCE_SECONDS}s
+                                of footage to extract viral clips from. Please upload a longer video.
                             </p>
                         ) : null}
                         {!file && (
@@ -256,7 +256,7 @@ export default function MediaInput({ onProcess, isProcessing }) {
                                 />
                                 <Upload className="mx-auto mb-3 text-neutral-400" size={20} />
                                 <p className="text-neutral-900 font-semibold text-sm">Click to upload or drag and drop</p>
-                                <p className="readout mt-2">MP4, MOV up to 500MB · At least {MIN_SOURCE_SECONDS}s long</p>
+                                <p className="readout mt-2">MP4, MOV up to 500MB · Podcast, stream, or long video</p>
                             </label>
                         )}
                     </div>
