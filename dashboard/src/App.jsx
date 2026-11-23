@@ -1490,7 +1490,7 @@ function App() {
         <span className={collapsed ? 'hidden lg:block truncate' : 'truncate'}>landing page</span>
       </a>
       <a
-        href="https://github.com/mutonby/openshorts"
+        href="https://github.com/digitalinproject-ui/Digiclip"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 px-3 py-2 text-xs lowercase text-muted hover:text-ink2 transition-colors"

@@ -626,7 +626,7 @@ export default function Landing({ onLaunchApp }) {
             <p className="text-sm text-muted lowercase">
               <a href="#pricing" className="underline underline-offset-2 hover:text-ink">paid plans from $12/mo</a> without watermark. prefer to run it yourself?{' '}
               <a
-                href="https://github.com/mutonby/openshorts"
+                href="https://github.com/digitalinproject-ui/Digiclip"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink2 underline hover:text-ink transition-colors"
@@ -883,7 +883,7 @@ export default function Landing({ onLaunchApp }) {
                   <li key={i} className="flex items-center gap-2 text-sm text-muted"><Check size={14} className="text-ok shrink-0" />{f}</li>
                 ))}
               </ul>
-              <a href="https://github.com/mutonby/openshorts" target="_blank" rel="noopener noreferrer"
+              <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer"
                 className="btn-ghost whitespace-nowrap">
                 <Github size={16} /> view on github
               </a>
@@ -1167,7 +1167,7 @@ export default function Landing({ onLaunchApp }) {
               </button>
             )}
             <a
-              href="https://github.com/mutonby/openshorts"
+              href="https://github.com/digitalinproject-ui/Digiclip"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-ghost whitespace-nowrap"
@@ -1252,7 +1252,7 @@ export default function Landing({ onLaunchApp }) {
               <span className="text-sm text-muted">OpenShorts — Free Open Source Clip Generator & AI UGC Video Creator</span>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm lowercase text-muted">
-              <a href="https://github.com/mutonby/openshorts" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">GitHub</a>
+              <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">GitHub</a>
               <a href="#features" className="hover:text-ink transition-colors">Features</a>
               <a href="#faq" className="hover:text-ink transition-colors">FAQ</a>
               <a href="/terms" className="hover:text-ink transition-colors whitespace-nowrap">Terms</a>

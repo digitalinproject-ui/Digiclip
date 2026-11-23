@@ -88,7 +88,7 @@ const TRUST_CARDS = [
       <>
         The full code is public on{' '}
         <a
-          href="https://github.com/mutonby/openshorts"
+          href="https://github.com/digitalinproject-ui/Digiclip"
           target="_blank"
           rel="noopener noreferrer"
           className="text-ink underline decoration-1 underline-offset-2 hover:text-brass transition-colors"
@@ -255,7 +255,7 @@ export default function PricingPage({ onRequireLogin }) {
               keys and the time to keep it running.
             </p>
             <a
-              href="https://github.com/mutonby/openshorts"
+              href="https://github.com/digitalinproject-ui/Digiclip"
               target="_blank" rel="noopener noreferrer"
               className="shrink-0 text-sm text-muted hover:text-ink transition-colors inline-flex items-center gap-1.5"
             >
@@ -315,7 +315,7 @@ export default function PricingPage({ onRequireLogin }) {
               <ArrowRight size={16} />
             </button>
             <a
-              href="https://github.com/mutonby/openshorts"
+              href="https://github.com/digitalinproject-ui/Digiclip"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-ghost whitespace-nowrap"
