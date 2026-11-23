@@ -91,13 +91,12 @@ export const NAV_GROUPS = [
  * the footers only. The plan picker and checkout stay at the hash route
  * #/pricing?plan=..., a different thing: nginx sends /pricing?plan=... there. */
 export const NAV_LINKS = [
-  { href: '/#pricing', label: { en: 'Pricing', es: 'Precios' } },
-  { href: '/self-hosted-ai-clip-maker', label: { en: 'Open source', es: 'Código abierto' } },
+  { href: '/self-hosted-ai-clip-maker', label: { en: 'Open Source', es: 'Código Abierto' } },
 ]
 
 export const NAV_STRINGS = {
-  en: { cta: 'Get Free Clips', ctaHint: 'First video free up to 60 min, no card. 8 clips automatically generated or self-host free (MIT).', openApp: 'Open Studio', login: 'Log In', menu: 'Menu', main: 'Main', github: 'Digiclip on GitHub' },
-  es: { cta: 'Clips Gratis', ctaHint: 'Primer vídeo gratis hasta 60 min, sin tarjeta. 8 clips automáticos o autoalojado gratis (MIT).', openApp: 'Abrir Studio', login: 'Iniciar Sesión', menu: 'Menú', main: 'Principal', github: 'Digiclip en GitHub' },
+  en: { cta: 'Get Free Clips', ctaHint: '100% Free and Open Source. 8 clips automatically generated with zero watermarks.', openApp: 'Open Studio', login: 'Log In', menu: 'Menu', main: 'Main', github: 'Digiclip on GitHub' },
+  es: { cta: 'Clips Gratis', ctaHint: '100% Gratis y de Código Abierto. 8 clips generados automáticamente sin marcas de agua.', openApp: 'Abrir Studio', login: 'Iniciar Sesión', menu: 'Menú', main: 'Principal', github: 'Digiclip en GitHub' },
 }
 
 const pick = (v, lang) => (v && typeof v === 'object' ? v[lang] || v.en : v)
@@ -138,7 +137,7 @@ export function renderNav({ lang = 'en', signedIn = false, showLogin = true } = 
     ${login}
   </nav>
   <div class="osn-actions">
-    <a class="osn-donate" href="https://saweria.co/Digitalin" target="_blank" rel="noopener noreferrer" title="Donasi Developer via Saweria">❤️ <span class="osn-donate-text">Saweria</span></a>
+    <a class="osn-donate" href="https://saweria.co/Digitalin" target="_blank" rel="noopener noreferrer" title="Support Digiclip Open Source Project on Saweria">❤️ <span class="osn-donate-text">Support Project</span></a>
     <a class="osn-cta" href="${APP_HREF}"${signedIn ? '' : ` title="${esc(t.ctaHint)}"`}>${esc(signedIn ? t.openApp : t.cta)}</a>
   </div>
 </div>

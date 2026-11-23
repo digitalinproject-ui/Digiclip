@@ -1,6 +1,5 @@
 import React from 'react';
 import { Sparkles, Zap, Globe, FileVideo, Subtitles, Youtube, Instagram, Shield, Github, ArrowRight, Check, ChevronDown, Monitor, Cpu, Languages, Type, Upload, Scissors, Link2, Bot } from 'lucide-react';
-import PricingSection from './components/PricingSection';
 import SiteNav from './components/SiteNav';
 import { useAuth } from './contexts/AuthContext';
 import './landing.css';
@@ -606,20 +605,20 @@ export default function Landing({ onLaunchApp }) {
                 (a card) is the whole point of the free plan. */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5 text-sm">
               <span className="badge-ok whitespace-nowrap font-semibold">
-                <Check size={14} className="text-emerald-600" /> No Credit Card Required
+                <Check size={14} className="text-emerald-600" /> 100% Free &amp; Open Source
               </span>
-              <span className="text-neutral-600">First video free (up to 60 min) · 8 clips automatically generated</span>
+              <span className="text-neutral-600">8 viral clips generated per video · No subscription · No watermark</span>
             </div>
 
             <p className="text-sm text-neutral-600">
-              <a href="#pricing" className="underline underline-offset-2 hover:text-[#0000fb] font-semibold text-neutral-900">Paid plans from $12/mo</a> without watermark. Prefer to run it yourself?{' '}
+              <span className="font-semibold text-neutral-900">Zero cost. Zero paywalls.</span> Built for creators, editors, and developers.{' '}
               <a
                 href="https://github.com/digitalinproject-ui/Digiclip"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#0000fb] font-semibold underline hover:text-[#0000d6] transition-colors"
               >
-                Self-host free on GitHub →
+                Contribute on GitHub →
               </a>
             </p>
 
@@ -663,17 +662,17 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Proof: real usage numbers. Update by hand; never round them up. */}
+      {/* Proof: valid specifications and real capabilities */}
       <section className="border-b border-rule bg-white/50">
         <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:divide-x divide-neutral-200 text-center">
           {[
-            ['50,000+', 'Accounts Created'],
-            ['32,900+', 'Videos Clipped'],
-            ['8,300+', 'Hours Of Video Processed'],
-            ['GitHub', 'Open Source & Free'],
+            ['8 Clips', 'Guaranteed Output Per Run'],
+            ['9:16', 'Smart AI Face Tracking'],
+            ['30+', 'AI Dubbing Languages'],
+            ['100% Free', 'Open Source Under MIT'],
           ].map(([n, label]) => (
             <div key={label} className="px-4">
-              <div className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tabular-nums">{n}</div>
+              <div className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-neutral-900 tabular-nums">{n}</div>
               <div className="eyebrow mt-2 font-semibold text-xs text-neutral-500 uppercase tracking-wider">{label}</div>
             </div>
           ))}
@@ -842,23 +841,17 @@ export default function Landing({ onLaunchApp }) {
             <div className="card p-8 flex flex-col border-2 border-[#0000fb] bg-white rounded-2xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <Sparkles size={18} className="text-[#0000fb]" />
-                <h3 className="font-display font-bold text-2xl text-neutral-900">Digiclip Cloud Studio</h3>
-                <span className="badge-ok">Recommended · Free Plan</span>
+                <h3 className="font-display font-bold text-2xl text-neutral-900">Digiclip Web Studio</h3>
+                <span className="badge-ok">Free Online Tool</span>
               </div>
               <ul className="space-y-2 mb-6 flex-1">
-                {['High-speed GPU: 8-min video processed in seconds', 'Gemini key included, zero setup required', 'Direct social media publishing to YouTube, TikTok & Reels', 'Connect Claude or ChatGPT directly via MCP URL', 'First video free up to 60 min, no credit card required'].map((f, i) => (
+                {['Instant AI processing in seconds', 'Gemini key included, zero setup required', 'Direct social media publishing to YouTube, TikTok & Reels', 'Connect Claude or ChatGPT directly via MCP URL', '100% free with no credit card required'].map((f, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm text-neutral-700 font-medium"><Check size={14} className="text-emerald-600 shrink-0" />{f}</li>
                 ))}
               </ul>
-              {billingEnabled ? (
-                <a href="#pricing" className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold rounded-xl py-3 text-center">
-                  Start Free <ArrowRight size={16} />
-                </a>
-              ) : (
-                <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold rounded-xl py-3">
-                  Launch Digiclip Studio <ArrowRight size={16} />
-                </button>
-              )}
+              <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold rounded-xl py-3 w-full">
+                Launch Digiclip Studio <ArrowRight size={16} />
+              </button>
             </div>
             <div className="card p-8 flex flex-col bg-white border border-neutral-200 rounded-2xl">
               <div className="flex flex-wrap items-center gap-3 mb-3">
@@ -880,23 +873,11 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Pricing Section — hosted plans (self-host stays free) */}
-      {billingEnabled && (
-        <section id="pricing" className="py-20 px-6 border-t border-rule">
-          <div className="max-w-6xl mx-auto">
-            <SectionHeader eyebrow="06 · Pricing" title="Free Plan vs Pro: Transparent Pricing">
-              Your first video is free, up to 60 minutes. Then 20 free minutes every month — no credit card required. Cancel anytime.
-            </SectionHeader>
-            <PricingSection onRequireLogin={() => { window.location.hash = '#/pricing'; }} />
-          </div>
-        </section>
-      )}
-
       {/* Comparison Table */}
       <section id="comparison" className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="07 · Comparison" title="Digiclip vs Opus Clip, Klap, And Vizard">
-            Hosted Digiclip starts at $12/mo billed monthly, or self-host it 100% free under MIT. Opus Clip starts at $15/month, Klap at $14, and Vizard at $14.50/month.
+          <SectionHeader eyebrow="06 · Comparison" title="Digiclip vs Opus Clip, Klap, And Vizard">
+            Digiclip is 100% free and open source with zero subscriptions or fees. Commercial alternatives charge $14 to $24 every month.
           </SectionHeader>
           <div className="overflow-x-auto bg-white rounded-2xl border border-neutral-200 p-2">
             <table className="w-full">
@@ -905,29 +886,30 @@ export default function Landing({ onLaunchApp }) {
                   <th className="py-3 px-4 text-left text-sm text-neutral-600 font-semibold">Feature</th>
                   <th className="py-3 px-4 text-center text-sm font-bold">
                     <span className="text-[#0000fb]">Digiclip</span>
-                    <span className="block text-xs text-neutral-500 font-normal">Self-Hosted / Cloud</span>
+                    <span className="block text-xs text-neutral-500 font-normal">100% Free Open Source</span>
                   </th>
                   <th className="py-3 px-4 text-center text-sm text-neutral-600 font-semibold">Opus Clip</th>
                   <th className="py-3 px-4 text-center text-sm text-neutral-600 font-semibold">Kapwing</th>
                 </tr>
               </thead>
               <tbody>
-                <ComparisonRow feature="Price" digiclip={<span className="text-emerald-600 font-bold">$0 / from $12/mo</span>} opusclip={xIcon} kapwing={xIcon} />
-                <ComparisonRow feature="Target 8 Clips Per Run" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Varies</span>} kapwing={<span className="text-muted text-sm">Manual</span>} />
+                <ComparisonRow feature="Price" digiclip={<span className="text-emerald-600 font-bold">100% Free ($0)</span>} opusclip={<span className="text-neutral-500 text-sm">$15/mo</span>} kapwing={<span className="text-neutral-500 text-sm">$24/mo</span>} />
+                <ComparisonRow feature="Subscriptions / Hidden Fees" digiclip={<span className="text-emerald-600 font-bold">Zero ($0)</span>} opusclip={<span className="text-neutral-500 text-sm">Monthly plan</span>} kapwing={<span className="text-neutral-500 text-sm">Monthly plan</span>} />
+                <ComparisonRow feature="Target 8 Clips Per Run" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">Varies</span>} kapwing={<span className="text-neutral-400 text-sm">Manual</span>} />
                 <ComparisonRow feature="AI Viral Moment Detection" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
                 <ComparisonRow feature="Smart Vertical Cropping" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
                 <ComparisonRow feature="Auto Subtitles" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
-                <ComparisonRow feature="AI Voice Dubbing (30+ langs, your ElevenLabs key)" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Limited</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="AI Video Effects" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={checkMuted} />
+                <ComparisonRow feature="AI Voice Dubbing (30+ langs, your ElevenLabs key)" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">Limited</span>} kapwing={<span className="text-neutral-400 text-sm">No</span>} />
+                <ComparisonRow feature="AI Video Effects" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">No</span>} kapwing={checkMuted} />
                 <ComparisonRow feature="Hook Text Overlays" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
-                <ComparisonRow feature="Self-Hosted / Privacy" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Cloud only</span>} kapwing={<span className="text-muted text-sm">Cloud only</span>} />
-                <ComparisonRow feature="No Watermark" digiclip={<span className="text-emerald-600 text-sm font-semibold">Self-hosted &amp; Paid</span>} opusclip={<span className="text-muted text-sm">Free tier only</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
-                <ComparisonRow feature="Open Source" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="AI YouTube Thumbnail Generator" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
-                <ComparisonRow feature="AI Title & Description Generator" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Limited</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
-                <ComparisonRow feature="AI UGC Video Generator" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="AI Actors with Lip-Sync" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="Usage Limits" digiclip={<span className="text-emerald-600 text-sm font-semibold">Unlimited self-hosted</span>} opusclip={<span className="text-muted text-sm">Per plan</span>} kapwing={<span className="text-muted text-sm">Per plan</span>} />
+                <ComparisonRow feature="Self-Hosted / Privacy" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">Cloud only</span>} kapwing={<span className="text-neutral-400 text-sm">Cloud only</span>} />
+                <ComparisonRow feature="No Watermark" digiclip={<span className="text-emerald-600 text-sm font-semibold">100% Free (No Watermark)</span>} opusclip={<span className="text-neutral-400 text-sm">Paid tier only</span>} kapwing={<span className="text-neutral-400 text-sm">Paid only</span>} />
+                <ComparisonRow feature="Open Source (MIT)" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">No</span>} kapwing={<span className="text-neutral-400 text-sm">No</span>} />
+                <ComparisonRow feature="AI YouTube Thumbnail Generator" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">No</span>} kapwing={<span className="text-neutral-400 text-sm">Paid</span>} />
+                <ComparisonRow feature="AI Title & Description Generator" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">Limited</span>} kapwing={<span className="text-neutral-400 text-sm">Paid</span>} />
+                <ComparisonRow feature="AI UGC Video Generator" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">No</span>} kapwing={<span className="text-neutral-400 text-sm">No</span>} />
+                <ComparisonRow feature="AI Actors with Lip-Sync" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">No</span>} kapwing={<span className="text-neutral-400 text-sm">No</span>} />
+                <ComparisonRow feature="Usage Limits" digiclip={<span className="text-emerald-600 text-sm font-semibold">Unlimited</span>} opusclip={<span className="text-neutral-400 text-sm">Per plan</span>} kapwing={<span className="text-neutral-400 text-sm">Per plan</span>} />
               </tbody>
             </table>
           </div>
@@ -1092,19 +1074,12 @@ export default function Landing({ onLaunchApp }) {
       <section className="py-24 px-6 border-t border-rule bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tracking-tight mb-5">Start Creating Viral Videos Today.</h2>
-          <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">First video free (up to 60 min) · 8 clips per run · No credit card required, or self-host free with Docker.</p>
+          <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">100% Free &amp; Open Source · 8 clips per run · Zero subscription · Zero watermarks.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            {billingEnabled ? (
-              <a href="#pricing" className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
-                Start Free
-                <ArrowRight size={16} />
-              </a>
-            ) : (
-              <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
-                Launch Digiclip Studio
-                <ArrowRight size={16} />
-              </button>
-            )}
+            <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
+              Launch Digiclip Studio
+              <ArrowRight size={16} />
+            </button>
             <a
               href="https://github.com/digitalinproject-ui/Digiclip"
               target="_blank"
@@ -1156,9 +1131,10 @@ export default function Landing({ onLaunchApp }) {
                 href="https://saweria.co/Digitalin"
                 target="_blank"
                 rel="noopener noreferrer"
+                title="Support Digiclip Open Source Project on Saweria"
                 className="text-rose-600 hover:text-rose-700 font-semibold bg-rose-50 px-3 py-1.5 rounded-full border border-rose-200 transition-colors flex items-center gap-1.5"
               >
-                ❤️ Donasi Dev (Saweria)
+                ❤️ Support Project (Saweria)
               </a>
               <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-900 transition-colors">GitHub</a>
               <a href="#features" className="hover:text-neutral-900 transition-colors">Features</a>

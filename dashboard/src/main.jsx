@@ -112,7 +112,10 @@ function Root() {
     if (hash.startsWith('#/oauth/authorize')) return 'oauth';
     if (hash.startsWith('#/account')) return 'account';
     if (hash.startsWith('#/deleted')) return 'deleted';
-    if (hash.startsWith('#/pricing')) return 'pricing';
+    if (hash.startsWith('#/pricing')) {
+      window.location.hash = '#app';
+      return 'app';
+    }
     if (hash.startsWith('#/login')) return 'login';
     if (hash === '#legal') return 'legal';
     // The app lives at #app (and #app?tab=… deep links). Everything else,

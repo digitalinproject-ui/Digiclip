@@ -66,17 +66,16 @@ const STEPS = [
 // FAQPage JSON-LD in index.html, with the same answers.
 const FAQ = [
   [
-    'Is OpenShorts really free?',
-    'Self-hosting is free under the MIT licence, with no watermark and no cap; OpenShorts Cloud has a free plan (your first video up to 60 minutes, then 20 minutes a month, watermarked) and paid plans from $12/month.' +
-      ' Self-hosted costs you hardware and time: on a typical CPU an 8-minute video takes 5 to 8 minutes to process, and you supply your own Google Gemini key, whose free tier covers 1,500 requests a day. On OpenShorts Cloud an NVIDIA GPU clips that same video in about 50 seconds, the Gemini key is included, paid plans post every clip to TikTok, Instagram, YouTube, Facebook, LinkedIn, Threads and Bluesky for you and Autopilot clips each new video on your channel on its own, and your clips stay retrievable from any browser.',
+    'Is Digiclip really free?',
+    'Yes, 100% free and open source under the MIT licence. There are no paid plans, no subscriptions, no paywalls, and no hidden fees. You can use Digiclip online or run it yourself with Docker.',
   ],
   [
     'Do the clips have a watermark?',
-    'Only on the free Cloud plan. Clips made on the free plan of OpenShorts Cloud carry a small watermark; every paid plan, from $12/month, has none, and upgrading removes the mark from the clips you already made. The self-hosted edition, free under MIT, never adds one.',
+    'No. Digiclip does not place any watermarks on your clips. All exported clips are 1080x1920 high definition with zero watermarks.',
   ],
   [
-    'Do I need a credit card to start?',
-    'No. The free plan of OpenShorts Cloud needs no credit card: your first video is clipped free up to 60 minutes, then you get 20 free minutes every month, with a watermark. You only add a card if you choose a paid plan, from $12/month.',
+    'Do I need a credit card or subscription?',
+    'No. You will never be asked for a credit card because Digiclip does not sell anything.',
   ],
   [
     'How many clips do I get from one video?',
@@ -176,8 +175,13 @@ ${NAV_SCRIPT}
   <h1 style="${S.h1}">AI Video Clip Maker: Long Video In, Viral Shorts Out</h1>
   <p style="${S.p};max-width:44rem;font-size:1.05rem">Paste a YouTube link or upload a podcast, stream or interview. Digiclip AI automatically picks the top 8 moments worth posting, reframes them to 9:16 around active speakers, and burns in animated captions, ready for TikTok, Reels and Shorts in minutes. Prefer to run it yourself? It is <a href="/free-ai-clip-generator" style="${S.a}">free and open source</a>. Claude, ChatGPT and n8n can drive it over <a href="/mcp" style="${S.a}">MCP</a>.</p>
   ${HERO_FORM}
-  <p style="${S.muted};max-width:44rem">50,000+ accounts created &middot; 32,900+ videos clipped &middot; 8,300+ hours of video processed &middot; Open source on GitHub.</p>
-  <p style="${S.muted};max-width:44rem"><strong style="color:#059669">No credit card required.</strong> Your first video is free up to 60 minutes, then 20 free minutes every month, and each video yields 8 viral clips. Paid plans from $12/month without watermark. Prefer to run it yourself? <a style="${S.a}" href="https://github.com/digitalinproject-ui/Digiclip" rel="noopener" target="_blank">Self-host free on GitHub</a>.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1.5rem;margin:1.5rem 0 2rem;padding:1.5rem;background:#ffffff;border:1px solid #e5e5ea;border-radius:14px;text-align:center">
+    <div><div style="font-size:2.2rem;font-weight:800;color:#1d1d1f">8 Clips</div><div style="${S.eyebrow};margin:0.25rem 0 0">Guaranteed Output Per Run</div></div>
+    <div><div style="font-size:2.2rem;font-weight:800;color:#1d1d1f">9:16</div><div style="${S.eyebrow};margin:0.25rem 0 0">Smart AI Face Tracking</div></div>
+    <div><div style="font-size:2.2rem;font-weight:800;color:#1d1d1f">30+</div><div style="${S.eyebrow};margin:0.25rem 0 0">AI Dubbing Languages</div></div>
+    <div><div style="font-size:2.2rem;font-weight:800;color:#1d1d1f">100% Free</div><div style="${S.eyebrow};margin:0.25rem 0 0">Open Source Under MIT</div></div>
+  </div>
+  <p style="${S.muted};max-width:44rem"><strong style="color:#059669">100% Free &amp; Open Source.</strong> Zero cost. Zero paywalls. No watermarks. Built for creators, editors, and developers. <a style="${S.a}" href="https://github.com/digitalinproject-ui/Digiclip" rel="noopener" target="_blank">Contribute or Self-Host on GitHub &rarr;</a></p>
   <p style="${S.muted};max-width:44rem">Works with links from ${WORKS_WITH.map(link).join(' &middot; ')}.</p>
 </div></section>
 
@@ -194,14 +198,6 @@ ${NAV_SCRIPT}
   <p style="${S.p};max-width:48rem">${CANONICAL_ANSWERS.howItWorks}</p>
 </div></section>
 
-<section id="pricing" style="${S.section}"><div style="${S.wrap}">
-  <h2 style="${S.h2}">Free Plan vs Pro: Transparent Pricing</h2>
-  <div style="${S.grid};max-width:56rem">
-    ${card('Digiclip Self-Hosted &middot; $0', EDITIONS.selfHosted.summary)}
-    ${card('OpenShorts Cloud &middot; free tier, then from $12/month', EDITIONS.cloud.summary)}
-  </div>
-</div></section>
-
 <section id="features" style="${S.section}"><div style="${S.wrap}">
   <h2 style="${S.h2}">AI clipping that finds the moments worth posting</h2>
   <div style="${S.grid}">${FEATURES.map(([t, b]) => card(t, b)).join('')}</div>
@@ -215,8 +211,8 @@ ${NAV_SCRIPT}
 </div></section>
 
 <section id="comparison" style="${S.section}"><div style="${S.wrap}">
-  <h2 style="${S.h2}">OpenShorts vs Opus Clip, Klap and Vizard</h2>
-  <p style="${S.muted};max-width:48rem">Entry pricing checked 5 October 2026. OpenShorts is $0 self-hosted or $12/month hosted without a watermark, billed monthly. 2short.ai starts at $9.90/month, Submagic at $12, Klap at $14 and Vizard at $14.50 a month on yearly billing, Opus Clip at $15/month and Quso (formerly Vidyo.ai) at $19/month yearly. OpenShorts is the only open source and self-hostable option.</p>
+  <h2 style="${S.h2}">Digiclip vs Opus Clip, Klap and Vizard</h2>
+  <p style="${S.muted};max-width:48rem">Digiclip is 100% free ($0) and open source under the MIT licence with zero watermarks. Opus Clip starts at $15/month, Klap at $14/month, and Kapwing at $24/month. Digiclip is fully transparent, self-hostable, and does not charge any subscriptions.</p>
   <h3 style="${S.h3};margin-top:1.5rem">Switching from another tool?</h3>
   <p style="${S.muted}">${SWITCHING.map(link).join(' &middot; ')}</p>
   <p style="${S.muted}">
@@ -243,7 +239,6 @@ ${NAV_SCRIPT}
     <a style="${S.a}" href="/auto-reframe">Auto reframe</a> &middot;
     <a style="${S.a}" href="/use-cases/sermons">Sermon clip maker</a> &middot;
     <a style="${S.a}" href="/how-to/clip-a-youtube-video">How to clip a YouTube video</a> &middot;
-    <a style="${S.a}" href="/pricing">Pricing</a> &middot;
     <a style="${S.a}" href="/open-source-video-clipper">Open source video clipper</a> &middot;
     <a style="${S.a}" href="/self-hosted-ai-clip-maker">Self-hosted AI clip maker</a> &middot;
     <a style="${S.a}" href="/open-source-ai-video-generator">Open source AI video generator</a> &middot;
