@@ -33,7 +33,7 @@ function buildClients({ cloud, url }) {
       steps: [
         'Open claude.ai → Settings → Connectors → Add custom connector.',
         `Paste this URL and save: ${url}`,
-        'Click Connect: you will land on OpenShorts to approve the access, then the 8 tools appear in every chat.',
+        'Click Connect: you will land on Digiclip to approve the access, then the 8 tools appear in every chat.',
       ],
       snippet: url,
     },
@@ -41,24 +41,24 @@ function buildClients({ cloud, url }) {
       id: 'chatgpt', label: 'ChatGPT', kind: 'steps',
       steps: [
         'Open ChatGPT → Settings → Connectors → Create (developer mode).',
-        `Name it OpenShorts, paste this MCP server URL, choose OAuth: ${url}`,
-        'Approve the access on OpenShorts when asked. Done: ask ChatGPT to clip a video.',
+        `Name it Digiclip, paste this MCP server URL, choose OAuth: ${url}`,
+        'Approve the access on Digiclip when asked. Done: ask ChatGPT to clip a video.',
       ],
       snippet: url,
     },
     {
       id: 'claude-code', label: 'Claude Code', kind: 'code', lang: 'bash',
-      snippet: `claude mcp add --transport http openshorts ${url}${header}`,
+      snippet: `claude mcp add --transport http digiclip ${url}${header}`,
       note: cloud ? 'Create a key below and paste it in place of osk_YOUR_KEY.' : 'No key needed on a self-hosted install.',
     },
     {
       id: 'claude-desktop', label: 'Claude Desktop', kind: 'code', lang: 'json',
-      snippet: `{\n  "mcpServers": {\n    "openshorts": {\n      "command": "npx",\n      "args": ${desktopArgs}\n    }\n  }\n}`,
+      snippet: `{\n  "mcpServers": {\n    "digiclip": {\n      "command": "npx",\n      "args": ${desktopArgs}\n    }\n  }\n}`,
       note: 'Settings → Developer → Edit config (claude_desktop_config.json), then restart Claude.',
     },
     {
       id: 'cursor', label: 'Cursor', kind: 'code', lang: 'json',
-      snippet: `{\n  "mcpServers": {\n    "openshorts": {\n      "url": "${url}"${cursorHeaders}\n    }\n  }\n}`,
+      snippet: `{\n  "mcpServers": {\n    "digiclip": {\n      "url": "${url}"${cursorHeaders}\n    }\n  }\n}`,
       note: 'Settings → MCP → Add new global MCP server (.cursor/mcp.json).',
     },
     {
@@ -94,8 +94,8 @@ export default function McpConnectCard({ cloud = true, compact = false }) {
 
   return (
     <div className="card p-6" id="connect-agent">
-      <h3 className="font-display lowercase text-lg text-ink mb-1 flex items-center gap-2">
-        <Plug size={16} className="text-brass" /> Connect an agent
+      <h3 className="font-display font-bold text-lg text-neutral-900 mb-1 flex items-center gap-2">
+        <Plug size={16} className="text-[#0000fb]" /> Connect An Agent (MCP)
       </h3>
       <p className="text-muted text-sm mb-4">
         Let Claude, ChatGPT, Cursor or n8n clip and publish for you through the built-in MCP server:
@@ -112,8 +112,8 @@ export default function McpConnectCard({ cloud = true, compact = false }) {
             role="tab"
             aria-selected={c.id === active}
             onClick={() => { setActive(c.id); setCopied(false); }}
-            className={`px-3 py-1.5 rounded-input text-xs border transition-colors ${
-              c.id === active ? 'border-brass text-ink bg-brass/10' : 'border-rule text-muted hover:text-ink'}`}
+            className={`px-3 py-1.5 rounded-xl text-xs border transition-colors ${
+              c.id === active ? 'border-2 border-[#0000fb] text-neutral-900 bg-[#0000fb]/10 font-semibold' : 'border-neutral-200 text-neutral-600 hover:text-neutral-900 bg-white'}`}
           >
             {c.label}
           </button>

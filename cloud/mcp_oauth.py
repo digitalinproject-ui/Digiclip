@@ -75,8 +75,8 @@ def resource_metadata(base: str) -> dict:
         "authorization_servers": [base],
         "bearer_methods_supported": ["header"],
         "scopes_supported": [SCOPE],
-        "resource_name": "OpenShorts",
-        "resource_documentation": "https://www.openshorts.app/mcp",
+        "resource_name": "Digiclip",
+        "resource_documentation": f"{base}/mcp",
     }
 
 
