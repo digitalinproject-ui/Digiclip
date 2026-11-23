@@ -1597,6 +1597,17 @@ function App() {
         <button onClick={() => billingEnabled && !isSignedIn ? setShowLogin(true) : goToTab('settings')} className="w-full flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg hover:bg-neutral-100/60 transition-colors text-left">
           <User size={16} /> <span className="hidden lg:inline">{billingEnabled && isSignedIn ? 'Account' : 'Settings'}</span>
         </button>
+        <div className="pt-2 px-1 text-[11px] text-neutral-400 hidden lg:block text-center">
+          Powered by{' '}
+          <a
+            href="https://digitalinlabs.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-neutral-600 hover:text-[#0000fb] transition-colors"
+          >
+            Digitalinlabs.id
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -1673,6 +1684,17 @@ function App() {
           <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg transition-colors">
             <HelpCircle size={16} /> <span>Help & Support</span>
           </a>
+          <div className="pt-2 px-1 text-[11px] text-neutral-400 text-center">
+            Powered by{' '}
+            <a
+              href="https://digitalinlabs.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-neutral-600 hover:text-[#0000fb] transition-colors"
+            >
+              Digitalinlabs.id
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -2375,6 +2397,18 @@ function App() {
                   <span className="flex items-center gap-2 text-neutral-500"><Instagram size={16} /> Instagram</span>
                   <span className="flex items-center gap-2 text-neutral-500"><TikTokIcon size={16} /> TikTok</span>
                 </div>
+
+                <p className="mt-3 text-[11px] text-neutral-400 font-medium">
+                  Powered by{' '}
+                  <a
+                    href="https://digitalinlabs.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-neutral-600 hover:text-[#0000fb] transition-colors"
+                  >
+                    Digitalinlabs.id
+                  </a>
+                </p>
               </div>
               </div>
             </div>

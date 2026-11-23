@@ -645,6 +645,18 @@ export default function Landing({ onLaunchApp }) {
                 <Github size={13} />
                 <span>GitHub Repository</span>
               </a>
+              <span className="mx-1 text-neutral-300">|</span>
+              <span className="text-neutral-400">
+                Powered by{' '}
+                <a
+                  href="https://digitalinlabs.id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
+                >
+                  Digitalinlabs.id
+                </a>
+              </span>
             </div>
           </div>
 
