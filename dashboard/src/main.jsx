@@ -21,13 +21,13 @@ function PageShell({ title, children }) {
     <div className="min-h-screen bg-paper text-ink2">
       <header className="h-14 sm:h-16 border-b border-rule bg-paper flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-20">
         <a href="#app" className="font-display font-bold text-lg text-neutral-900 truncate flex items-center gap-2">
-          <img src="/logo-digiclip.png" className="w-6 h-6 rounded" alt="Digiclip" />
+          <img src="/logo-black.png" className="w-6 h-6 rounded" alt="Digiclip" />
           <span>Digiclip Studio</span>
         </a>
         <a href="#app" className="text-sm font-semibold text-[#0000fb] hover:underline transition-colors shrink-0">← <span className="hidden sm:inline">Back to Studio</span><span className="sm:hidden">Back</span></a>
       </header>
       <main className="p-4 sm:p-6 md:p-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
-        {title && <h1 className="font-display lowercase text-2xl sm:text-3xl text-ink text-center mb-6 sm:mb-10">{title}</h1>}
+        {title && <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 text-center mb-6 sm:mb-10">{title}</h1>}
         {children}
       </main>
     </div>

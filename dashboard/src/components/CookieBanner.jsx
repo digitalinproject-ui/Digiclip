@@ -60,7 +60,7 @@ export default function CookieBanner() {
     >
       <div className="card mx-auto max-w-3xl p-4 sm:p-5 space-y-4 shadow-2xl">
         <div className="space-y-2">
-          <h2 className="font-display lowercase text-lg text-ink">Before we count anything</h2>
+          <h2 className="font-display font-bold text-lg text-neutral-900">Before We Count Anything</h2>
           <p className="text-sm text-ink2">
             We only store what the app needs to work unless you tell us otherwise.
             Audience measurement stays off until you say yes, and you can change

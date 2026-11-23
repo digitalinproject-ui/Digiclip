@@ -240,7 +240,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
   return (
     <div className="max-w-4xl mx-auto animate-fade">
       <p className="eyebrow mb-1.5">02 · AUTOPILOT</p>
-      <h1 className="font-display lowercase text-3xl text-ink mb-2">your channel, clipped on its own</h1>
+      <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight mb-2">Your Channel, Clipped Automatically</h1>
       <p className="text-muted text-sm mb-8 max-w-2xl">
         Publish on YouTube as usual. Autopilot notices every new video, turns it into shorts
         and emails you when they are ready. Switch on autopublish and the best ones go out on

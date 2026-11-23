@@ -713,7 +713,7 @@ export default function SaaShortsTab({ geminiApiKey, elevenLabsKey, falKey, uplo
             {/* Scripts */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-display lowercase text-xl text-ink">Generated Scripts</h2>
+                <h2 className="font-display font-bold text-xl text-neutral-900">Generated Scripts</h2>
                 <span className="readout">{scripts.length} scripts</span>
               </div>
 
@@ -800,7 +800,7 @@ export default function SaaShortsTab({ geminiApiKey, elevenLabsKey, falKey, uplo
         {step === 2 && scripts[selectedScript] && (
           <div className="animate-fade space-y-6">
             <div className="card p-6 space-y-5">
-              <h2 className="font-display lowercase text-xl text-ink">Configure Video</h2>
+              <h2 className="font-display font-bold text-xl text-neutral-900">Configure Video</h2>
               <p className="text-sm lowercase text-muted">
                 script: <strong className="text-ink2 normal-case font-medium">{scripts[selectedScript].title}</strong>
               </p>
@@ -1172,7 +1172,7 @@ export default function SaaShortsTab({ geminiApiKey, elevenLabsKey, falKey, uplo
           <div className="animate-fade space-y-6">
             <div className="card p-6">
               <div className="flex items-center justify-between mb-5">
-                <h2 className="font-display lowercase text-xl text-ink">Video Generation</h2>
+                <h2 className="font-display font-bold text-xl text-neutral-900">Video Generation</h2>
                 <span className={
                   genStatus === 'processing' ? 'badge-brass' :
                   genStatus === 'completed' ? 'badge-ok' :
@@ -1276,7 +1276,7 @@ export default function SaaShortsTab({ geminiApiKey, elevenLabsKey, falKey, uplo
         {step === 4 && genResult && (
           <div className="animate-fade space-y-6">
             <div className="card p-6">
-              <h2 className="font-display lowercase text-xl text-ink mb-4">
+              <h2 className="font-display font-bold text-xl text-neutral-900 mb-4">
                 Your Short is Ready
               </h2>
 

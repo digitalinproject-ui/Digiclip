@@ -482,20 +482,20 @@ export default function ThumbnailStudio({ geminiApiKey, uploadPostKey, uploadUse
         <div className="flex items-end justify-between mb-2">
           <div>
             <p className="eyebrow mb-2">06 · YOUTUBE STUDIO</p>
-            <h1 className="font-display lowercase text-2xl text-ink flex items-center gap-3">
+            <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight flex items-center gap-3">
               <span className="w-10 h-10 rounded-card bg-paper3 flex items-center justify-center">
-                <Image size={18} className="text-brass" />
+                <Image size={18} className="text-[#0000fb]" />
               </span>
               YouTube Studio
             </h1>
           </div>
           {step > 0 && (
-            <button onClick={handleReset} className="text-xs lowercase text-muted hover:text-ink transition-colors flex items-center gap-1">
+            <button onClick={handleReset} className="text-xs text-neutral-500 hover:text-neutral-900 transition-colors flex items-center gap-1 font-medium">
               <Plus size={12} /> New Project
             </button>
           )}
         </div>
-        <p className="text-sm lowercase text-muted mb-6">Generate viral titles, AI thumbnails, descriptions and publish directly to YouTube</p>
+        <p className="text-sm text-neutral-500 mb-6">Generate viral titles, AI thumbnails, descriptions and publish directly to YouTube</p>
 
         <div className="mb-8">
           <StepIndicator steps={STEPS} current={step} />

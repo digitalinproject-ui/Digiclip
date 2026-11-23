@@ -1543,7 +1543,7 @@ function App() {
     <div className="hidden md:flex w-20 lg:w-64 bg-white border-r border-[#e5e5ea] flex-col h-full shrink-0 transition-all duration-300">
       <a href="#app" onClick={() => goToTab('dashboard')} className="p-6 flex items-center gap-3.5 group" title="Digiclip Studio">
         <div className="w-9 h-9 flex items-center justify-center shrink-0">
-          <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
+          <img src="/logo-black.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
         </div>
         <div className="flex items-center gap-2 hidden lg:flex">
           <span className="font-sans font-bold tracking-tight text-xl text-neutral-900">digiclip</span>
@@ -1618,7 +1618,7 @@ function App() {
         <div className="flex items-center justify-between px-5 h-16 border-b border-[#e5e5ea] shrink-0">
           <a href="#app" className="flex items-center gap-3" onClick={() => goToTab('dashboard')}>
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
-              <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
+              <img src="/logo-black.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
             </div>
             <div className="flex items-center gap-2">
               <span className="font-sans font-bold tracking-tight text-lg text-neutral-900">digiclip</span>
@@ -1901,7 +1901,7 @@ function App() {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
                 <div>
                   <p className="eyebrow mb-1.5">08 · SETTINGS</p>
-                  <h1 className="font-display lowercase text-2xl text-ink">Settings</h1>
+                  <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight">Settings</h1>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-muted mt-1">
                   <Shield size={12} className="text-ok shrink-0" /> Privacy: keys only live in your browser (sent to backend just to process)
@@ -1917,7 +1917,7 @@ function App() {
                       <div className="w-9 h-9 rounded-input bg-paper3 flex items-center justify-center shrink-0">
                         <Shield size={16} className="text-brass" />
                       </div>
-                      <h2 className="text-base font-medium text-ink lowercase">Included in your plan</h2>
+                      <h2 className="text-base font-bold text-neutral-900">Included In Your Plan</h2>
                     </div>
                     <span className="badge-ok">Managed</span>
                   </div>
@@ -1942,7 +1942,7 @@ function App() {
                       <div className="w-9 h-9 rounded-input bg-paper3 flex items-center justify-center shrink-0">
                         <Sparkles size={16} className="text-brass" />
                       </div>
-                      <h2 className="text-base font-medium text-ink lowercase">Choose your plan</h2>
+                      <h2 className="text-base font-bold text-neutral-900">Choose Your Plan</h2>
                     </div>
                     <span className="badge-ok">Free plan available</span>
                   </div>
@@ -1963,7 +1963,7 @@ function App() {
                     <div className="w-9 h-9 rounded-input bg-paper3 flex items-center justify-center shrink-0">
                       <Share2 size={16} className="text-brass" />
                     </div>
-                    <h2 className="text-base font-medium text-ink lowercase">Social Integration</h2>
+                    <h2 className="text-base font-bold text-neutral-900">Social Integration</h2>
                   </div>
                   <span className="text-xs text-muted">Optional (Auto-Publish)</span>
                 </div>
@@ -2018,7 +2018,7 @@ function App() {
                     <div className="w-9 h-9 rounded-input bg-paper3 flex items-center justify-center shrink-0">
                       <Globe size={16} className="text-brass" />
                     </div>
-                    <h2 className="text-base font-medium text-ink lowercase">Video Translation</h2>
+                    <h2 className="text-base font-bold text-neutral-900">Video Translation</h2>
                   </div>
                   <span className="readout">BYOK</span>
                 </div>
@@ -2075,7 +2075,7 @@ function App() {
                     <div className="w-9 h-9 rounded-input bg-paper3 flex items-center justify-center shrink-0">
                       <Sparkles size={16} className="text-brass" />
                     </div>
-                    <h2 className="text-base font-medium text-ink lowercase">AI Shorts (UGC Videos)</h2>
+                    <h2 className="text-base font-bold text-neutral-900">AI Shorts (UGC Videos)</h2>
                   </div>
                   <span className="readout">BYOK</span>
                 </div>
@@ -2278,13 +2278,13 @@ function App() {
                   />
                 ) : (
                   <div className="max-w-2xl mx-auto card p-8 text-center">
-                    <Rocket size={28} className="mx-auto mb-4 text-brass" />
-                    <h1 className="font-display lowercase text-2xl text-ink mb-2">your channel, clipped on its own</h1>
+                    <Rocket size={28} className="mx-auto mb-4 text-[#0000fb]" />
+                    <h1 className="font-display font-bold text-2xl text-neutral-900 mb-2">Your Channel, Clipped Automatically</h1>
                     <p className="text-muted text-sm mb-6">
                       Connect your YouTube channel and every new video turns into shorts automatically.
                       Sign in to set it up.
                     </p>
-                    <button onClick={() => setShowLogin(true)} className="btn-primary">sign in</button>
+                    <button onClick={() => setShowLogin(true)} className="btn-primary">Sign In</button>
                   </div>
                 )}
               </div>
@@ -2297,12 +2297,12 @@ function App() {
               <div className="max-w-6xl mx-auto p-4 sm:p-6 md:p-8">
                 {billingEnabled && !isSignedIn ? (
                   <div className="max-w-2xl mx-auto card p-8 text-center">
-                    <History size={28} className="mx-auto mb-4 text-brass" />
-                    <h1 className="font-display lowercase text-2xl text-ink mb-2">your clips are saved to your account</h1>
+                    <History size={28} className="mx-auto mb-4 text-[#0000fb]" />
+                    <h1 className="font-display font-bold text-2xl text-neutral-900 mb-2">Your Clips Saved To Your Account</h1>
                     <p className="text-muted text-sm mb-6">
                       Sign in with the email address you used to create them and they open right here.
                     </p>
-                    <button onClick={() => setShowLogin(true)} className="btn-primary">sign in</button>
+                    <button onClick={() => setShowLogin(true)} className="btn-primary">Sign In</button>
                   </div>
                 ) : (
                   <HistoryTab onReopenProject={restoreProject} />
@@ -2341,7 +2341,7 @@ function App() {
               <div className="max-w-xl w-full text-center space-y-5 sm:space-y-8">
                 <div className="space-y-2.5 sm:space-y-4">
                   <p className="eyebrow hidden sm:block">01 · CLIP GENERATOR</p>
-                  <h1 className="font-display lowercase text-3xl sm:text-4xl md:text-5xl text-ink">
+                  <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-neutral-900 tracking-tight">
                     Create Viral Shorts
                   </h1>
                   <p className="text-muted text-[15px] sm:text-lg leading-snug sm:leading-normal max-w-sm sm:max-w-none mx-auto">

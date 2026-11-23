@@ -63,7 +63,7 @@ export default function Legal() {
             </header>
 
             <main className="max-w-[65ch] mx-auto px-6 py-12">
-                <h1 className="font-display lowercase text-3xl md:text-4xl text-ink mb-3">Terms & Privacy</h1>
+                <h1 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 mb-3 tracking-tight">Terms &amp; Privacy</h1>
                 <p className="readout mb-10">Last updated: {LAST_UPDATED}</p>
 
                 <div className="text-ink2 leading-relaxed space-y-3 text-sm mb-10">

@@ -336,3 +336,25 @@
   background-color: #ecfdf5 !important;
   border: 1px solid #a7f3d0 !important;
 }
+
+/* ==========================================================================
+   DIGICLIP APPLE HIG HEADLINE HIERARCHY
+   Guarantees all headlines are BOLD, Title Case, Jet Black, NO LOWERCASE
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6,
+.font-display,
+.hero-h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  letter-spacing: -0.025em;
+  color: #1d1d1f !important;
+}
+
+/* Force override any lowercase class on headings or titles */
+h1.lowercase, h2.lowercase, h3.lowercase, h4.lowercase,
+.font-display.lowercase, .hero-h1.lowercase {
+  text-transform: none !important;
+  font-weight: 700 !important;
+}
