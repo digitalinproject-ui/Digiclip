@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers } from 'lucide-react';
+import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers, Search, Bell, HelpCircle, User, Play, SlidersHorizontal, MoreHorizontal, Scissors } from 'lucide-react';
 import KeyInput from './components/KeyInput';
 import MediaInput from './components/MediaInput';
 import McpConnectCard from './components/McpConnectCard';
@@ -390,6 +390,26 @@ function App() {
         return sb - sa || a.index - b.index;
       });
   }, [results]);
+
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [showSourceModal, setShowSourceModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortOption, setSortOption] = useState('newest');
+
+  const displayClips = useMemo(() => {
+    let list = rankedClips;
+    if (filterStatus === 'failed') return [];
+    if (searchQuery && searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(({ clip }) =>
+        (clip?.video_title_for_youtube_short || '').toLowerCase().includes(q) ||
+        (clip?.why || '').toLowerCase().includes(q) ||
+        (clip?.video_description_for_tiktok || '').toLowerCase().includes(q) ||
+        (clip?.video_description_for_instagram || '').toLowerCase().includes(q)
+      );
+    }
+    return list;
+  }, [rankedClips, filterStatus, searchQuery]);
   // Bulk subtitles: apply one style to every clip of the job (triggered from
   // within a clip's subtitle modal via "apply to all").
   const [bulkSub, setBulkSub] = useState({ running: false, current: 0, total: 0, errors: 0 });
@@ -1520,18 +1540,18 @@ function App() {
   // Desktop rail: icon-only from md, labelled from lg. Below md it is gone
   // entirely — an unlabelled 80px rail ate a fifth of a phone screen.
   const Sidebar = () => (
-    <div className="hidden md:flex w-20 lg:w-64 bg-paper2 border-r border-rule flex-col h-full shrink-0 transition-all duration-300">
+    <div className="hidden md:flex w-20 lg:w-64 bg-white border-r border-[#e5e5ea] flex-col h-full shrink-0 transition-all duration-300">
       <a href="#app" onClick={() => goToTab('dashboard')} className="p-6 flex items-center gap-3.5 group" title="Digiclip Studio">
         <div className="w-9 h-9 flex items-center justify-center shrink-0">
-          <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(0,0,251,0.5)]" />
+          <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
         </div>
         <div className="flex items-center gap-2 hidden lg:flex">
           <span className="font-sans font-bold tracking-tight text-xl text-neutral-900">digiclip</span>
-          <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb]/10 text-[#0000fb] border border-[#0000fb]/20">STUDIO</span>
+          <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
         </div>
       </a>
 
-      <nav className="flex-1 px-4 py-4 space-y-1">
+      <nav className="flex-1 px-3.5 py-2 space-y-1 overflow-y-auto custom-scrollbar">
         {navItems.map((item) => {
           const NavIcon = item.icon;
           const isActive = activeTab === item.id;
@@ -1542,25 +1562,30 @@ function App() {
               onClick={() => goToTab(item.id)}
               title={tabLocked(item.id) ? 'Finish your first clips to unlock' : item.label}
               disabled={tabLocked(item.id)}
-              className={`relative w-full flex items-center gap-3 px-3 py-2.5 rounded-input transition-colors ${isActive ? 'bg-paper3 text-ink' : 'text-muted hover:text-ink2 hover:bg-paper3/50'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed hover:bg-transparent hover:text-muted' : ''}`}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                isActive
+                  ? 'bg-[#0000fb]/10 text-[#0000fb] font-semibold'
+                  : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/70'
+              } ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed hover:bg-transparent hover:text-neutral-400' : ''}`}
             >
-              {isActive && (
-                <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 bg-brass rounded-full" aria-hidden="true" />
-              )}
-              <NavIcon size={18} className={`shrink-0 ${isActive ? 'text-brass' : ''}`} />
-              <span className="text-sm lowercase hidden lg:block flex-1 text-left truncate">{item.label}</span>
+              <NavIcon size={18} className={`shrink-0 ${isActive ? 'text-[#0000fb]' : 'text-neutral-500'}`} />
+              <span className="hidden lg:block flex-1 text-left truncate">{item.label}</span>
               {tabLocked(item.id)
-                ? <Lock size={12} className="shrink-0 hidden lg:block" />
-                : item.byok ? <span className="readout hidden lg:block">BYOK</span>
-                  : item.isNew ? <span className="badge-brass hidden lg:block">new</span> : null}
-              <span className="readout hidden lg:block">{item.ord}</span>
+                ? <Lock size={12} className="shrink-0 hidden lg:block text-neutral-400" />
+                : item.byok ? <span className="text-[10px] font-mono uppercase bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded hidden lg:block">BYOK</span>
+                  : item.isNew ? <span className="text-[10px] font-bold uppercase bg-[#0000fb] text-white px-2 py-0.5 rounded-full hidden lg:block">new</span> : null}
             </button>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-rule space-y-1">
-        <NavFooterLinks collapsed />
+      <div className="p-4 border-t border-[#e5e5ea] space-y-1 text-xs">
+        <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg hover:bg-neutral-100/60 transition-colors">
+          <HelpCircle size={16} /> <span className="hidden lg:inline">Help & Support</span>
+        </a>
+        <button onClick={() => billingEnabled && !isSignedIn ? setShowLogin(true) : goToTab('settings')} className="w-full flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg hover:bg-neutral-100/60 transition-colors text-left">
+          <User size={16} /> <span className="hidden lg:inline">{billingEnabled && isSignedIn ? 'Account' : 'Settings'}</span>
+        </button>
       </div>
     </div>
   );
@@ -1578,21 +1603,21 @@ function App() {
         onClick={() => setNavOpen(false)}
         aria-hidden="true"
       />
-      <div className="relative w-[17rem] max-w-[82vw] h-full bg-paper2 border-r border-rule flex flex-col animate-slide-in-left">
-        <div className="flex items-center justify-between px-5 h-14 border-b border-rule shrink-0">
+      <div className="relative w-[17rem] max-w-[82vw] h-full bg-white border-r border-[#e5e5ea] flex flex-col animate-slide-in-left">
+        <div className="flex items-center justify-between px-5 h-16 border-b border-[#e5e5ea] shrink-0">
           <a href="#app" className="flex items-center gap-3" onClick={() => goToTab('dashboard')}>
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
-              <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(0,0,251,0.5)]" />
+              <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
             </div>
             <div className="flex items-center gap-2">
               <span className="font-sans font-bold tracking-tight text-lg text-neutral-900">digiclip</span>
-              <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb]/10 text-[#0000fb] border border-[#0000fb]/20">STUDIO</span>
+              <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
             </div>
           </a>
           <button
             onClick={() => setNavOpen(false)}
             aria-label="close navigation"
-            className="p-2 -mr-2 text-muted hover:text-ink transition-colors"
+            className="p-2 -mr-2 text-neutral-500 hover:text-neutral-900 transition-colors"
           >
             <X size={18} />
           </button>
@@ -1609,37 +1634,34 @@ function App() {
                 disabled={tabLocked(item.id)}
                 aria-current={isActive ? 'page' : undefined}
                 title={tabLocked(item.id) ? 'Finish your first clips to unlock' : undefined}
-                className={`relative w-full flex items-center gap-3 px-3 py-3 rounded-input transition-colors ${isActive ? 'bg-paper3 text-ink' : 'text-muted active:bg-paper3/60'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed' : ''}`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive ? 'bg-[#0000fb]/10 text-[#0000fb] font-semibold' : 'text-neutral-600 active:bg-neutral-100'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
-                {isActive && (
-                  <span className="absolute left-0 top-2 bottom-2 w-0.5 bg-brass rounded-full" aria-hidden="true" />
-                )}
-                <NavIcon size={18} className={`shrink-0 ${isActive ? 'text-brass' : ''}`} />
-                <span className="text-[0.95rem] lowercase flex-1 text-left truncate">{item.label}</span>
+                <NavIcon size={18} className={`shrink-0 ${isActive ? 'text-[#0000fb]' : 'text-neutral-500'}`} />
+                <span className="text-[0.95rem] flex-1 text-left truncate">{item.label}</span>
                 {tabLocked(item.id)
-                  ? <Lock size={12} className="shrink-0" />
-                  : item.byok ? <span className="readout shrink-0">BYOK</span>
-                    : item.isNew ? <span className="badge-brass shrink-0">new</span> : null}
+                  ? <Lock size={12} className="shrink-0 text-neutral-400" />
+                  : item.byok ? <span className="text-[10px] font-mono uppercase bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded shrink-0">BYOK</span>
+                    : item.isNew ? <span className="text-[10px] font-bold uppercase bg-[#0000fb] text-white px-2 py-0.5 rounded-full shrink-0">new</span> : null}
               </button>
             );
           })}
         </nav>
 
-        <div className="px-3 py-3 border-t border-rule space-y-0.5 safe-bottom shrink-0">
-          <NavFooterLinks />
+        <div className="px-3 py-3 border-t border-[#e5e5ea] space-y-0.5 safe-bottom shrink-0 text-xs">
+          <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg transition-colors">
+            <HelpCircle size={16} /> <span>Help & Support</span>
+          </a>
         </div>
       </div>
     </div>
   );
 
   // Bottom tab bar: the four everyday destinations plus "more" for the rest.
-  // It is a flex sibling of the scrolling pane rather than `fixed`, so nothing
-  // ever hides behind it and no pane needs compensating padding.
   const MobileTabBar = () => {
     const tabs = navItems.filter((n) => n.primary);
     const moreActive = !tabs.some((t) => t.id === activeTab);
     return (
-      <nav className="md:hidden shrink-0 border-t border-rule bg-paper2/95 backdrop-blur-sm safe-bottom">
+      <nav className="md:hidden shrink-0 border-t border-[#e5e5ea] bg-white/95 backdrop-blur-sm safe-bottom">
         <div className="flex items-stretch">
           {tabs.map((item) => {
             const NavIcon = item.icon;
@@ -1652,10 +1674,10 @@ function App() {
                 disabled={tabLocked(item.id)}
                 aria-current={isActive ? 'page' : undefined}
                 title={tabLocked(item.id) ? 'Finish your first clips to unlock' : undefined}
-                className={`flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] transition-colors ${isActive ? 'text-ink' : 'text-muted active:text-ink2'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed' : ''}`}
+                className={`flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] transition-colors ${isActive ? 'text-[#0000fb] font-semibold' : 'text-neutral-500 active:text-neutral-900'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
-                <NavIcon size={19} className={isActive ? 'text-brass' : ''} />
-                <span className="text-[10.5px] lowercase leading-none truncate max-w-full px-0.5">{item.short}</span>
+                <NavIcon size={19} className={isActive ? 'text-[#0000fb]' : ''} />
+                <span className="text-[10.5px] leading-none truncate max-w-full px-0.5">{item.short}</span>
               </button>
             );
           })}
@@ -1663,10 +1685,10 @@ function App() {
             onClick={() => setNavOpen(true)}
             aria-label="more sections"
             aria-expanded={navOpen}
-            className={`flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] transition-colors ${moreActive ? 'text-ink' : 'text-muted active:text-ink2'}`}
+            className={`flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] transition-colors ${moreActive ? 'text-[#0000fb] font-semibold' : 'text-neutral-500 active:text-neutral-900'}`}
           >
-            <Menu size={19} className={moreActive ? 'text-brass' : ''} />
-            <span className="text-[10.5px] lowercase leading-none">more</span>
+            <Menu size={19} className={moreActive ? 'text-[#0000fb]' : ''} />
+            <span className="text-[10.5px] leading-none">more</span>
           </button>
         </div>
       </nav>
@@ -1674,42 +1696,56 @@ function App() {
   };
 
   return (
-    /* h-dvh where supported: on mobile Safari/Chrome `100vh` is the tallest the
-       viewport ever gets, so a h-screen shell hides its own bottom bar behind
-       the browser chrome until the user scrolls. */
-    <div className="flex h-screen supports-[height:100dvh]:h-[100dvh] bg-paper overflow-hidden">
+    <div className="flex h-screen supports-[height:100dvh]:h-[100dvh] bg-[#f8f9fa] text-neutral-900 overflow-hidden font-sans">
       <Sidebar />
       {navOpen && <MobileNavDrawer />}
 
       <main className="flex-1 min-w-0 flex flex-col h-full overflow-hidden relative">
-        {/* Top Header */}
-        <header className="h-14 border-b border-rule bg-paper flex items-center justify-between gap-2 px-3 sm:px-6 shrink-0 z-10">
-          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-            {/* Mobile: the drawer handle, and the section name the icon rail
-                used to carry. Without it a phone has no "where am I". */}
+        {/* Top Header - Apple Clean White Navbar with Search & CTA */}
+        <header className="h-16 border-b border-[#e5e5ea] bg-white flex items-center justify-between gap-4 px-4 sm:px-8 shrink-0 z-20">
+          <div className="flex items-center gap-3 flex-1 max-w-md">
             <button
               onClick={() => setNavOpen(true)}
               aria-label="open navigation"
-              className="md:hidden -ml-1 p-2 rounded-input text-muted active:bg-paper3 transition-colors shrink-0"
+              className="md:hidden -ml-1 p-2 rounded-xl text-neutral-600 hover:bg-neutral-100 transition-colors shrink-0"
             >
               <Menu size={20} />
             </button>
-            <span data-tutorial="nav-clips" className="md:hidden font-display lowercase text-base text-ink truncate">
-              {activeNav?.label || 'openshorts'}
+
+            {/* Apple-style Search Bar matching Reference Image */}
+            <div className="relative w-full max-w-sm hidden sm:block">
+              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search your clips..."
+                className="w-full pl-9 pr-12 py-2 bg-neutral-100/80 hover:bg-neutral-100 focus:bg-white border border-transparent focus:border-neutral-300 rounded-xl text-xs sm:text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] text-neutral-400 bg-white border border-neutral-200 px-1.5 py-0.5 rounded shadow-2xs">⌘ K</span>
+            </div>
+
+            <span className="md:hidden font-bold text-neutral-900 text-sm">
+              {activeNav?.label || 'Digiclip'}
             </span>
-            {status !== 'idle' && (
-              <button
-                onClick={handleReset}
-                className="btn-quiet px-3 py-1.5 text-xs shrink-0"
-                aria-label="New Project"
-              >
-                <Plus size={14} />
-                <span className="hidden sm:inline">New Project</span>
-              </button>
-            )}
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Primary Action Button (Generate New Clip / New Project) */}
+            <button
+              onClick={handleReset}
+              className="inline-flex items-center gap-1.5 bg-[#0000fb] hover:bg-[#0000d6] text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl shadow-sm transition-all"
+            >
+              <Plus size={16} />
+              <span>Generate New Clip</span>
+            </button>
+
+            {/* Notifications Bell matching Reference Image */}
+            <button className="relative p-2 rounded-xl text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-colors hidden sm:inline-flex">
+              <Bell size={18} />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500"></span>
+            </button>
+
             {userProfiles.length > 0 && (
               <UserProfileSelector
                 profiles={userProfiles}
@@ -1719,9 +1755,6 @@ function App() {
               />
             )}
 
-            {/* Cloud: minutes meter + account/sign-in. For free users the meter
-                opens the upgrade modal — otherwise the only path to a plan is
-                failing against the quota wall. */}
             {billingEnabled && isManaged && (
               <UsageMeter onClick={() => {
                 if (plan === 'free') openUpsell({ source: 'meter' });
@@ -1742,12 +1775,10 @@ function App() {
             )}
             {billingEnabled && isSignedIn && <ProfileMenu onUpgrade={isManaged ? openUpsell : null} />}
 
-            {/* Hidden below sm: the standing banner underneath already says the
-                same thing, and two warnings in a 360px header is just noise. */}
             {keysMissing && (
               <button
                 onClick={() => (billingEnabled && !isSignedIn ? setShowLogin(true) : goToTab('settings'))}
-                className="badge-warn hover:brightness-125 transition-all hidden sm:inline-flex"
+                className="badge-warn hover:brightness-110 transition-all hidden sm:inline-flex"
                 title="Configure API keys or choose a plan"
               >
                 <AlertTriangle size={12} />
@@ -2310,392 +2341,328 @@ function App() {
             </div>
           )}
 
-          {/* View: Processing / Results (Split View) */}
-          {activeTab === 'dashboard' && (status === 'processing' || status === 'complete' || status === 'error') && (
-            <div className="h-full flex flex-col md:flex-row gap-3 md:gap-4 p-3 md:p-4 overflow-y-auto md:overflow-y-hidden custom-scrollbar animate-fade">
+          {/* View: Clip Results - Apple HIG Layout matching Reference Image */}
+          {activeTab === 'dashboard' && status === 'complete' && (
+            <div className="h-full overflow-y-auto custom-scrollbar p-4 sm:p-8 animate-fade">
+              <div className="max-w-7xl mx-auto space-y-6">
 
-              {/* Left Panel: Preview & Status */}
-              <div className={`${status === 'complete' ? 'w-full md:w-[30%] lg:w-[25%]' : 'w-full md:w-[55%] lg:w-[60%]'} md:h-full flex flex-col shrink-0 md:shrink card p-3.5 sm:p-6 md:overflow-y-auto custom-scrollbar transition-all duration-700 ease-in-out`}>
-                <div className="mb-4 sm:mb-6 flex items-center justify-between gap-2">
-                  <h2 className="text-sm font-medium text-ink lowercase flex items-center gap-2">
-                    <Activity className={`text-brass ${status === 'processing' ? 'animate-pulse' : ''}`} size={18} />
-                    Live Analysis
-                  </h2>
-                  <span className={status === 'processing' ? 'badge-brass' :
-                    status === 'complete' ? 'badge-ok' :
-                      'badge-danger'
-                    }>
-                    {status.toUpperCase()}
-                  </span>
-                </div>
-
-                {/* Trimmed run: say it while it renders, not only once the
-                    clips land, so the shorter result is no surprise. */}
-                {status === 'processing' && partialJob && !partialJob.chosen && plan === 'free' && isManaged && (
-                  <button
-                    onClick={() => openUpsell({ source: 'partial_processing', partialJob })}
-                    className="mb-4 w-full text-left rounded-card border border-brass/40 bg-brass/5 px-4 py-3 text-sm hover:border-brass transition-colors"
-                  >
-                    <span className="text-ink">Clipping the first {partialJob.processed_minutes} of {partialJob.total_minutes} minutes with your free minutes.</span>{' '}
-                    <span className="text-brass font-medium">Clip the whole video →</span>
-                  </button>
-                )}
-
-                {/* Waiting in line: say where and for how long, and that paid
-                    plans go first (they do: plan priority in the job queue). */}
-                {status === 'processing' && queueInfo && (
-                  <div className="mb-4 rounded-card border border-brass/40 bg-brass/5 px-4 py-3 text-sm">
-                    <p className="text-ink">
-                      {queueInfo.ahead === 0
-                        ? 'You are next in line. Starting in a moment…'
-                        : <>You are <b>#{queueInfo.position}</b> in line · {queueInfo.eta_is_minimum ? 'at least' : 'about'} <b>{Math.max(1, Math.round(queueInfo.eta_seconds / 60))} min</b></>}
+                {/* Header Row: Clip Results + Actions */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+                      Clip Results
+                    </h1>
+                    <p className="text-xs sm:text-sm text-neutral-500 mt-1">
+                      Your generated clips are here. Download, edit, or share them.
                     </p>
-                    {queueSlow ? (
-                      /* The free queue is saturated and this video is far
-                         back in it: later arrivals can still pass it
-                         (eta_is_minimum), so the wait is hours, not minutes.
-                         Said here, when it is this user's wait, with the one
-                         thing that changes it. All of it is how the queue
-                         works: plan priority, and paying re-keys the video
-                         already in line. */
-                      <>
-                        <p className="mt-1 text-muted">
-                          High demand right now: free videos wait behind paid ones and this can take hours.
-                          We are adding capacity.
-                        </p>
-                        <button
-                          onClick={() => { track('QueueUpsellClick', { props: { position: String(queueInfo.position), slow: '1' } }); if (isManaged) openUpsell({ source: 'queue' }); else setShowPlanChoice(true); }}
-                          className="btn-primary mt-3"
-                        >
-                          Skip the line with a plan
-                        </button>
-                        <p className="mt-2 text-xs text-muted">
-                          Paid videos are usually ready in minutes, and this one moves to the front as soon as you subscribe.
-                        </p>
-                      </>
-                    ) : billingEnabled && !['starter', 'creator', 'pro'].includes(plan) && queueInfo.ahead > 0 && (
-                      <button
-                        onClick={() => { track('QueueUpsellClick', { props: { position: String(queueInfo.position) } }); if (isManaged) openUpsell({ source: 'queue' }); else setShowPlanChoice(true); }}
-                        className="mt-2 text-xs lowercase text-brass hover:underline"
-                      >
-                        paid plans skip the line →
-                      </button>
-                    )}
                   </div>
-                )}
 
-                {/* Video Preview */}
-                {processingMedia && (
-                  <ProcessingAnimation
-                    media={processingMedia}
-                    isComplete={status === 'complete'}
-                    syncedTime={syncedTime}
-                    isSyncedPlaying={isSyncedPlaying}
-                    syncTrigger={syncTrigger}
-                  />
-                )}
-
-                {/* Phones only. The scan box drops its invented telemetry at
-                    this size and the log terminal below starts collapsed, so
-                    without this the screen would say nothing about what the job
-                    is actually doing. The log tail is the real answer. */}
-                {status === 'processing' && (
-                  <div className="sm:hidden mb-3 flex items-start gap-2 text-xs text-ink2 min-w-0">
-                    <Loader2 size={14} className="animate-spin text-brass shrink-0 mt-px" />
-                    <span className="min-w-0 leading-snug break-words">
-                      {logs.length ? logs[logs.length - 1] : 'starting up…'}
-                    </span>
-                  </div>
-                )}
-
-                {/* The render is dead time: the user is watching a progress bar
-                    with nothing to do, so this is where the one star ask goes. */}
-                {status === 'processing' && (
-                  <div className="my-3">
-                    <StarBanner message="Got a minute while this renders?" />
-                  </div>
-                )}
-
-                {/* Logs Terminal */}
-                <div className={`bg-paper rounded-card border border-rule overflow-hidden flex flex-col transition-all duration-500 ${status === 'complete' ? `min-h-0 opacity-50 hover:opacity-100 ${logsVisible ? 'h-32' : 'h-auto'}` : `flex-1 ${logsVisible ? 'min-h-[160px] sm:min-h-[200px]' : 'min-h-0 flex-none'}`}`}>
-                  <button
-                    type="button"
-                    onClick={() => setLogsVisible(!logsVisible)}
-                    aria-expanded={logsVisible}
-                    className="w-full px-3.5 sm:px-4 py-2.5 border-b border-rule flex items-center justify-between gap-2 bg-paper2 shrink-0 text-left"
-                  >
-                    <span className="readout flex items-center gap-2">
-                      <Terminal size={12} /> System Logs
-                    </span>
-                    <span className="flex items-center gap-2 text-muted">
-                      {!logsVisible && logs.length > 0 && (
-                        <span className="readout normal-case">{logs.length}</span>
-                      )}
-                      <ChevronDown size={16} className={logsVisible ? '' : 'rotate-180'} />
-                    </span>
-                  </button>
-                  {logsVisible && (
-                    <div className="flex-1 p-3.5 sm:p-4 overflow-y-auto font-mono text-[11px] sm:text-xs space-y-1.5 custom-scrollbar text-muted break-words">
-                      {logs.map((log, i) => (
-                        <div key={i} className={`flex gap-2 ${log.toLowerCase().includes('error') ? 'text-danger' : 'text-muted'}`}>
-                          <span className="text-muted opacity-50 shrink-0 hidden sm:inline tabular-nums">
-                            {logTimes[i] ? new Date(logTimes[i] * 1000).toLocaleTimeString() : ''}
-                          </span>
-                          <span className="min-w-0 break-words">{log}</span>
-                        </div>
-                      ))}
-                      {status === 'processing' && (
-                        <div className="animate-pulse text-brass">_</div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Right Panel: Results Grid */}
-              <div className={`${status === 'complete' ? 'w-full md:w-[70%] lg:w-[75%]' : 'w-full md:w-[45%] lg:w-[40%]'} md:h-full flex flex-col shrink-0 md:shrink card p-3.5 sm:p-6 transition-all duration-700 ease-in-out`}>
-                {/* Title + counters on one row, the two actions on their own row
-                    below. Wrapping them all together dropped a lone half-width
-                    "schedule week" pill under the title on a phone. */}
-                <div className="mb-4 sm:mb-6 shrink-0 space-y-3">
-                  <h2 className="font-display lowercase text-lg sm:text-xl text-ink flex flex-wrap items-center gap-2">
-                    <span className="mr-auto">Generated Shorts</span>
-                    {clipsMaking ? (
-                      <span className="readout bg-paper3 px-2.5 py-1 rounded-full text-brass">
-                        {progress.ready}/{progress.total} Clips
-                      </span>
-                    ) : results?.clips?.length > 0 && (
-                      <span className="readout bg-paper3 px-2.5 py-1 rounded-full">
-                        {results.clips.length} Clips
-                      </span>
-                    )}
-                    {results?.cost_analysis && !isManaged && (
-                      <span className="readout bg-paper3 px-2.5 py-1 rounded-full" title={`Input: ${results.cost_analysis.input_tokens} | Output: ${results.cost_analysis.output_tokens}`}>
-                        GEMINI · ${results.cost_analysis.total_cost.toFixed(5)}
-                      </span>
-                    )}
-                  </h2>
-                  {clipsMaking && (
-                    <div
-                      className="h-1 rounded-full bg-paper3 overflow-hidden"
-                      role="progressbar" aria-valuemin={0} aria-valuemax={progress.total} aria-valuenow={progress.ready}
-                      aria-label="Clips ready"
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <button
+                      onClick={handleDownloadAll}
+                      disabled={downloadingAll}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-700 rounded-xl text-xs sm:text-sm font-medium transition-colors shadow-2xs"
+                      title="Download all clips as a ZIP"
                     >
-                      <div
-                        className="h-full bg-brass transition-all duration-500"
-                        style={{ width: `${(progress.ready / progress.total) * 100}%` }}
-                      />
+                      {downloadingAll ? (
+                        <>
+                          <Loader2 size={15} className="animate-spin text-[#0000fb]" />
+                          <span>Zipping...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Download size={15} />
+                          <span>Download All (ZIP)</span>
+                        </>
+                      )}
+                    </button>
+
+                    {results?.clips?.length > 1 && (
+                      <button
+                        onClick={() => setShowScheduleWeek(true)}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-neutral-50 border border-neutral-200 text-neutral-700 rounded-xl text-xs sm:text-sm font-medium transition-colors shadow-2xs"
+                      >
+                        <Calendar size={15} />
+                        <span>Schedule Week</span>
+                      </button>
+                    )}
+
+                    <button
+                      onClick={handleReset}
+                      className="inline-flex items-center gap-1.5 bg-[#0000fb] hover:bg-[#0000d6] text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl shadow-sm transition-all"
+                    >
+                      <Plus size={16} />
+                      <span>Generate New Clip</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Filter and Sort Pills Row matching Reference Image */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                  <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 custom-scrollbar">
+                    <button
+                      onClick={() => setFilterStatus('all')}
+                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                        filterStatus === 'all'
+                          ? 'bg-[#0000fb] text-white shadow-sm'
+                          : 'bg-white border border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
+                      }`}
+                    >
+                      <span>All Clips</span>
+                      <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${
+                        filterStatus === 'all' ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-600'
+                      }`}>
+                        {rankedClips.length}
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => setFilterStatus('completed')}
+                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                        filterStatus === 'completed'
+                          ? 'bg-[#0000fb] text-white shadow-sm'
+                          : 'bg-white border border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
+                      }`}
+                    >
+                      <span>Completed</span>
+                      <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${
+                        filterStatus === 'completed' ? 'bg-white/20 text-white' : 'bg-neutral-100 text-neutral-600'
+                      }`}>
+                        {rankedClips.length}
+                      </span>
+                    </button>
+
+                    <button
+                      onClick={() => setFilterStatus('processing')}
+                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                        filterStatus === 'processing'
+                          ? 'bg-[#0000fb] text-white shadow-sm'
+                          : 'bg-white border border-neutral-200 text-neutral-500 hover:text-neutral-900'
+                      }`}
+                    >
+                      <span>Processing</span>
+                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-500">0</span>
+                    </button>
+
+                    <button
+                      onClick={() => setFilterStatus('failed')}
+                      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                        filterStatus === 'failed'
+                          ? 'bg-[#0000fb] text-white shadow-sm'
+                          : 'bg-white border border-neutral-200 text-neutral-500 hover:text-neutral-900'
+                      }`}
+                    >
+                      <span>Failed</span>
+                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-mono bg-neutral-100 text-neutral-500">0</span>
+                    </button>
+
+                    {/* Source Video & Logs Inspector Toggle */}
+                    <button
+                      onClick={() => setShowSourceModal(true)}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-neutral-200 text-neutral-600 hover:text-[#0000fb] hover:border-[#0000fb]/40 transition-colors ml-auto sm:ml-2"
+                      title="Inspect original source video and system processing logs"
+                    >
+                      <Terminal size={12} className="text-[#0000fb]" />
+                      <span>Source & Logs</span>
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-2 self-end sm:self-auto">
+                    <button className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+                      <Calendar size={13} className="text-neutral-500" />
+                      <span>Last 7 days</span>
+                      <ChevronDown size={13} className="text-neutral-400" />
+                    </button>
+
+                    <button className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-200 rounded-xl text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
+                      <span>Sort by: Newest</span>
+                      <ChevronDown size={13} className="text-neutral-400" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Notifications & Nudges */}
+                <div className="space-y-2">
+                  {partialJob && !partialJob.chosen && (
+                    <button
+                      onClick={() => openUpsell({ source: 'partial_banner', partialJob })}
+                      className="w-full text-left px-4 py-3 rounded-xl bg-white border border-[#0000fb]/30 hover:border-[#0000fb] text-sm transition-colors shadow-2xs"
+                    >
+                      <span className="text-neutral-900">These clips come from the first {partialJob.processed_minutes} of {partialJob.total_minutes} minutes.</span>{' '}
+                      <span className="text-[#0000fb] font-semibold">Clip the whole video →</span>
+                    </button>
+                  )}
+                  {showAutopilotNudge && (
+                    <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 rounded-xl bg-white border border-neutral-200 text-sm shadow-2xs">
+                      <div className="flex items-center gap-3">
+                        <Rocket size={18} className="text-[#0000fb] shrink-0" />
+                        <div>
+                          <span className="font-semibold text-neutral-900">Autopilot Video Clipper</span> — Automatically monitor your YouTube channel and generate clips on every upload.
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => { dismissAutopilotNudge('AutopilotNudgeClicked'); setActiveTab('autopilot'); }}
+                        className="btn-quiet text-xs shrink-0 self-end sm:self-auto"
+                      >
+                        Set up Autopilot →
+                      </button>
                     </div>
                   )}
-                  {results?.clips?.length > 0 && status === 'complete' && (
-                    <div className="flex flex-col sm:flex-row sm:justify-end items-stretch sm:items-center gap-2">
-                      <button
-                        onClick={handleDownloadAll}
-                        disabled={downloadingAll}
-                        className="btn-ghost px-3 py-2 text-xs"
-                        title="Download all clips as a ZIP"
-                      >
-                        {downloadingAll
-                          ? <><Loader2 size={14} className="animate-spin" />zipping…</>
-                          : <><Download size={14} />download all</>}
-                      </button>
-                      {results.clips.length > 1 && (
+                </div>
+
+                {/* 3-Column Responsive Grid matching Reference Image */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+                  {displayClips.map(({ clip, index: i }) => (
+                    <ResultCard
+                      key={`${jobId}-${i}-${clip.video_url || ''}`}
+                      clip={clip}
+                      index={i}
+                      jobId={jobId}
+                      onEditClip={(index) => setEditingClip(index)}
+                      onReframeClip={(index) => setReframingClip(index)}
+                      onModeChanged={handleClipRerendered}
+                      onUpgrade={isManaged ? openUpsell : null}
+                      initialState={projectState?.clips?.find((c) => c.index === i) || null}
+                      onStateChange={handleClipStateChange}
+                      durable={durableClips[i]}
+                      uploadPostKey={uploadPostKey}
+                      uploadUserId={uploadUserId}
+                      geminiApiKey={apiKey}
+                      elevenLabsKey={elevenLabsKey}
+                      isManaged={isManaged}
+                      connectedPlatforms={(userProfiles.find((p) => p.username === uploadUserId) || userProfiles[0])?.connected ?? null}
+                      onConnectSocials={isManaged ? handleConnectSocials : null}
+                      onPlay={(time) => handleClipPlay(time)}
+                      onPause={handleClipPause}
+                      onBulkSubtitle={handleBulkSubtitles}
+                      clipCount={results.clips.length}
+                      bulkProgress={bulkSub}
+                    />
+                  ))}
+                </div>
+
+              </div>
+            </div>
+          )}
+
+          {/* View: Processing / Error State */}
+          {activeTab === 'dashboard' && (status === 'processing' || status === 'error') && (
+            <div className="h-full overflow-y-auto custom-scrollbar p-3 sm:p-6 animate-fade">
+              <div className="max-w-4xl mx-auto space-y-4">
+                <div className="card p-4 sm:p-6 space-y-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <h2 className="text-base font-semibold text-neutral-900 flex items-center gap-2">
+                      <Activity className={`text-[#0000fb] ${status === 'processing' ? 'animate-pulse' : ''}`} size={18} />
+                      Live Analysis
+                    </h2>
+                    <span className={status === 'processing' ? 'badge-warn' : 'badge-danger'}>
+                      {status.toUpperCase()}
+                    </span>
+                  </div>
+
+                  {status === 'processing' && partialJob && !partialJob.chosen && plan === 'free' && isManaged && (
+                    <button
+                      onClick={() => openUpsell({ source: 'partial_processing', partialJob })}
+                      className="mb-4 w-full text-left rounded-xl border border-[#0000fb]/30 bg-[#0000fb]/5 px-4 py-3 text-sm hover:border-[#0000fb] transition-colors"
+                    >
+                      <span className="text-neutral-900">Clipping the first {partialJob.processed_minutes} of {partialJob.total_minutes} minutes with your free minutes.</span>{' '}
+                      <span className="text-[#0000fb] font-medium">Clip the whole video →</span>
+                    </button>
+                  )}
+
+                  {status === 'processing' && queueInfo && (
+                    <div className="rounded-xl border border-[#0000fb]/30 bg-[#0000fb]/5 px-4 py-3 text-sm">
+                      <p className="text-neutral-900">
+                        {queueInfo.ahead === 0
+                          ? 'You are next in line. Starting in a moment…'
+                          : <>You are <b>#{queueInfo.position}</b> in line · {queueInfo.eta_is_minimum ? 'at least' : 'about'} <b>{Math.max(1, Math.round(queueInfo.eta_seconds / 60))} min</b></>}
+                      </p>
+                      {queueSlow ? (
+                        <>
+                          <p className="mt-1 text-neutral-500">
+                            High demand right now: free videos wait behind paid ones and this can take hours.
+                            We are adding capacity.
+                          </p>
+                          <button
+                            onClick={() => { track('QueueUpsellClick', { props: { position: String(queueInfo.position), slow: '1' } }); if (isManaged) openUpsell({ source: 'queue' }); else setShowPlanChoice(true); }}
+                            className="btn-primary mt-3"
+                          >
+                            Skip the line with a plan
+                          </button>
+                        </>
+                      ) : billingEnabled && !['starter', 'creator', 'pro'].includes(plan) && queueInfo.ahead > 0 && (
                         <button
-                          onClick={() => setShowScheduleWeek(true)}
-                          className="btn-primary px-4 py-2 text-xs"
+                          onClick={() => { track('QueueUpsellClick', { props: { position: String(queueInfo.position) } }); if (isManaged) openUpsell({ source: 'queue' }); else setShowPlanChoice(true); }}
+                          className="mt-2 text-xs text-[#0000fb] hover:underline"
                         >
-                          <Calendar size={14} />
-                          schedule week
+                          paid plans skip the line →
                         </button>
                       )}
                     </div>
                   )}
-                </div>
 
-                {status === 'complete' && results?.clips?.length > 0 && (
-                  <div className="mb-2 space-y-2">
-                    {/* Partial job: the clips on screen come from the first N
-                        minutes only. Say so, and sell the rest of the video. */}
-                    {partialJob && !partialJob.chosen && (
-                      <button
-                        onClick={() => openUpsell({ source: 'partial_banner', partialJob })}
-                        className="w-full text-left px-3 py-2.5 rounded-input bg-paper3 border border-brass/40 hover:border-brass text-sm transition-colors"
-                      >
-                        <span className="text-ink">These clips come from the first {partialJob.processed_minutes} of {partialJob.total_minutes} minutes.</span>{' '}
-                        <span className="text-brass font-medium">Clip the whole video →</span>
-                      </button>
-                    )}
-                    {/* Peak-moment upsell: they just SAW their clips — sell while
-                        they're proud of the result, before asking for stars. */}
-                    {firstVideoJob && !partialJob && (
-                      <button
-                        onClick={() => openUpsell({ source: 'first_video_banner' })}
-                        className="w-full text-left px-3 py-2.5 rounded-input bg-paper3 border border-brass/40 hover:border-brass text-sm transition-colors"
-                      >
-                        <span className="text-ink">Your first video is on us: we clipped all of it.</span>{' '}
-                        <span className="text-muted">That used this month's free minutes.</span>{' '}
-                        <span className="text-brass font-medium">Keep clipping →</span>
-                      </button>
-                    )}
-                    {plan === 'free' && (!partialJob || partialJob.chosen) && !firstVideoJob && (
-                      <button
-                        onClick={() => openUpsell({ source: 'results_banner' })}
-                        className="w-full text-left px-3 py-2.5 rounded-input bg-paper3 border border-brass/40 hover:border-brass text-sm transition-colors"
-                      >
-                        <span className="text-ink">
-                          {results?.clips?.length <= FREE_CLIPS_QUIET
-                            ? `The free plan makes the ${FREE_CLIPS_PER_VIDEO} to ${FREE_CLIPS_QUIET} best clips of each video.`
-                            : 'Like these clips?'}
-                        </span>{' '}
-                        <span className="text-muted">
-                          {results?.clips?.length <= FREE_CLIPS_QUIET
-                            ? `Plans get every clip, up to ${MAX_CLIPS_PER_VIDEO} per video, and these lose the watermark on the spot.`
-                            : 'Upgrade and these exact clips lose the watermark on the spot, and stay for good.'}
-                        </span>{' '}
-                        <span className="text-brass font-medium">
-                          {results?.clips?.length <= FREE_CLIPS_QUIET ? 'Get every clip →' : 'Remove the watermark →'}
-                        </span>
-                      </button>
-                    )}
-                    {showAutopilotNudge && (
-                      <div className="w-full flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 px-3 py-2.5 rounded-input bg-paper3 border border-rule text-sm">
-                        <div className="flex items-start gap-3 flex-1 min-w-0">
-                          <Rocket size={16} className="text-brass shrink-0 mt-0.5" />
-                          <div className="min-w-0 leading-relaxed">
-                            <span className="text-ink">Want this for every new video, without coming back?</span>{' '}
-                            <span className="text-muted">
-                              Autopilot watches your YouTube channel and clips each new upload on its own
-                              {plan === 'free' ? ', included in every paid plan.' : '.'}
+                  {/* Video Preview */}
+                  {processingMedia && (
+                    <ProcessingAnimation
+                      media={processingMedia}
+                      isComplete={false}
+                      syncedTime={syncedTime}
+                      isSyncedPlaying={isSyncedPlaying}
+                      syncTrigger={syncTrigger}
+                    />
+                  )}
+
+                  {/* Phones only */}
+                  {status === 'processing' && (
+                    <div className="sm:hidden mb-3 flex items-start gap-2 text-xs text-neutral-700 min-w-0">
+                      <Loader2 size={14} className="animate-spin text-[#0000fb] shrink-0 mt-px" />
+                      <span className="min-w-0 leading-snug break-words">
+                        {logs.length ? logs[logs.length - 1] : 'starting up…'}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Star banner */}
+                  {status === 'processing' && (
+                    <div className="my-2">
+                      <StarBanner message="Got a minute while this renders?" />
+                    </div>
+                  )}
+
+                  {/* Logs Terminal */}
+                  <div className="bg-neutral-900 text-neutral-200 rounded-xl overflow-hidden flex flex-col">
+                    <button
+                      type="button"
+                      onClick={() => setLogsVisible(!logsVisible)}
+                      aria-expanded={logsVisible}
+                      className="w-full px-4 py-2.5 flex items-center justify-between gap-2 bg-neutral-800 text-left text-xs font-mono"
+                    >
+                      <span className="flex items-center gap-2 text-white">
+                        <Terminal size={13} className="text-[#0000fb]" /> System Logs
+                      </span>
+                      <span className="flex items-center gap-2 text-neutral-400">
+                        {logs.length > 0 && <span>{logs.length} lines</span>}
+                        <ChevronDown size={14} className={logsVisible ? '' : 'rotate-180'} />
+                      </span>
+                    </button>
+                    {logsVisible && (
+                      <div className="p-4 max-h-48 overflow-y-auto font-mono text-xs space-y-1.5 custom-scrollbar text-neutral-300 break-words">
+                        {logs.map((log, i) => (
+                          <div key={i} className={`flex gap-2 ${log.toLowerCase().includes('error') ? 'text-red-400' : 'text-neutral-300'}`}>
+                            <span className="text-neutral-500 shrink-0 hidden sm:inline tabular-nums">
+                              {logTimes[i] ? new Date(logTimes[i] * 1000).toLocaleTimeString() : ''}
                             </span>
+                            <span className="min-w-0 break-words">{log}</span>
                           </div>
-                          <button
-                            onClick={() => dismissAutopilotNudge('AutopilotNudgeDismissed')}
-                            aria-label="dismiss"
-                            className="sm:hidden shrink-0 -m-1 p-1 text-muted hover:text-ink"
-                          >
-                            <X size={16} />
-                          </button>
-                        </div>
-                        <button
-                          onClick={() => { dismissAutopilotNudge('AutopilotNudgeClicked'); setActiveTab('autopilot'); }}
-                          className="btn-quiet shrink-0 text-xs py-1.5 px-3 lowercase w-full sm:w-auto"
-                        >
-                          set up autopilot →
-                        </button>
-                        <button
-                          onClick={() => dismissAutopilotNudge('AutopilotNudgeDismissed')}
-                          aria-label="dismiss"
-                          className="hidden sm:block shrink-0 p-1 text-muted hover:text-ink"
-                        >
-                          <X size={14} />
-                        </button>
-                      </div>
-                    )}
-                    {/* Distribution nudge at the same peak: clips on screen,
-                        publishing them is one connect away. Hidden once any
-                        network is linked or the user dismisses it. */}
-                    {showSocialNudge && (
-                      <div className="w-full flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 px-3 py-2.5 rounded-input bg-paper3 border border-rule text-sm">
-                        <div className="flex items-start gap-3 flex-1 min-w-0">
-                          <div className="min-w-0 leading-relaxed">
-                            <span className="text-ink">Publish these clips straight from here.</span>{' '}
-                            <span className="text-muted">Connect your YouTube, TikTok or Instagram once — after that every clip is one click from posted.</span>
-                          </div>
-                          {/* On a phone the dismiss X rides the copy, so the CTA
-                              below can run the full width of the card. */}
-                          <button
-                            onClick={() => {
-                              track('SocialNudgeDismissed');
-                              setSocialNudgeDismissed(true);
-                              try { localStorage.setItem('os_social_nudge_dismissed', '1'); } catch (_) { /* ignore */ }
-                            }}
-                            aria-label="dismiss"
-                            className="sm:hidden shrink-0 -m-1 p-1 text-muted hover:text-ink"
-                          >
-                            <X size={16} />
-                          </button>
-                        </div>
-                        <button
-                          onClick={() => { track('SocialNudgeConnect'); handleConnectSocials(); }}
-                          className="btn-quiet shrink-0 text-xs py-1.5 px-3 lowercase w-full sm:w-auto"
-                        >
-                          connect socials →
-                        </button>
-                        <button
-                          onClick={() => {
-                            track('SocialNudgeDismissed');
-                            setSocialNudgeDismissed(true);
-                            try { localStorage.setItem('os_social_nudge_dismissed', '1'); } catch (_) { /* ignore */ }
-                          }}
-                          aria-label="dismiss"
-                          className="hidden sm:block shrink-0 p-1 text-muted hover:text-ink"
-                        >
-                          <X size={14} />
-                        </button>
-                      </div>
-                    )}
-                    {/* Self-host only: cloud archives clips to the video library,
-                        here they really are gone once the retention sweep runs. */}
-                    {!billingEnabled && jobRetentionSeconds > 0 && (
-                      <div className="px-3 py-2.5 rounded-input bg-paper3 border border-paper3 text-sm">
-                        <span className="text-ink">Clips are kept for {formatRetention(jobRetentionSeconds)}, then deleted.</span>{' '}
-                        <span className="text-muted">Download what you want to keep, or raise JOB_RETENTION_SECONDS in your env.</span>
+                        ))}
+                        {status === 'processing' && (
+                          <div className="animate-pulse text-[#0000fb]">_</div>
+                        )}
                       </div>
                     )}
                   </div>
-                )}
-
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-1">
-                  {results && results.clips && results.clips.length > 0 ? (
-                    <div className={`grid gap-4 pb-10 ${status === 'complete' ? 'grid-cols-[repeat(auto-fill,minmax(min(100%,600px),1fr))]' : 'grid-cols-1'}`}>
-                      {rankedClips.map(({ clip, index: i }) => (
-                        <ResultCard
-                          key={`${jobId}-${i}-${clip.video_url || ''}`}
-                          clip={clip}
-                          index={i}
-                          jobId={jobId}
-                          onEditClip={(index) => setEditingClip(index)}
-                          onReframeClip={(index) => setReframingClip(index)}
-                          onModeChanged={status === 'processing' ? null : handleClipRerendered}
-                          onUpgrade={isManaged ? openUpsell : null}
-                          initialState={projectState?.clips?.find((c) => c.index === i) || null}
-                          onStateChange={handleClipStateChange}
-                          durable={durableClips[i]}
-                          uploadPostKey={uploadPostKey}
-                          uploadUserId={uploadUserId}
-                          geminiApiKey={apiKey}
-                          elevenLabsKey={elevenLabsKey}
-                          isManaged={isManaged}
-                          connectedPlatforms={(userProfiles.find((p) => p.username === uploadUserId) || userProfiles[0])?.connected ?? null}
-                          onConnectSocials={isManaged ? handleConnectSocials : null}
-                          onPlay={(time) => handleClipPlay(time)}
-                          onPause={handleClipPause}
-                          onBulkSubtitle={handleBulkSubtitles}
-                          clipCount={results.clips.length}
-                          bulkProgress={bulkSub}
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    status === 'processing' ? (
-                      <div className="h-full min-h-[140px] flex flex-col items-center justify-center text-muted space-y-3 text-center px-4">
-                        <Loader2 size={28} className="animate-spin text-brass" />
-                        <p className="text-sm lowercase">
-                          {clipsMaking ? `Making ${progress.total} ${progress.total === 1 ? 'clip' : 'clips'}...` : 'Waiting for clips...'}
-                        </p>
-                        <p className="text-xs text-muted/80 max-w-[26ch] leading-snug">
-                          They appear here one by one as each finishes rendering.
-                        </p>
-                      </div>
-                    ) : status === 'error' ? (
-                      <div className="h-full min-h-[120px] flex flex-col items-center justify-center text-danger space-y-2">
-                        <p>Generation failed.</p>
-                      </div>
-                    ) : null
-                  )}
                 </div>
               </div>
-
             </div>
           )}
 
@@ -2832,6 +2799,49 @@ function App() {
         </Modal>
       )}
 
+      {/* Source Video & Logs Inspector Modal */}
+      {showSourceModal && (
+        <Modal
+          isOpen={showSourceModal}
+          onClose={() => setShowSourceModal(false)}
+          eyebrow="INSPECTOR"
+          title="Source Video & Logs"
+          size="lg"
+        >
+          <div className="space-y-4">
+            {processingMedia && (
+              <div className="rounded-xl overflow-hidden border border-neutral-200">
+                <ProcessingAnimation
+                  media={processingMedia}
+                  isComplete={true}
+                  syncedTime={syncedTime}
+                  isSyncedPlaying={isSyncedPlaying}
+                  syncTrigger={syncTrigger}
+                />
+              </div>
+            )}
+
+            <div className="bg-neutral-900 text-neutral-200 rounded-xl overflow-hidden flex flex-col">
+              <div className="w-full px-4 py-2.5 flex items-center justify-between gap-2 bg-neutral-800 text-left text-xs font-mono">
+                <span className="flex items-center gap-2 text-white">
+                  <Terminal size={13} className="text-[#0000fb]" /> System Logs
+                </span>
+                <span className="text-neutral-400 text-xs">{logs.length} lines</span>
+              </div>
+              <div className="p-4 max-h-56 overflow-y-auto font-mono text-xs space-y-1.5 custom-scrollbar text-neutral-300 break-words">
+                {logs.map((log, i) => (
+                  <div key={i} className={`flex gap-2 ${log.toLowerCase().includes('error') ? 'text-red-400' : 'text-neutral-300'}`}>
+                    <span className="text-neutral-500 shrink-0 hidden sm:inline tabular-nums">
+                      {logTimes[i] ? new Date(logTimes[i] * 1000).toLocaleTimeString() : ''}
+                    </span>
+                    <span className="min-w-0 break-words">{log}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
 
       {editingClip !== null && results?.clips?.[editingClip] && (
         <ClipEditor

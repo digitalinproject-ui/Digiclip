@@ -1,47 +1,47 @@
 :root {
-  /* paper - Clean Pure White Apple Canvas */
-  --color-paper: #ffffff;
-  --color-paper-2: #f5f5f7;
-  --color-paper-3: #ffffff;
+  /* paper - Apple HIG Clean Surfaces */
+  --color-paper: #f5f5f7;      /* Apple System Gray 6 - Window Canvas Background */
+  --color-paper-2: #ffffff;    /* Pure White - Sidebars, Headers, Cards */
+  --color-paper-3: #f2f2f7;    /* Inset elements, subtle pills, input fields */
 
-  /* ink - Apple High Contrast Black Typography (Zero Orange) */
-  --color-ink: #000000;
-  --color-ink-2: #1d1d1f;
-  --color-muted: #6e6e73;
+  /* ink - Apple High Contrast Typography */
+  --color-ink: #1d1d1f;        /* Jet Black - Headings, Titles, High-contrast text */
+  --color-ink-2: #1d1d1f;      /* Near Black - Body text, Form labels */
+  --color-muted: #52525b;      /* Dark Zinc/Gray - Secondary metadata (WCAG AAA compliant) */
 
-  /* rules - Crisp Light Gray Apple Borders */
-  --color-rule: rgba(0, 0, 0, 0.08);
-  --color-rule-2: rgba(0, 0, 0, 0.14);
+  /* rules - Crisp Apple 1px Borders */
+  --color-rule: #e5e5ea;       /* Clean subtle border */
+  --color-rule-2: #d1d1d6;     /* Stronger border */
   --rule-blueprint: rgba(0, 0, 251, 0.04);
 
-  /* accents - Primary Brand #0000fb (Electric Royal Blue, ZERO ORANGE) */
+  /* accents - Brand Electric Royal Blue #0000fb (STRICTLY ZERO ORANGE) */
   --color-accent: #0000fb;
   --color-accent-ink: #ffffff;
   --color-accent-2: #0000fb;
-  --color-glow: rgba(0, 0, 251, 0.25);
-  --color-paper-emit: rgba(0, 0, 251, 0.04);
+  --color-glow: rgba(0, 0, 251, 0.35);
+  --color-paper-emit: rgba(0, 0, 251, 0.05);
   --color-focus: #0000fb;
 
   /* states */
   --color-ok: #10b981;
   --color-danger: #ef4444;
-  --color-warn: #0000fb;
+  --color-warn: #0000fb;       /* Warning mapped to Brand Blue / Accent (NO ORANGE) */
 
   /* type - Apple System Typography */
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
   --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
-  --text-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-  --tracking-display: -0.03em;
-  --tracking-micro: 0.06em;
+  --text-display: clamp(2.25rem, 4.5vw + 1rem, 4rem);
+  --tracking-display: -0.025em;
+  --tracking-micro: 0.04em;
 
   /* geometry - Apple Rounded Squircles */
-  --radius-card: 22px;
-  --radius-input: 14px;
+  --radius-card: 18px;
+  --radius-input: 12px;
 
   /* motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-short: 200ms;
-  --dur-reveal: 500ms;
+  --dur-short: 180ms;
+  --dur-reveal: 400ms;
   --dur-pulse: 3s;
 }

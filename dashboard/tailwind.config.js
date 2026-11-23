@@ -7,24 +7,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Digiclip Clean White, Black, and Blue #0000fb Brand Palette
-        paper: "var(--color-paper)",
-        paper2: "var(--color-paper-2)",
-        paper3: "var(--color-paper-3)",
-        ink: "var(--color-ink)",
-        ink2: "var(--color-ink-2)",
-        muted: "var(--color-muted)",
+        // Digiclip Apple HIG Light Theme: White, Black, and Blue #0000fb Brand Palette
+        paper: "#f5f5f7",
+        paper2: "#ffffff",
+        paper3: "#f2f2f7",
+        ink: "#1d1d1f",
+        ink2: "#1d1d1f",
+        muted: "#52525b",
         brass: "#0000fb",
         brassink: "#ffffff",
         coral: "#0000fb",
         brand: "#0000fb",
-        brandHover: "#1a1afc",
-        ok: "var(--color-ok)",
-        warn: "var(--color-warn)",
-        danger: "var(--color-danger)",
-        // Aliases for clean user-friendly styling
-        background: "var(--color-paper)",
-        surface: "var(--color-paper-2)",
+        brandHover: "#0000d6",
+        ok: "#10b981",
+        warn: "#0000fb",
+        danger: "#ef4444",
+        // Semantic aliases
+        background: "#f5f5f7",
+        surface: "#ffffff",
         primary: "#0000fb",
         accent: "#0000fb",
       },
@@ -44,15 +44,14 @@ export default {
         input: "var(--radius-input)",
       },
       fontSize: {
-        micro: ["10.5px", { letterSpacing: "0.10em" }],
+        micro: ["11px", { letterSpacing: "0.06em" }],
       },
       transitionTimingFunction: {
         out: "var(--ease-out)",
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'fade': 'fadeIn 0.4s var(--ease-out)',
-        // mobile shell: the nav drawer flies in from the edge, sheets rise
+        'fade': 'fadeIn 0.3s var(--ease-out)',
         'slide-in-left': 'slideInLeft 0.24s var(--ease-out)',
         'sheet-up': 'sheetUp 0.26s var(--ease-out)',
       },

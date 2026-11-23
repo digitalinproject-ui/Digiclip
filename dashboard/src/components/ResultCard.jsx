@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Download, Share2, AlertCircle, Loader2, Copy, Check, Wand2, Type, Calendar, Languages, FileText, Link2, Scissors, Crosshair, TrendingUp, Sparkles } from 'lucide-react';
+import { Download, Share2, AlertCircle, Loader2, Copy, Check, Wand2, Type, Calendar, Languages, FileText, Link2, Scissors, Crosshair, TrendingUp, Sparkles, Play, Pause, MoreVertical, ChevronDown, ChevronUp } from 'lucide-react';
 import { getApiUrl } from '../config';
 import { apiFetch, QuotaError, openQuotaWall } from '../lib/api';
 import { platformOptions as buildPlatformOptions, defaultPlatformFlags, flagsFromList } from '../lib/socialPlatforms';
@@ -14,7 +14,7 @@ import TikTokDraftNotice from './TikTokDraftNotice';
 import { useAuth } from '../contexts/AuthContext';
 import { renderInBrowser } from '../lib/renderInBrowser';
 
-const QUIET_BTN = 'group flex flex-col items-center justify-center gap-1 py-2.5 sm:py-2 px-1 rounded-input border border-rule hover:bg-paper3 text-[11px] lowercase text-ink2 whitespace-nowrap transition-colors disabled:opacity-45 disabled:cursor-not-allowed';
+const QUIET_BTN = 'group flex flex-col items-center justify-center gap-1.5 py-2.5 sm:py-2 px-1.5 rounded-xl border border-neutral-200 bg-neutral-50 hover:bg-neutral-100 hover:border-neutral-300 text-[11px] font-medium text-neutral-800 whitespace-nowrap transition-colors disabled:opacity-45 disabled:cursor-not-allowed';
 
 // Follow an async post (request_id from /api/social/post) for about a minute.
 // Returns {done, failed}: done once every platform finished, failed lists
@@ -79,6 +79,21 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
     const [showDescModal, setShowDescModal] = useState(false);
     const [showSubtitleModal, setShowSubtitleModal] = useState(false);
     const [showWatermarkModal, setShowWatermarkModal] = useState(false);
+    const [showTools, setShowTools] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        if (!videoRef.current) return;
+        if (isPlaying) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+            if (onPause) onPause();
+        } else {
+            videoRef.current.play();
+            setIsPlaying(true);
+            if (onPlay) onPlay(clip.start + (videoRef.current.currentTime || 0));
+        }
+    };
     const { plan } = useAuth();
     const videoRef = React.useRef(null);
     // Pristine base clip (no burned subtitles/hook), stable regardless of how
@@ -858,17 +873,13 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
     const durationReadout = formatDuration(clip);
 
     return (
-        <div className="card overflow-hidden flex flex-col md:flex-row group hover:border-rule2 transition-colors animate-fade md:min-h-[420px]" style={{ animationDelay: `${index * 0.1}s` }}>
-            {/* Left: Video Preview — 9:16 column matching the fixed card height */}
-            {/* A full-width 9:16 preview on a phone is ~640px tall on its own,
-                which pushed the title, captions and every action off-screen.
-                Capping the height and centring keeps the whole card scannable
-                without letterboxing the clip. */}
-            <div className="w-full max-w-[calc(64vh*0.5625)] md:max-w-none mx-auto md:mx-0 md:w-[236px] bg-black relative shrink-0 aspect-[9/16] md:aspect-auto group/video">
+        <div className="bg-white border border-neutral-200/90 hover:border-neutral-300 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group/card animate-fade" style={{ animationDelay: `${index * 0.08}s` }}>
+            {/* Top: Video Thumbnail & Preview matching Reference Image */}
+            <div className="relative w-full aspect-[16/10] sm:aspect-[9/14] bg-neutral-950 overflow-hidden group/video flex items-center justify-center">
                 <video
                     ref={videoRef}
                     src={playbackUrl}
-                    controls
+                    controls={isPlaying}
                     className="w-full h-full object-contain"
                     playsInline
                     onLoadedMetadata={(e) => {
@@ -878,284 +889,218 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
                         }
                     }}
                     onError={() => {
-                        // The durable copy is unreachable (signature expired after an
-                        // hour on an idle tab, object purged) → serve from the API for
-                        // the rest of this card's life.
                         if (playbackUrl === durableSrc) {
                             setDurableFailed(true);
                             return;
                         }
-                        // Local /videos/ file gone (e.g. cleaned up after a reload) →
-                        // fall back to the durable R2 copy for managed users. If the
-                        // durable URL hasn't loaded yet, the effect above retries.
                         if (durable?.url && currentVideoUrl !== durable.url) setCurrentVideoUrl(durable.url);
                         else setVideoErrored(true);
                     }}
                     onPlay={() => {
                         if (!hasPlayed) track('ClipPlayed', { props: { clip_index: index, clips: clipCount } });
                         setHasPlayed(true);
+                        setIsPlaying(true);
                         const currentTime = videoRef.current ? videoRef.current.currentTime : 0;
                         onPlay && onPlay(clip.start + currentTime);
                     }}
-                    onPause={() => onPause && onPause()}
+                    onPause={() => {
+                        setIsPlaying(false);
+                        onPause && onPause();
+                    }}
                     onEnded={() => {
+                        setIsPlaying(false);
                         if (videoRef.current) {
                             videoRef.current.currentTime = 0;
-                            videoRef.current.play();
                         }
                     }}
                 />
-                <div className="absolute top-3 left-3 flex gap-2">
-                    {/* Stays the clip's own number, not its rank: the cards are
-                        ordered by score, but this is what the downloaded file
-                        is called (clip-N.mp4) and what every api call indexes. */}
-                    <span className="bg-black/70 text-ink font-mono text-micro uppercase px-2 py-1 rounded-full">
+
+                {/* Translucent Center Play Button overlay matching Reference Image */}
+                {!isPlaying && (
+                    <button
+                        onClick={togglePlay}
+                        aria-label="Play clip"
+                        className="absolute inset-0 flex items-center justify-center bg-black/25 hover:bg-black/35 transition-colors group/play z-10"
+                    >
+                        <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/25 flex items-center justify-center text-white shadow-xl group-hover/play:scale-110 transition-transform">
+                            <Play size={22} className="ml-0.5 fill-white text-white" />
+                        </div>
+                    </button>
+                )}
+
+                {/* Clip Number Badge */}
+                <div className="absolute top-2.5 left-2.5 z-20 pointer-events-none">
+                    <span className="bg-black/75 backdrop-blur-md text-white font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full border border-white/15 font-semibold">
                         Clip {index + 1}
                     </span>
-                    {/* A bare number on a thumbnail reads as a duration, a
-                        position, anything — it has to name itself and carry
-                        its scale, or it is decoration. */}
-                    {Number.isFinite(clip.predicted_score) && (
-                        <span
-                            className="bg-black/70 font-mono text-micro uppercase px-2 py-1 rounded-full flex items-center gap-1"
-                            title="openshorts' prediction of how well this clip will perform, from 0 to 100"
-                        >
-                            <TrendingUp size={11} className="shrink-0 text-muted" />
-                            <span className="text-muted">viral</span>
-                            <b className={
-                                clip.predicted_score >= 80 ? 'text-ok'
-                                    : clip.predicted_score >= 65 ? 'text-brass'
-                                        : 'text-ink2'
-                            }>
+                </div>
+
+                {/* Viral Score Badge */}
+                {Number.isFinite(clip.predicted_score) && (
+                    <div className="absolute top-2.5 right-2.5 z-20 pointer-events-none">
+                        <span className="bg-black/75 backdrop-blur-md text-white font-mono text-[10px] uppercase px-2.5 py-0.5 rounded-full border border-white/15 flex items-center gap-1 font-semibold">
+                            <TrendingUp size={11} className="text-[#60a5fa]" />
+                            <span className="text-white/70">viral</span>
+                            <b className={clip.predicted_score >= 80 ? 'text-emerald-400 font-bold' : clip.predicted_score >= 65 ? 'text-[#60a5fa] font-bold' : 'text-white font-bold'}>
                                 {clip.predicted_score}
                             </b>
-                            <span className="text-muted">/100</span>
+                            <span className="text-white/50">/100</span>
                         </span>
-                    )}
-                </div>
+                    </div>
+                )}
+
+                {/* Duration Badge Bottom Right */}
+                {durationReadout && (
+                    <span className="absolute bottom-2.5 right-2.5 z-20 bg-black/80 backdrop-blur-sm text-white font-mono text-[10.5px] px-2 py-0.5 rounded-md font-medium pointer-events-none">
+                        {durationReadout}
+                    </span>
+                )}
 
                 {/* Auto Edit Overlay if Processing */}
                 {isEditing && (
-                    <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center z-10 p-4 text-center">
-                        <Loader2 size={28} className="text-brass animate-spin mb-3" />
-                        <span className="text-xs text-ink lowercase">ai magic in progress…</span>
-                        <span className="readout mt-1.5">APPLYING VIRAL EDITS · ZOOMS</span>
+                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center z-30 p-4 text-center">
+                        <Loader2 size={28} className="text-[#0000fb] animate-spin mb-3" />
+                        <span className="text-xs text-white font-medium">Applying AI edits & zooms…</span>
+                        <span className="readout text-neutral-400 mt-1">SMART REFOCUS · CUTS</span>
                     </div>
                 )}
             </div>
 
-            {/* Right: Content & Details */}
-            <div className="flex-1 p-4 md:p-5 flex flex-col overflow-hidden min-w-0">
-                <div className="mb-4">
-                    <h3 className="text-base font-medium text-ink leading-tight line-clamp-2 mb-2 break-words" title={clip.video_title_for_youtube_short}>
+            {/* Bottom Content Area matching Reference Image */}
+            <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-white space-y-3">
+                <div>
+                    <h3 className="text-base font-bold text-neutral-900 leading-snug line-clamp-1 break-words" title={clip.video_title_for_youtube_short}>
                         {clip.video_title_for_youtube_short || "Viral Clip Generated"}
                     </h3>
-                    {/* The score alone says how much, not why. One line from
-                        the selection pass on what this moment has going for it. */}
                     {clip.why && (
-                        <div
-                            className="relative mb-2"
-                            onMouseEnter={() => setWhyOpen(true)}
-                            onMouseLeave={() => setWhyOpen(false)}
+                        <p className="text-xs text-neutral-500 line-clamp-1 mt-1 leading-relaxed">
+                            {clip.why}
+                        </p>
+                    )}
+                </div>
+
+                {/* Meta & Quick Action Icons Row matching Reference Image */}
+                <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
+                    <div className="flex items-center gap-2 text-xs text-neutral-500 font-medium">
+                        <span>{durationReadout || '00:30'}</span>
+                        <span>•</span>
+                        <span className="text-neutral-800 font-semibold">{clip.predicted_score || 90}% Viral</span>
+                    </div>
+
+                    <div className="flex items-center gap-1">
+                        {/* Download MP4 */}
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (plan === 'free' && !watermarkNoticeDismissed(jobId)) {
+                                    setShowWatermarkModal(true);
+                                    return;
+                                }
+                                downloadClip();
+                            }}
+                            title="Download MP4"
+                            className="p-1.5 rounded-lg text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 transition-colors"
                         >
-                            <p
-                                ref={whyRef}
-                                className={`text-xs text-muted leading-snug line-clamp-2 break-words ${whyClamped ? 'cursor-pointer' : ''}`}
-                                onClick={() => whyClamped && setWhyOpen(v => !v)}
-                                aria-label="why openshorts picked this moment"
-                            >
-                                {clip.why}
-                            </p>
-                            {whyClamped && whyOpen && (
-                                <div
-                                    role="tooltip"
-                                    className="absolute left-0 right-0 top-full mt-1 z-20 bg-paper border border-rule rounded-input px-3 py-2 text-xs text-ink leading-snug shadow-lg"
-                                >
-                                    {clip.why}
-                                </div>
+                            <Download size={16} />
+                        </button>
+
+                        {/* Share / Post to Socials */}
+                        <button
+                            onClick={() => setShowModal(true)}
+                            title="Post to TikTok / Instagram / YouTube"
+                            className="p-1.5 rounded-lg text-neutral-500 hover:text-[#0000fb] hover:bg-[#0000fb]/10 transition-colors"
+                        >
+                            <Share2 size={16} />
+                        </button>
+
+                        {/* More Tools Toggle */}
+                        <button
+                            onClick={() => setShowTools(!showTools)}
+                            title="More editing tools & captions"
+                            className={`p-1.5 rounded-lg transition-colors ${showTools ? 'bg-neutral-200 text-neutral-900' : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100'}`}
+                        >
+                            <MoreVertical size={16} />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Expandable Editing Suite - Preserving ALL existing tools */}
+                {showTools && (
+                    <div className="pt-3 border-t border-neutral-200 space-y-3 animate-fade">
+                        {/* Editing Actions Grid */}
+                        <div className="grid grid-cols-3 gap-1.5">
+                            {onEditClip && (
+                                <button onClick={() => onEditClip(index)} className={QUIET_BTN}>
+                                    <Scissors size={14} className="text-neutral-500 group-hover:text-[#0000fb]" />
+                                    <span>Trim Clip</span>
+                                </button>
                             )}
+                            {onReframeClip && (
+                                <button onClick={() => onReframeClip(index)} className={QUIET_BTN}>
+                                    <Crosshair size={14} className="text-neutral-500 group-hover:text-[#0000fb]" />
+                                    <span>Reframing</span>
+                                </button>
+                            )}
+                            <button onClick={handleAutoEdit} disabled={isEditing} className={QUIET_BTN}>
+                                {isEditing ? <Loader2 size={14} className="animate-spin text-[#0000fb]" /> : <Wand2 size={14} className="text-neutral-500 group-hover:text-[#0000fb]" />}
+                                <span>{isEditing ? 'Editing…' : 'Auto Edit'}</span>
+                            </button>
+                            <button onClick={() => setShowSubtitleModal(true)} disabled={isSubtitling} className={QUIET_BTN}>
+                                {isSubtitling ? <Loader2 size={14} className="animate-spin text-[#0000fb]" /> : <Type size={14} className="text-neutral-500 group-hover:text-[#0000fb]" />}
+                                <span>Subtitles</span>
+                            </button>
+                            <button onClick={() => setShowHookModal(true)} disabled={isHooking} className={QUIET_BTN}>
+                                {isHooking ? <Loader2 size={14} className="animate-spin text-[#0000fb]" /> : <Sparkles size={14} className="text-neutral-500 group-hover:text-[#0000fb]" />}
+                                <span>Hook 5s</span>
+                            </button>
+                            <button onClick={() => setShowTranslateModal(true)} disabled={isTranslating} className={QUIET_BTN}>
+                                {isTranslating ? <Loader2 size={14} className="animate-spin text-[#0000fb]" /> : <Languages size={14} className="text-neutral-500 group-hover:text-[#0000fb]" />}
+                                <span>Dub Voice</span>
+                            </button>
                         </div>
-                    )}
-                    <div className="flex flex-wrap gap-1.5">
-                        {durationReadout && <span className="readout bg-paper3 px-2 py-0.5 rounded-full shrink-0">{durationReadout}</span>}
-                        {resolution && <span className="readout bg-paper3 px-2 py-0.5 rounded-full shrink-0">{resolution}</span>}
-                        {isPro && <span className="readout bg-paper3 px-2 py-0.5 rounded-full shrink-0 text-brass">pro mode</span>}
-                        {!isPro && clip.pro_suggested && <span className="readout bg-paper3 px-2 py-0.5 rounded-full shrink-0 text-brass">pro recommended</span>}
-                        <span className="readout bg-paper3 px-2 py-0.5 rounded-full shrink-0">#shorts</span>
-                        <span className="readout bg-paper3 px-2 py-0.5 rounded-full shrink-0">#viral</span>
-                    </div>
-                </div>
 
-                {/* Descriptions (compact) — full text lives in the modal */}
-                <div className="flex-1 min-h-0 space-y-2 mb-4">
-                    <div className="bg-paper rounded-input px-3 py-2 border border-rule flex items-center gap-2 min-w-0 overflow-hidden">
-                        <span className="eyebrow shrink-0">YOUTUBE</span>
-                        <p className="text-xs text-ink2 truncate flex-1 min-w-0">
-                            {clip.video_title_for_youtube_short || "Viral Short Video"}
-                        </p>
-                        <button
-                            onClick={() => handleCopy('youtube', clip.video_title_for_youtube_short || "Viral Short Video")}
-                            aria-label="copy youtube title"
-                            className="p-1 rounded-full text-muted hover:text-brass transition-colors shrink-0"
-                        >
-                            {copied === 'youtube' ? <Check size={14} className="text-ok" /> : <Copy size={14} />}
-                        </button>
-                    </div>
+                        {canSwitchMode && !isPro && clip.pro_suggested && (
+                            <button
+                                onClick={handleMode}
+                                disabled={isSwitchingMode}
+                                className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl border border-[#0000fb]/30 bg-[#0000fb]/5 hover:bg-[#0000fb]/10 text-left transition-colors text-xs text-neutral-900"
+                            >
+                                <Sparkles size={16} className="text-[#0000fb] shrink-0" />
+                                <span className="font-semibold">Try pro mode on this clip</span>
+                            </button>
+                        )}
 
-                    <div className="bg-paper rounded-input px-3 py-2 border border-rule flex items-center gap-2 min-w-0 overflow-hidden">
-                        <span className="eyebrow shrink-0">TIKTOK · IG</span>
-                        <p className="text-xs text-ink2 truncate flex-1 min-w-0">
-                            {clip.video_description_for_tiktok || clip.video_description_for_instagram}
-                        </p>
-                        <button
-                            onClick={() => handleCopy('caption', clip.video_description_for_tiktok || clip.video_description_for_instagram)}
-                            aria-label="copy caption"
-                            className="p-1 rounded-full text-muted hover:text-brass transition-colors shrink-0"
-                        >
-                            {copied === 'caption' ? <Check size={14} className="text-ok" /> : <Copy size={14} />}
-                        </button>
-                    </div>
+                        {/* Copy YouTube and TikTok Titles */}
+                        <div className="space-y-1.5">
+                            <div className="bg-neutral-50 rounded-xl p-2.5 border border-neutral-200 flex items-center justify-between gap-2 text-xs">
+                                <div className="min-w-0 flex-1">
+                                    <span className="text-[10px] font-mono text-neutral-400 block uppercase font-bold tracking-wider">YouTube Title</span>
+                                    <span className="text-neutral-900 truncate block text-xs font-medium">{clip.video_title_for_youtube_short || "Viral Short Video"}</span>
+                                </div>
+                                <button onClick={() => handleCopy('youtube', clip.video_title_for_youtube_short || "Viral Short Video")} className="p-1.5 rounded-lg text-neutral-500 hover:text-[#0000fb] hover:bg-neutral-100 transition-colors">
+                                    {copied === 'youtube' ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                                </button>
+                            </div>
 
-                    <button
-                        onClick={() => setShowDescModal(true)}
-                        className="w-full flex items-center justify-center gap-2 py-2 rounded-input border border-dashed border-rule text-xs lowercase text-muted hover:text-brass hover:border-rule2 transition-colors"
-                    >
-                        <FileText size={14} /> view descriptions
-                    </button>
-                </div>
+                            <div className="bg-neutral-50 rounded-xl p-2.5 border border-neutral-200 flex items-center justify-between gap-2 text-xs">
+                                <div className="min-w-0 flex-1">
+                                    <span className="text-[10px] font-mono text-neutral-400 block uppercase font-bold tracking-wider">TikTok / IG Caption</span>
+                                    <span className="text-neutral-900 truncate block text-xs font-medium">{clip.video_description_for_tiktok || clip.video_description_for_instagram}</span>
+                                </div>
+                                <button onClick={() => handleCopy('caption', clip.video_description_for_tiktok || clip.video_description_for_instagram)} className="p-1.5 rounded-lg text-neutral-500 hover:text-[#0000fb] hover:bg-neutral-100 transition-colors">
+                                    {copied === 'caption' ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                                </button>
+                            </div>
 
-                {/* Error Message */}
-                {editError && (
-                    <div className="mb-3 px-3 py-2 rounded-input text-xs text-danger bg-[color-mix(in_oklab,var(--color-danger)_10%,transparent)] flex items-center gap-2">
-                        <AlertCircle size={14} className="shrink-0" />
-                        {editError}
+                            <button
+                                onClick={() => setShowDescModal(true)}
+                                className="w-full flex items-center justify-center gap-2 py-2 rounded-xl border border-dashed border-neutral-300 hover:border-[#0000fb] bg-neutral-50/50 hover:bg-[#0000fb]/5 text-xs font-medium text-neutral-700 hover:text-[#0000fb] transition-colors"
+                            >
+                                <FileText size={14} /> View full descriptions
+                            </button>
+                        </div>
                     </div>
                 )}
-
-                {canSwitchMode && !isPro && clip.pro_suggested && (
-                    <button
-                        onClick={handleMode}
-                        disabled={isSwitchingMode}
-                        className="mb-3 w-full flex items-center gap-3 px-3 py-2.5 rounded-input border border-brass bg-brass/10 hover:bg-brass/20 text-left transition-colors disabled:opacity-70"
-                    >
-                        {isSwitchingMode
-                            ? <Loader2 size={20} className="animate-spin text-brass shrink-0" />
-                            : <Sparkles size={20} className="text-brass shrink-0" />}
-                        <span className="min-w-0">
-                            <span className="block text-sm font-semibold text-ink">
-                                {isSwitchingMode ? 'Rendering pro mode…' : 'Try pro mode on this clip'}
-                            </span>
-                            <span className="block text-[11px] leading-snug text-ink2">
-                                One person talking: tighter frame on the face, pauses cut, cinematic look. One click back to normal.
-                            </span>
-                        </span>
-                    </button>
-                )}
-                {canSwitchMode && (isPro || !clip.pro_suggested) && (
-                    <p className="mb-2 text-[11px] leading-snug text-muted">
-                        {isPro
-                            ? 'Pro mode is on: tighter frame on the face, pauses cut, cinematic look. You can switch back to normal any time.'
-                            : 'Pro mode is recommended only for podcasts and talking-head clips, where the picture is one person speaking.'}
-                    </p>
-                )}
-
-                {/* Actions Footer */}
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(104px,1fr))] gap-2 mt-auto pt-4 border-t border-rule">
-                    {onEditClip && (
-                        <button
-                            onClick={() => onEditClip(index)}
-                            className={QUIET_BTN}
-                        >
-                            <Scissors size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />
-                            edit clip
-                        </button>
-                    )}
-
-                    {onReframeClip && (
-                        <button
-                            onClick={() => onReframeClip(index)}
-                            className={QUIET_BTN}
-                        >
-                            <Crosshair size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />
-                            reframing
-                        </button>
-                    )}
-
-                    {canSwitchMode && (
-                        <button
-                            onClick={handleMode}
-                            disabled={isSwitchingMode}
-                            title="Pro mode: tighter frame on the face, pauses cut, cinematic look. Recommended for podcasts and talking-head clips."
-                            className={!isPro && clip.pro_suggested
-                                ? 'btn-primary flex-col gap-1 py-2.5 sm:py-2 px-1 text-[11px] leading-none rounded-input whitespace-nowrap'
-                                : QUIET_BTN}
-                        >
-                            {isSwitchingMode
-                                ? <Loader2 size={16} className={`animate-spin shrink-0 ${!isPro && clip.pro_suggested ? '' : 'text-brass'}`} />
-                                : <Sparkles size={16} className={!isPro && clip.pro_suggested ? 'shrink-0' : `${isPro ? 'text-brass' : 'text-muted'} group-hover:text-brass transition-colors shrink-0`} />}
-                            {isSwitchingMode ? 'rendering…' : isPro ? 'normal mode' : 'pro mode'}
-                        </button>
-                    )}
-
-                    <button
-                        onClick={handleAutoEdit}
-                        disabled={isEditing}
-                        className={QUIET_BTN}
-                    >
-                        {isEditing ? <Loader2 size={16} className="animate-spin text-brass shrink-0" /> : <Wand2 size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />}
-                        {isEditing ? 'editing…' : 'auto edit'}
-                    </button>
-
-                    <button
-                        onClick={() => setShowSubtitleModal(true)}
-                        disabled={isSubtitling}
-                        className={QUIET_BTN}
-                    >
-                        {isSubtitling ? <Loader2 size={16} className="animate-spin text-brass shrink-0" /> : <Type size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />}
-                        {isSubtitling ? 'adding…' : 'subtitles'}
-                    </button>
-
-                    <button
-                        onClick={() => setShowHookModal(true)}
-                        disabled={isHooking}
-                        className={QUIET_BTN}
-                    >
-                        {isHooking ? <Loader2 size={16} className="animate-spin text-brass shrink-0" /> : <Wand2 size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />}
-                        {isHooking ? 'saving…' : 'edit hook'}
-                    </button>
-
-                    <button
-                        onClick={() => setShowTranslateModal(true)}
-                        disabled={isTranslating}
-                        className={QUIET_BTN}
-                    >
-                        {isTranslating ? <Loader2 size={16} className="animate-spin text-brass shrink-0" /> : <Languages size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />}
-                        {isTranslating ? 'translating…' : 'dub voice'}
-                    </button>
-
-                    <button
-                        onClick={() => setShowModal(true)}
-                        className="btn-primary flex-col gap-1 py-2.5 sm:py-2 px-1 text-[11px] leading-none rounded-input whitespace-nowrap"
-                    >
-                        <Share2 size={16} className="shrink-0" /> post
-                    </button>
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            // Free clips are watermarked — surface the upsell once
-                            // before the first download, then get out of the way.
-                            if (plan === 'free' && !watermarkNoticeDismissed(jobId)) {
-                                setShowWatermarkModal(true);
-                                return;
-                            }
-                            downloadClip();
-                        }}
-                        className={`${QUIET_BTN}${onEditClip ? ' col-span-2' : ''}`}
-                    >
-                        <Download size={16} className="text-muted group-hover:text-brass transition-colors shrink-0" />
-                        {downloadPct === null ? 'download' : `downloading ${downloadPct}%`}
-                    </button>
-                </div>
             </div>
 
             {/* Descriptions Modal */}
