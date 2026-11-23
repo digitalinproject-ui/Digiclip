@@ -1546,7 +1546,7 @@ function App() {
           <img src="/logo-black.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
         </div>
         <div className="flex items-center gap-2 hidden lg:flex">
-          <span className="font-sans font-bold tracking-tight text-xl text-neutral-900">digiclip</span>
+          <span className="font-sans font-bold tracking-tight text-xl text-neutral-900">Digiclip</span>
           <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
         </div>
       </a>
@@ -1621,7 +1621,7 @@ function App() {
               <img src="/logo-black.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,0,251,0.25)]" />
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-sans font-bold tracking-tight text-lg text-neutral-900">digiclip</span>
+              <span className="font-sans font-bold tracking-tight text-lg text-neutral-900">Digiclip</span>
               <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
             </div>
           </a>

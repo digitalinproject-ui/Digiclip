@@ -129,7 +129,7 @@ export function renderNav({ lang = 'en', signedIn = false, showLogin = true } = 
   const login = signedIn || !showLogin ? '' : `<a class="osn-login" href="${LOGIN_HREF}">${esc(t.login)}</a>`
   return `<header class="osn" data-osn>
 <div class="osn-bar">
-  <a class="osn-brand" href="/"><img src="/logo-black.png" alt="Digiclip logo" width="30" height="30"><span>digiclip</span><span class="osn-brand-badge">STUDIO</span></a>
+  <a class="osn-brand" href="/"><img src="/logo-black.png" alt="Digiclip logo" width="30" height="30"><span>Digiclip</span><span class="osn-brand-badge">STUDIO</span></a>
   <input type="checkbox" id="osn-toggle" class="osn-toggle" aria-label="${esc(t.menu)}">
   <label for="osn-toggle" class="osn-burger" title="${esc(t.menu)}">${BURGER}</label>
   <nav class="osn-menu" aria-label="${esc(t.main)}">
