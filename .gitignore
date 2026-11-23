@@ -3,6 +3,19 @@
 *.webm
 *.mov
 *.mkv
+*.ass
+*.wav
+
+# Scratch campaign scripts
+*_kol*.py
+*speakers*.py
+*extended*.py
+*speed*.py
+*faces*.py
+*words*.py
+*outro*.py
+test_*.py
+make_ass.py
 
 # YOLO model
 *.pt

@@ -34,16 +34,16 @@
   --color-warn: oklch(78% 0.14 75);
 
   /* type */
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --text-display: clamp(3rem, 6vw + 1rem, 6rem);
-  --tracking-display: -0.032em;
-  --tracking-micro: 0.10em;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+  --text-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --tracking-display: -0.03em;
+  --tracking-micro: 0.06em;
 
   /* geometry */
-  --radius-card: 10px;
-  --radius-input: 8px;
+  --radius-card: 20px;
+  --radius-input: 12px;
 
   /* motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

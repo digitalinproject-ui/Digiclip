@@ -30,10 +30,7 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: [
-      'openshorts.app',
-      'www.openshorts.app'
-    ],
+    allowedHosts: true,
     proxy: {
       '/api': { target: backend, changeOrigin: true },
       '/videos': { target: backend, changeOrigin: true },

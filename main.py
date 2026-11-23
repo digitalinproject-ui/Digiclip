@@ -2799,11 +2799,15 @@ if __name__ == '__main__':
     def _report_job_cpu():
         """CPU time of the whole job (this process + every ffmpeg it waited
         for) for app.py's log, to compare pipeline versions per job."""
-        import resource
-        own = resource.getrusage(resource.RUSAGE_SELF)
-        kids = resource.getrusage(resource.RUSAGE_CHILDREN)
-        py_s = own.ru_utime + own.ru_stime
-        children_s = kids.ru_utime + kids.ru_stime
+        try:
+            import resource
+            own = resource.getrusage(resource.RUSAGE_SELF)
+            kids = resource.getrusage(resource.RUSAGE_CHILDREN)
+            py_s = own.ru_utime + own.ru_stime
+            children_s = kids.ru_utime + kids.ru_stime
+        except ImportError:
+            py_s = 0.0
+            children_s = 0.0
         # Where Parakeet ran (None: this job did not load it). A "cpu" here on
         # a GPU host means the image shipped onnxruntime without CUDA.
         asr = sys.modules.get("transcribe_backends")

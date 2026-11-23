@@ -4414,7 +4414,16 @@ async def lifespan(app: FastAPI):
         # Last chunk of this instance's log to storage (cloud/log_archive.py).
         await asyncio.to_thread(cloud.log_archive.flush)
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, title="Digiclip API", version="2.0.0")
+
+# Mount Digiclip modular router for Batch Studio & Custom Viral Overlays
+try:
+    from digiclip_router import router as digiclip_router
+    app.include_router(digiclip_router)
+    print("Digiclip router mounted successfully at /api/digiclip")
+except Exception as e:
+    print(f"Warning: could not mount digiclip_router: {e}")
+
 
 
 class _QuietAccessLog(__import__("logging").Filter):
@@ -4991,8 +5000,10 @@ def _job_nice():
 
 
 def _lower_priority():
+    if sys.platform == "win32":
+        return
     n = _job_nice()
-    if n:
+    if n and hasattr(os, "nice"):
         os.nice(n)
 
 
@@ -5141,6 +5152,12 @@ async def _run_main(job_id, cmd, env, tick=None):
     nice = _job_nice()
     launch = (["nice", "-n", str(nice), *cmd]
               if nice and shutil.which("nice") else list(cmd))
+    extra_popen = {}
+    if sys.platform != "win32":
+        if nice and launch[0] != "nice":
+            extra_popen["preexec_fn"] = _lower_priority
+    else:
+        extra_popen["creationflags"] = getattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS", 0)
     process = await asyncio.to_thread(
         subprocess.Popen,
         launch,
@@ -5148,7 +5165,7 @@ async def _run_main(job_id, cmd, env, tick=None):
         stderr=subprocess.STDOUT, # Merge stderr to stdout
         env=env,
         cwd=os.getcwd(),
-        preexec_fn=(_lower_priority if nice and launch[0] != "nice" else None),
+        **extra_popen,
     )
     # We need to capture logs in a thread because Popen isn't async
     t_log = threading.Thread(target=enqueue_output, args=(process.stdout, job_id))
