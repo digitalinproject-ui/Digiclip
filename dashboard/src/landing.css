@@ -9,18 +9,20 @@
   background-size: 100% 100%, 48px 48px, 48px 48px;
 }
 
-/* ---- hero headline + coral verb landmark ---- */
+/* ---- hero headline + brand verb landmark ---- */
 .hero-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 5vw + 1rem, 5rem);
-  letter-spacing: -0.032em;
-  line-height: 1.05;
-  text-transform: lowercase;
-  color: var(--color-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Geist", system-ui, sans-serif;
+  font-size: clamp(2.75rem, 5vw + 1rem, 4.75rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-weight: 800;
+  text-transform: none;
+  color: #1d1d1f;
 }
 .hero-h1 em {
   font-style: normal;
-  color: var(--color-accent-2);
+  color: #0000fb;
+  font-weight: 800;
   position: relative;
 }
 .hero-h1 em::after {
@@ -29,8 +31,8 @@
   left: 0;
   right: 0;
   bottom: 0.04em;
-  height: 1px;
-  background: var(--color-accent-2);
+  height: 2px;
+  background: #0000fb;
   transform: scaleX(0);
   transform-origin: left center;
   animation: verb-underline 320ms var(--ease-out) 900ms forwards;

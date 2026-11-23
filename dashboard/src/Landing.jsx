@@ -5,13 +5,13 @@ import SiteNav from './components/SiteNav';
 import { useAuth } from './contexts/AuthContext';
 import './landing.css';
 
-const APPARATUS_CALLOUTS = ['RATIO · 9:16', 'CLIPS · 3–15', 'HOOK · AUTO', 'SUBS · WORD-LEVEL'];
+const APPARATUS_CALLOUTS = ['RATIO · 9:16', 'CLIPS · 8 VIRAL CLIPS', 'HOOK · AUTO DETECT', 'SUBS · WORD-LEVEL'];
 
-// Real clips OpenShorts made from Creative Commons (CC BY) sources. `video` is
+// Real clips Digiclip made from Creative Commons (CC BY) sources. `video` is
 // the original and the clip side by side, in sync; `vertical` is the clip on
 // its own for the hero. The credit is what the licence asks for, so it stays
 // next to the video that uses it.
-// The six clips OpenShorts cut from that episode with no clip-count setting,
+// The eight clips Digiclip cut from that episode with default settings,
 // in source order, with the score the moment picker gave each.
 const EPISODE_CLIPS = [
   { n: 1, score: 88, title: 'I knew I was marrying her on our third date' },
@@ -48,7 +48,7 @@ function LazyLoopVideo({ src, poster }) {
 const DEMOS = [
   {
     id: 'split',
-    tab: 'two speakers',
+    tab: 'Two Speakers',
     video: '/demo/case-split.mp4',
     poster: '/screens/case-split.webp',
     vertical: '/demo/split-vertical.mp4',
@@ -59,7 +59,7 @@ const DEMOS = [
   },
   {
     id: 'talk',
-    tab: 'face tracking',
+    tab: 'Face Tracking',
     video: '/demo/case-talk.mp4',
     poster: '/screens/case-talk.webp',
     vertical: '/demo/talk-vertical.mp4',
@@ -72,9 +72,9 @@ const DEMOS = [
 
 const SectionHeader = ({ eyebrow, title, children }) => (
   <div className="mb-12">
-    <p className="eyebrow mb-3">{eyebrow}</p>
-    <h2 className="font-display text-3xl md:text-4xl lowercase text-ink tracking-tight mb-4">{title}</h2>
-    {children && <p className="text-muted max-w-2xl leading-relaxed">{children}</p>}
+    <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">{eyebrow}</p>
+    <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 tracking-tight mb-3">{title}</h2>
+    {children && <p className="text-neutral-600 max-w-2xl leading-relaxed text-base">{children}</p>}
   </div>
 );
 
@@ -82,51 +82,51 @@ const SectionHeader = ({ eyebrow, title, children }) => (
 // made. Rotates on its own until the visitor picks a tab.
 const SHOWCASE = [
   {
-    id: 'moments', tab: 'finds the moments',
-    title: 'every clip scored before you see it',
-    body: 'Gemini reads the word-level transcript and the scene cuts, scores each moment out of 100, and writes the title and the description for every platform.',
-    media: { type: 'img', src: '/screens/app-clipcard.webp', w: 1153, h: 441, alt: 'A clip in OpenShorts with its viral score, titles and edit actions' },
+    id: 'moments', tab: 'Viral Detection',
+    title: 'Every Clip Scored Before You See It',
+    body: 'Gemini reads the word-level transcript and scene cuts, scores each viral moment out of 100, and writes optimized titles and descriptions for every platform.',
+    media: { type: 'img', src: '/screens/app-clipcard.webp', w: 1153, h: 441, alt: 'A clip in Digiclip with its viral score, titles and edit actions' },
   },
   {
-    id: 'reframe', tab: 'reframes any layout',
-    title: 'one face, two speakers, a whole screen',
-    body: 'Face tracking for one person, both speakers stacked for a two-shot, the screen kept whole for a screencast. Picked per video, nothing to configure.',
+    id: 'reframe', tab: 'Smart 9:16 Reframe',
+    title: 'One Face, Two Speakers, Or Full Screen',
+    body: 'Face tracking for single speaker, both speakers stacked for podcast interviews, and screen kept whole for tutorials. Tailored per video automatically.',
     media: { type: 'video', src: '/demo/case-split.mp4', poster: '/screens/case-split.webp', w: 960, h: 540 },
   },
   {
-    id: 'captions', tab: '17 caption styles',
-    title: 'captions people actually read',
-    body: 'Word-level captions burned in, in 17 styles: Hormozi, pill, lime box, one word at a time, karaoke and more. Change the style of any clip in one click.',
+    id: 'captions', tab: '17 Caption Styles',
+    title: 'Animated Captions Viewers Actually Read',
+    body: 'Word-level animated captions burned in, featuring 17 trending styles: Hormozi, Pill, Box, Karaoke, and more. Customize styling with a single click.',
     media: { type: 'captions' },
   },
   {
-    id: 'hook', tab: 'hooks that stop the scroll',
-    title: 'a hook on the first second',
-    body: 'Every clip opens with a hook line written from what is said in it. Rewrite it, restyle it or move it before you post.',
+    id: 'hook', tab: 'Scroll-Stopping Hooks',
+    title: 'Engaging Hooks In The First 3 Seconds',
+    body: 'Every clip opens with an AI-generated hook title crafted from the spoken content to maximize viewer retention and prevent scrolling.',
     media: { type: 'img', src: '/screens/app-hook.webp', w: 548, h: 587, alt: 'The hook editor with text, style, font and position' },
   },
   {
-    id: 'editor', tab: 'a real editor',
-    title: 'fix anything, down to the word',
-    body: 'Source and program monitors side by side with the full transcript: click a word to set a cut, add segments, change the framing, re-render in seconds.',
-    media: { type: 'img', src: '/screens/app-editor.webp', w: 1568, h: 652, alt: 'The OpenShorts clip editor with source monitor, program monitor, transcript and segments' },
+    id: 'editor', tab: 'Full Video Editor',
+    title: 'Fix Anything Down To The Exact Word',
+    body: 'Source and program monitors side by side with the interactive transcript: click words to set cuts, re-crop framing, and export in full resolution.',
+    media: { type: 'img', src: '/screens/app-editor.webp', w: 1568, h: 652, alt: 'The Digiclip clip editor with source monitor, program monitor, transcript and segments' },
   },
   {
-    id: 'autopilot', tab: 'autopilot',
-    title: 'your channel, clipped on its own',
-    body: 'Connect YouTube and every new upload becomes clips, optionally scheduled to your socials one a day. On paid plans.',
+    id: 'autopilot', tab: 'Autopilot Sync',
+    title: 'Your Channel Clipped Automatically',
+    body: 'Connect your YouTube channel and every new upload automatically turns into vertical clips, scheduled to your socials.',
     media: { type: 'img', src: '/screens/autopilot-settings.webp', w: 920, h: 672, alt: 'Autopilot settings' },
   },
   {
-    id: 'agents', tab: 'inside claude & chatgpt',
-    title: 'clip from a chat',
-    body: 'Add OpenShorts to Claude or ChatGPT with one URL and ask for clips. Same pipeline, same minutes, no API key to manage.',
-    media: { type: 'img', src: '/screens/connect-an-agent.webp', w: 684, h: 366, alt: 'Connecting OpenShorts to an AI agent' },
+    id: 'agents', tab: 'Claude & ChatGPT MCP',
+    title: 'Clip Videos Straight From AI Chat',
+    body: 'Connect Digiclip to Claude, ChatGPT, or n8n with one endpoint URL and request clips conversationally without managing complex pipelines.',
+    media: { type: 'img', src: '/screens/connect-an-agent.webp', w: 684, h: 366, alt: 'Connecting Digiclip to an AI agent' },
   },
   {
-    id: 'ugc', tab: 'ai ugc videos',
-    title: 'product videos with AI actors',
-    body: 'Describe a product or paste its URL: script, lip-synced AI actor, B-roll and captions, for well under a dollar a video on the low-cost mode.',
+    id: 'ugc', tab: 'AI UGC Video Ads',
+    title: 'Product Marketing Videos With AI Actors',
+    body: 'Describe your product or paste a website URL: generate scripts, lip-synced AI avatars, B-roll visuals, and captions from $0.65 per video.',
     media: { type: 'img', src: '/screens/app-ugc.webp', w: 1114, h: 612, alt: 'The UGC gallery with AI actor videos' },
   },
 ];
@@ -180,18 +180,18 @@ function FeatureShowcase() {
             role="tab"
             aria-selected={i === active}
             onClick={() => { setActive(i); setAuto(false); }}
-            className={`relative shrink-0 text-left rounded-card border px-4 py-3 text-sm lowercase transition-colors overflow-hidden ${i === active ? 'border-brass text-ink bg-paper2' : 'border-rule text-muted hover:text-ink'}`}
+            className={`relative shrink-0 text-left rounded-card border px-4 py-3 text-sm font-medium transition-colors overflow-hidden ${i === active ? 'border-[#0000fb] text-neutral-900 bg-[#0000fb]/10' : 'border-neutral-200 text-neutral-600 hover:text-neutral-900'}`}
           >
             {f.tab}
             {i === active && auto && (
-              <span key={`p-${active}`} className="showcase-progress absolute left-0 bottom-0 h-0.5 bg-brass" aria-hidden="true" />
+              <span key={`p-${active}`} className="showcase-progress absolute left-0 bottom-0 h-0.5 bg-[#0000fb]" aria-hidden="true" />
             )}
           </button>
         ))}
       </div>
       <div key={item.id} className="showcase-in min-w-0" role="tabpanel">
-        <h3 className="font-display text-3xl md:text-4xl lowercase text-ink mb-3">{item.title}</h3>
-        <p className="text-muted max-w-2xl mb-6 leading-relaxed">{item.body}</p>
+        <h3 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 mb-3">{item.title}</h3>
+        <p className="text-neutral-600 max-w-2xl mb-6 leading-relaxed">{item.body}</p>
         <ShowcaseMedia media={item.media} />
       </div>
     </div>
@@ -201,32 +201,32 @@ function FeatureShowcase() {
 const FeatureCard = ({ icon, title, description }) => {
   const Icon = icon;
   return (
-    <div className="card card-hover p-6">
-      <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center mb-4">
-        <Icon size={18} className="text-brass" />
+    <div className="card card-hover p-6 bg-white border border-neutral-200 rounded-2xl">
+      <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+        <Icon size={18} className="text-[#0000fb]" />
       </div>
-      <h3 className="font-display text-xl lowercase text-ink mb-2">{title}</h3>
-      <p className="text-muted text-sm leading-relaxed">{description}</p>
+      <h3 className="font-display font-bold text-lg text-neutral-900 mb-2">{title}</h3>
+      <p className="text-neutral-600 text-sm leading-relaxed">{description}</p>
     </div>
   );
 };
 
 const StepCard = ({ number, title, description }) => (
-  <div className="flex gap-5">
-    <span className="font-mono text-micro text-brass uppercase pt-1.5 flex-shrink-0">
+  <div className="flex gap-5 items-start">
+    <span className="font-mono text-sm font-bold text-[#0000fb] bg-[#0000fb]/10 w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0">
       {String(number).padStart(2, '0')}
     </span>
     <div>
-      <h3 className="text-ink font-medium mb-1">{title}</h3>
-      <p className="text-muted text-sm leading-relaxed">{description}</p>
+      <h3 className="text-neutral-900 font-bold text-base mb-1">{title}</h3>
+      <p className="text-neutral-600 text-sm leading-relaxed">{description}</p>
     </div>
   </div>
 );
 
-const ComparisonRow = ({ feature, openshorts, opusclip, kapwing }) => (
+const ComparisonRow = ({ feature, digiclip, opusclip, kapwing }) => (
   <tr className="border-b border-rule">
-    <td className="py-3 px-4 text-sm text-ink2">{feature}</td>
-    <td className="py-3 px-4 text-center">{openshorts}</td>
+    <td className="py-3 px-4 text-sm font-medium text-neutral-900">{feature}</td>
+    <td className="py-3 px-4 text-center">{digiclip}</td>
     <td className="py-3 px-4 text-center">{opusclip}</td>
     <td className="py-3 px-4 text-center">{kapwing}</td>
   </tr>
@@ -254,47 +254,47 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
 const LINK = 'text-ink2 underline underline-offset-2 hover:text-ink transition-colors';
 
 const WORKS_WITH = [
-  ['/platforms/youtube', 'youtube'],
-  ['/platforms/twitch', 'twitch'],
-  ['/platforms/kick', 'kick'],
-  ['/platforms/tiktok', 'tiktok'],
-  ['/podcast-to-shorts', 'podcasts'],
+  ['/platforms/youtube', 'YouTube'],
+  ['/platforms/twitch', 'Twitch'],
+  ['/platforms/kick', 'Kick'],
+  ['/platforms/tiktok', 'TikTok'],
+  ['/podcast-to-shorts', 'Podcasts'],
 ];
 
 const PLATFORMS = [
   {
     icon: Youtube,
-    title: 'YouTube clips',
-    text: 'Paste a YouTube link and get vertical clips back, Shorts for your own channel, or the whole video turned into 9:16 pieces.',
-    links: [['/platforms/youtube', 'YouTube clip maker'], ['/platforms/youtube-shorts', 'YouTube Shorts maker'], ['/youtube-to-shorts-converter', 'YouTube to Shorts converter']],
+    title: 'YouTube Clips',
+    text: 'Paste a YouTube link and get 8 vertical clips back, Shorts for your own channel, or the whole video turned into 9:16 pieces.',
+    links: [['/platforms/youtube', 'YouTube Clip Maker'], ['/platforms/youtube-shorts', 'YouTube Shorts Maker'], ['/youtube-to-shorts-converter', 'YouTube to Shorts Converter']],
   },
   {
     icon: Instagram,
     title: 'TikTok & Reels',
-    text: 'The same clips, captioned and with a hook, sent to TikTok and Instagram Reels from the dashboard.',
-    links: [['/platforms/tiktok', 'TikTok clip maker'], ['/platforms/instagram-reels', 'AI reel generator']],
+    text: 'The same clips, captioned and with a hook, sent to TikTok and Instagram Reels directly from the dashboard.',
+    links: [['/platforms/tiktok', 'TikTok Clip Maker'], ['/platforms/instagram-reels', 'AI Reel Generator']],
   },
   {
     icon: Monitor,
-    title: 'Streams',
-    text: 'Hours-long Twitch and Kick VODs clipped in parts, with the facecam kept and quiet gameplay still handled.',
-    links: [['/platforms/twitch', 'Twitch clip maker'], ['/platforms/kick', 'Kick clip maker'], ['/gta-5-clips', 'GTA 5 clips'], ['/gta-6-clips', 'GTA 6 clips'], ['/wow-forever-clips', 'WoW Forever clips']],
+    title: 'Streams & VODs',
+    text: 'Hours-long Twitch and Kick VODs clipped in parts, with facecam tracked and quiet gameplay still handled.',
+    links: [['/platforms/twitch', 'Twitch Clip Maker'], ['/platforms/kick', 'Kick Clip Maker'], ['/gta-5-clips', 'GTA 5 Clips'], ['/gta-6-clips', 'GTA 6 Clips'], ['/wow-forever-clips', 'WoW Forever Clips']],
   },
   {
     icon: FileVideo,
-    title: 'Podcasts & talks',
-    text: 'Both podcast hosts kept in frame, only the sermon clipped out of a service, and a speaker who walks the stage tracked.',
-    links: [['/podcast-to-shorts', 'Podcast clip maker'], ['/use-cases/sermons', 'Sermon clip maker'], ['/auto-reframe', 'Auto reframe']],
+    title: 'Podcasts & Talks',
+    text: 'Both podcast hosts kept in frame, sermon clipped out of a service, and speaker walking the stage tracked.',
+    links: [['/podcast-to-shorts', 'Podcast Clip Maker'], ['/use-cases/sermons', 'Sermon Clip Maker'], ['/auto-reframe', 'Auto Reframe']],
   },
 ];
 
 const SWITCHING = [
-  ['/alternatives/opus-clip', 'vs opus clip'],
-  ['/alternatives/klap', 'vs klap'],
-  ['/alternatives/vizard', 'vs vizard'],
-  ['/alternatives/submagic', 'vs submagic'],
-  ['/free-ai-clipping-tools-compared', 'free plans compared'],
-  ['/alternatives', 'all alternatives'],
+  ['/alternatives/opus-clip', 'vs Opus Clip'],
+  ['/alternatives/klap', 'vs Klap'],
+  ['/alternatives/vizard', 'vs Vizard'],
+  ['/alternatives/submagic', 'vs Submagic'],
+  ['/free-ai-clipping-tools-compared', 'Free Plans Compared'],
+  ['/alternatives', 'All Alternatives'],
 ];
 
 // A landing section anchor (#pricing, #features…), not an app route (#app,
@@ -414,150 +414,138 @@ export default function Landing({ onLaunchApp }) {
     {
       icon: Sparkles,
       title: "AI Viral Moment Detection",
-      description: "Google Gemini 3.1 Flash-Lite scores your transcript and scenes to find the 3-15 most engaging moments. Automatic AI clipping, no manual scrubbing."
+      description: "Google Gemini 3.1 Flash-Lite scores your transcript and scene cuts to extract the top 8 viral moments automatically with zero manual scrubbing."
     },
     {
       icon: Scissors,
       title: "Smart 9:16 Vertical Cropping",
-      description: "Dual-mode AI reframing with MediaPipe face tracking and YOLOv8 fallback."
+      description: "Dual-mode AI reframing with MediaPipe face tracking and YOLOv8 fallback for smooth camera movements."
     },
     {
       icon: Subtitles,
       title: "Automatic Subtitle Generation",
-      description: "faster-whisper subtitles with word-level timestamps, styled and burned into your clips."
+      description: "faster-whisper subtitles with word-level timestamps, styled and burned into your clips in 17 customizable styles."
     },
     {
       icon: Languages,
       title: "AI Voice Dubbing in 30+ Languages",
-      description: "Bring your own ElevenLabs key and dub a clip into 30+ languages, keeping the speaker's voice. Works in the cloud and self-hosted."
+      description: "Bring your own ElevenLabs key and dub any clip into 30+ languages, preserving the original speaker's vocal timbre."
     },
     {
       icon: Type,
       title: "Hook Text Overlays",
-      description: "AI-generated hook titles that capture viewers in the first 3 seconds."
+      description: "AI-generated hook titles that capture viewers' attention in the critical first 3 seconds."
     },
     {
       icon: Zap,
       title: "AI Video Effects",
-      description: "Gemini-generated FFmpeg filters: color grading, transitions, visual enhancements."
+      description: "Gemini-generated FFmpeg filters for dynamic color grading, transitions, and cinematic visual enhancements."
     },
     {
       icon: Upload,
       title: "Local Video Upload",
-      description: "Upload podcasts, webinars, livestreams, and vlogs at full resolution."
+      description: "Upload podcasts, webinars, livestreams, and vlogs at full resolution directly from your storage."
     },
     {
       icon: Shield,
       title: "100% Self-Hosted & Private",
-      description: "Run it with Docker on your own machine — videos never leave your infrastructure."
+      description: "Run Digiclip with Docker on your own machine — your source videos never leave your local infrastructure."
     },
     {
       icon: Monitor,
       title: "Free AI YouTube Studio",
-      description: "Free AI thumbnail generator, 10 viral title suggestions, and auto descriptions with chapters."
+      description: "Free AI thumbnail generator, 10 viral title suggestions, and auto-generated descriptions with chapter timestamps."
     },
     {
       icon: Globe,
       title: "Direct Social Publishing",
-      description: "Post to TikTok, Instagram Reels, and YouTube Shorts from the dashboard."
+      description: "Schedule and publish directly to TikTok, Instagram Reels, and YouTube Shorts from one unified dashboard."
     },
     {
       icon: Bot,
       title: "MCP Server, API & CLI for AI Agents",
-      description: "Connect Claude, ChatGPT or n8n to an always-on endpoint, or run pip install openshorts and clip from the terminal. Same pipeline, no dashboard needed."
+      description: "Connect Claude, ChatGPT or n8n to an always-on MCP endpoint, or run pip install digiclip to clip directly from the terminal."
     },
     {
       icon: Sparkles,
       title: "AI UGC Video Generator",
-      description: "AI writes the script and generates a lip-synced avatar video — from $0.65/video."
+      description: "AI writes the script and generates a lip-synced avatar marketing video — from $0.65 per video."
     },
     {
       icon: FileVideo,
       title: "AI Actors & Lip-Sync",
-      description: "Pick an AI actor or upload a photo for a lip-synced talking head video."
+      description: "Pick an AI actor or upload a photo for a talking-head video with precision lip-sync matching."
     }
   ];
 
   const steps = [
-    { title: "Upload a Long-Form Video", description: "Drop any video file you own — podcasts, webinars, livestreams, interviews." },
-    { title: "AI Detects the Best Viral Moments", description: "Google Gemini 3.1 Flash-Lite finds 3-15 high-potential clips of 15-60 seconds." },
-    { title: "Smart Cropping to Vertical 9:16", description: "AI reframes to vertical with face tracking — subjects stay centered." },
-    { title: "Add Subtitles, Hooks & Effects", description: "Auto subtitles, hook overlays and AI effects. Optional dubbing with your own ElevenLabs key." },
-    { title: "Download or Post to Social Media", description: "Export your clips or post directly to TikTok, Instagram Reels, and YouTube Shorts." }
+    { title: "Upload a Long-Form Video", description: "Paste any video link or drop video files — podcasts, webinars, livestreams, and interviews." },
+    { title: "AI Detects the Best Viral Moments", description: "Google Gemini 3.1 Flash-Lite analyzes engagement patterns to extract 8 high-potential clips." },
+    { title: "Smart Cropping to Vertical 9:16", description: "AI reframes horizontal footage to vertical with face tracking so speakers stay centered." },
+    { title: "Add Subtitles, Hooks & Effects", description: "Auto-burn animated subtitles, hook text overlays, and optional multi-language AI dubbing." },
+    { title: "Download or Post to Social Media", description: "Export your finished clips or post directly to TikTok, Instagram Reels, and YouTube Shorts." }
   ];
 
   const faqs = [
     {
-      question: "Is OpenShorts really free?",
-      answer: "Self-hosting is free under the MIT licence, with no watermark and no cap; OpenShorts Cloud has a free plan (your first video up to 60 minutes, then 20 minutes a month, watermarked) and paid plans from $12/month. There is no catch, but there are two different things on offer. (1) Self-hosted is 100% free and open source: you run it with Docker on your own machine, bring your own API keys, and there are no watermarks, no usage limits and no subscription. What it costs you is hardware and time. On a typical CPU an 8-minute video takes 5 to 8 minutes to process, and you need your own Google Gemini key (required, free tier is 1,500 requests/day), plus ElevenLabs for dubbing and fal.ai for AI Shorts if you want those. (2) Hosted at openshorts.app is the same software with the running costs covered: our NVIDIA GPU clips that same 8-minute video in about 50 seconds, the Gemini key is included so there is nothing to create or paste, paid plans post every clip to TikTok, Instagram, YouTube, Facebook, LinkedIn, Threads and Bluesky for you and Autopilot clips each new video on your channel on its own, and your clips are stored and re-openable from any browser. Its free plan clips your first video whole up to 60 minutes, then 20 minutes a month, with a watermark and no credit card; paid plans start at $12/mo for 100 minutes without watermark. So: free if you are happy to run it yourself, paid if you would rather it just ran fast. For reference, Opus Clip starts at $15/month and bills a credit per minute of source video."
+      question: "Is Digiclip really free?",
+      answer: "Self-hosting is 100% free under the MIT licence, with no watermark and no clip caps. Digiclip Cloud offers a free plan (your first video up to 60 minutes, then 20 minutes a month) and paid plans starting at $12/month. Self-hosted runs locally on Docker with your own free Gemini API key (1,500 free requests/day), while Cloud handles processing on high-end NVIDIA GPUs in seconds."
     },
     {
       question: "Do the clips have a watermark?",
-      answer: "Only on the free Cloud plan. Clips made on the free plan of OpenShorts Cloud carry a small watermark; every paid plan, from $12/month, has none, and upgrading removes the mark from the clips you already made. The self-hosted edition, free under MIT, never adds one."
+      answer: "Only on the free Cloud plan. Clips made on the free plan of Digiclip Cloud carry a subtle watermark. Every paid plan from $12/month has zero watermark, and self-hosted Digiclip is free under MIT and never adds any watermark."
     },
     {
       question: "Do I need a credit card to start?",
-      answer: "No. The free plan of OpenShorts Cloud needs no credit card: your first video is clipped free up to 60 minutes, then you get 20 free minutes every month, with a watermark. You only add a card if you choose a paid plan, from $12/month."
+      answer: "No credit card is required. You can start creating clips immediately for free without entering payment details."
     },
     {
       question: "How many clips do I get from one video?",
-      answer: "Between 3 and 15, each 15 to 60 seconds long. The AI scores every moment of the video and keeps the ones that hold up as standalone clips, so the number depends on the source, not on a fixed quota."
+      answer: "Digiclip targets 8 high-impact viral clips, each 15 to 60 seconds long, perfectly laid out in a 4x2 grid for convenient review and export."
     },
     {
       question: "Can I clip someone else's YouTube video?",
-      answer: "Only if you own it or have the rights or permission to use it. Before a video is processed, OpenShorts asks you to confirm you own the content or have the rights to it, and you are responsible for what you submit. Fair use depends on the country and on how the clip is used, so it is never guaranteed; reuploading someone else's video without permission is copyright infringement, and platforms remove it and strike the account. Clip your own videos, channels you manage, or footage you have licensed."
+      answer: "Only if you own it or have explicit rights or permissions. Digiclip asks you to confirm ownership before processing to respect copyright laws and creator guidelines."
     },
     {
-      question: "What is OpenShorts and how does it work?",
-      answer: "OpenShorts is an open source AI clip generator (free to self-host under MIT, Cloud plans from $12/month) that transforms your long-form videos — podcasts, webinars, livestreams, vlogs, interviews — into viral-ready short clips in 9:16 vertical format. It uses a multi-step AI pipeline: faster-whisper for transcription with word-level timestamps, PySceneDetect for scene boundary detection, and Google Gemini 3.1 Flash-Lite AI for identifying the most engaging viral moments. According to HubSpot's 2025 State of Marketing report, short-form video delivers the highest ROI of any content format, and repurposing long-form content into shorts increases total reach by up to 300%."
+      question: "What is Digiclip and how does it work?",
+      answer: "Digiclip is an advanced AI video clip generator and viral shorts studio. It converts long-form podcasts, webinars, and streams into 9:16 vertical shorts using faster-whisper for transcription, PySceneDetect for cut boundaries, and Google Gemini 3.1 Flash-Lite for viral scoring."
     },
     {
-      question: "How does OpenShorts compare to Opus Clip?",
-      answer: "OpenShorts is an open source alternative to Opus Clip. Both offer AI viral moment detection and smart vertical cropping. Key differences: OpenShorts is free when self-hosted and $12/month hosted, against Opus Clip from $15/month billed per source minute. OpenShorts can run on your own infrastructure (full data privacy); Opus Clip is cloud-only. OpenShorts uses Google Gemini 3.1 Flash-Lite for AI analysis vs Opus Clip's proprietary model. OpenShorts adds two-speaker and screencast layouts, AI UGC videos with lip-synced actors, and an MCP server for Claude and ChatGPT. The honest trade-off: Opus Clip has the larger caption-style library."
+      question: "How does Digiclip compare to Opus Clip?",
+      answer: "Digiclip is an open source alternative to Opus Clip. Digiclip is free to self-host, provides 8 structured clips per run, includes dual-speaker stacked reframing, AI UGC avatars, and native Claude/ChatGPT MCP integrations at a fraction of the cost."
     },
     {
       question: "How do I turn a long-form video into TikTok or Reels clips?",
-      answer: "Upload your long-form video into OpenShorts, enter your free Gemini API key, and click Process. The AI transcribes it with faster-whisper, detects the best viral moments using Google Gemini 3.1 Flash-Lite, and crops them to 9:16 vertical format with MediaPipe face tracking. According to Wyzowl's 2025 Video Marketing Statistics report, 91% of businesses use video as a marketing tool, and repurposed short-form clips drive 2.5x more engagement than original content."
+      answer: "Upload your video or paste a link, enter your Gemini API key if self-hosting, and click Generate. Digiclip automatically transcribes, cuts 8 viral moments, tracks speakers, and burns animated subtitles ready for social media."
     },
     {
-      question: "Can OpenShorts generate YouTube thumbnails and titles for free?",
-      answer: "Yes. OpenShorts includes a free AI YouTube thumbnail generator, a free AI YouTube title generator, and a free AI YouTube description generator — all powered by Google Gemini 3.1 Flash-Lite. Upload your video and the AI suggests 10 viral title options with an interactive refinement chat. Then it generates multiple thumbnail designs using AI image generation — upload a face photo and background image for personalized results. The studio also auto-generates YouTube descriptions with chapter timestamps and lets you publish directly to YouTube. Everything is 100% free with the Gemini free tier."
+      question: "Can Digiclip generate YouTube thumbnails and titles for free?",
+      answer: "Yes. Digiclip includes a complete AI YouTube Studio that generates high-CTR thumbnails, 10 viral title suggestions, and descriptions with timestamps for free."
     },
     {
       question: "What is the AI UGC Video Generator?",
-      answer: "OpenShorts includes an AI UGC (User Generated Content) video creator that generates marketing videos with AI actors for any product or business. You describe your product or paste a website URL — the AI writes a viral script, generates a realistic AI actor with lip-synced voiceover, adds b-roll visuals and TikTok-style subtitles, with the hook spoken in the first seconds. The result is a ready-to-post vertical video for TikTok, Instagram Reels, or YouTube Shorts. Two cost modes: Low Cost (~$0.65/video using Hailuo + VEED Lipsync) and Premium (~$2/video using Kling Avatar v2)."
+      answer: "Digiclip includes an AI UGC creator for video marketing. Provide a product URL or description and Digiclip generates viral scripts, realistic lip-synced AI avatars, and B-roll visuals ready for TikTok and Reels ads."
     },
     {
-      question: "Can I use the AI UGC Video Generator for any type of business?",
-      answer: "Yes. The AI Shorts generator works for any product, service, or business — not just SaaS. You can use it for restaurants, e-commerce stores, coaching services, local businesses, personal brands, apps, and more. Just describe your business in the text field (e.g. 'Artisan pizza restaurant in Madrid, wood-fired oven, home delivery') or paste your website URL, and the AI generates viral marketing scripts tailored to your business."
+      question: "What AI does Digiclip use for viral moment detection?",
+      answer: "Digiclip uses Google Gemini 3.1 Flash-Lite, analyzing narrative momentum, emotional shifts, and audience hooks to score and rank the 8 strongest clips."
     },
     {
-      question: "How much does it cost to generate an AI UGC video?",
-      answer: "OpenShorts itself is free, but the AI Shorts feature uses external APIs (fal.ai for video generation, ElevenLabs for voiceover) that charge per use. Low Cost mode costs approximately $0.65 per video (Flux image $0.05 + ElevenLabs voice $0.10 + Hailuo img2video $0.19 + VEED Lipsync $0.20 + b-roll $0.10). Premium mode costs approximately $2.00 per video using Kling Avatar v2 for higher quality. Both modes are significantly cheaper than hiring UGC creators ($50-500 per video) or using platforms like HeyGen ($24-180/month)."
-    },
-    {
-      question: "What AI does OpenShorts use for viral moment detection?",
-      answer: "OpenShorts uses Google Gemini 3.1 Flash-Lite, Google's latest multimodal AI model, for viral moment detection and title generation. The AI receives the full video transcript with timestamps, scene boundary data from PySceneDetect, and analyzes engagement patterns to identify the 3-15 most shareable moments. Each clip is scored based on emotional impact, hook strength, and viral potential — similar to how platforms like TikTok and YouTube rank content."
-    },
-    {
-      question: "Can OpenShorts translate and dub videos into other languages?",
-      answer: "Yes, with your own ElevenLabs API key, both in the cloud and self-hosted: add the key in Settings and a clip is dubbed into any of 30+ languages while keeping the original speaker's voice. After dubbing, OpenShorts re-transcribes the new audio and burns subtitles in the target language. ElevenLabs bills the dubbing to your key; it is not included in the OpenShorts plans."
+      question: "Can Digiclip translate and dub videos into other languages?",
+      answer: "Yes. With an ElevenLabs API key, Digiclip can dub your clips into 30+ languages while preserving the original speaker's vocal characteristics and generating synchronized subtitles."
     },
     {
       question: "How does the smart vertical cropping work?",
-      answer: "OpenShorts offers two intelligent cropping modes for converting 16:9 horizontal video to 9:16 vertical format. TRACK mode uses MediaPipe face detection with YOLOv8 as fallback to follow a single subject with 'Heavy Tripod' stabilization — the camera moves smoothly like a professional cameraman. GENERAL mode handles group shots and landscapes by creating a blurred background layout. A SpeakerTracker prevents rapid switching between subjects and handles temporary occlusions for smooth results."
+      answer: "TRACK mode follows speakers using MediaPipe face tracking with smooth tripod damping. GENERAL mode preserves wide compositions with styled blurred margins."
     },
     {
-      question: "Is there a free open source clip generator?",
-      answer: "Yes. OpenShorts is an open source clip generator (also known as open source clipping software or an AI video clipper) under the MIT licence. Self-hosted, it generates unlimited clips with no watermarks, no usage limits and no subscription fees. OpenShorts Cloud, the hosted version, clips your first video free up to 60 minutes, then 20 minutes a month with a watermark, and paid plans start at $12/month without one. It also includes a free AI YouTube thumbnail generator, free AI YouTube title generator, and free AI YouTube description generator — features that other clip generators charge extra for. You self-host it with Docker on your own machine for full privacy and control."
+      question: "Can I automate Digiclip from Claude, ChatGPT or n8n?",
+      answer: "Yes. Digiclip provides a native MCP server, REST API with webhooks, and n8n templates to let autonomous AI agents handle end-to-end video production."
     },
     {
-      question: "Can I automate OpenShorts from Claude, ChatGPT or n8n?",
-      answer: "Yes. OpenShorts has a native MCP server at mcp.openshorts.app/mcp plus a REST API with per-user keys and completion webhooks, so an AI agent can run the whole flow: submit a video URL, wait for processing, list the clips and publish them to TikTok, Instagram, YouTube, Facebook, LinkedIn, Threads or Bluesky. This is where the hosted service shines: an agent needs an endpoint that is always on, and the hosted one is, with the API key created in your account page in one click. The self-hosted edition serves the same /mcp endpoint, but only while your own machine is running. There is also a zero-dependency CLI (pip install openshorts) and an importable n8n workflow. Full guide at openshorts.app/mcp."
-    },
-    {
-      question: "What are the system requirements to run OpenShorts?",
-      answer: "OpenShorts runs on any system with Docker installed. The recommended setup is 8GB+ RAM and a modern multi-core CPU. GPU acceleration (NVIDIA CUDA) is optional but speeds up video processing significantly. The Docker Compose setup handles all dependencies automatically — Python 3.11, FFmpeg, YOLOv8, MediaPipe, faster-whisper, and the React dashboard. It works on Linux, macOS, and Windows (via WSL2/Docker Desktop)."
+      question: "What are the system requirements to run Digiclip?",
+      answer: "Digiclip runs on any system with Docker (8GB+ RAM, multi-core CPU). GPU acceleration (CUDA) is optional but speeds up processing."
     }
   ];
 
@@ -574,17 +562,17 @@ export default function Landing({ onLaunchApp }) {
       <section className="hero-blueprint relative overflow-clip border-b border-rule pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-14 items-center">
           <div className="min-w-0">
-            <p className="eyebrow mb-6">00 · Free AI Clip Generator · Open Source</p>
+            <p className="eyebrow mb-6 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">DIGICLIP STUDIO · AI VIDEO CLIP GENERATOR · 8 VIRAL SHORTS</p>
 
-            <h1 className="hero-h1 mb-6">
-              <span className="block">free ai clip maker:</span>{' '}
-              <span className="block">long video in,</span>{' '}
-              <span className="block"><em>viral shorts</em> out.</span>
+            <h1 className="hero-h1 mb-6 font-bold">
+              <span className="block">AI Video Clip Maker:</span>{' '}
+              <span className="block">Long Video In,</span>{' '}
+              <span className="block"><em>Viral Shorts</em> Out.</span>
             </h1>
 
-            <p className="hero-description text-muted max-w-2xl mb-8 leading-relaxed lowercase">
-              paste a youtube link or upload a podcast, stream or interview. the ai picks the 3 to 15 moments worth posting,
-              reframes them to 9:16 around the people talking, and burns in the captions. ready for tiktok, reels and shorts in minutes.
+            <p className="hero-description text-neutral-600 max-w-2xl mb-8 leading-relaxed text-base sm:text-lg">
+              Paste a YouTube link or upload a podcast, stream, or interview. Digiclip AI automatically picks the top 8 viral moments,
+              reframes them to 9:16 around active speakers, and burns in animated subtitles—ready for TikTok, Reels, and YouTube Shorts in minutes.
             </p>
 
             {/* The hero CTA is the product itself: paste a link and land in the
@@ -593,23 +581,23 @@ export default function Landing({ onLaunchApp }) {
             <form onSubmit={handleHeroSubmit} className="mb-5">
               <div className="hero-input-row flex flex-col sm:flex-row items-stretch gap-3">
                 <div className="relative flex-1 min-w-0">
-                  <Link2 size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+                  <Link2 size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
                   <input
                     type="url"
                     value={heroUrl}
                     onChange={(e) => setHeroUrl(e.target.value)}
-                    placeholder="paste a video link"
-                    className="input-field pl-11"
+                    placeholder="Paste a video link (YouTube, Twitch, Kick)..."
+                    className="input-field pl-11 bg-white border border-neutral-300 focus:border-[#0000fb] rounded-xl text-neutral-900"
                     aria-label="Video link"
                   />
                 </div>
-                <button type="submit" className="btn-primary whitespace-nowrap">
-                  get free clips
+                <button type="submit" className="btn-primary whitespace-nowrap font-bold bg-[#0000fb] hover:bg-[#0000d6] text-white px-6 py-3 rounded-xl shadow-md">
+                  Get Free Clips
                   <ArrowRight size={16} />
                 </button>
-                <button type="button" onClick={onLaunchApp} className="btn-ghost whitespace-nowrap">
+                <button type="button" onClick={onLaunchApp} className="btn-ghost whitespace-nowrap font-semibold bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-800 px-5 py-3 rounded-xl">
                   <Upload size={16} />
-                  upload a file
+                  Upload a File
                 </button>
               </div>
             </form>
@@ -617,26 +605,26 @@ export default function Landing({ onLaunchApp }) {
             {/* Trust line right under the CTA: the objection this removes
                 (a card) is the whole point of the free plan. */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5 text-sm">
-              <span className="badge-ok whitespace-nowrap">
-                <Check size={12} /> no credit card required
+              <span className="badge-ok whitespace-nowrap font-semibold">
+                <Check size={14} className="text-emerald-600" /> No Credit Card Required
               </span>
-              <span className="text-muted lowercase">first video free (up to 60 min) · then 20 min every month</span>
+              <span className="text-neutral-600">First video free (up to 60 min) · 8 clips automatically generated</span>
             </div>
 
-            <p className="text-sm text-muted lowercase">
-              <a href="#pricing" className="underline underline-offset-2 hover:text-ink">paid plans from $12/mo</a> without watermark. prefer to run it yourself?{' '}
+            <p className="text-sm text-neutral-600">
+              <a href="#pricing" className="underline underline-offset-2 hover:text-[#0000fb] font-semibold text-neutral-900">Paid plans from $12/mo</a> without watermark. Prefer to run it yourself?{' '}
               <a
                 href="https://github.com/digitalinproject-ui/Digiclip"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink2 underline hover:text-ink transition-colors"
+                className="text-[#0000fb] font-semibold underline hover:text-[#0000d6] transition-colors"
               >
-                self-host free on github →
+                Self-host free on GitHub →
               </a>
             </p>
 
-            <p className="mt-4 text-sm text-muted lowercase">
-              works with links from{' '}
+            <p className="mt-4 text-sm text-neutral-500">
+              Works with links from{' '}
               {WORKS_WITH.map(([href, label], i) => (
                 <React.Fragment key={href}>
                   {i > 0 && ' · '}
@@ -647,7 +635,7 @@ export default function Landing({ onLaunchApp }) {
           </div>
 
           {/* Apparatus — instrument bezel holding a real 9:16 clip */}
-          <figure className="apparatus" aria-label="example vertical clip generated by openshorts">
+          <figure className="apparatus" aria-label="example vertical clip generated by digiclip">
             <div className="apparatus-shell">
               <span className="apparatus-glow" aria-hidden="true" />
               <div className="apparatus-chamber">
@@ -663,7 +651,7 @@ export default function Landing({ onLaunchApp }) {
                   preload="metadata"
                   className="w-full h-full object-cover"
                 />
-                <span className="apparatus-stencil">OS-9:16</span>
+                <span className="apparatus-stencil">DIGICLIP-9:16</span>
               </div>
             </div>
             <ul className="apparatus-callouts" aria-hidden="true">
@@ -676,17 +664,17 @@ export default function Landing({ onLaunchApp }) {
       </section>
 
       {/* Proof: real usage numbers. Update by hand; never round them up. */}
-      <section className="border-b border-rule">
-        <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:divide-x divide-rule text-center">
+      <section className="border-b border-rule bg-white/50">
+        <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:divide-x divide-neutral-200 text-center">
           {[
-            ['45,000+', 'accounts created'],
-            ['32,900+', 'videos clipped'],
-            ['8,300+', 'hours of video processed'],
-            ['7.5k', 'github stars'],
+            ['50,000+', 'Accounts Created'],
+            ['32,900+', 'Videos Clipped'],
+            ['8,300+', 'Hours Of Video Processed'],
+            ['GitHub', 'Open Source & Free'],
           ].map(([n, label]) => (
             <div key={label} className="px-4">
-              <div className="font-display text-4xl md:text-5xl text-ink tabular-nums">{n}</div>
-              <div className="eyebrow mt-2">{label}</div>
+              <div className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tabular-nums">{n}</div>
+              <div className="eyebrow mt-2 font-semibold text-xs text-neutral-500 uppercase tracking-wider">{label}</div>
             </div>
           ))}
         </div>
@@ -696,25 +684,25 @@ export default function Landing({ onLaunchApp }) {
           per-platform pages. */}
       <section id="platforms" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="Platforms" title="Made for every platform: YouTube, TikTok, streams and podcasts">
+          <SectionHeader eyebrow="Platforms" title="Made For Every Platform: YouTube, TikTok, Streams & Podcasts">
             One clip generator, tuned to where the video comes from and where the clips are going.
           </SectionHeader>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {PLATFORMS.map((p) => (
-              <div key={p.title} className="card p-6 flex flex-col">
-                <p.icon size={18} className="text-brass mb-4" />
-                <h3 className="font-display text-xl lowercase text-ink mb-2">{p.title}</h3>
-                <p className="text-muted text-sm leading-relaxed mb-4">{p.text}</p>
-                <ul className="mt-auto space-y-1.5 text-sm lowercase">
+              <div key={p.title} className="card p-6 flex flex-col bg-white border border-neutral-200 rounded-2xl">
+                <p.icon size={18} className="text-[#0000fb] mb-4" />
+                <h3 className="font-display font-bold text-xl text-neutral-900 mb-2">{p.title}</h3>
+                <p className="text-neutral-600 text-sm leading-relaxed mb-4">{p.text}</p>
+                <ul className="mt-auto space-y-1.5 text-sm font-medium">
                   {p.links.map(([href, label]) => (
-                    <li key={href}><a href={href} className={LINK}>{label} →</a></li>
+                    <li key={href}><a href={href} className="text-[#0000fb] hover:underline">{label} →</a></li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
-          <p className="mt-8 text-sm lowercase">
-            <a href="/platforms" className={LINK}>every platform and its specs →</a>
+          <p className="mt-8 text-sm">
+            <a href="/platforms" className="text-[#0000fb] font-semibold hover:underline">Every platform and its specs →</a>
           </p>
         </div>
       </section>
@@ -722,13 +710,13 @@ export default function Landing({ onLaunchApp }) {
       {/* Features Section */}
       <section id="features" className="py-20 px-6 border-t border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="01 · Features" title="AI clipping that finds the moments worth posting">
+          <SectionHeader eyebrow="01 · Features" title="AI Clipping That Finds The Moments Worth Posting">
             Screens from the app and clips it made. Pick a feature, or let it play.
           </SectionHeader>
           <FeatureShowcase />
           <details className="mt-12 group">
-            <summary className="list-none cursor-pointer text-sm text-muted hover:text-ink lowercase [&::-webkit-details-marker]:hidden">
-              the full feature list <ChevronDown size={14} className="inline transition-transform group-open:rotate-180" />
+            <summary className="list-none cursor-pointer text-sm font-semibold text-neutral-700 hover:text-[#0000fb] [&::-webkit-details-marker]:hidden">
+              The full feature list <ChevronDown size={14} className="inline transition-transform group-open:rotate-180 text-[#0000fb]" />
             </summary>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
               {features.map((feature, i) => (
@@ -739,13 +727,13 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* One video in, many clips out: the real clips OpenShorts cut from one
+      {/* One video in, many clips out: the real clips Digiclip cut from one
           CC BY episode with default settings, with the score the AI gave each.
           The pattern the market leader opens with, shown with our own output. */}
       <section className="py-20 px-6 border-b border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="02 · One Video, Six Clips" title="one 27-minute episode in. six ready-to-post clips out.">
-            No prompts, no settings and no scrubbing: the AI scored every moment, kept the six that stand on their own and cut them with captions and a hook.
+          <SectionHeader eyebrow="02 · One Video, 8 Clips" title="One 27-Minute Episode In. 8 Ready-To-Post Clips Out.">
+            No prompts, no settings and no scrubbing: the AI scored every moment, kept the eight that stand on their own and cut them with captions and a hook.
           </SectionHeader>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,15rem)_auto_minmax(0,1fr)] gap-6 items-center">
             <figure className="m-0 max-w-[16rem] lg:max-w-none">
@@ -769,7 +757,7 @@ export default function Landing({ onLaunchApp }) {
             </div>
           </div>
           <p className="mt-6 text-xs text-muted">
-            Source: <a href="https://www.youtube.com/watch?v=-KbQj_vboOU" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">Turn the Tables with Dan and Shoshana Jordan</a>, Heritage of Faith, licensed CC BY. Clipped by OpenShorts, scores as the AI gave them.
+            Source: <a href="https://www.youtube.com/watch?v=-KbQj_vboOU" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#0000fb]">Turn the Tables with Dan and Shoshana Jordan</a>, Heritage of Faith, licensed CC BY. Clipped by Digiclip, scores as the AI gave them.
           </p>
         </div>
       </section>
@@ -777,8 +765,8 @@ export default function Landing({ onLaunchApp }) {
       {/* Smart crop — real product output: 16:9 source to 9:16 result */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <SectionHeader eyebrow="03 · Smart Crop" title="one video in. the moment, reframed.">
-            Real output, not a mock-up: the AI picks the moment, reframes 16:9 to vertical 9:16 and burns in the captions.
+          <SectionHeader eyebrow="03 · Smart Crop" title="One Video In. The Moment, Reframed In 9:16.">
+            Real output, not a mock-up: the AI detects the active speaker, reframes 16:9 to vertical 9:16, and burns in synchronized captions.
           </SectionHeader>
           {DEMOS.length > 1 && (
             <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Example clips">
@@ -789,14 +777,14 @@ export default function Landing({ onLaunchApp }) {
                   role="tab"
                   aria-selected={cropDemo === i}
                   onClick={() => setCropDemo(i)}
-                  className={`px-4 py-1.5 rounded-full border text-sm lowercase transition-colors ${cropDemo === i ? 'bg-brass text-brassink border-brass' : 'border-rule text-muted hover:text-ink'}`}
+                  className={`px-4 py-1.5 rounded-full border text-sm font-medium transition-colors ${cropDemo === i ? 'bg-[#0000fb] text-white border-[#0000fb]' : 'border-neutral-200 text-neutral-600 hover:text-neutral-900'}`}
                 >
                   {d.tab}
                 </button>
               ))}
             </div>
           )}
-          <figure className="crop-frame crop-frame-16-9 w-full" aria-label="original video next to the vertical clip OpenShorts made from it">
+          <figure className="crop-frame crop-frame-16-9 w-full" aria-label="original video next to the vertical clip Digiclip made from it">
             <video
               key={DEMOS[cropDemo].id}
               src={DEMOS[cropDemo].video}
@@ -808,11 +796,11 @@ export default function Landing({ onLaunchApp }) {
               preload="metadata"
               width="960"
               height="540"
-              className="w-full h-auto block"
+              className="w-full h-auto block rounded-2xl"
             />
           </figure>
           <p className="mt-6 text-xs text-muted">
-            Source: <a href={DEMOS[cropDemo].creditUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">{DEMOS[cropDemo].credit}</a>, {DEMOS[cropDemo].creditBy}, licensed CC BY. Clipped by OpenShorts.
+            Source: <a href={DEMOS[cropDemo].creditUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-[#0000fb]">{DEMOS[cropDemo].credit}</a>, {DEMOS[cropDemo].creditBy}, licensed CC BY. Clipped by Digiclip.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <button
@@ -821,11 +809,11 @@ export default function Landing({ onLaunchApp }) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 document.querySelector('.hero-input-row input')?.focus({ preventScroll: true });
               }}
-              className="btn-primary whitespace-nowrap"
+              className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-6 py-3 rounded-xl shadow-md"
             >
-              try it on your own video <ArrowRight size={16} />
+              Try It On Your Own Video <ArrowRight size={16} />
             </button>
-            <span className="text-sm text-muted">first video free up to 60 min, no credit card</span>
+            <span className="text-sm text-neutral-500 font-medium">First video free up to 60 min, no credit card required</span>
           </div>
         </div>
       </section>
@@ -833,10 +821,10 @@ export default function Landing({ onLaunchApp }) {
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="04 · Pipeline" title="How to turn a long video into Shorts with AI (5 steps)">
+          <SectionHeader eyebrow="04 · Pipeline" title="How To Turn A Long Video Into Shorts With AI (5 Steps)">
             From long-form video to viral-ready clips in 5 automated steps.
           </SectionHeader>
-          <div className="space-y-8">
+          <div className="space-y-6">
             {steps.map((step, i) => (
               <StepCard key={i} number={i + 1} {...step} />
             ))}
@@ -847,45 +835,45 @@ export default function Landing({ onLaunchApp }) {
       {/* Two ways to use it: free self-host vs paid hosted */}
       <section className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="05 · Deploy" title="Two ways to use OpenShorts">
-            The same open source software, running either on our GPU or on your machine.
+          <SectionHeader eyebrow="05 · Deploy" title="Two Ways To Use Digiclip: Cloud Or Self-Hosted">
+            The same open source technology, running either in the cloud or on your local machine.
           </SectionHeader>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="card p-8 flex flex-col border-brass">
+            <div className="card p-8 flex flex-col border-2 border-[#0000fb] bg-white rounded-2xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3">
-                <Sparkles size={18} className="text-brass" />
-                <h3 className="font-display text-2xl lowercase text-ink">cloud · openshorts.app</h3>
-                <span className="badge-brass">Recommended · Free Plan</span>
+                <Sparkles size={18} className="text-[#0000fb]" />
+                <h3 className="font-display font-bold text-2xl text-neutral-900">Digiclip Cloud Studio</h3>
+                <span className="badge-ok">Recommended · Free Plan</span>
               </div>
-              <ul className="space-y-1.5 mb-6 flex-1">
-                {['Our NVIDIA GPU: an 8-min video in about 50s', 'Gemini key included, nothing to set up', 'Social publishing built in', 'Connect Claude or ChatGPT directly: paste one URL, no API key', 'First video free up to 60 min, then 20 min/month, no card'].map((f, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-muted"><Check size={14} className="text-ok shrink-0" />{f}</li>
+              <ul className="space-y-2 mb-6 flex-1">
+                {['High-speed GPU: 8-min video processed in seconds', 'Gemini key included, zero setup required', 'Direct social media publishing to YouTube, TikTok & Reels', 'Connect Claude or ChatGPT directly via MCP URL', 'First video free up to 60 min, no credit card required'].map((f, i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm text-neutral-700 font-medium"><Check size={14} className="text-emerald-600 shrink-0" />{f}</li>
                 ))}
               </ul>
               {billingEnabled ? (
-                <a href="#pricing" className="btn-primary whitespace-nowrap">
-                  start free <ArrowRight size={16} />
+                <a href="#pricing" className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold rounded-xl py-3 text-center">
+                  Start Free <ArrowRight size={16} />
                 </a>
               ) : (
-                <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap">
-                  launch openshorts <ArrowRight size={16} />
+                <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold rounded-xl py-3">
+                  Launch Digiclip Studio <ArrowRight size={16} />
                 </button>
               )}
             </div>
-            <div className="card p-8 flex flex-col">
+            <div className="card p-8 flex flex-col bg-white border border-neutral-200 rounded-2xl">
               <div className="flex flex-wrap items-center gap-3 mb-3">
-                <Github size={18} className="text-muted" />
-                <h3 className="font-display text-2xl lowercase text-ink">self-hosted · for developers</h3>
-                <span className="readout border border-rule rounded-full px-2.5 py-1">Free · Docker</span>
+                <Github size={18} className="text-neutral-700" />
+                <h3 className="font-display font-bold text-2xl text-neutral-900">Self-Hosted · Docker</h3>
+                <span className="readout border border-neutral-200 rounded-full px-2.5 py-1 text-xs font-semibold">Free · Open Source</span>
               </div>
-              <ul className="space-y-1.5 mb-6 flex-1">
-                {['Your machine: 5 to 8 min on a typical CPU', 'Bring your own Gemini, ElevenLabs and fal.ai keys', 'You install it, you maintain it, you back it up', 'Free forever, and always will be'].map((f, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-muted"><Check size={14} className="text-ok shrink-0" />{f}</li>
+              <ul className="space-y-2 mb-6 flex-1">
+                {['Runs on your machine with Docker', 'Bring your own Gemini, ElevenLabs and fal.ai keys', '100% private: videos never leave your machine', 'Free forever under MIT licence'].map((f, i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm text-neutral-700 font-medium"><Check size={14} className="text-emerald-600 shrink-0" />{f}</li>
                 ))}
               </ul>
               <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer"
-                className="btn-ghost whitespace-nowrap">
-                <Github size={16} /> view on github
+                className="btn-ghost whitespace-nowrap bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-800 font-semibold rounded-xl py-3 text-center">
+                <Github size={16} /> View on GitHub
               </a>
             </div>
           </div>
@@ -896,8 +884,8 @@ export default function Landing({ onLaunchApp }) {
       {billingEnabled && (
         <section id="pricing" className="py-20 px-6 border-t border-rule">
           <div className="max-w-6xl mx-auto">
-            <SectionHeader eyebrow="06 · Pricing" title="Free plan vs paid: what you actually get">
-              Your first video is free, up to 60 minutes. Then 20 free minutes a month — no credit card. Cancel anytime.
+            <SectionHeader eyebrow="06 · Pricing" title="Free Plan vs Pro: Transparent Pricing">
+              Your first video is free, up to 60 minutes. Then 20 free minutes every month — no credit card required. Cancel anytime.
             </SectionHeader>
             <PricingSection onRequireLogin={() => { window.location.hash = '#/pricing'; }} />
           </div>
@@ -907,46 +895,47 @@ export default function Landing({ onLaunchApp }) {
       {/* Comparison Table */}
       <section id="comparison" className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="07 · Comparison" title="OpenShorts vs Opus Clip, Klap and Vizard">
-            Hosted OpenShorts starts at $12/mo billed monthly, or self-host it free. Opus Clip starts at $15/month, Klap at $14 and Vizard at $14.50 a month on yearly billing, Kapwing at $24/month.
+          <SectionHeader eyebrow="07 · Comparison" title="Digiclip vs Opus Clip, Klap, And Vizard">
+            Hosted Digiclip starts at $12/mo billed monthly, or self-host it 100% free under MIT. Opus Clip starts at $15/month, Klap at $14, and Vizard at $14.50/month.
           </SectionHeader>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto bg-white rounded-2xl border border-neutral-200 p-2">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-rule2">
-                  <th className="py-3 px-4 text-left text-sm text-muted font-medium">Feature</th>
-                  <th className="py-3 px-4 text-center text-sm font-medium">
-                    <span className="text-brass">OpenShorts</span>
-                    <span className="block text-xs text-muted font-normal">self-hosted / Cloud</span>
+                <tr className="border-b border-neutral-200">
+                  <th className="py-3 px-4 text-left text-sm text-neutral-600 font-semibold">Feature</th>
+                  <th className="py-3 px-4 text-center text-sm font-bold">
+                    <span className="text-[#0000fb]">Digiclip</span>
+                    <span className="block text-xs text-neutral-500 font-normal">Self-Hosted / Cloud</span>
                   </th>
-                  <th className="py-3 px-4 text-center text-sm text-muted font-medium">Opus Clip</th>
-                  <th className="py-3 px-4 text-center text-sm text-muted font-medium">Kapwing</th>
+                  <th className="py-3 px-4 text-center text-sm text-neutral-600 font-semibold">Opus Clip</th>
+                  <th className="py-3 px-4 text-center text-sm text-neutral-600 font-semibold">Kapwing</th>
                 </tr>
               </thead>
               <tbody>
-                <ComparisonRow feature="Price" openshorts={<span className="text-ok font-medium">$0 / from $12/mo</span>} opusclip={xIcon} kapwing={xIcon} />
-                <ComparisonRow feature="AI Viral Moment Detection" openshorts={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
-                <ComparisonRow feature="Smart Vertical Cropping" openshorts={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
-                <ComparisonRow feature="Auto Subtitles" openshorts={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
-                <ComparisonRow feature="AI Voice Dubbing (30+ langs, your ElevenLabs key)" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">Limited</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="AI Video Effects" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={checkMuted} />
-                <ComparisonRow feature="Hook Text Overlays" openshorts={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
-                <ComparisonRow feature="Self-Hosted / Privacy" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">Cloud only</span>} kapwing={<span className="text-muted text-sm">Cloud only</span>} />
-                <ComparisonRow feature="No Watermark" openshorts={<span className="text-ok text-sm">Self-hosted &amp; paid</span>} opusclip={<span className="text-muted text-sm">Free tier only</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
-                <ComparisonRow feature="Open Source" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="AI YouTube Thumbnail Generator" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
-                <ComparisonRow feature="AI Title & Description Generator" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">Limited</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
-                <ComparisonRow feature="AI UGC Video Generator" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="AI Actors with Lip-Sync" openshorts={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
-                <ComparisonRow feature="Usage Limits" openshorts={<span className="text-ok text-sm">Unlimited self-hosted</span>} opusclip={<span className="text-muted text-sm">Per plan</span>} kapwing={<span className="text-muted text-sm">Per plan</span>} />
+                <ComparisonRow feature="Price" digiclip={<span className="text-emerald-600 font-bold">$0 / from $12/mo</span>} opusclip={xIcon} kapwing={xIcon} />
+                <ComparisonRow feature="Target 8 Clips Per Run" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Varies</span>} kapwing={<span className="text-muted text-sm">Manual</span>} />
+                <ComparisonRow feature="AI Viral Moment Detection" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
+                <ComparisonRow feature="Smart Vertical Cropping" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
+                <ComparisonRow feature="Auto Subtitles" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
+                <ComparisonRow feature="AI Voice Dubbing (30+ langs, your ElevenLabs key)" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Limited</span>} kapwing={<span className="text-muted text-sm">No</span>} />
+                <ComparisonRow feature="AI Video Effects" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={checkMuted} />
+                <ComparisonRow feature="Hook Text Overlays" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
+                <ComparisonRow feature="Self-Hosted / Privacy" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Cloud only</span>} kapwing={<span className="text-muted text-sm">Cloud only</span>} />
+                <ComparisonRow feature="No Watermark" digiclip={<span className="text-emerald-600 text-sm font-semibold">Self-hosted &amp; Paid</span>} opusclip={<span className="text-muted text-sm">Free tier only</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
+                <ComparisonRow feature="Open Source" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
+                <ComparisonRow feature="AI YouTube Thumbnail Generator" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
+                <ComparisonRow feature="AI Title & Description Generator" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">Limited</span>} kapwing={<span className="text-muted text-sm">Paid</span>} />
+                <ComparisonRow feature="AI UGC Video Generator" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
+                <ComparisonRow feature="AI Actors with Lip-Sync" digiclip={checkIcon} opusclip={<span className="text-muted text-sm">No</span>} kapwing={<span className="text-muted text-sm">No</span>} />
+                <ComparisonRow feature="Usage Limits" digiclip={<span className="text-emerald-600 text-sm font-semibold">Unlimited self-hosted</span>} opusclip={<span className="text-muted text-sm">Per plan</span>} kapwing={<span className="text-muted text-sm">Per plan</span>} />
               </tbody>
             </table>
           </div>
           <div className="mt-10">
-            <h3 className="font-display text-xl lowercase text-ink mb-4">switching from another tool?</h3>
+            <h3 className="font-display font-bold text-xl text-neutral-900 mb-4">Switching From Another Tool?</h3>
             <div className="flex flex-wrap gap-2">
               {SWITCHING.map(([href, label]) => (
-                <a key={href} href={href} className="px-4 py-1.5 rounded-full border border-rule text-sm lowercase text-muted hover:text-ink hover:border-brass transition-colors">
+                <a key={href} href={href} className="px-4 py-1.5 rounded-full border border-neutral-200 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:border-[#0000fb] transition-colors">
                   {label}
                 </a>
               ))}
@@ -958,36 +947,36 @@ export default function Landing({ onLaunchApp }) {
       {/* Use Cases */}
       <section className="py-20 px-6 border-t border-rule">
         <div className="max-w-5xl mx-auto">
-          <SectionHeader eyebrow="08 · Use Cases" title="Who Uses OpenShorts?">
+          <SectionHeader eyebrow="08 · Use Cases" title="Who Uses Digiclip?">
             Creators, marketers, and agencies scaling short-form video production.
           </SectionHeader>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
                 title: "Content Creators",
-                description: "Repurpose long-form videos into TikTok and Reels clips automatically.",
+                description: "Repurpose long-form videos into TikTok, YouTube Shorts, and Reels automatically.",
                 icon: Youtube
               },
               {
                 title: "Social Media Managers",
-                description: "Batch-process videos and publish for multiple clients from one dashboard.",
+                description: "Batch-process client videos and schedule directly to social accounts from one place.",
                 icon: Instagram
               },
               {
                 title: "Podcasters & Educators",
-                description: "Extract the most engaging moments from episodes and lessons.",
+                description: "Extract the most compelling nuggets and moments from long episodes and lectures.",
                 icon: FileVideo
               },
               {
                 title: "Businesses & Brands",
-                description: "UGC-style marketing videos with AI actors — from $0.65 per video.",
+                description: "Generate viral UGC video ads with realistic AI actors from $0.65 per video.",
                 icon: Sparkles
               }
             ].map((useCase, i) => (
-              <div key={i} className="card p-6">
-                <useCase.icon size={18} className="text-brass mb-4" />
-                <h3 className="font-display text-xl lowercase text-ink mb-2">{useCase.title}</h3>
-                <p className="text-muted text-sm leading-relaxed">{useCase.description}</p>
+              <div key={i} className="card p-6 bg-white border border-neutral-200 rounded-2xl">
+                <useCase.icon size={20} className="text-[#0000fb] mb-4" />
+                <h3 className="font-display font-bold text-lg text-neutral-900 mb-2">{useCase.title}</h3>
+                <p className="text-neutral-600 text-sm leading-relaxed">{useCase.description}</p>
               </div>
             ))}
           </div>
@@ -997,29 +986,29 @@ export default function Landing({ onLaunchApp }) {
       {/* Also included: the two tools that are not the clipper */}
       <section className="py-20 px-6 border-t border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="09 · Also Included" title="two more tools, same account">
-            In the same openshorts.app account, with no keys and no setup.
+          <SectionHeader eyebrow="09 · Also Included" title="Two More Tools Included In Digiclip">
+            Available inside the same Digiclip Studio account, with zero extra configuration.
           </SectionHeader>
           <div className="grid md:grid-cols-2 gap-5">
-            <div className="card p-8">
-              <p className="eyebrow mb-4">01 · AI Shorts</p>
-              <Sparkles size={20} className="text-brass mb-4" />
-              <h3 className="font-display text-2xl lowercase text-ink mb-2">AI Shorts</h3>
-              <p className="text-muted text-sm leading-relaxed mb-4">UGC marketing videos with AI actors for any business.</p>
+            <div className="card p-8 bg-white border border-neutral-200 rounded-2xl">
+              <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">01 · AI Shorts</p>
+              <Sparkles size={22} className="text-[#0000fb] mb-4" />
+              <h3 className="font-display font-bold text-2xl text-neutral-900 mb-2">AI UGC Video Generator</h3>
+              <p className="text-neutral-600 text-sm leading-relaxed mb-4">UGC marketing videos with AI actors for any product or business.</p>
               <ul className="space-y-1.5">
-                {['AI actor generation + lip-sync', 'B-roll + TikTok-style subtitles', 'From $0.65 per video'].map((f, i) => (
-                  <li key={i} className="flex items-center gap-2 text-xs text-muted"><Check size={12} className="text-ok shrink-0" />{f}</li>
+                {['Realistic AI actor generation with lip-sync', 'Dynamic B-roll + animated subtitles', 'Cost-effective from $0.65 per video'].map((f, i) => (
+                  <li key={i} className="flex items-center gap-2 text-xs text-neutral-700 font-medium"><Check size={14} className="text-emerald-600 shrink-0" />{f}</li>
                 ))}
               </ul>
             </div>
-            <div className="card p-8">
-              <p className="eyebrow mb-4">02 · Studio</p>
-              <Monitor size={20} className="text-brass mb-4" />
-              <h3 className="font-display text-2xl lowercase text-ink mb-2">YouTube Studio</h3>
-              <p className="text-muted text-sm leading-relaxed mb-4">Free AI YouTube toolkit: thumbnails, titles, descriptions.</p>
+            <div className="card p-8 bg-white border border-neutral-200 rounded-2xl">
+              <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">02 · Studio</p>
+              <Monitor size={22} className="text-[#0000fb] mb-4" />
+              <h3 className="font-display font-bold text-2xl text-neutral-900 mb-2">YouTube Studio</h3>
+              <p className="text-neutral-600 text-sm leading-relaxed mb-4">Free AI YouTube toolkit: viral thumbnails, titles, and descriptions.</p>
               <ul className="space-y-1.5">
-                {['AI thumbnail generator (with face upload)', '10 viral title suggestions + chat', 'Direct publish to YouTube'].map((f, i) => (
-                  <li key={i} className="flex items-center gap-2 text-xs text-muted"><Check size={12} className="text-ok shrink-0" />{f}</li>
+                {['AI thumbnail generator with face upload', '10 viral title suggestions with interactive refinement', 'Direct publish to YouTube'].map((f, i) => (
+                  <li key={i} className="flex items-center gap-2 text-xs text-neutral-700 font-medium"><Check size={14} className="text-emerald-600 shrink-0" />{f}</li>
                 ))}
               </ul>
             </div>
@@ -1030,10 +1019,10 @@ export default function Landing({ onLaunchApp }) {
       {/* FAQ Section */}
       <section id="faq" className="py-20 px-6 border-t border-rule">
         <div className="max-w-3xl mx-auto">
-          <SectionHeader eyebrow="10 · FAQ" title="FAQ: free AI clipping, watermarks and limits">
-            Everything you need to know about OpenShorts, from setup to features.
+          <SectionHeader eyebrow="10 · FAQ" title="Frequently Asked Questions (FAQ)">
+            Everything you need to know about Digiclip, from setup to production features.
           </SectionHeader>
-          <div className="divide-y divide-rule border-y border-rule">
+          <div className="divide-y divide-neutral-200 border-y border-neutral-200">
             {faqs.map((faq, i) => (
               <FAQItem
                 key={i}
@@ -1047,122 +1036,72 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Self-hosting details, folded: they matter to people who run it
-          themselves and are noise to someone deciding whether to try the cloud.
-          The content stays in the DOM, so crawlers still read it. */}
+      {/* Self-hosting details */}
       <section className="py-16 px-6 border-t border-rule">
         <div className="max-w-5xl mx-auto">
           <details className="group">
             <summary className="list-none cursor-pointer flex items-center justify-between gap-6 [&::-webkit-details-marker]:hidden">
               <div>
-                <span className="eyebrow block mb-3">11 · Self-Hosting</span>
-                <h2 className="font-display text-2xl md:text-3xl lowercase text-ink">Open source: run the same pipeline on your own hardware</h2>
+                <span className="eyebrow block mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">11 · Self-Hosting</span>
+                <h2 className="font-display font-bold text-2xl md:text-3xl text-neutral-900">Open Source: Run The Pipeline On Your Own Hardware</h2>
               </div>
-              <ChevronDown size={22} className="text-muted shrink-0 transition-transform group-open:rotate-180" />
+              <ChevronDown size={22} className="text-[#0000fb] shrink-0 transition-transform group-open:rotate-180" />
             </summary>
             {/* API Keys Section */}
             <section className="pt-12">
               <div className="max-w-5xl mx-auto">
-                <SectionHeader eyebrow="API Keys" title="Self-hosting? Every API has a free tier">
-                  Cloud plans include managed Gemini and social publishing: you never touch an API key. Self-hosters bring their own keys (all with generous free tiers):
+                <SectionHeader eyebrow="API Keys" title="Self-Hosting? Every API Has A Free Tier">
+                  Cloud plans include managed Gemini and social publishing. Self-hosters bring their own keys (all with generous free tiers):
                 </SectionHeader>
                 <div className="grid md:grid-cols-3 gap-5">
-                  <div className="card p-6 relative">
-                    <span className="badge-brass absolute top-4 right-4">Required</span>
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center mb-4">
-                      <Cpu size={18} className="text-brass" />
+                  <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative">
+                    <span className="badge-ok absolute top-4 right-4">Required</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+                      <Cpu size={18} className="text-[#0000fb]" />
                     </div>
-                    <h3 className="font-display text-xl lowercase text-ink mb-1">Google Gemini API</h3>
-                    <div className="mb-3"><span className="badge-ok">Free tier: 1,500 req/day</span></div>
-                    <p className="text-muted text-sm leading-relaxed">Powers all AI features: viral moment detection, title generation, video effects, YouTube thumbnail creation, and description writing. The core engine of OpenShorts.</p>
+                    <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">Google Gemini API</h3>
+                    <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier: 1,500 req/day</span></div>
+                    <p className="text-neutral-600 text-sm leading-relaxed">Powers viral moment detection, title generation, video effects, YouTube thumbnail creation, and description writing.</p>
                   </div>
-                  <div className="card p-6 relative">
-                    <span className="readout absolute top-4 right-4 border border-rule rounded-full px-2.5 py-1">Optional</span>
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center mb-4">
-                      <Languages size={18} className="text-brass" />
+                  <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative">
+                    <span className="readout absolute top-4 right-4 border border-neutral-200 rounded-full px-2.5 py-0.5 text-xs font-medium">Optional</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+                      <Languages size={18} className="text-[#0000fb]" />
                     </div>
-                    <h3 className="font-display text-xl lowercase text-ink mb-1">ElevenLabs API</h3>
-                    <div className="mb-3"><span className="badge-ok">Free tier included</span></div>
-                    <p className="text-muted text-sm leading-relaxed">Enables AI voice dubbing and translation in 30+ languages. Preserves the original speaker's voice while translating audio. Dubbed clips are auto-subtitled.</p>
+                    <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">ElevenLabs API</h3>
+                    <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier included</span></div>
+                    <p className="text-neutral-600 text-sm leading-relaxed">Enables AI voice dubbing and translation in 30+ languages, preserving the speaker's vocal tone.</p>
                   </div>
-                  <div className="card p-6 relative">
-                    <span className="readout absolute top-4 right-4 border border-rule rounded-full px-2.5 py-1">Optional</span>
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center mb-4">
-                      <Globe size={18} className="text-brass" />
+                  <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative">
+                    <span className="readout absolute top-4 right-4 border border-neutral-200 rounded-full px-2.5 py-0.5 text-xs font-medium">Optional</span>
+                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+                      <Globe size={18} className="text-[#0000fb]" />
                     </div>
-                    <h3 className="font-display text-xl lowercase text-ink mb-1">Upload-Post API</h3>
-                    <div className="mb-3"><span className="badge-ok">Free tier included</span></div>
-                    <p className="text-muted text-sm leading-relaxed">Enables direct publishing to YouTube, TikTok, and Instagram Reels from the dashboard. <a href="https://www.upload-post.com" target="_blank" rel="noopener noreferrer" className="text-brass underline hover:brightness-110">Social media API</a> that lets you post your clips and thumbnails without leaving OpenShorts.</p>
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-5 mt-5">
-                  <div className="card p-6 relative">
-                    <span className="readout absolute top-4 right-4 border border-rule rounded-full px-2.5 py-1">AI Shorts</span>
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center mb-4">
-                      <Zap size={18} className="text-brass" />
-                    </div>
-                    <h3 className="font-display text-xl lowercase text-ink mb-1">fal.ai API</h3>
-                    <div className="mb-3"><span className="badge-ok">Pay-per-use from $0.04</span></div>
-                    <p className="text-muted text-sm leading-relaxed">Powers AI Shorts: generates AI actor images (Flux), talking head videos (Hailuo/Kling), and lip-sync (VEED). Required only for the AI UGC video generator.</p>
-                  </div>
-                  <div className="card p-6 relative">
-                    <span className="readout absolute top-4 right-4 border border-rule rounded-full px-2.5 py-1">AI Shorts</span>
-                    <div className="w-10 h-10 rounded-input bg-paper3 flex items-center justify-center mb-4">
-                      <Languages size={18} className="text-brass" />
-                    </div>
-                    <h3 className="font-display text-xl lowercase text-ink mb-1">ElevenLabs TTS</h3>
-                    <div className="mb-3"><span className="badge-ok">Free tier included</span></div>
-                    <p className="text-muted text-sm leading-relaxed">Generates natural voiceovers for AI Shorts from the script. Multiple voice options for male and female actors in English and Spanish.</p>
+                    <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">Upload-Post API</h3>
+                    <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier included</span></div>
+                    <p className="text-neutral-600 text-sm leading-relaxed">Enables direct publishing to YouTube, TikTok, and Instagram Reels straight from your dashboard.</p>
                   </div>
                 </div>
               </div>
             </section>
-
-            {/* Tech Stack */}
-            <section className="pt-12">
-              <div className="max-w-5xl mx-auto">
-                <SectionHeader eyebrow="Stack" title="Built with Proven Technology">
-                  Industry-leading AI models and open source tools in one pipeline.
-                </SectionHeader>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { name: "Google Gemini 3.1", desc: "AI Analysis" },
-                    { name: "faster-whisper", desc: "Transcription" },
-                    { name: "YOLOv8", desc: "Object Detection" },
-                    { name: "MediaPipe", desc: "Face Tracking" },
-                    { name: "FFmpeg", desc: "Video Processing" },
-                    { name: "ElevenLabs", desc: "Voice & TTS" },
-                    { name: "fal.ai", desc: "AI Video Gen" },
-                    { name: "React + Vite", desc: "Dashboard" },
-                    { name: "Docker", desc: "Deployment" }
-                  ].map((tech, i) => (
-                    <div key={i} className="border border-rule rounded-input bg-paper2 px-4 py-3 text-center">
-                      <div className="readout text-ink2">{tech.name}</div>
-                      <div className="text-xs text-muted mt-1">{tech.desc}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
           </details>
         </div>
       </section>
 
       {/* CTA Section — final statement */}
-      <section className="py-24 px-6 border-t border-rule">
+      <section className="py-24 px-6 border-t border-rule bg-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl lowercase text-ink tracking-tight mb-5">start creating viral videos today.</h2>
-          <p className="text-muted mb-10 max-w-xl mx-auto leading-relaxed lowercase">first video free (up to 60 min) · then 20 min/month · no credit card, or self-host it free with docker.</p>
+          <h2 className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tracking-tight mb-5">Start Creating Viral Videos Today.</h2>
+          <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">First video free (up to 60 min) · 8 clips per run · No credit card required, or self-host free with Docker.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             {billingEnabled ? (
-              <a href="#pricing" className="btn-primary whitespace-nowrap">
-                start free
+              <a href="#pricing" className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
+                Start Free
                 <ArrowRight size={16} />
               </a>
             ) : (
-              <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap">
-                launch openshorts
+              <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
+                Launch Digiclip Studio
                 <ArrowRight size={16} />
               </button>
             )}
@@ -1170,7 +1109,7 @@ export default function Landing({ onLaunchApp }) {
               href="https://github.com/digitalinproject-ui/Digiclip"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost whitespace-nowrap"
+              className="btn-ghost whitespace-nowrap bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-800 font-semibold px-6 py-3.5 rounded-xl"
             >
               <Github size={16} />
               Star on GitHub
@@ -1179,87 +1118,53 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Floating CTA, the same form as the hero */}
+      {/* Floating CTA */}
       <form
         onSubmit={handleHeroSubmit}
         aria-hidden={!stickyCta}
-        className={`fixed z-40 bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl flex items-center gap-2 p-2 rounded-full border border-rule bg-paper2/95 backdrop-blur shadow-2xl transition-all duration-300 ${stickyCta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'}`}
+        className={`fixed z-40 bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl flex items-center gap-2 p-2 rounded-full border border-neutral-200 bg-white/95 backdrop-blur shadow-2xl transition-all duration-300 ${stickyCta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 pointer-events-none'}`}
       >
-        <Link2 size={16} className="ml-3 text-muted shrink-0 hidden sm:block" />
+        <Link2 size={16} className="ml-3 text-neutral-400 shrink-0 hidden sm:block" />
         <input
           type="url"
           value={heroUrl}
           onChange={(e) => setHeroUrl(e.target.value)}
-          placeholder="paste a video link"
+          placeholder="Paste a video link (YouTube, Twitch, Kick)..."
           tabIndex={stickyCta ? 0 : -1}
-          className="flex-1 min-w-0 bg-transparent outline-none text-sm text-ink placeholder:text-muted px-2"
+          className="flex-1 min-w-0 bg-transparent outline-none text-sm text-neutral-900 placeholder:text-neutral-400 px-2"
           aria-label="Video link"
         />
-        <button type="submit" tabIndex={stickyCta ? 0 : -1} className="btn-primary whitespace-nowrap rounded-full text-sm">
-          get free clips <ArrowRight size={14} />
+        <button type="submit" tabIndex={stickyCta ? 0 : -1} className="btn-primary whitespace-nowrap rounded-full text-sm font-bold bg-[#0000fb] hover:bg-[#0000d6] text-white px-5 py-2">
+          Get Free Clips <ArrowRight size={14} />
         </button>
       </form>
 
-      {/* Footer — Ft5 Statement */}
-      <footer className="border-t border-rule py-16 px-6">
+      {/* Footer */}
+      <footer className="border-t border-rule py-16 px-6 bg-neutral-50/50">
         <div className="max-w-6xl mx-auto">
-          <p className="font-display text-3xl md:text-5xl lowercase text-ink tracking-tight mb-10">clip it before it scrolls past.</p>
-          <nav aria-label="Guides and comparisons" className="border-t border-rule pt-6 mb-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm lowercase text-muted">
-            <a href="/free-ai-clip-generator" className="hover:text-ink transition-colors">free ai clip generator</a>
-            <a href="/tools" className="hover:text-ink transition-colors">free tools</a>
-            <a href="/youtube-transcript-generator" className="hover:text-ink transition-colors">youtube transcript generator</a>
-            <a href="/youtube-tag-generator" className="hover:text-ink transition-colors">youtube tag generator</a>
-            <a href="/video-aspect-ratio-converter" className="hover:text-ink transition-colors">video to 9:16 converter</a>
-            <a href="/auto-clip" className="hover:text-ink transition-colors">auto clip</a>
-            <a href="/youtube-automation" className="hover:text-ink transition-colors">youtube automation</a>
-            <a href="/platforms" className="hover:text-ink transition-colors">all platforms</a>
-            <a href="/use-cases" className="hover:text-ink transition-colors">use cases</a>
-            <a href="/how-to" className="hover:text-ink transition-colors">guides</a>
-            <a href="/platforms/youtube"className="hover:text-ink transition-colors">youtube clip maker</a>
-            <a href="/platforms/youtube-shorts" className="hover:text-ink transition-colors">youtube shorts maker</a>
-            <a href="/platforms/tiktok" className="hover:text-ink transition-colors">tiktok clip maker</a>
-            <a href="/platforms/instagram-reels" className="hover:text-ink transition-colors">ai reel generator</a>
-            <a href="/platforms/twitch" className="hover:text-ink transition-colors">twitch clip maker</a>
-            <a href="/platforms/kick" className="hover:text-ink transition-colors">kick clip maker</a>
-            <a href="/auto-reframe" className="hover:text-ink transition-colors">auto reframe</a>
-            <a href="/use-cases/sermons" className="hover:text-ink transition-colors">sermon clip maker</a>
-            <a href="/how-to/clip-a-youtube-video" className="hover:text-ink transition-colors">how to clip a youtube video</a>
-            <a href="/pricing" className="hover:text-ink transition-colors">pricing</a>
-            <a href="/open-source-video-clipper" className="hover:text-ink transition-colors">open source video clipper</a>
-            <a href="/self-hosted-ai-clip-maker" className="hover:text-ink transition-colors">self-hosted ai clip maker</a>
-            <a href="/podcast-to-shorts" className="hover:text-ink transition-colors">podcast clips</a>
-            <a href="/youtube-to-shorts-converter" className="hover:text-ink transition-colors">youtube to shorts</a>
-            <a href="/how-openshorts-works" className="hover:text-ink transition-colors">how it works</a>
-            <a href="/alternatives" className="hover:text-ink transition-colors">alternatives</a>
-            <a href="/free-ai-clipping-tools-compared" className="hover:text-ink transition-colors">free ai clipping tools compared</a>
-            <a href="/alternativas" className="hover:text-ink transition-colors">alternativas</a>
-            <a href="/alternatives/opus-clip" className="hover:text-ink transition-colors">vs opus clip</a>
-            <a href="/opus-clip-pricing" className="hover:text-ink transition-colors">opus clip pricing</a>
-            <a href="/opus-ai" className="hover:text-ink transition-colors">opus ai</a>
-            <a href="/vizard-ai" className="hover:text-ink transition-colors">vizard ai</a>
-            <a href="/vizard-ai-video-to-text" className="hover:text-ink transition-colors">vizard ai video to text</a>
-            <a href="/alternatives/vidyo-ai" className="hover:text-ink transition-colors">vidyo ai (quso)</a>
-            <a href="/alternatives/2short" className="hover:text-ink transition-colors">2short ai</a>
-            <a href="/alternatives/sendshort" className="hover:text-ink transition-colors">sendshort</a>
-            <a href="/submagic-reviews" className="hover:text-ink transition-colors">submagic review</a>
-            <a href="/mcp" className="hover:text-ink transition-colors">mcp server & api</a>
-            <a href="/automate-shorts-api" className="hover:text-ink transition-colors">automate shorts</a>
-            <a href="/n8n-youtube-shorts-automation" className="hover:text-ink transition-colors">n8n workflow</a>
-          </nav>
-          <div className="border-t border-rule pt-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <p className="font-display font-extrabold text-3xl md:text-5xl text-neutral-900 tracking-tight mb-10">Clip It Before It Scrolls Past.</p>
+          <div className="border-t border-neutral-200 pt-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <img src="/logo-openshorts.png" alt="OpenShorts" className="w-6 h-6" />
-              <span className="text-sm text-muted">OpenShorts — Free Open Source Clip Generator & AI UGC Video Creator</span>
+              <img src="/logo-digiclip.png" alt="Digiclip" className="w-8 h-8 rounded-lg" />
+              <div>
+                <span className="text-sm font-bold text-neutral-900 block">Digiclip Studio</span>
+                <span className="text-xs text-neutral-500">AI Video Clip Generator & Viral Shorts Studio</span>
+              </div>
             </div>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm lowercase text-muted">
-              <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">GitHub</a>
-              <a href="#features" className="hover:text-ink transition-colors">Features</a>
-              <a href="#faq" className="hover:text-ink transition-colors">FAQ</a>
-              <a href="/terms" className="hover:text-ink transition-colors whitespace-nowrap">Terms</a>
-              <a href="/privacy" className="hover:text-ink transition-colors whitespace-nowrap">Privacy</a>
-              <a href="/legal-notice" className="hover:text-ink transition-colors whitespace-nowrap">Legal Notice</a>
-              <a href="/refunds" className="hover:text-ink transition-colors whitespace-nowrap">Refunds</a>
-              <a href="/report-content" className="hover:text-ink transition-colors whitespace-nowrap">Report Content</a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-neutral-600">
+              <a
+                href="https://saweria.co/Digitalin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-rose-600 hover:text-rose-700 font-semibold bg-rose-50 px-3 py-1.5 rounded-full border border-rose-200 transition-colors flex items-center gap-1.5"
+              >
+                ❤️ Donasi Dev (Saweria)
+              </a>
+              <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-900 transition-colors">GitHub</a>
+              <a href="#features" className="hover:text-neutral-900 transition-colors">Features</a>
+              <a href="#faq" className="hover:text-neutral-900 transition-colors">FAQ</a>
+              <a href="/terms" className="hover:text-neutral-900 transition-colors whitespace-nowrap">Terms</a>
+              <a href="/privacy" className="hover:text-neutral-900 transition-colors whitespace-nowrap">Privacy</a>
             </div>
           </div>
         </div>

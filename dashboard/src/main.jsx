@@ -20,8 +20,11 @@ function PageShell({ title, children }) {
   return (
     <div className="min-h-screen bg-paper text-ink2">
       <header className="h-14 sm:h-16 border-b border-rule bg-paper flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-20">
-        <a href="#app" className="font-display lowercase text-lg text-ink truncate">OpenShorts</a>
-        <a href="#app" className="text-sm lowercase text-muted hover:text-ink transition-colors shrink-0">← <span className="hidden sm:inline">Back to app</span><span className="sm:hidden">back</span></a>
+        <a href="#app" className="font-display font-bold text-lg text-neutral-900 truncate flex items-center gap-2">
+          <img src="/logo-digiclip.png" className="w-6 h-6 rounded" alt="Digiclip" />
+          <span>Digiclip Studio</span>
+        </a>
+        <a href="#app" className="text-sm font-semibold text-[#0000fb] hover:underline transition-colors shrink-0">← <span className="hidden sm:inline">Back to Studio</span><span className="sm:hidden">Back</span></a>
       </header>
       <main className="p-4 sm:p-6 md:p-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
         {title && <h1 className="font-display lowercase text-2xl sm:text-3xl text-ink text-center mb-6 sm:mb-10">{title}</h1>}
@@ -96,7 +99,7 @@ function DeletedView() {
           You're welcome back any time — signing up again with the same address
           starts a brand-new, empty account.
         </p>
-        <a href="#landing" className="btn-ghost px-4 py-2 inline-flex">Back to openshorts.app</a>
+        <a href="#landing" className="btn-ghost px-4 py-2 inline-flex font-semibold text-[#0000fb]">Back to Digiclip Studio</a>
       </div>
     </div>
   );

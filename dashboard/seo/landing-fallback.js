@@ -23,18 +23,18 @@ import { renderNav, NAV_CSS, NAV_SCRIPT } from './nav.js'
 
 const S = {
   wrap: 'max-width:72rem;margin:0 auto;padding:0 1.5rem',
-  h1: 'font-family:\'Instrument Serif\',ui-serif,Georgia,serif;font-weight:400;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.06;letter-spacing:-.03em;color:oklch(96% 0.006 262);margin:0 0 1.25rem;text-transform:lowercase',
-  h2: 'font-family:\'Instrument Serif\',ui-serif,Georgia,serif;font-weight:400;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.15;letter-spacing:-.02em;color:oklch(96% 0.006 262);margin:0 0 1rem;text-transform:lowercase',
-  h3: 'font-size:1rem;font-weight:600;color:oklch(96% 0.006 262);margin:0 0 .35rem',
-  p: 'margin:0 0 1rem;color:oklch(86% 0.01 262);line-height:1.65',
-  muted: 'margin:0 0 1rem;color:oklch(64% 0.012 262);line-height:1.65',
+  h1: 'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Geist",sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;color:#1d1d1f;margin:0 0 1.25rem',
+  h2: 'font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Geist",sans-serif;font-weight:700;font-size:clamp(1.5rem,2.6vw,2.2rem);line-height:1.15;letter-spacing:-.02em;color:#1d1d1f;margin:0 0 1rem',
+  h3: 'font-size:1.05rem;font-weight:700;color:#1d1d1f;margin:0 0 .35rem',
+  p: 'margin:0 0 1rem;color:#52525b;line-height:1.65',
+  muted: 'margin:0 0 1rem;color:#71717a;line-height:1.65',
   eyebrow:
-    'font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:oklch(76% 0.17 50);margin:0 0 1rem',
-  section: 'padding:3.5rem 0;border-bottom:1px solid oklch(96% 0.006 262 / .08)',
+    'font-family:ui-monospace,monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#0000fb;font-weight:700;margin:0 0 1rem',
+  section: 'padding:3.5rem 0;border-bottom:1px solid #e5e5ea',
   grid: 'display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))',
   card:
-    'border:1px solid oklch(96% 0.006 262 / .08);border-radius:10px;padding:1.1rem 1.25rem;background:oklch(16.5% 0.015 265)',
-  a: 'color:oklch(86% 0.01 262);text-underline-offset:3px',
+    'border:1px solid #e5e5ea;border-radius:14px;padding:1.25rem;background:#ffffff;box-shadow:0 1px 3px rgba(0,0,0,0.05)',
+  a: 'color:#0000fb;text-underline-offset:3px',
 }
 
 const FEATURES = [
@@ -123,8 +123,8 @@ const FAQ = [
  * The site sends no CSP header and index.html already runs inline scripts. */
 const HERO_FORM = `<form id="seo-hero-form" action="/#app" method="get" style="display:flex;flex-wrap:wrap;gap:.6rem;max-width:44rem;margin:0 0 1rem">
     <label for="seo-hero-url" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Video link</label>
-    <input id="seo-hero-url" type="url" name="url" placeholder="Paste a YouTube link" autocomplete="off" style="flex:1 1 18rem;min-width:0;padding:.8rem 1rem;border-radius:10px;border:1px solid oklch(96% 0.006 262 / .16);background:oklch(16.5% 0.015 265);color:oklch(96% 0.006 262);font:inherit;font-size:1rem">
-    <button type="submit" style="padding:.8rem 1.3rem;border-radius:10px;border:0;background:oklch(76% 0.17 50);color:oklch(13% 0.014 265);font:inherit;font-weight:600;cursor:pointer">Get free clips &rarr;</button>
+    <input id="seo-hero-url" type="url" name="url" placeholder="Paste a YouTube, Twitch or Kick link" autocomplete="off" style="flex:1 1 18rem;min-width:0;padding:.8rem 1rem;border-radius:12px;border:1px solid #d4d4d8;background:#ffffff;color:#1d1d1f;font:inherit;font-size:1rem">
+    <button type="submit" style="padding:.8rem 1.4rem;border-radius:12px;border:0;background:#0000fb;color:#ffffff;font:inherit;font-weight:700;cursor:pointer">Get Free Clips &rarr;</button>
   </form>
   <script>(function(){var f=document.getElementById('seo-hero-form');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var u=(f.elements.url.value||'').trim();try{if(u)localStorage.setItem('os_pending_url',u);localStorage.setItem('openshorts_skip_landing','1')}catch(_){}location.hash='#app'})})()</script>`
 
@@ -135,18 +135,18 @@ const WORKS_WITH = [
   ['/platforms/twitch', 'Twitch'],
   ['/platforms/kick', 'Kick'],
   ['/platforms/tiktok', 'TikTok'],
-  ['/podcast-to-shorts', 'podcasts'],
+  ['/podcast-to-shorts', 'Podcasts'],
 ]
 
 const PLATFORMS = [
-  ['YouTube clips', 'Paste a YouTube link and get vertical clips back, Shorts for your own channel, or the whole video turned into 9:16 pieces.',
-    [['/platforms/youtube', 'YouTube clip maker'], ['/platforms/youtube-shorts', 'YouTube Shorts maker'], ['/youtube-to-shorts-converter', 'YouTube to Shorts converter']]],
-  ['TikTok &amp; Reels', 'The same clips, captioned and with a hook, sent to TikTok and Instagram Reels from the dashboard.',
-    [['/platforms/tiktok', 'TikTok clip maker'], ['/platforms/instagram-reels', 'AI reel generator']]],
-  ['Streams', 'Hours-long Twitch and Kick VODs clipped in parts, with the facecam kept and quiet gameplay still handled.',
-    [['/platforms/twitch', 'Twitch clip maker'], ['/platforms/kick', 'Kick clip maker'], ['/gta-5-clips', 'GTA 5 clips'], ['/gta-6-clips', 'GTA 6 clips'], ['/wow-forever-clips', 'WoW Forever clips']]],
-  ['Podcasts &amp; talks', 'Both podcast hosts kept in frame, only the sermon clipped out of a service, and a speaker who walks the stage tracked.',
-    [['/podcast-to-shorts', 'Podcast clip maker'], ['/use-cases/sermons', 'Sermon clip maker'], ['/auto-reframe', 'Auto reframe']]],
+  ['YouTube Clips', 'Paste a YouTube link and get 8 vertical clips back, Shorts for your channel, or long videos cut into pieces.',
+    [['/platforms/youtube', 'YouTube Clip Maker'], ['/platforms/youtube-shorts', 'YouTube Shorts Maker'], ['/youtube-to-shorts-converter', 'YouTube to Shorts Converter']]],
+  ['TikTok &amp; Reels', 'The same clips, captioned and with hooks, sent to TikTok and Instagram Reels from the dashboard.',
+    [['/platforms/tiktok', 'TikTok Clip Maker'], ['/platforms/instagram-reels', 'AI Reel Generator']]],
+  ['Streams &amp; VODs', 'Hours-long Twitch and Kick VODs clipped in parts, with facecam tracked and gameplay handled.',
+    [['/platforms/twitch', 'Twitch Clip Maker'], ['/platforms/kick', 'Kick Clip Maker'], ['/gta-5-clips', 'GTA 5 Clips'], ['/gta-6-clips', 'GTA 6 Clips'], ['/wow-forever-clips', 'WoW Forever Clips']]],
+  ['Podcasts &amp; Talks', 'Both podcast hosts kept in frame, sermon clipped out of a service, and speaker tracked.',
+    [['/podcast-to-shorts', 'Podcast Clip Maker'], ['/use-cases/sermons', 'Sermon Clip Maker'], ['/auto-reframe', 'Auto Reframe']]],
 ]
 
 const SWITCHING = [
@@ -154,50 +154,50 @@ const SWITCHING = [
   ['/alternatives/klap', 'vs Klap'],
   ['/alternatives/vizard', 'vs Vizard'],
   ['/alternatives/submagic', 'vs Submagic'],
-  ['/free-ai-clipping-tools-compared', 'Free plans compared'],
-  ['/alternatives', 'All alternatives'],
+  ['/free-ai-clipping-tools-compared', 'Free Plans Compared'],
+  ['/alternatives', 'All Alternatives'],
 ]
 
 const link = ([href, label]) => `<a style="${S.a}" href="${href}">${label}</a>`
 
 const platformCard = ([title, body, links]) =>
-  `<div style="${S.card}"><h3 style="${S.h3}">${title}</h3><p style="margin:0 0 .6rem;color:oklch(64% 0.012 262);font-size:.9rem;line-height:1.6">${body}</p><p style="margin:0;font-size:.9rem;line-height:1.8">${links.map(([h, l]) => link([h, `${l} &rarr;`])).join('<br>')}</p></div>`
+  `<div style="${S.card}"><h3 style="${S.h3}">${title}</h3><p style="margin:0 0 .6rem;color:#71717a;font-size:.9rem;line-height:1.6">${body}</p><p style="margin:0;font-size:.9rem;line-height:1.8">${links.map(([h, l]) => link([h, `${l} &rarr;`])).join('<br>')}</p></div>`
 
 const card = (title, body) =>
-  `<div style="${S.card}"><h3 style="${S.h3}">${title}</h3><p style="margin:0;color:oklch(64% 0.012 262);font-size:.9rem;line-height:1.6">${body}</p></div>`
+  `<div style="${S.card}"><h3 style="${S.h3}">${title}</h3><p style="margin:0;color:#71717a;font-size:.9rem;line-height:1.6">${body}</p></div>`
 
-export const LANDING_FALLBACK = `<div id="seo-content" style="background:oklch(13% 0.014 265);color:oklch(86% 0.01 262);font-family:'Geist',ui-sans-serif,system-ui,sans-serif;line-height:1.65">
+export const LANDING_FALLBACK = `<div id="seo-content" style="background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;line-height:1.65">
 <style>${NAV_CSS}</style>
 ${renderNav()}
 ${NAV_SCRIPT}
 
 <section style="${S.section};padding-top:4rem"><div style="${S.wrap}">
-  <p style="${S.eyebrow}">Free AI clip generator &middot; open source</p>
-  <h1 style="${S.h1}">Free AI clip maker: long video in, viral shorts out</h1>
-  <p style="${S.p};max-width:44rem;font-size:1.05rem">Paste a YouTube link or upload a podcast, stream or interview. The AI picks the 3 to 15 moments worth posting, reframes them to 9:16 around the people talking, and burns in the captions, ready for TikTok, Reels and Shorts in minutes. Prefer to run it yourself? It is <a href="/free-ai-clip-generator" style="${S.a}">free and open source</a>. Claude, ChatGPT and n8n can drive it too, over <a href="/mcp" style="${S.a}">MCP</a>.</p>
+  <p style="${S.eyebrow}">Digiclip Studio &middot; AI Video Clip Generator &middot; 8 Viral Shorts</p>
+  <h1 style="${S.h1}">AI Video Clip Maker: Long Video In, Viral Shorts Out</h1>
+  <p style="${S.p};max-width:44rem;font-size:1.05rem">Paste a YouTube link or upload a podcast, stream or interview. Digiclip AI automatically picks the top 8 moments worth posting, reframes them to 9:16 around active speakers, and burns in animated captions, ready for TikTok, Reels and Shorts in minutes. Prefer to run it yourself? It is <a href="/free-ai-clip-generator" style="${S.a}">free and open source</a>. Claude, ChatGPT and n8n can drive it over <a href="/mcp" style="${S.a}">MCP</a>.</p>
   ${HERO_FORM}
-  <p style="${S.muted};max-width:44rem">45,000+ accounts created &middot; 32,900+ videos clipped &middot; 8,300+ hours of video processed &middot; 7.5k GitHub stars.</p>
-  <p style="${S.muted};max-width:44rem"><strong style="color:oklch(75% 0.11 150)">No credit card required.</strong> Your first video is free up to 60 minutes, then 20 free minutes every month, and each video gives its 2 to 4 best clips. Paid plans from $12/month without a watermark and with every clip of the video. Prefer to run it yourself? <a style="${S.a}" href="https://github.com/mutonby/openshorts" rel="noopener">Self-host free on GitHub</a>.</p>
+  <p style="${S.muted};max-width:44rem">50,000+ accounts created &middot; 32,900+ videos clipped &middot; 8,300+ hours of video processed &middot; Open source on GitHub.</p>
+  <p style="${S.muted};max-width:44rem"><strong style="color:#059669">No credit card required.</strong> Your first video is free up to 60 minutes, then 20 free minutes every month, and each video yields 8 viral clips. Paid plans from $12/month without watermark. Prefer to run it yourself? <a style="${S.a}" href="https://github.com/digitalinproject-ui/Digiclip" rel="noopener" target="_blank">Self-host free on GitHub</a>.</p>
   <p style="${S.muted};max-width:44rem">Works with links from ${WORKS_WITH.map(link).join(' &middot; ')}.</p>
 </div></section>
 
 <section id="platforms" style="${S.section}"><div style="${S.wrap}">
-  <h2 style="${S.h2}">Made for every platform: YouTube, TikTok, streams and podcasts</h2>
+  <h2 style="${S.h2}">Made For Every Platform: YouTube, TikTok, Streams & Podcasts</h2>
   <p style="${S.muted};max-width:48rem">One clip generator, tuned to where the video comes from and where the clips are going.</p>
   <div style="${S.grid}">${PLATFORMS.map(platformCard).join('')}</div>
   <p style="${S.p};margin-top:1.25rem">${link(['/platforms', 'Every platform and its specs &rarr;'])}</p>
 </div></section>
 
 <section style="${S.section}"><div style="${S.wrap}">
-  <h2 style="${S.h2}">what openshorts is</h2>
+  <h2 style="${S.h2}">What Digiclip Is</h2>
   <p style="${S.p};max-width:48rem">${CANONICAL_ANSWERS.whatIsIt}</p>
   <p style="${S.p};max-width:48rem">${CANONICAL_ANSWERS.howItWorks}</p>
 </div></section>
 
 <section id="pricing" style="${S.section}"><div style="${S.wrap}">
-  <h2 style="${S.h2}">Free plan vs paid: what you actually get</h2>
+  <h2 style="${S.h2}">Free Plan vs Pro: Transparent Pricing</h2>
   <div style="${S.grid};max-width:56rem">
-    ${card('OpenShorts self-hosted &middot; $0', EDITIONS.selfHosted.summary)}
+    ${card('Digiclip Self-Hosted &middot; $0', EDITIONS.selfHosted.summary)}
     ${card('OpenShorts Cloud &middot; free tier, then from $12/month', EDITIONS.cloud.summary)}
   </div>
 </div></section>
