@@ -2342,7 +2342,7 @@ function App() {
                 <div className="space-y-2.5 sm:space-y-4">
                   <p className="eyebrow hidden sm:block">01 · CLIP GENERATOR</p>
                   <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-neutral-900 tracking-tight">
-                    Turn Long Videos Into Viral Shorts
+                    Smart AI Clipping for Creators
                   </h1>
                   <p className="text-neutral-600 text-[15px] sm:text-lg leading-relaxed max-w-sm sm:max-w-none mx-auto">
                     Drop your podcast, stream, or video below to automatically extract 8 viral moments with AI.
