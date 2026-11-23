@@ -90,37 +90,37 @@ export default function BatchTab() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 font-sans">
-      {/* Apple-style Hero Header */}
+      {/* Apple-style Hero Header - Clean Light Canvas */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-[#0000fb]/10 text-white border border-[#0000fb]/30">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-[#0000fb]/10 text-[#0000fb] border border-[#0000fb]/20">
           <Sparkles size={13} className="text-[#0000fb]" />
           <span>Digiclip Studio Engine</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900">
           Batch Video Processor
         </h1>
-        <p className="text-neutral-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+        <p className="text-neutral-600 text-sm sm:text-base max-w-2xl leading-relaxed">
           Pindai satu folder video lokal, buatkan hook viral otomatis di 5 detik pertama, dan render seluruh klip dalam format vertikal 9:16 (SAR 1:1) tanpa perlu upload satu per satu.
         </p>
       </div>
 
       {error && (
-        <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-300 text-sm">
+        <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-center gap-3 text-red-600 text-sm">
           <AlertCircle size={18} className="shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
-      {/* Main Glassmorphic Workspace Card */}
-      <div className="rounded-3xl border border-white/[0.08] bg-neutral-900/60 backdrop-blur-2xl p-6 sm:p-8 space-y-6 shadow-2xl">
+      {/* Main Apple Clean White Card */}
+      <div className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 space-y-6 shadow-xl shadow-neutral-200/50">
         {/* Section 1: Folder Selection */}
         <div className="space-y-2">
-          <label className="text-xs font-medium uppercase tracking-wider text-neutral-400">
+          <label className="text-xs font-semibold uppercase tracking-wider text-neutral-700">
             Direktori Folder Lokal
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-500">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-400">
                 <Folder size={18} />
               </div>
               <input
@@ -128,13 +128,13 @@ export default function BatchTab() {
                 value={folderPath}
                 onChange={(e) => setFolderPath(e.target.value)}
                 placeholder="Contoh: E:\Downloads\KOL"
-                className="w-full pl-10 pr-4 py-3 bg-black/40 border border-white/10 rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:border-[#0000fb] focus:ring-1 focus:ring-[#0000fb] transition-all text-sm font-mono"
+                className="w-full pl-10 pr-4 py-3 bg-[#F5F5F7] border border-neutral-200 rounded-2xl text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#0000fb] focus:ring-2 focus:ring-[#0000fb]/20 transition-all text-sm font-mono"
               />
             </div>
             <button
               onClick={handleScan}
               disabled={scanning || processing}
-              className="px-6 py-3 rounded-2xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 shrink-0 shadow-lg"
+              className="px-6 py-3 rounded-2xl bg-neutral-900 text-white font-semibold text-sm hover:bg-black active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 shrink-0 shadow-md"
             >
               {scanning ? (
                 <>
@@ -154,17 +154,17 @@ export default function BatchTab() {
         {/* Section 2: Scanned Overview */}
         {scanResult && (
           <div className="pt-2">
-            <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-neutral-200 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 border border-[#0000fb]/30 flex items-center justify-center text-[#0000fb]">
+                <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 border border-[#0000fb]/20 flex items-center justify-center text-[#0000fb]">
                   <FileVideo size={20} />
                 </div>
                 <div>
-                  <h4 className="text-white text-sm font-semibold">Ditemukan {scanResult.count} File Video</h4>
+                  <h4 className="text-neutral-900 text-sm font-semibold">Ditemukan {scanResult.count} File Video</h4>
                   <p className="text-xs text-neutral-500 truncate max-w-md">{scanResult.folder}</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                 Siap Diproses
               </span>
             </div>
@@ -172,20 +172,20 @@ export default function BatchTab() {
         )}
 
         {/* Section 3: Studio Options Grid */}
-        <div className="pt-4 border-t border-white/[0.08]">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
+        <div className="pt-4 border-t border-neutral-200">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-4 flex items-center gap-2">
             <Sliders size={14} className="text-[#0000fb]" />
             <span>Pengaturan Produksi Otomatis</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Option 1: Viral Hook */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-neutral-200/70 flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <div className="text-sm font-medium text-white flex items-center gap-2">
+                <div className="text-sm font-semibold text-neutral-900 flex items-center gap-2">
                   <span>Banner Hook 5 Detik Pertama</span>
                 </div>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   Menampilkan badge grafis elegan di detik 0-5 untuk meningkatkan CTR & retensi audiens.
                 </p>
                 {enableHook && (
@@ -194,7 +194,7 @@ export default function BatchTab() {
                     value={badgeTag}
                     onChange={(e) => setBadgeTag(e.target.value)}
                     placeholder="Tag Header"
-                    className="mt-2 text-xs px-2.5 py-1.5 bg-black/40 border border-white/10 rounded-lg text-white w-full font-mono"
+                    className="mt-2 text-xs px-2.5 py-1.5 bg-white border border-neutral-300 rounded-lg text-neutral-900 w-full font-mono focus:outline-none focus:border-[#0000fb]"
                   />
                 )}
               </div>
@@ -207,10 +207,10 @@ export default function BatchTab() {
             </div>
 
             {/* Option 2: Dynamic Subtitles */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-neutral-200/70 flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <div className="text-sm font-medium text-white">Subtitle Otomatis (Faster-Whisper)</div>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <div className="text-sm font-semibold text-neutral-900">Subtitle Otomatis (Faster-Whisper)</div>
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   Subtitle dinamis tebal dengan highlight kata kunci kuning di area safe zone bawah.
                 </p>
               </div>
@@ -223,10 +223,10 @@ export default function BatchTab() {
             </div>
 
             {/* Option 3: Normalizer 9:16 */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-neutral-200/70 flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <div className="text-sm font-medium text-white">Rasio 9:16 Vertikal (SAR 1:1)</div>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <div className="text-sm font-semibold text-neutral-900">Rasio 9:16 Vertikal (SAR 1:1)</div>
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   Mencegah video ter-stretch atau gepeng di WhatsApp, Reels, dan TikTok.
                 </p>
               </div>
@@ -239,14 +239,14 @@ export default function BatchTab() {
             </div>
 
             {/* Option 4: Batch Speed */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-neutral-200/70 flex items-start justify-between gap-4">
               <div className="space-y-1">
-                <div className="text-sm font-medium text-white">Akselerasi CPU Int8</div>
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <div className="text-sm font-semibold text-neutral-900">Akselerasi CPU Int8</div>
+                <p className="text-xs text-neutral-600 leading-relaxed">
                   Optimalisasi rendering cepat menggunakan multi-threading lokal.
                 </p>
               </div>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#0000fb]/10 text-blue-300 border border-[#0000fb]/30 font-semibold">
+              <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-[#0000fb]/10 text-[#0000fb] border border-[#0000fb]/30 font-semibold">
                 ENABLED
               </span>
             </div>
@@ -257,17 +257,17 @@ export default function BatchTab() {
         {processing && (
           <div className="p-5 rounded-2xl bg-[#0000fb]/5 border border-[#0000fb]/20 space-y-3">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-blue-300 font-medium flex items-center gap-2">
+              <span className="text-[#0000fb] font-semibold flex items-center gap-2">
                 <Loader2 size={14} className="animate-spin" />
                 Sedang me-render: {batchStatus?.current_file || 'Memulai...'}
               </span>
-              <span className="text-neutral-400 font-mono">
+              <span className="text-neutral-500 font-mono">
                 {batchStatus?.current_index || 0} / {batchStatus?.total || 0} ({percent}%)
               </span>
             </div>
-            <div className="w-full bg-black/40 h-2.5 rounded-full overflow-hidden border border-white/5">
+            <div className="w-full bg-neutral-200 h-2.5 rounded-full overflow-hidden">
               <div
-                className="bg-[#0000fb] h-full transition-all duration-300 rounded-full shadow-lg shadow-[#0000fb]/50"
+                className="bg-[#0000fb] h-full transition-all duration-300 rounded-full"
                 style={{ width: `${percent}%` }}
               />
             </div>
@@ -276,14 +276,14 @@ export default function BatchTab() {
 
         {/* Section 5: Completed Summary */}
         {batchStatus?.status === 'completed' && (
-          <div className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-3">
-            <div className="flex items-center gap-2 text-emerald-400 font-semibold text-sm">
+          <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
+            <div className="flex items-center gap-2 text-emerald-700 font-semibold text-sm">
               <CheckCircle2 size={18} />
               <span>Selesai! Seluruh klip video telah berhasil di-render.</span>
             </div>
-            <div className="text-xs text-neutral-300">
+            <div className="text-xs text-neutral-600">
               Hasil tersimpan di folder:{' '}
-              <span className="font-mono text-emerald-300">{folderPath}\Digiclip_Output</span>
+              <span className="font-mono text-emerald-800 font-medium">{folderPath}\Digiclip_Output</span>
             </div>
           </div>
         )}
