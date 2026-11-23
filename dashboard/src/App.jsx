@@ -1521,13 +1521,13 @@ function App() {
   // entirely — an unlabelled 80px rail ate a fifth of a phone screen.
   const Sidebar = () => (
     <div className="hidden md:flex w-20 lg:w-64 bg-paper2 border-r border-rule flex-col h-full shrink-0 transition-all duration-300">
-      <a href="#app" onClick={() => goToTab('dashboard')} className="p-6 flex items-center gap-3 group" title="Digiclip Studio">
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-sm shadow-md shadow-blue-500/20 shrink-0">
-          D
+      <a href="#app" onClick={() => goToTab('dashboard')} className="p-6 flex items-center gap-3.5 group" title="Digiclip Studio">
+        <div className="w-9 h-9 flex items-center justify-center shrink-0">
+          <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(0,0,251,0.5)]" />
         </div>
-        <div className="flex items-center gap-1.5 hidden lg:flex">
-          <span className="font-sans font-bold tracking-tight text-lg text-white">digiclip</span>
-          <span className="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-blue-500/20 text-blue-400 border border-blue-500/30">STUDIO</span>
+        <div className="flex items-center gap-2 hidden lg:flex">
+          <span className="font-sans font-bold tracking-tight text-xl text-white">digiclip</span>
+          <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb]/20 text-blue-400 border border-[#0000fb]/40">STUDIO</span>
         </div>
       </a>
 
@@ -1580,13 +1580,13 @@ function App() {
       />
       <div className="relative w-[17rem] max-w-[82vw] h-full bg-paper2 border-r border-rule flex flex-col animate-slide-in-left">
         <div className="flex items-center justify-between px-5 h-14 border-b border-rule shrink-0">
-          <a href="#app" className="flex items-center gap-2.5" onClick={() => goToTab('dashboard')}>
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-bold text-xs shadow-md shrink-0">
-              D
+          <a href="#app" className="flex items-center gap-3" onClick={() => goToTab('dashboard')}>
+            <div className="w-8 h-8 flex items-center justify-center shrink-0">
+              <img src="/logo-digiclip.png" alt="Digiclip" className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(0,0,251,0.5)]" />
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               <span className="font-sans font-bold tracking-tight text-lg text-white">digiclip</span>
-              <span className="text-[10px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-blue-500/20 text-blue-400 border border-blue-500/30">STUDIO</span>
+              <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb]/20 text-blue-400 border border-[#0000fb]/40">STUDIO</span>
             </div>
           </a>
           <button

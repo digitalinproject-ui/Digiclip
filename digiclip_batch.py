@@ -75,20 +75,19 @@ def create_apple_hook_badge(hook_text, output_path, badge_tag="DIGICLIP | VIRAL"
     hook_font = ImageFont.truetype(font_bold_path, 40)
     
     # Apple Glassmorphism Card Style
-    # Deep obsidian background with subtle translucent glass glow
+    # Deep obsidian background with electric blue #0000fb brand border
     radius = 28
     card_box = [8, 8, W - 8, H - 8]
-    draw.rounded_rectangle(card_box, radius=radius, fill=(10, 12, 18, 242), outline=(10, 132, 255, 230), width=3)
+    draw.rounded_rectangle(card_box, radius=radius, fill=(10, 12, 18, 245), outline=(0, 0, 251, 240), width=3)
     
-    # Refined Pill Tag
+    # Refined Pill Tag with brand primary blue #0000fb
     tag_text = f"  {badge_tag.upper()}  "
     tag_bbox = draw.textbbox((0, 0), tag_text, font=tag_font)
     tag_w = tag_bbox[2] - tag_bbox[0] + 24
     tag_h = 38
     tag_x = (W - tag_w) // 2
     tag_y = 22
-    # Apple Accent Blue pill
-    draw.rounded_rectangle([tag_x, tag_y, tag_x + tag_w, tag_y + tag_h], radius=12, fill=(0, 113, 227, 255))
+    draw.rounded_rectangle([tag_x, tag_y, tag_x + tag_w, tag_y + tag_h], radius=12, fill=(0, 0, 251, 255))
     draw.text((tag_x + 12, tag_y + 5), tag_text, fill=(255, 255, 255, 255), font=tag_font)
     
     # Text wrapping

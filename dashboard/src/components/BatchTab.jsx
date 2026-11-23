@@ -92,8 +92,8 @@ export default function BatchTab() {
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 font-sans">
       {/* Apple-style Hero Header */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20">
-          <Sparkles size={13} className="text-blue-400" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-[#0000fb]/10 text-white border border-[#0000fb]/30">
+          <Sparkles size={13} className="text-[#0000fb]" />
           <span>Digiclip Studio Engine</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
@@ -128,7 +128,7 @@ export default function BatchTab() {
                 value={folderPath}
                 onChange={(e) => setFolderPath(e.target.value)}
                 placeholder="Contoh: E:\Downloads\KOL"
-                className="w-full pl-10 pr-4 py-3 bg-black/40 border border-white/10 rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-sm font-mono"
+                className="w-full pl-10 pr-4 py-3 bg-black/40 border border-white/10 rounded-2xl text-white placeholder-neutral-600 focus:outline-none focus:border-[#0000fb] focus:ring-1 focus:ring-[#0000fb] transition-all text-sm font-mono"
               />
             </div>
             <button
@@ -156,7 +156,7 @@ export default function BatchTab() {
           <div className="pt-2">
             <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 border border-[#0000fb]/30 flex items-center justify-center text-[#0000fb]">
                   <FileVideo size={20} />
                 </div>
                 <div>
@@ -174,7 +174,7 @@ export default function BatchTab() {
         {/* Section 3: Studio Options Grid */}
         <div className="pt-4 border-t border-white/[0.08]">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4 flex items-center gap-2">
-            <Sliders size={14} className="text-blue-400" />
+            <Sliders size={14} className="text-[#0000fb]" />
             <span>Pengaturan Produksi Otomatis</span>
           </h3>
 
@@ -202,7 +202,7 @@ export default function BatchTab() {
                 type="checkbox"
                 checked={enableHook}
                 onChange={(e) => setEnableHook(e.target.checked)}
-                className="mt-1 h-5 w-5 rounded-md accent-blue-500 cursor-pointer"
+                className="mt-1 h-5 w-5 rounded-md accent-[#0000fb] cursor-pointer"
               />
             </div>
 
@@ -218,7 +218,7 @@ export default function BatchTab() {
                 type="checkbox"
                 checked={subtitles}
                 onChange={(e) => setSubtitles(e.target.checked)}
-                className="mt-1 h-5 w-5 rounded-md accent-blue-500 cursor-pointer"
+                className="mt-1 h-5 w-5 rounded-md accent-[#0000fb] cursor-pointer"
               />
             </div>
 
@@ -234,7 +234,7 @@ export default function BatchTab() {
                 type="checkbox"
                 checked={sarNormalize}
                 disabled
-                className="mt-1 h-5 w-5 rounded-md accent-blue-500 cursor-not-allowed opacity-80"
+                className="mt-1 h-5 w-5 rounded-md accent-[#0000fb] cursor-not-allowed opacity-80"
               />
             </div>
 
@@ -246,7 +246,7 @@ export default function BatchTab() {
                   Optimalisasi rendering cepat menggunakan multi-threading lokal.
                 </p>
               </div>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#0000fb]/10 text-blue-300 border border-[#0000fb]/30 font-semibold">
                 ENABLED
               </span>
             </div>
@@ -255,9 +255,9 @@ export default function BatchTab() {
 
         {/* Section 4: Progress Bar (Active Job) */}
         {processing && (
-          <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/20 space-y-3">
+          <div className="p-5 rounded-2xl bg-[#0000fb]/5 border border-[#0000fb]/20 space-y-3">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-blue-400 font-medium flex items-center gap-2">
+              <span className="text-blue-300 font-medium flex items-center gap-2">
                 <Loader2 size={14} className="animate-spin" />
                 Sedang me-render: {batchStatus?.current_file || 'Memulai...'}
               </span>
@@ -267,7 +267,7 @@ export default function BatchTab() {
             </div>
             <div className="w-full bg-black/40 h-2.5 rounded-full overflow-hidden border border-white/5">
               <div
-                className="bg-gradient-to-r from-blue-500 to-indigo-500 h-full transition-all duration-300 rounded-full"
+                className="bg-[#0000fb] h-full transition-all duration-300 rounded-full shadow-lg shadow-[#0000fb]/50"
                 style={{ width: `${percent}%` }}
               />
             </div>
@@ -294,7 +294,7 @@ export default function BatchTab() {
             <button
               onClick={handleStartBatch}
               disabled={processing}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 active:scale-[0.99] text-white font-semibold text-base shadow-xl shadow-blue-500/15 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+              className="w-full py-4 rounded-2xl bg-[#0000fb] hover:bg-[#1a1afc] active:scale-[0.99] text-white font-semibold text-base shadow-xl shadow-[#0000fb]/30 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
             >
               {processing ? (
                 <>
