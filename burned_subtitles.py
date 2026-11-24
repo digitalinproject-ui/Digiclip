@@ -104,7 +104,7 @@ def detect(video_path, frames=None):
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         return None
-    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
+    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-3.7-flash'
     try:
         from google import genai
         from google.genai import types as genai_types

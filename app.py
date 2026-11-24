@@ -6218,7 +6218,12 @@ async def process_endpoint(
         env.pop("GEMINI_API_KEY", None)  # local-LLM job: main.py must not find a stale key
     req_gemini_model = gemini_model or request.headers.get("X-Gemini-Model")
     if req_gemini_model:
-        env["GEMINI_MODEL"] = str(req_gemini_model).strip()
+        m = str(req_gemini_model).strip()
+        if any(old in m.lower() for old in ("2.5-pro", "1.5-pro", "2.0-pro")):
+            m = "gemini-3.1-pro-preview"
+        elif any(old in m.lower() for old in ("2.5-flash", "1.5-flash", "2.0-flash")):
+            m = "gemini-3.7-flash"
+        env["GEMINI_MODEL"] = m
         print(f"[engine] job={job_id} model={env['GEMINI_MODEL']}")
     # The stdio fix above only covers this process. main.py prints an emoji on
     # its first line and configures nothing, so on a cp1252 console the child

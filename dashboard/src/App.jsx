@@ -329,7 +329,13 @@ function App() {
   const [durableClips, setDurableClips] = useState({});
 
   const [apiKey, setApiKey] = useState(localStorage.getItem('gemini_key') || '');
-  const [geminiModel, setGeminiModel] = useState(localStorage.getItem('gemini_model') || 'gemini-2.5-pro');
+  const [geminiModel, setGeminiModel] = useState(() => {
+    const raw = localStorage.getItem('gemini_model');
+    if (!raw || raw.includes('2.5') || raw.includes('1.5') || raw.includes('2.0')) {
+      return 'gemini-3.1-pro-preview';
+    }
+    return raw;
+  });
   // Social API State - Load encrypted or plain
   const [uploadPostKey, setUploadPostKey] = useState(() => {
     const stored = localStorage.getItem('uploadPostKey_v3');

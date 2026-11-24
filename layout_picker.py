@@ -203,7 +203,7 @@ def pick(video_path, video_duration):
     if not api_key:
         return "none"
 
-    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
+    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-3.7-flash'
     print("🎛️  Choosing a layout for this video…")
     try:
         # Inside the try on purpose: the contract above is that this never

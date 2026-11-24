@@ -543,7 +543,7 @@ def _ask_model(prompt, api_key):
     # is sent ("client has been closed").
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
-        model=os.environ.get("GEMINI_MODEL") or "gemini-2.5-flash",
+        model=os.environ.get("GEMINI_MODEL") or "gemini-3.7-flash",
         contents=[prompt],
         config=genai_types.GenerateContentConfig(
             response_mime_type="application/json", response_schema=Titles))

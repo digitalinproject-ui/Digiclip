@@ -2240,8 +2240,14 @@ def _run_gemini_stage(client, model_name, prompt, schema):
         response_mime_type="application/json",
         response_schema=schema,
     )
-    fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro"]
-    curr_model = model_name
+    fallback_chain = ["gemini-3.1-pro-preview", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]
+    # Auto-alias sunsetted models (e.g. 2.5-pro, 1.5-pro) to active Gemini 3 family
+    if any(old in str(model_name).lower() for old in ("2.5-pro", "1.5-pro", "2.0-pro")):
+        curr_model = "gemini-3.1-pro-preview"
+    elif any(old in str(model_name).lower() for old in ("2.5-flash", "1.5-flash", "2.0-flash")):
+        curr_model = "gemini-3.7-flash"
+    else:
+        curr_model = model_name
     fallback_idx = 0
     max_attempts = 6
     for attempt in range(1, max_attempts + 1):
@@ -2370,7 +2376,13 @@ def get_viral_clips(transcript_result, video_duration, viewer_clips=None):
                   "(set it, or point LLM_BASE_URL at an OpenAI-compatible server).")
             return None
         client = genai.Client(api_key=api_key)
-        model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
+        raw_model = os.environ.get("GEMINI_MODEL") or 'gemini-3.1-pro-preview'
+        if any(old in raw_model.lower() for old in ("2.5-pro", "1.5-pro", "2.0-pro")):
+            model_name = "gemini-3.1-pro-preview"
+        elif any(old in raw_model.lower() for old in ("2.5-flash", "1.5-flash", "2.0-flash")):
+            model_name = "gemini-3.7-flash"
+        else:
+            model_name = raw_model
     print(f"\U0001f916  Model: {model_name} | language: {language}")
 
     # Full word list — ground truth for snapping cut points.
@@ -2649,8 +2661,13 @@ def _visual_pass(client, model_name, video_path, duration, language,
             response_mime_type="application/json",
             response_schema=gemini_worker.VisualResponse,
         )
-        fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro"]
-        curr_model = model_name
+        fallback_chain = ["gemini-3.1-pro-preview", "gemini-3.7-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]
+        if any(old in str(model_name).lower() for old in ("2.5-pro", "1.5-pro", "2.0-pro")):
+            curr_model = "gemini-3.1-pro-preview"
+        elif any(old in str(model_name).lower() for old in ("2.5-flash", "1.5-flash", "2.0-flash")):
+            curr_model = "gemini-3.7-flash"
+        else:
+            curr_model = model_name
         fallback_idx = 0
         max_attempts = 6
         for attempt in range(1, max_attempts + 1):
@@ -2721,7 +2738,13 @@ def get_visual_clips(video_path, video_duration, language="en", viewer_clips=Non
             print("❌ Error: GEMINI_API_KEY not found.")
         return None
     client = genai.Client(api_key=api_key)
-    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
+    raw_model = os.environ.get("GEMINI_MODEL") or 'gemini-3.7-flash'
+    if any(old in raw_model.lower() for old in ("2.5-pro", "1.5-pro", "2.0-pro")):
+        model_name = "gemini-3.1-pro-preview"
+    elif any(old in raw_model.lower() for old in ("2.5-flash", "1.5-flash", "2.0-flash")):
+        model_name = "gemini-3.7-flash"
+    else:
+        model_name = raw_model
 
     # The vision path has no scoring windows to derive a count from, so the
     # env targets (user request) apply directly over the classic 3-15.

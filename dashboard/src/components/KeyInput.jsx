@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Key, Eye, EyeOff, Check, Sparkles, Zap, ExternalLink, ShieldCheck } from 'lucide-react';
 
+const normalizeModel = (m) => {
+    if (!m) return 'gemini-3.1-pro-preview';
+    if (m.includes('pro')) return 'gemini-3.1-pro-preview';
+    if (m.includes('flash')) return 'gemini-3.7-flash';
+    return m;
+};
+
 export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet }) {
     const [key, setKey] = useState(savedKey || '');
-    const [model, setModel] = useState(savedModel || 'gemini-2.5-pro');
+    const [model, setModel] = useState(() => normalizeModel(savedModel || localStorage.getItem('gemini_model')));
     const [isVisible, setIsVisible] = useState(false);
     const [isSaved, setIsSaved] = useState(!!savedKey);
 
@@ -12,7 +19,11 @@ export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet })
     }, [savedKey]);
 
     useEffect(() => {
-        if (savedModel) setModel(savedModel);
+        if (savedModel) {
+            const normalized = normalizeModel(savedModel);
+            setModel(normalized);
+            localStorage.setItem('gemini_model', normalized);
+        }
     }, [savedModel]);
 
     const handleSave = () => {
@@ -103,7 +114,7 @@ export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet })
                 <div className="flex items-center justify-between mb-3">
                     <div>
                         <h3 className="text-sm font-semibold text-neutral-900 flex items-center gap-2">
-                            Pilihan Model AI (Flagship / Pro Tier)
+                            Pilihan Model AI (Google Gemini Active Family)
                         </h3>
                         <p className="text-xs text-neutral-500">
                             Pilih model reasoning sesuai tingkat akun Google AI Studio Anda.
@@ -115,11 +126,11 @@ export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet })
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {/* Gemini 2.5 Pro Card */}
+                    {/* Gemini 3.1 Pro Preview Card */}
                     <div
-                        onClick={() => handleModelChange('gemini-2.5-pro')}
+                        onClick={() => handleModelChange('gemini-3.1-pro-preview')}
                         className={`relative p-4 rounded-xl border cursor-pointer transition-all ${
-                            model === 'gemini-2.5-pro'
+                            model === 'gemini-3.1-pro-preview'
                                 ? 'border-[#0000fb] bg-blue-50/40 shadow-sm ring-1 ring-[#0000fb]'
                                 : 'border-neutral-200 hover:border-neutral-300 bg-white hover:bg-neutral-50/50'
                         }`}
@@ -129,18 +140,18 @@ export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet })
                                 <div className="p-1.5 rounded-lg bg-blue-100/70 text-[#0000fb]">
                                     <Sparkles size={16} />
                                 </div>
-                                <span className="font-semibold text-sm text-neutral-900">Gemini 2.5 Pro</span>
+                                <span className="font-semibold text-sm text-neutral-900">Gemini 3.1 Pro Preview</span>
                             </div>
                             <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#0000fb] text-white">
                                 Flagship / Pro
                             </span>
                         </div>
                         <p className="text-xs text-neutral-600 leading-relaxed mb-2.5">
-                            Model penalaran mendalam (Deep Reasoning) tertinggi. Sangat cerdas mendeteksi punchline, konteks viral, dan potong klip presisi.
+                            Model penalaran frontier tertinggi dari Google. Sangat cerdas mendeteksi punchline, konteks viral, dan potong klip presisi.
                         </p>
                         <div className="flex items-center justify-between pt-2 border-t border-neutral-100/80 text-[11px]">
                             <span className="text-neutral-500">Rekomendasi: <strong>Akun Pro / Paid Tier</strong></span>
-                            {model === 'gemini-2.5-pro' && (
+                            {model === 'gemini-3.1-pro-preview' && (
                                 <span className="text-[#0000fb] font-semibold flex items-center gap-1">
                                     <Check size={12} strokeWidth={2.5} /> Aktif
                                 </span>
@@ -148,11 +159,11 @@ export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet })
                         </div>
                     </div>
 
-                    {/* Gemini 2.5 Flash Card */}
+                    {/* Gemini 3.7 Flash Card */}
                     <div
-                        onClick={() => handleModelChange('gemini-2.5-flash')}
+                        onClick={() => handleModelChange('gemini-3.7-flash')}
                         className={`relative p-4 rounded-xl border cursor-pointer transition-all ${
-                            model === 'gemini-2.5-flash'
+                            model === 'gemini-3.7-flash'
                                 ? 'border-[#0000fb] bg-blue-50/40 shadow-sm ring-1 ring-[#0000fb]'
                                 : 'border-neutral-200 hover:border-neutral-300 bg-white hover:bg-neutral-50/50'
                         }`}
@@ -162,18 +173,18 @@ export default function KeyInput({ onKeySet, savedKey, savedModel, onModelSet })
                                 <div className="p-1.5 rounded-lg bg-amber-100/70 text-amber-600">
                                     <Zap size={16} />
                                 </div>
-                                <span className="font-semibold text-sm text-neutral-900">Gemini 2.5 Flash</span>
+                                <span className="font-semibold text-sm text-neutral-900">Gemini 3.7 Flash</span>
                             </div>
                             <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600">
                                 Fast / Free Tier
                             </span>
                         </div>
                         <p className="text-xs text-neutral-600 leading-relaxed mb-2.5">
-                            Kecepatan kilat & hemat token. Dioptimalkan untuk akun gratis Google AI Studio agar tidak terkena limit (15 RPM).
+                            Kecepatan kilat & hemat token. Model multimodal aktif Google untuk pemrosesan instan dan akun gratis (Free Tier).
                         </p>
                         <div className="flex items-center justify-between pt-2 border-t border-neutral-100/80 text-[11px]">
                             <span className="text-neutral-500">Rekomendasi: <strong>Akun Gratis (Free Tier)</strong></span>
-                            {model === 'gemini-2.5-flash' && (
+                            {model === 'gemini-3.7-flash' && (
                                 <span className="text-[#0000fb] font-semibold flex items-center gap-1">
                                     <Check size={12} strokeWidth={2.5} /> Aktif
                                 </span>

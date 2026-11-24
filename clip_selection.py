@@ -8,7 +8,8 @@ import math
 
 # USD per 1M tokens (input, output incl. thinking), from ai.google.dev pricing.
 MODEL_PRICES = {
-    "gemini-2.5-pro": (1.25, 5.00),
+    "gemini-3.1-pro-preview": (1.25, 5.00),
+    "gemini-3.7-flash": (0.30, 2.50),
     "gemini-3.5-flash": (1.50, 9.00),
     "gemini-3.1-flash-lite": (0.25, 1.50),
     "gemini-3-flash-preview": (0.50, 3.00),
