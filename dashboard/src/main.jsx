@@ -20,9 +20,8 @@ function PageShell({ title, children }) {
   return (
     <div className="min-h-screen bg-paper text-ink2">
       <header className="h-14 sm:h-16 border-b border-rule bg-paper flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-20">
-        <a href="#app" className="flex items-center gap-2.5 shrink-0">
+        <a href="#app" className="flex items-center shrink-0">
           <img src="/logo-full.png" className="h-6 sm:h-7 w-auto object-contain" alt="Digiclip" />
-          <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
         </a>
         <a href="#app" className="text-sm font-semibold text-[#0000fb] hover:underline transition-colors shrink-0">← <span className="hidden sm:inline">Back to Studio</span><span className="sm:hidden">Back</span></a>
       </header>

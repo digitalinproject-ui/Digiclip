@@ -47,7 +47,7 @@ export default function UGCGallery() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="eyebrow mb-1">05 · UGC GALLERY</p>
+        <p className="eyebrow mb-1 font-semibold text-xs tracking-wider uppercase text-neutral-500">UGC Library</p>
         <h1 className="font-display font-bold text-2xl md:text-3xl text-neutral-900 tracking-tight">UGC Gallery</h1>
         <p className="readout mt-2">
           {loadingVideos ? '…' : videos.length} videos

@@ -1134,9 +1134,8 @@ export default function Landing({ onLaunchApp }) {
           <p className="font-display font-extrabold text-3xl md:text-5xl text-neutral-900 tracking-tight mb-10">Clip It Before It Scrolls Past.</p>
           <div className="border-t border-neutral-200 pt-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center">
                 <img src="/logo-full.png" alt="Digiclip" className="h-7 w-auto object-contain" />
-                <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
               </div>
               <span className="text-xs text-neutral-500 block mt-1.5">AI Video Clip Generator & Viral Shorts Studio</span>
             </div>

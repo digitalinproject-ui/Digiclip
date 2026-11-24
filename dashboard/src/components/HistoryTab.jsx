@@ -58,7 +58,7 @@ export default function HistoryTab({ onReopenProject }) {
 
   return (
     <div className="h-full overflow-y-auto p-8 max-w-5xl mx-auto animate-fade">
-      <p className="eyebrow mb-1.5">07 · HISTORY</p>
+      <p className="eyebrow mb-1.5 font-semibold text-xs tracking-wider uppercase text-neutral-500">History</p>
       <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight mb-2">Your Library</h1>
       <p className="text-neutral-500 text-sm mb-8">
         All the shorts you've generated. Reopen a project anytime to continue editing its clips.

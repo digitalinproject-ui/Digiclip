@@ -369,7 +369,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
       <div className="card p-6 mb-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="eyebrow mb-1">03 · AUTOPUBLISH</p>
+            <p className="eyebrow mb-1 font-semibold text-xs tracking-wider uppercase text-neutral-500">Auto-Publish</p>
             <p className="text-ink">{s.autopublish ? 'the best clips are scheduled for you' : 'off: you review and post the clips yourself'}</p>
             <p className="text-muted text-sm mt-1">
               Picks the {s.clips_to_publish || 3} highest-scoring clips of each video and schedules
@@ -453,7 +453,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
         <div className="card p-6 mb-6">
           <div className="flex items-center justify-between gap-3 mb-4">
             <div>
-              <p className="eyebrow mb-1">04 · YOUR LATEST VIDEOS</p>
+              <p className="eyebrow mb-1 font-semibold text-xs tracking-wider uppercase text-neutral-500">Latest Channel Videos</p>
               <p className="text-muted text-sm">Clip any of them now, or let Autopilot handle the next one.</p>
             </div>
             <button onClick={load} className="btn-quiet text-xs" aria-label="refresh"><RefreshCw size={13} /> refresh</button>
@@ -509,7 +509,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
       {/* 5 · activity */}
       {runs.length > 0 && (
         <div className="card p-6 mb-10">
-          <p className="eyebrow mb-4">05 · ACTIVITY</p>
+          <p className="eyebrow mb-4 font-semibold text-xs tracking-wider uppercase text-neutral-500">Recent Activity</p>
           <div className="space-y-3">
             {runs.map((r) => (
               <div key={r.id} className="flex items-center gap-3 text-sm">

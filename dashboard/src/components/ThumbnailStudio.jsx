@@ -481,7 +481,7 @@ export default function ThumbnailStudio({ geminiApiKey, uploadPostKey, uploadUse
         {/* Header */}
         <div className="flex items-end justify-between mb-2">
           <div>
-            <p className="eyebrow mb-2">06 · YOUTUBE STUDIO</p>
+            <p className="eyebrow mb-2 font-semibold text-xs tracking-wider uppercase text-neutral-500">YouTube Suite</p>
             <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight flex items-center gap-3">
               <span className="w-10 h-10 rounded-card bg-paper3 flex items-center justify-center">
                 <Image size={18} className="text-[#0000fb]" />

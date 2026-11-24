@@ -1546,9 +1546,8 @@ function App() {
         <div className="w-9 h-9 flex items-center justify-center shrink-0 lg:hidden">
           <img src="/logo-black.png" alt="Digiclip" className="w-full h-full object-contain" />
         </div>
-        <div className="hidden lg:flex items-center gap-2.5">
+        <div className="hidden lg:flex items-center">
           <img src="/logo-full.png" alt="Digiclip" className="h-7 w-auto object-contain" />
-          <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
         </div>
       </a>
 
@@ -1628,9 +1627,8 @@ function App() {
       />
       <div className="relative w-[17rem] max-w-[82vw] h-full bg-white border-r border-[#e5e5ea] flex flex-col animate-slide-in-left">
         <div className="flex items-center justify-between px-5 h-16 border-b border-[#e5e5ea] shrink-0">
-          <a href="#app" className="flex items-center gap-2.5" onClick={() => goToTab('dashboard')}>
+          <a href="#app" className="flex items-center" onClick={() => goToTab('dashboard')}>
             <img src="/logo-full.png" alt="Digiclip" className="h-7 w-auto object-contain" />
-            <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#0000fb] text-white">STUDIO</span>
           </a>
           <button
             onClick={() => setNavOpen(false)}
@@ -2154,8 +2152,8 @@ function App() {
 
                 {/* Header */}
                 <div className="space-y-3">
-                  <p className="text-xs font-mono uppercase font-bold tracking-wider text-[#0000fb] flex items-center gap-2">
-                    <Bot size={14} /> 03 · AI AGENT · AUTONOMOUS CLIPPING
+                  <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 flex items-center gap-2">
+                    <Bot size={14} className="text-[#0000fb]" /> Autonomous Agent
                   </p>
                   <h1 className="font-bold text-3xl md:text-4xl tracking-tight text-neutral-900">
                     Your Personal Clipping Team
