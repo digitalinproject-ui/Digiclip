@@ -6095,6 +6095,7 @@ async def process_endpoint(
     max_minutes: Optional[str] = Form(None),
     source_start: Optional[str] = Form(None),
     source_end: Optional[str] = Form(None),
+    gemini_model: Optional[str] = Form(None),
 ):
     api_key = await resolve_gemini(request)
     if not api_key and not (llm_backend.active() and not BILLING_ENABLED):
@@ -6129,6 +6130,7 @@ async def process_endpoint(
         max_minutes = body.get("max_minutes")
         source_start = body.get("source_start")
         source_end = body.get("source_end")
+        gemini_model = body.get("gemini_model") or gemini_model
 
     # Normalize output format (auto = keep pipeline default).
     if output_format not in ("vertical", "horizontal", "square"):
@@ -6214,6 +6216,10 @@ async def process_endpoint(
         env["GEMINI_API_KEY"] = api_key # Override with key from request
     else:
         env.pop("GEMINI_API_KEY", None)  # local-LLM job: main.py must not find a stale key
+    req_gemini_model = gemini_model or request.headers.get("X-Gemini-Model")
+    if req_gemini_model:
+        env["GEMINI_MODEL"] = str(req_gemini_model).strip()
+        print(f"[engine] job={job_id} model={env['GEMINI_MODEL']}")
     # The stdio fix above only covers this process. main.py prints an emoji on
     # its first line and configures nothing, so on a cp1252 console the child
     # still dies before it renders anything -- the server starts and every job

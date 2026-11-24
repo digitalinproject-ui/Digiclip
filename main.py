@@ -2240,7 +2240,7 @@ def _run_gemini_stage(client, model_name, prompt, schema):
         response_mime_type="application/json",
         response_schema=schema,
     )
-    fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
+    fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro"]
     curr_model = model_name
     fallback_idx = 0
     max_attempts = 6
@@ -2649,7 +2649,7 @@ def _visual_pass(client, model_name, video_path, duration, language,
             response_mime_type="application/json",
             response_schema=gemini_worker.VisualResponse,
         )
-        fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
+        fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro"]
         curr_model = model_name
         fallback_idx = 0
         max_attempts = 6

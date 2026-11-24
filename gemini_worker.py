@@ -615,7 +615,7 @@ def main() -> int:
         fmt["min_secs"], fmt["max_secs"] = clip_duration_bounds()
     prompt = template.format(**fmt)
 
-    fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
+    fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.5-pro"]
     curr_model = model_name
     fallback_idx = 0
     max_attempts = 6

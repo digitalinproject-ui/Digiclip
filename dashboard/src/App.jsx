@@ -329,6 +329,7 @@ function App() {
   const [durableClips, setDurableClips] = useState({});
 
   const [apiKey, setApiKey] = useState(localStorage.getItem('gemini_key') || '');
+  const [geminiModel, setGeminiModel] = useState(localStorage.getItem('gemini_model') || 'gemini-2.5-pro');
   // Social API State - Load encrypted or plain
   const [uploadPostKey, setUploadPostKey] = useState(() => {
     const stored = localStorage.getItem('uploadPostKey_v3');
@@ -853,6 +854,10 @@ function App() {
   }, [apiKey]);
 
   useEffect(() => {
+    if (geminiModel) localStorage.setItem('gemini_model', geminiModel);
+  }, [geminiModel]);
+
+  useEffect(() => {
     if (uploadPostKey) {
       localStorage.setItem('uploadPostKey_v3', encrypt(uploadPostKey));
     }
@@ -1298,10 +1303,12 @@ function App() {
       // BYOK sends the Gemini header; managed users rely on the bearer token
       // that apiFetch attaches automatically.
       const headers = apiKey ? { 'X-Gemini-Key': apiKey } : {};
+      if (geminiModel) headers['X-Gemini-Model'] = geminiModel;
 
       // Advanced generation controls: only sent when the user set them, so the
       // default request stays byte-identical to the pre-feature one.
       const advanced = {
+        gemini_model: geminiModel || null,
         target_clips: data.targetClips || null,
         clip_min_seconds: data.clipMinSeconds || null,
         clip_max_seconds: data.clipMaxSeconds || null,
@@ -1983,7 +1990,12 @@ function App() {
                 </div>
               ) : (
                 <>
-              <KeyInput onKeySet={setApiKey} savedKey={apiKey} />
+              <KeyInput
+                onKeySet={setApiKey}
+                savedKey={apiKey}
+                savedModel={geminiModel}
+                onModelSet={setGeminiModel}
+              />
 
               <div className="card p-4 sm:p-6 mt-8">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
