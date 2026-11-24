@@ -71,15 +71,17 @@ const DEMOS = [
 
 const SectionHeader = ({ eyebrow, title, children }) => (
   <div className="mb-12">
-    <BlurReveal delay={0.05} duration={0.6}>
-      <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">{eyebrow}</p>
-    </BlurReveal>
+    {eyebrow && (
+      <BlurReveal delay={0.05} duration={0.6}>
+        <p className="mb-2 text-xs font-semibold tracking-wider uppercase text-neutral-500">{eyebrow}</p>
+      </BlurReveal>
+    )}
     <BlurReveal delay={0.12} duration={0.7} yOffset={10}>
       <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 tracking-tight mb-3">{title}</h2>
     </BlurReveal>
     {children && (
       <BlurReveal delay={0.2} duration={0.6} yOffset={8}>
-        <p className="text-neutral-600 max-w-2xl leading-relaxed text-base">{children}</p>
+        <p className="text-neutral-500 max-w-2xl leading-relaxed text-base font-normal">{children}</p>
       </BlurReveal>
     )}
   </div>
@@ -571,11 +573,9 @@ export default function Landing({ onLaunchApp }) {
           <div className="min-w-0">
             {/* Subtle Pill Eyebrow */}
             <BlurReveal delay={0.04} duration={0.6}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-xs font-semibold text-neutral-800 mb-6 shadow-2xs backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-[#0000fb] ring-4 ring-[#0000fb]/15 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 text-xs font-medium text-neutral-600 mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0000fb]"></span>
                 <span>AI Video Clip Maker</span>
-                <span className="text-neutral-300">·</span>
-                <span className="text-neutral-600 font-medium">4 Viral Shorts Per Video</span>
               </div>
             </BlurReveal>
 
@@ -587,14 +587,14 @@ export default function Landing({ onLaunchApp }) {
             </BlurReveal>
 
             <BlurReveal delay={0.24} duration={0.7} yOffset={10}>
-              <p className="text-neutral-600 max-w-xl mb-8 leading-relaxed text-base sm:text-lg font-normal">
-                Turn long videos, podcasts, and streams into 8 high-engagement vertical shorts. Automatically reframed to 9:16 with animated subtitles and viral hooks—ready to post in minutes.
+              <p className="text-neutral-500 max-w-lg mb-8 leading-relaxed text-base sm:text-lg font-normal">
+                Turn long videos and podcasts into viral 9:16 shorts. AI speaker tracking, auto subtitles, and instant hooks.
               </p>
             </BlurReveal>
 
             {/* Apple Spotlight-Style Unified Capsule Input */}
             <BlurReveal delay={0.34} duration={0.7} yOffset={10}>
-              <form onSubmit={handleHeroSubmit} className="mb-6 max-w-2xl">
+              <form onSubmit={handleHeroSubmit} className="mb-4 max-w-2xl">
                 <div className="p-1.5 sm:p-2 bg-white border border-neutral-200/90 rounded-2xl shadow-sm hover:shadow-md focus-within:shadow-md focus-within:border-[#0000fb]/40 transition-all flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <div className="relative flex-1 min-w-0 flex items-center">
                     <Link2 size={18} className="absolute left-3.5 text-neutral-400 pointer-events-none" />
@@ -629,54 +629,14 @@ export default function Landing({ onLaunchApp }) {
               </form>
             </BlurReveal>
 
-            {/* Apple-style Guarantee Badges Tier */}
+            {/* Clean Apple Trust Micro-line (Zero Slop) */}
             <BlurReveal delay={0.44} duration={0.6} yOffset={8}>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-neutral-700 mb-4">
-                <span className="inline-flex items-center gap-1.5">
-                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 100% Free &amp; Open Source
-                </span>
-                <span className="text-neutral-300">·</span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 4 Viral Clips Guaranteed
-                </span>
-                <span className="text-neutral-300">·</span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> No Watermarks or Paywalls
-                </span>
-              </div>
-            </BlurReveal>
-
-            {/* Platform Compatibility Chips */}
-            <BlurReveal delay={0.52} duration={0.6} yOffset={6}>
-              <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-500">
-                <span className="text-neutral-400 font-medium">Compatible with:</span>
-                {['YouTube', 'Twitch', 'Kick', 'TikTok', 'Podcasts'].map((platform) => (
-                  <span key={platform} className="px-2.5 py-0.5 rounded-lg bg-neutral-100/90 text-neutral-700 font-medium">
-                    {platform}
-                  </span>
-                ))}
-                <span className="mx-1 text-neutral-300">|</span>
-                <a
-                  href="https://github.com/digitalinproject-ui/Digiclip"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
-                >
-                  <Github size={13} />
-                  <span>GitHub Repository</span>
-                </a>
-                <span className="mx-1 text-neutral-300">|</span>
-                <span className="text-neutral-400">
-                  Powered by{' '}
-                  <a
-                    href="https://digitalinlabs.id"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
-                  >
-                    Digitalinlabs.id
-                  </a>
-                </span>
+              <div className="flex items-center gap-3 text-xs text-neutral-400 font-normal">
+                <span>100% Free &amp; Open Source</span>
+                <span>·</span>
+                <span>4 Curated Clips</span>
+                <span>·</span>
+                <span>No Watermark</span>
               </div>
             </BlurReveal>
           </div>
@@ -699,7 +659,7 @@ export default function Landing({ onLaunchApp }) {
                 />
               </div>
 
-              {/* Floating pill 1: Viral Score */}
+              {/* Minimal Single Floating Pill: Viral Score */}
               <div className="floating-badge -top-2 -right-3 sm:-right-6">
                 <div className="w-7 h-7 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs ring-2 ring-emerald-500/20">
                   98
@@ -707,17 +667,6 @@ export default function Landing({ onLaunchApp }) {
                 <div>
                   <div className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Viral Score</div>
                   <div className="text-xs font-bold text-neutral-900">High Retention</div>
-                </div>
-              </div>
-
-              {/* Floating pill 2: Auto 9:16 Clips */}
-              <div className="floating-badge -bottom-3 -left-3 sm:-left-6">
-                <div className="w-7 h-7 rounded-full bg-[#0000fb]/10 text-[#0000fb] flex items-center justify-center">
-                  <Scissors size={14} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Smart Reframe</div>
-                  <div className="text-xs font-bold text-neutral-900">4 Clips Ready</div>
                 </div>
               </div>
             </div>
@@ -729,14 +678,14 @@ export default function Landing({ onLaunchApp }) {
       <section className="border-b border-rule bg-white/50">
         <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:divide-x divide-neutral-200 text-center">
           {[
-            ['4 Clips', 'Guaranteed Output Per Run'],
-            ['9:16', 'Smart AI Face Tracking'],
-            ['30+', 'AI Dubbing Languages'],
-            ['100% Free', 'Open Source Under MIT'],
+            ['4 Clips', 'Curated per run'],
+            ['9:16', 'Active face tracking'],
+            ['30+', 'Dubbing languages'],
+            ['100% Free', 'Open source (MIT)'],
           ].map(([n, label]) => (
             <div key={label} className="px-4">
               <div className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-neutral-900 tabular-nums">{n}</div>
-              <div className="eyebrow mt-2 font-semibold text-xs text-neutral-500 uppercase tracking-wider">{label}</div>
+              <div className="mt-2 text-xs font-medium text-neutral-500">{label}</div>
             </div>
           ))}
         </div>
@@ -746,7 +695,7 @@ export default function Landing({ onLaunchApp }) {
           per-platform pages. */}
       <section id="platforms" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="Platforms" title="Made For Every Platform: YouTube, TikTok, Streams & Podcasts">
+          <SectionHeader eyebrow="Platforms" title="Made for Every Major Platform">
             One clip generator, tuned to where the video comes from and where the clips are going.
           </SectionHeader>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -772,7 +721,7 @@ export default function Landing({ onLaunchApp }) {
       {/* Features Section */}
       <section id="features" className="py-20 px-6 border-t border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="01 · Features" title="AI Clipping That Finds The Moments Worth Posting">
+          <SectionHeader eyebrow="Features" title="AI clipping that finds the moments worth posting">
             Screens from the app and clips it made. Pick a feature, or let it play.
           </SectionHeader>
           <FeatureShowcase />
@@ -794,7 +743,7 @@ export default function Landing({ onLaunchApp }) {
           The pattern the market leader opens with, shown with our own output. */}
       <section className="py-20 px-6 border-b border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="02 · One Video, 4 Clips" title="One 27-Minute Episode In. 4 Ready-To-Post Clips Out.">
+          <SectionHeader eyebrow="Curated Output" title="One episode in. Four viral clips out.">
             No prompts, no settings and no scrubbing: the AI scored every moment, kept the four that stand on their own and cut them with captions and a hook.
           </SectionHeader>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,15rem)_auto_minmax(0,1fr)] gap-6 items-center">
@@ -806,14 +755,14 @@ export default function Landing({ onLaunchApp }) {
               <figcaption className="text-xs text-muted mt-2">the full episode, 16:9</figcaption>
             </figure>
             <ArrowRight size={28} className="text-brass mx-auto rotate-90 lg:rotate-0" aria-hidden="true" />
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
-              {EPISODE_CLIPS.map((c) => (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+              {EPISODE_CLIPS.slice(0, 4).map((c) => (
                 <figure key={c.n} className="m-0 min-w-0">
-                  <div className="relative rounded-card overflow-hidden border border-rule bg-paper2">
+                  <div className="relative rounded-card overflow-hidden border border-neutral-200 bg-neutral-900 shadow-2xs">
                     <LazyLoopVideo src={`/demo/ep-clip-${c.n}.mp4`} poster={`/screens/ep-clip-${c.n}.webp`} />
-                    <span className="absolute top-1.5 left-1.5 readout text-[10px] bg-paper/85 text-ok px-1.5 py-0.5 rounded">score {c.score}</span>
+                    <span className="absolute top-1.5 left-1.5 text-[10px] font-bold bg-black/75 backdrop-blur-md text-emerald-400 px-1.5 py-0.5 rounded">score {c.score}</span>
                   </div>
-                  <figcaption className="text-xs text-ink2 mt-2 leading-snug">{c.title}</figcaption>
+                  <figcaption className="text-xs text-neutral-800 font-medium mt-2 leading-snug">{c.title}</figcaption>
                 </figure>
               ))}
             </div>
@@ -827,7 +776,7 @@ export default function Landing({ onLaunchApp }) {
       {/* Smart crop — real product output: 16:9 source to 9:16 result */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <SectionHeader eyebrow="03 · Smart Crop" title="One Video In. The Moment, Reframed In 9:16.">
+          <SectionHeader eyebrow="Smart Reframe" title="Active speaker tracking in vertical 9:16">
             Real output, not a mock-up: the AI detects the active speaker, reframes 16:9 to vertical 9:16, and burns in synchronized captions.
           </SectionHeader>
           {DEMOS.length > 1 && (
@@ -875,7 +824,7 @@ export default function Landing({ onLaunchApp }) {
             >
               Try It On Your Own Video <ArrowRight size={16} />
             </button>
-            <span className="text-sm text-neutral-500 font-medium">First video free up to 60 min, no credit card required</span>
+            <span className="text-sm text-neutral-400 font-medium">100% free &amp; open source under MIT</span>
           </div>
         </div>
       </section>
@@ -883,7 +832,7 @@ export default function Landing({ onLaunchApp }) {
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="04 · Pipeline" title="How To Turn A Long Video Into Shorts With AI (5 Steps)">
+          <SectionHeader eyebrow="Workflow" title="From long video to viral clips in 5 steps">
             From long-form video to viral-ready clips in 5 automated steps.
           </SectionHeader>
           <div className="space-y-6">
@@ -897,7 +846,7 @@ export default function Landing({ onLaunchApp }) {
       {/* Two ways to use it: free self-host vs paid hosted */}
       <section className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="05 · Deploy" title="Two Ways To Use Digiclip: Cloud Or Self-Hosted">
+          <SectionHeader eyebrow="Deployment" title="Run in the cloud or on your own machine">
             The same open source technology, running either in the cloud or on your local machine.
           </SectionHeader>
           <div className="grid md:grid-cols-2 gap-6">
@@ -939,7 +888,7 @@ export default function Landing({ onLaunchApp }) {
       {/* Comparison Table */}
       <section id="comparison" className="py-20 px-6 border-t border-rule">
         <div className="max-w-4xl mx-auto">
-          <SectionHeader eyebrow="06 · Comparison" title="Digiclip vs Opus Clip, Klap, And Vizard">
+          <SectionHeader eyebrow="Comparison" title="Zero subscriptions. 100% free forever.">
             Digiclip is 100% free and open source with zero subscriptions or fees. Commercial alternatives charge $14 to $24 every month.
           </SectionHeader>
           <div className="overflow-x-auto bg-white rounded-2xl border border-neutral-200 p-2">
@@ -992,7 +941,7 @@ export default function Landing({ onLaunchApp }) {
       {/* Use Cases */}
       <section className="py-20 px-6 border-t border-rule">
         <div className="max-w-5xl mx-auto">
-          <SectionHeader eyebrow="08 · Use Cases" title="Who Uses Digiclip?">
+          <SectionHeader eyebrow="Built for Creators" title="Designed for modern video workflows">
             Creators, marketers, and agencies scaling short-form video production.
           </SectionHeader>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -1031,12 +980,12 @@ export default function Landing({ onLaunchApp }) {
       {/* Also included: the two tools that are not the clipper */}
       <section className="py-20 px-6 border-t border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="09 · Also Included" title="Two More Tools Included In Digiclip">
+          <SectionHeader eyebrow="More Tools" title="Extra tools included in Digiclip Studio">
             Available inside the same Digiclip Studio account, with zero extra configuration.
           </SectionHeader>
           <div className="grid md:grid-cols-2 gap-5">
             <div className="card p-8 bg-white border border-neutral-200 rounded-2xl">
-              <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">01 · AI Shorts</p>
+              <p className="mb-2 text-xs font-semibold tracking-wider uppercase text-neutral-500">AI Video Ads</p>
               <Sparkles size={22} className="text-[#0000fb] mb-4" />
               <h3 className="font-display font-bold text-2xl text-neutral-900 mb-2">AI UGC Video Generator</h3>
               <p className="text-neutral-600 text-sm leading-relaxed mb-4">UGC marketing videos with AI actors for any product or business.</p>
@@ -1047,7 +996,7 @@ export default function Landing({ onLaunchApp }) {
               </ul>
             </div>
             <div className="card p-8 bg-white border border-neutral-200 rounded-2xl">
-              <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">02 · Studio</p>
+              <p className="mb-2 text-xs font-semibold tracking-wider uppercase text-neutral-500">YouTube Suite</p>
               <Monitor size={22} className="text-[#0000fb] mb-4" />
               <h3 className="font-display font-bold text-2xl text-neutral-900 mb-2">YouTube Studio</h3>
               <p className="text-neutral-600 text-sm leading-relaxed mb-4">Free AI YouTube toolkit: viral thumbnails, titles, and descriptions.</p>
@@ -1064,7 +1013,7 @@ export default function Landing({ onLaunchApp }) {
       {/* FAQ Section */}
       <section id="faq" className="py-20 px-6 border-t border-rule">
         <div className="max-w-3xl mx-auto">
-          <SectionHeader eyebrow="10 · FAQ" title="Frequently Asked Questions (FAQ)">
+          <SectionHeader eyebrow="FAQ" title="Frequently asked questions">
             Everything you need to know about Digiclip, from setup to production features.
           </SectionHeader>
           <div className="divide-y divide-neutral-200 border-y border-neutral-200">

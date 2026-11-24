@@ -239,7 +239,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
 
   return (
     <div className="max-w-4xl mx-auto animate-fade">
-      <p className="eyebrow mb-1.5">02 · AUTOPILOT</p>
+      <p className="eyebrow mb-1.5 font-semibold text-xs tracking-wider uppercase text-neutral-500">Autopilot</p>
       <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight mb-2">Your Channel, Clipped Automatically</h1>
       <p className="text-muted text-sm mb-8 max-w-2xl">
         Publish on YouTube as usual. Autopilot notices every new video, turns it into shorts
@@ -276,7 +276,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
               <Youtube size={18} className={yt ? 'text-brass' : 'text-muted'} />
             </div>
             <div className="min-w-0">
-              <p className="eyebrow">01 · CHANNEL</p>
+              <p className="eyebrow font-semibold text-xs tracking-wider uppercase text-neutral-500">Connected Channel</p>
               {yt ? (
                 <p className="text-ink truncate">{yt.display_name || yt.handle} <span className="readout ml-1">{yt.handle}</span></p>
               ) : (
@@ -328,7 +328,7 @@ export default function AutopilotTab({ onOpenProject, onUpgrade, justConnected }
       <div className="card p-6 mb-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="eyebrow mb-1">02 · AUTOPILOT</p>
+            <p className="eyebrow mb-1 font-semibold text-xs tracking-wider uppercase text-neutral-500">Automation Status</p>
             <p className="text-ink">{s.enabled ? 'on: new videos are clipped automatically' : 'off'}</p>
             <p className="text-muted text-sm mt-1">
               Only videos you publish from now on. Up to {limits.daily_auto || 1} video a day, the first

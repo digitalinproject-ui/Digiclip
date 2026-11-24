@@ -116,24 +116,20 @@ const BURGER = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stro
  * knows the session; static HTML always renders the signed-out variant. */
 export function renderNav({ lang = 'en', signedIn = false, showLogin = true } = {}) {
   const t = NAV_STRINGS[lang] || NAV_STRINGS.en
-  const groups = NAV_GROUPS.map((g) => {
-    const items = g.items
-      .map((it) => {
-        const sub = pick(it.sub, lang)
-        return `<li><a href="${esc(pick(it.href, lang))}">${esc(pick(it.label, lang))}${sub ? `<small>${esc(sub)}</small>` : ''}</a></li>`
-      })
-      .join('')
-    return `<li class="osn-item"><details class="osn-dd" data-osn-dd><summary>${esc(pick(g.label, lang))}${CHEVRON}</summary><ul class="osn-panel">${items}</ul></details></li>`
-  }).join('')
-  const links = NAV_LINKS.map((l) => `<li class="osn-item"><a class="osn-top" href="${esc(l.href)}">${esc(pick(l.label, lang))}</a></li>`).join('')
+  const primaryLinks = [
+    { href: '/#features', label: { en: 'Features', es: 'Características' } },
+    { href: '/#how-it-works', label: { en: 'How It Works', es: 'Cómo Funciona' } },
+    { href: '/self-hosted-ai-clip-maker', label: { en: 'Open Source', es: 'Código Abierto' } },
+  ]
+  const links = primaryLinks.map((l) => `<li class="osn-item"><a class="osn-top" href="${esc(l.href)}">${esc(pick(l.label, lang))}</a></li>`).join('')
   const login = signedIn || !showLogin ? '' : `<a class="osn-login" href="${LOGIN_HREF}">${esc(t.login)}</a>`
   return `<header class="osn" data-osn>
 <div class="osn-bar">
-  <a class="osn-brand" href="/"><img src="/logo-full.png" alt="Digiclip" class="osn-brand-img"><span class="osn-brand-badge">STUDIO</span></a>
+  <a class="osn-brand" href="/"><img src="/logo-full.png" alt="Digiclip" class="osn-brand-img"></a>
   <input type="checkbox" id="osn-toggle" class="osn-toggle" aria-label="${esc(t.menu)}">
   <label for="osn-toggle" class="osn-burger" title="${esc(t.menu)}">${BURGER}</label>
   <nav class="osn-menu" aria-label="${esc(t.main)}">
-    <ul class="osn-list">${groups}${links}<li class="osn-item"><a class="osn-top osn-gh" href="${REPO_URL}" rel="noopener" target="_blank" aria-label="${esc(t.github)}" title="GitHub">${GITHUB}<span class="osn-gh-label">GitHub</span></a></li></ul>
+    <ul class="osn-list">${links}<li class="osn-item"><a class="osn-top osn-gh" href="${REPO_URL}" rel="noopener" target="_blank" aria-label="${esc(t.github)}" title="GitHub">${GITHUB}<span class="osn-gh-label">GitHub</span></a></li></ul>
     ${login}
   </nav>
   <div class="osn-actions">

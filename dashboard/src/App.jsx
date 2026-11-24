@@ -2348,9 +2348,9 @@ function App() {
                 {/* Header Block with Proportional Apple Hierarchy & Vertical Rhythm */}
                 <div className="mb-6 sm:mb-8">
                   <BlurReveal delay={0.04} duration={0.6}>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-[11px] font-semibold text-neutral-700 mb-3.5 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0000fb] animate-pulse"></span>
-                      <span>01 · CLIP GENERATOR</span>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 text-xs font-medium text-neutral-600 mb-3.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0000fb]"></span>
+                      <span>AI Clip Generator</span>
                     </div>
                   </BlurReveal>
 
@@ -2365,42 +2365,9 @@ function App() {
                       Drop your podcast, stream, or video below to automatically extract 4 viral moments with AI.
                     </p>
                   </BlurReveal>
-
-                  {!tutorialLock && (
-                    <BlurReveal delay={0.3} duration={0.6} yOffset={8}>
-                      <p className="text-xs text-neutral-400 mt-2">
-                        Or let an agent do it:{' '}
-                        <a
-                          href={billingEnabled ? '#/account' : '#app'}
-                          onClick={(e) => { if (!billingEnabled) { e.preventDefault(); goToTab('settings'); } }}
-                          className="text-neutral-600 hover:text-[#0000fb] font-medium underline underline-offset-2 transition-colors"
-                        >
-                          connect Claude, ChatGPT or n8n →
-                        </a>
-                      </p>
-                    </BlurReveal>
-                  )}
                 </div>
 
                 <MediaInput onProcess={handleProcess} isProcessing={status === 'processing'} />
-
-                <div className="mt-5 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-neutral-400 text-xs sm:text-sm">
-                  <span className="flex items-center gap-2 text-neutral-500"><Youtube size={16} /> YouTube</span>
-                  <span className="flex items-center gap-2 text-neutral-500"><Instagram size={16} /> Instagram</span>
-                  <span className="flex items-center gap-2 text-neutral-500"><TikTokIcon size={16} /> TikTok</span>
-                </div>
-
-                <p className="mt-3 text-[11px] text-neutral-400 font-medium">
-                  Powered by{' '}
-                  <a
-                    href="https://digitalinlabs.id"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-neutral-600 hover:text-[#0000fb] transition-colors"
-                  >
-                    Digitalinlabs.id
-                  </a>
-                </p>
               </div>
               </div>
             </div>
