@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers, Search, Bell, HelpCircle, User, Play, SlidersHorizontal, MoreHorizontal, Scissors, Heart } from 'lucide-react';
+import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers, Search, Bell, HelpCircle, User, Play, SlidersHorizontal, MoreHorizontal, Scissors, Heart, Film } from 'lucide-react';
 import BlurReveal from './components/ui/BlurReveal';
 import KeyInput from './components/KeyInput';
 import MediaInput from './components/MediaInput';
@@ -1470,7 +1470,7 @@ function App() {
   // drawer, and the bottom tab bar. `short` is the tab-bar label — the full one
   // wraps to two lines in a 5-up bar on a 360px phone.
   const navItems = [
-    { id: 'dashboard', ord: '01', icon: LayoutDashboard, label: 'Clip Generator', short: 'clips', primary: true },
+    { id: 'dashboard', ord: '01', icon: Film, label: 'Clip Generator', short: 'clips', primary: true },
     { id: 'batch', ord: '02', icon: Layers, label: 'Batch Studio', short: 'batch', isNew: true, primary: true },
     // Cloud only: it runs on the managed pipeline and the Upload-Post connection.
     ...(billingEnabled ? [{ id: 'autopilot', ord: '02', icon: Rocket, label: 'Autopilot', short: 'autopilot', isNew: true }] : []),
@@ -1568,12 +1568,23 @@ function App() {
                   : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100/70'
               } ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed hover:bg-transparent hover:text-neutral-400' : ''}`}
             >
-              <NavIcon size={18} className={`shrink-0 ${isActive ? 'text-[#0000fb]' : 'text-neutral-500'}`} />
+              <NavIcon size={18} strokeWidth={1.8} className={`shrink-0 ${isActive ? 'text-[#0000fb]' : 'text-neutral-500'}`} />
               <span className="hidden lg:block flex-1 text-left truncate">{item.label}</span>
               {tabLocked(item.id)
                 ? <Lock size={12} className="shrink-0 hidden lg:block text-neutral-400" />
-                : item.byok ? <span className="text-[10px] font-mono uppercase bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded hidden lg:block">BYOK</span>
-                  : item.isNew ? <span className="text-[10px] font-bold uppercase bg-[#0000fb] text-white px-2 py-0.5 rounded-full hidden lg:block">new</span> : null}
+                : item.byok ? (
+                  <span
+                    title="Bring Your Own Key — Menggunakan API Key Anda sendiri (fal.ai / ElevenLabs) yang dapat diatur di Settings"
+                    className="text-[10px] font-medium tracking-tight bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded-full border border-neutral-200/80 hidden lg:inline-flex items-center gap-1 shadow-2xs"
+                  >
+                    <KeyRound size={10} className="text-neutral-400" />
+                    BYOK
+                  </span>
+                ) : item.isNew ? (
+                  <span className="text-[10px] font-semibold tracking-wider bg-[#0000fb] text-white px-2 py-0.5 rounded-full shadow-2xs hidden lg:block">
+                    New
+                  </span>
+                ) : null}
             </button>
           );
         })}
@@ -1652,12 +1663,23 @@ function App() {
                 title={tabLocked(item.id) ? 'Finish your first clips to unlock' : undefined}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${isActive ? 'bg-[#0000fb]/10 text-[#0000fb] font-semibold' : 'text-neutral-600 active:bg-neutral-100'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
-                <NavIcon size={18} className={`shrink-0 ${isActive ? 'text-[#0000fb]' : 'text-neutral-500'}`} />
+                <NavIcon size={18} strokeWidth={1.8} className={`shrink-0 ${isActive ? 'text-[#0000fb]' : 'text-neutral-500'}`} />
                 <span className="text-[0.95rem] flex-1 text-left truncate">{item.label}</span>
                 {tabLocked(item.id)
                   ? <Lock size={12} className="shrink-0 text-neutral-400" />
-                  : item.byok ? <span className="text-[10px] font-mono uppercase bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded shrink-0">BYOK</span>
-                    : item.isNew ? <span className="text-[10px] font-bold uppercase bg-[#0000fb] text-white px-2 py-0.5 rounded-full shrink-0">new</span> : null}
+                  : item.byok ? (
+                    <span
+                      title="Bring Your Own Key — Menggunakan API Key Anda sendiri (fal.ai / ElevenLabs) yang dapat diatur di Settings"
+                      className="text-[10px] font-medium tracking-tight bg-neutral-100 text-neutral-600 px-2 py-0.5 rounded-full border border-neutral-200/80 inline-flex items-center gap-1 shrink-0 shadow-2xs"
+                    >
+                      <KeyRound size={10} className="text-neutral-400" />
+                      BYOK
+                    </span>
+                  ) : item.isNew ? (
+                    <span className="text-[10px] font-semibold tracking-wider bg-[#0000fb] text-white px-2 py-0.5 rounded-full shrink-0 shadow-2xs">
+                      New
+                    </span>
+                  ) : null}
               </button>
             );
           })}
@@ -1714,7 +1736,7 @@ function App() {
                 title={tabLocked(item.id) ? 'Finish your first clips to unlock' : undefined}
                 className={`flex-1 min-w-0 flex flex-col items-center justify-center gap-1 py-2 min-h-[56px] transition-colors ${isActive ? 'text-[#0000fb] font-semibold' : 'text-neutral-500 active:text-neutral-900'} ${tabLocked(item.id) ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
-                <NavIcon size={19} className={isActive ? 'text-[#0000fb]' : ''} />
+                <NavIcon size={19} strokeWidth={1.8} className={isActive ? 'text-[#0000fb]' : ''} />
                 <span className="text-[10.5px] leading-none truncate max-w-full px-0.5">{item.short}</span>
               </button>
             );
