@@ -676,17 +676,17 @@ export default function Landing({ onLaunchApp }) {
       </section>
 
       {/* Proof: valid specifications and real capabilities */}
-      <section className="border-b border-rule bg-white/50">
-        <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:divide-x divide-neutral-200 text-center">
+      <section className="border-b border-rule bg-white/50 backdrop-blur-xs">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-7 sm:py-8 grid grid-cols-2 md:grid-cols-4 gap-y-6 md:gap-y-0 md:divide-x divide-neutral-200/80 text-center">
           {[
             ['4 Clips', 'Curated per run'],
             ['9:16', 'Active face tracking'],
             ['30+', 'Dubbing languages'],
             ['100% Free', 'Open source (MIT)'],
           ].map(([n, label]) => (
-            <div key={label} className="px-4">
-              <div className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-neutral-900 tabular-nums">{n}</div>
-              <div className="mt-2 text-xs font-medium text-neutral-500">{label}</div>
+            <div key={label} className="px-2 sm:px-4 flex flex-col items-center justify-center">
+              <div className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-neutral-900 tabular-nums whitespace-nowrap tracking-tight">{n}</div>
+              <div className="mt-1.5 text-xs font-medium text-neutral-500 whitespace-nowrap">{label}</div>
             </div>
           ))}
         </div>
