@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link2, Upload, FileVideo, X, Info, Loader2, ChevronDown } from 'lucide-react';
+import { Link2, Upload, FileVideo, X, Info, Loader2, ChevronDown, Sparkles } from 'lucide-react';
 import { track } from '../lib/analytics';
 import { getApiUrl } from '../config';
 import SourceCost from './SourceCost';
@@ -154,30 +154,37 @@ export default function MediaInput({ onProcess, isProcessing }) {
     };
 
     return (
-        <div className="card p-4 sm:p-6 animate-fade">
-            <div className="flex gap-4 sm:gap-6 mb-6 border-b border-rule" data-tutorial="source-tabs">
-                <button
-                    onClick={() => setMode('file')}
-                    className={`flex items-center gap-2 pb-3 px-1 -mb-px border-b-2 text-sm whitespace-nowrap transition-colors ${mode === 'file'
-                        ? 'text-neutral-900 border-[#0000fb] font-semibold'
-                        : 'text-neutral-500 border-transparent hover:text-neutral-800 font-medium'
-                        }`}
-                >
-                    <Upload size={16} className={`hidden sm:block ${mode === 'file' ? 'text-[#0000fb]' : ''}`} />
-                    Upload File
-                </button>
-                {youtubeUrlEnabled && (
+        <div className="bg-white border border-[#e5e5ea] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.03)] p-5 sm:p-7 animate-blur-reveal-delay-2">
+            {/* Apple HIG Segmented Switcher */}
+            <div className="flex justify-center mb-6" data-tutorial="source-tabs">
+                <div className="bg-[#f2f2f7] p-1 rounded-xl inline-flex items-center gap-1">
                     <button
-                        onClick={() => setMode('url')}
-                        className={`flex items-center gap-2 pb-3 px-1 -mb-px border-b-2 text-sm whitespace-nowrap transition-colors ${mode === 'url'
-                            ? 'text-neutral-900 border-[#0000fb] font-semibold'
-                            : 'text-neutral-500 border-transparent hover:text-neutral-800 font-medium'
-                            }`}
+                        type="button"
+                        onClick={() => setMode('file')}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm transition-all ${
+                            mode === 'file'
+                                ? 'bg-white text-neutral-900 font-semibold shadow-xs'
+                                : 'text-neutral-500 font-medium hover:text-neutral-900'
+                        }`}
                     >
-                        <Link2 size={16} className={`hidden sm:block ${mode === 'url' ? 'text-[#0000fb]' : ''}`} />
-                        Video URL
+                        <Upload size={14} className={mode === 'file' ? 'text-[#0000fb]' : 'text-neutral-400'} />
+                        <span>Upload File</span>
                     </button>
-                )}
+                    {youtubeUrlEnabled && (
+                        <button
+                            type="button"
+                            onClick={() => setMode('url')}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm transition-all ${
+                                mode === 'url'
+                                    ? 'bg-white text-neutral-900 font-semibold shadow-xs'
+                                    : 'text-neutral-500 font-medium hover:text-neutral-900'
+                            }`}
+                        >
+                            <Link2 size={14} className={mode === 'url' ? 'text-[#0000fb]' : 'text-neutral-400'} />
+                            <span>Video URL</span>
+                        </button>
+                    )}
+                </div>
             </div>
 
             <form onSubmit={handleSubmit}>
@@ -188,30 +195,31 @@ export default function MediaInput({ onProcess, isProcessing }) {
                                 type="url"
                                 value={url}
                                 onChange={(e) => setUrl(e.target.value)}
-                                placeholder="https://... paste a video link"
-                                className="input-field pr-11"
+                                placeholder="Paste YouTube, Twitch, or Kick URL..."
+                                className="w-full pl-11 pr-11 py-3.5 bg-neutral-50/70 border border-neutral-200/90 rounded-xl text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:border-[#0000fb] focus:bg-white focus:ring-2 focus:ring-[#0000fb]/15 transition-all shadow-2xs"
                                 required
                             />
+                            <Link2 size={17} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
                             <div className="absolute inset-y-0 right-2 flex items-center" ref={infoRef}>
                                 <button
                                     type="button"
                                     onClick={() => setShowInfo((v) => !v)}
                                     aria-label="Supported platforms"
-                                    className="p-1.5 text-muted hover:text-brass transition-colors"
+                                    className="p-1.5 text-neutral-400 hover:text-neutral-700 transition-colors"
                                 >
                                     <Info size={16} />
                                 </button>
                                 {showInfo && (
-                                    <div className="absolute right-0 top-full mt-2 w-64 z-20 card p-4 text-left animate-fade">
-                                        <p className="eyebrow mb-2">Paste a link from</p>
+                                    <div className="absolute right-0 top-full mt-2 w-64 z-20 bg-white border border-neutral-200 rounded-2xl shadow-lg p-4 text-left animate-fade">
+                                        <p className="eyebrow mb-2 font-semibold text-neutral-600">Paste a link from</p>
                                         <div className="flex flex-wrap gap-1.5">
                                             {SUPPORTED_PLATFORMS.map((p) => (
-                                                <span key={p} className="text-xs px-2 py-0.5 rounded-full bg-paper3 text-ink2">
+                                                <span key={p} className="text-xs px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-700 font-medium">
                                                     {p}
                                                 </span>
                                             ))}
                                         </div>
-                                        <p className="text-xs text-muted mt-2.5 leading-relaxed">
+                                        <p className="text-xs text-neutral-500 mt-2.5 leading-relaxed">
                                             …and 1,000+ more sites. If a link has a public video, we can usually fetch it.
                                         </p>
                                     </div>
@@ -222,31 +230,29 @@ export default function MediaInput({ onProcess, isProcessing }) {
                 ) : (
                     <div
                         data-tutorial="drop-zone"
-                        className={`border-2 border-dashed rounded-card p-6 sm:p-8 text-center transition-colors ${file ? 'border-brass' : 'border-rule2 hover:border-brass'
-                            }`}
+                        className={`border border-dashed rounded-2xl p-7 sm:p-9 text-center transition-all ${
+                            file
+                                ? 'border-[#0000fb] bg-[#0000fb]/[0.02]'
+                                : 'border-neutral-300 hover:border-[#0000fb] bg-neutral-50/50 hover:bg-neutral-50'
+                        }`}
                         onDragOver={(e) => e.preventDefault()}
                         onDrop={handleDrop}
                     >
                         {file ? (
-                            <div className="flex items-center justify-center gap-3 text-ok min-w-0">
-                                <FileVideo size={18} className="shrink-0" />
-                                <span className="font-medium truncate">{file.name}</span>
+                            <div className="flex items-center justify-center gap-3 text-emerald-600 min-w-0">
+                                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200/60">
+                                    <FileVideo size={18} />
+                                </div>
+                                <span className="font-semibold text-neutral-900 truncate text-sm">{file.name}</span>
                                 <button
                                     type="button"
-                                    onClick={() => setFile(null)}
-                                    className="p-1 text-muted hover:text-ink hover:bg-paper3 rounded-full transition-colors"
+                                    onClick={(e) => { e.stopPropagation(); setFile(null); }}
+                                    className="p-1 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-200/60 rounded-full transition-colors"
                                 >
-                                    <X size={16} />
+                                    <X size={15} />
                                 </button>
                             </div>
-                        ) : null}
-                        {file && fileTooShort ? (
-                            <p className="text-danger text-sm mt-3" role="alert">
-                                This video is {Math.round(fileSeconds)}s long. Digiclip needs at least {MIN_SOURCE_SECONDS}s
-                                of footage to extract viral clips from. Please upload a longer video.
-                            </p>
-                        ) : null}
-                        {!file && (
+                        ) : (
                             <label className="cursor-pointer block">
                                 <input
                                     type="file"
@@ -254,11 +260,19 @@ export default function MediaInput({ onProcess, isProcessing }) {
                                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                                     className="hidden"
                                 />
-                                <Upload className="mx-auto mb-3 text-neutral-400" size={20} />
-                                <p className="text-neutral-900 font-semibold text-sm">Click to upload or drag and drop</p>
-                                <p className="readout mt-2">MP4, MOV up to 500MB · Podcast, stream, or long video</p>
+                                <div className="w-12 h-12 rounded-full bg-white shadow-xs border border-neutral-200 flex items-center justify-center mx-auto mb-3 text-[#0000fb]">
+                                    <Upload size={18} />
+                                </div>
+                                <p className="text-neutral-900 font-semibold text-sm">Click to upload or drag &amp; drop video</p>
+                                <p className="text-xs text-neutral-500 mt-1.5 font-normal">MP4, MOV up to 500MB · Podcast, stream, or long video</p>
                             </label>
                         )}
+                        {file && fileTooShort ? (
+                            <p className="text-rose-600 text-xs mt-3 font-medium" role="alert">
+                                This video is {Math.round(fileSeconds)}s long. Digiclip needs at least {MIN_SOURCE_SECONDS}s
+                                of footage to extract viral clips from. Please upload a longer video.
+                            </p>
+                        ) : null}
                     </div>
                 )}
 
@@ -272,12 +286,12 @@ export default function MediaInput({ onProcess, isProcessing }) {
 
                 {/* Output format selector */}
                 <div className="mt-5" data-tutorial="output-format">
-                    <p className="eyebrow mb-2">Output format</p>
-                    <div className="grid grid-cols-3 gap-2">
+                    <p className="eyebrow mb-2 font-semibold text-neutral-600">Output Format</p>
+                    <div className="grid grid-cols-3 gap-2.5">
                         {[
                             { value: 'vertical', label: '9:16', hint: 'Shorts · Reels · TikTok', w: 18, h: 32 },
-                            { value: 'square', label: '1:1', hint: 'Feed posts', w: 28, h: 28 },
-                            { value: 'horizontal', label: '16:9', hint: 'Keep landscape · YouTube', w: 36, h: 20 },
+                            { value: 'square', label: '1:1', hint: 'Square Feed', w: 26, h: 26 },
+                            { value: 'horizontal', label: '16:9', hint: 'YouTube Landscape', w: 34, h: 20 },
                         ].map((f) => {
                             const active = outputFormat === f.value;
                             return (
@@ -285,8 +299,10 @@ export default function MediaInput({ onProcess, isProcessing }) {
                                     key={f.value}
                                     type="button"
                                     onClick={() => setOutputFormat(f.value)}
-                                    className={`py-3 px-2 rounded-input border flex flex-col items-center gap-2 transition-colors
-                                        ${active ? 'border-[color:var(--color-accent)] text-ink' : 'border-rule2 text-muted hover:border-[color:var(--color-accent)]'}`}
+                                    className={`py-3 px-2 rounded-xl border flex flex-col items-center gap-2 transition-all
+                                        ${active
+                                            ? 'border-2 border-[#0000fb] bg-[#0000fb]/[0.03] text-neutral-900 shadow-2xs font-semibold'
+                                            : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-300 hover:bg-neutral-50/50'}`}
                                 >
                                     {/* Aspect-ratio glyph */}
                                     <span
@@ -294,12 +310,12 @@ export default function MediaInput({ onProcess, isProcessing }) {
                                         style={{
                                             width: `${f.w}px`,
                                             height: `${f.h}px`,
-                                            borderColor: active ? 'var(--color-accent)' : 'var(--color-rule-2)',
-                                            backgroundColor: active ? 'color-mix(in srgb, var(--color-accent) 22%, transparent)' : 'transparent',
+                                            borderColor: active ? '#0000fb' : '#d1d1d6',
+                                            backgroundColor: active ? 'rgba(0, 0, 251, 0.12)' : 'transparent',
                                         }}
                                     />
                                     <span className="block font-mono text-sm leading-none">{f.label}</span>
-                                    <span className="block text-[11px] sm:text-[10px] leading-tight text-center text-muted">{f.hint}</span>
+                                    <span className="block text-[11px] sm:text-[10px] leading-tight text-center text-neutral-500 font-normal">{f.hint}</span>
                                 </button>
                             );
                         })}
@@ -424,16 +440,17 @@ export default function MediaInput({ onProcess, isProcessing }) {
                     type="submit"
                     data-tutorial="generate"
                     disabled={isProcessing || !acknowledged || (mode === 'url' && !url) || (mode === 'file' && (!file || fileTooShort))}
-                    className="w-full btn-primary mt-4"
+                    className="w-full mt-5 py-3.5 px-6 rounded-xl font-semibold text-white bg-[#0000fb] hover:bg-[#0000d6] disabled:opacity-40 disabled:hover:bg-[#0000fb] disabled:cursor-not-allowed shadow-[0_4px_16px_rgba(0,0,251,0.22)] hover:shadow-[0_6px_22px_rgba(0,0,251,0.32)] active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer"
                 >
                     {isProcessing ? (
                         <>
-                            <Loader2 size={16} className="animate-spin" />
-                            Processing Video...
+                            <Loader2 size={18} className="animate-spin" />
+                            <span>Processing Video with AI...</span>
                         </>
                     ) : (
                         <>
-                            Generate Clips
+                            <Sparkles size={18} />
+                            <span>Generate 8 Viral Clips</span>
                         </>
                     )}
                 </button>

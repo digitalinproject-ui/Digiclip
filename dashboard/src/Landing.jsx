@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, Zap, Globe, FileVideo, Subtitles, Youtube, Instagram, Shield, Github, ArrowRight, Check, ChevronDown, Monitor, Cpu, Languages, Type, Upload, Scissors, Link2, Bot } from 'lucide-react';
+import { BlurReveal } from './components/ui/BlurReveal';
 import SiteNav from './components/SiteNav';
 import { useAuth } from './contexts/AuthContext';
 import './landing.css';
@@ -70,9 +71,17 @@ const DEMOS = [
 
 const SectionHeader = ({ eyebrow, title, children }) => (
   <div className="mb-12">
-    <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">{eyebrow}</p>
-    <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 tracking-tight mb-3">{title}</h2>
-    {children && <p className="text-neutral-600 max-w-2xl leading-relaxed text-base">{children}</p>}
+    <BlurReveal delay={0.05} duration={0.6}>
+      <p className="eyebrow mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">{eyebrow}</p>
+    </BlurReveal>
+    <BlurReveal delay={0.12} duration={0.7} yOffset={10}>
+      <h2 className="font-display font-bold text-3xl md:text-4xl text-neutral-900 tracking-tight mb-3">{title}</h2>
+    </BlurReveal>
+    {children && (
+      <BlurReveal delay={0.2} duration={0.6} yOffset={8}>
+        <p className="text-neutral-600 max-w-2xl leading-relaxed text-base">{children}</p>
+      </BlurReveal>
+    )}
   </div>
 );
 
@@ -561,103 +570,115 @@ export default function Landing({ onLaunchApp }) {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_auto] gap-12 lg:gap-16 items-center">
           <div className="min-w-0">
             {/* Subtle Pill Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-xs font-semibold text-neutral-800 mb-6 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#0000fb] ring-4 ring-[#0000fb]/15"></span>
-              <span>AI Video Clip Maker</span>
-              <span className="text-neutral-300">|</span>
-              <span className="text-neutral-600 font-medium">8 Viral Shorts Per Video</span>
-            </div>
+            <BlurReveal delay={0.04} duration={0.6}>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-xs font-semibold text-neutral-800 mb-6 shadow-2xs backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-[#0000fb] ring-4 ring-[#0000fb]/15 animate-pulse"></span>
+                <span>AI Video Clip Maker</span>
+                <span className="text-neutral-300">·</span>
+                <span className="text-neutral-600 font-medium">8 Viral Shorts Per Video</span>
+              </div>
+            </BlurReveal>
 
-            <h1 className="hero-h1 mb-5">
-              <span className="block">AI Video Clip Maker:</span>
-              <span className="text-neutral-900">Long Video In, </span>
-              <span className="text-[#0000fb]">Viral Shorts Out.</span>
-            </h1>
+            <BlurReveal delay={0.14} duration={0.8} yOffset={16}>
+              <h1 className="hero-h1 mb-5">
+                <span className="block text-neutral-900">Long Video In.</span>
+                <span className="text-[#0000fb]">Viral Shorts Out.</span>
+              </h1>
+            </BlurReveal>
 
-            <p className="text-neutral-600 max-w-xl mb-8 leading-relaxed text-base sm:text-lg font-normal">
-              Turn long videos, podcasts, and streams into 8 high-engagement vertical shorts. Automatically reframed to 9:16 with animated subtitles and viral hooks—ready to post in minutes.
-            </p>
+            <BlurReveal delay={0.24} duration={0.7} yOffset={10}>
+              <p className="text-neutral-600 max-w-xl mb-8 leading-relaxed text-base sm:text-lg font-normal">
+                Turn long videos, podcasts, and streams into 8 high-engagement vertical shorts. Automatically reframed to 9:16 with animated subtitles and viral hooks—ready to post in minutes.
+              </p>
+            </BlurReveal>
 
             {/* Apple Spotlight-Style Unified Capsule Input */}
-            <form onSubmit={handleHeroSubmit} className="mb-6 max-w-2xl">
-              <div className="p-1.5 sm:p-2 bg-white border border-neutral-200/90 rounded-2xl shadow-sm hover:shadow-md focus-within:shadow-md focus-within:border-[#0000fb]/40 transition-all flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                <div className="relative flex-1 min-w-0 flex items-center">
-                  <Link2 size={18} className="absolute left-3.5 text-neutral-400 pointer-events-none" />
-                  <input
-                    type="url"
-                    value={heroUrl}
-                    onChange={(e) => setHeroUrl(e.target.value)}
-                    placeholder="Paste YouTube, Twitch, or Kick URL..."
-                    className="w-full pl-10 pr-3 py-2.5 bg-transparent text-sm sm:text-base text-neutral-900 placeholder-neutral-400 focus:outline-none"
-                    aria-label="Video link"
-                  />
+            <BlurReveal delay={0.34} duration={0.7} yOffset={10}>
+              <form onSubmit={handleHeroSubmit} className="mb-6 max-w-2xl">
+                <div className="p-1.5 sm:p-2 bg-white border border-neutral-200/90 rounded-2xl shadow-sm hover:shadow-md focus-within:shadow-md focus-within:border-[#0000fb]/40 transition-all flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div className="relative flex-1 min-w-0 flex items-center">
+                    <Link2 size={18} className="absolute left-3.5 text-neutral-400 pointer-events-none" />
+                    <input
+                      type="url"
+                      value={heroUrl}
+                      onChange={(e) => setHeroUrl(e.target.value)}
+                      placeholder="Paste YouTube, Twitch, or Kick URL..."
+                      className="w-full pl-10 pr-3 py-2.5 bg-transparent text-sm sm:text-base text-neutral-900 placeholder-neutral-400 focus:outline-none"
+                      aria-label="Video link"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="submit"
+                      className="flex-1 sm:flex-none whitespace-nowrap font-semibold bg-[#0000fb] hover:bg-[#0000d6] text-white px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-sm cursor-pointer"
+                    >
+                      <Sparkles size={15} />
+                      <span>Get Free Clips</span>
+                      <ArrowRight size={15} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onLaunchApp}
+                      className="flex-1 sm:flex-none whitespace-nowrap font-medium bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 px-4 py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 text-sm cursor-pointer"
+                    >
+                      <Upload size={15} />
+                      <span>Upload</span>
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="submit"
-                    className="flex-1 sm:flex-none whitespace-nowrap font-semibold bg-[#0000fb] hover:bg-[#0000d6] text-white px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-sm"
-                  >
-                    <span>Get Free Clips</span>
-                    <ArrowRight size={15} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={onLaunchApp}
-                    className="flex-1 sm:flex-none whitespace-nowrap font-medium bg-neutral-100 hover:bg-neutral-200/80 text-neutral-800 px-4 py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 text-sm"
-                  >
-                    <Upload size={15} />
-                    <span>Upload</span>
-                  </button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </BlurReveal>
 
             {/* Apple-style Guarantee Badges Tier */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-neutral-700 mb-4">
-              <span className="inline-flex items-center gap-1.5">
-                <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 100% Free &amp; Open Source
-              </span>
-              <span className="text-neutral-300">·</span>
-              <span className="inline-flex items-center gap-1.5">
-                <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 8 Viral Clips Guaranteed
-              </span>
-              <span className="text-neutral-300">·</span>
-              <span className="inline-flex items-center gap-1.5">
-                <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> No Watermarks or Paywalls
-              </span>
-            </div>
+            <BlurReveal delay={0.44} duration={0.6} yOffset={8}>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-neutral-700 mb-4">
+                <span className="inline-flex items-center gap-1.5">
+                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 100% Free &amp; Open Source
+                </span>
+                <span className="text-neutral-300">·</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 8 Viral Clips Guaranteed
+                </span>
+                <span className="text-neutral-300">·</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> No Watermarks or Paywalls
+                </span>
+              </div>
+            </BlurReveal>
 
             {/* Platform Compatibility Chips */}
-            <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-500">
-              <span className="text-neutral-400 font-medium">Compatible with:</span>
-              {['YouTube', 'Twitch', 'Kick', 'TikTok', 'Podcasts'].map((platform) => (
-                <span key={platform} className="px-2.5 py-0.5 rounded-lg bg-neutral-100/90 text-neutral-700 font-medium">
-                  {platform}
-                </span>
-              ))}
-              <span className="mx-1 text-neutral-300">|</span>
-              <a
-                href="https://github.com/digitalinproject-ui/Digiclip"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
-              >
-                <Github size={13} />
-                <span>GitHub Repository</span>
-              </a>
-              <span className="mx-1 text-neutral-300">|</span>
-              <span className="text-neutral-400">
-                Powered by{' '}
+            <BlurReveal delay={0.52} duration={0.6} yOffset={6}>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+                <span className="text-neutral-400 font-medium">Compatible with:</span>
+                {['YouTube', 'Twitch', 'Kick', 'TikTok', 'Podcasts'].map((platform) => (
+                  <span key={platform} className="px-2.5 py-0.5 rounded-lg bg-neutral-100/90 text-neutral-700 font-medium">
+                    {platform}
+                  </span>
+                ))}
+                <span className="mx-1 text-neutral-300">|</span>
                 <a
-                  href="https://digitalinlabs.id"
+                  href="https://github.com/digitalinproject-ui/Digiclip"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
+                  className="inline-flex items-center gap-1.5 font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
                 >
-                  Digitalinlabs.id
+                  <Github size={13} />
+                  <span>GitHub Repository</span>
                 </a>
-              </span>
-            </div>
+                <span className="mx-1 text-neutral-300">|</span>
+                <span className="text-neutral-400">
+                  Powered by{' '}
+                  <a
+                    href="https://digitalinlabs.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-neutral-700 hover:text-[#0000fb] transition-colors"
+                  >
+                    Digitalinlabs.id
+                  </a>
+                </span>
+              </div>
+            </BlurReveal>
           </div>
 
           {/* Clean Apple Smartphone Preview with Floating Status Widgets */}

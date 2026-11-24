@@ -358,3 +358,44 @@ h1.lowercase, h2.lowercase, h3.lowercase, h4.lowercase,
   text-transform: none !important;
   font-weight: 700 !important;
 }
+
+/* ==========================================================================
+   APPLE HIG BLUR-REVEAL ANIMATIONS (@spell/blur-reveal style)
+   ========================================================================== */
+@keyframes blurReveal {
+  0% {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.animate-blur-reveal {
+  animation: blurReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, filter, transform;
+}
+
+.animate-blur-reveal-fast {
+  animation: blurReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, filter, transform;
+}
+
+.animate-blur-reveal-delay-1 {
+  animation: blurReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  will-change: opacity, filter, transform;
+}
+
+.animate-blur-reveal-delay-2 {
+  animation: blurReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+  will-change: opacity, filter, transform;
+}
+
+.animate-blur-reveal-delay-3 {
+  animation: blurReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+  will-change: opacity, filter, transform;
+}

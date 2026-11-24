@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Upload, Sparkles, Youtube, Instagram, Share2, ChevronDown, Check, Activity, LayoutDashboard, Settings, Plus, History, X, Terminal, Shield, LayoutGrid, Image, Globe, RotateCcw, Calendar, AlertTriangle, KeyRound, Bot, Users, Smartphone, ExternalLink, Copy, CheckCircle2, Mail, Loader2, Download, Menu, Lock, Rocket, Layers, Search, Bell, HelpCircle, User, Play, SlidersHorizontal, MoreHorizontal, Scissors, Heart } from 'lucide-react';
+import BlurReveal from './components/ui/BlurReveal';
 import KeyInput from './components/KeyInput';
 import MediaInput from './components/MediaInput';
 import McpConnectCard from './components/McpConnectCard';
@@ -2358,30 +2359,38 @@ function App() {
               <div className="max-w-2xl w-full text-center">
                 {/* Header Block with Proportional Apple Hierarchy & Vertical Rhythm */}
                 <div className="mb-6 sm:mb-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-[11px] font-semibold text-neutral-700 mb-3 shadow-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#0000fb]"></span>
-                    <span>01 · CLIP GENERATOR</span>
-                  </div>
+                  <BlurReveal delay={0.04} duration={0.6}>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100/90 border border-neutral-200/80 text-[11px] font-semibold text-neutral-700 mb-3.5 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0000fb] animate-pulse"></span>
+                      <span>01 · CLIP GENERATOR</span>
+                    </div>
+                  </BlurReveal>
 
-                  <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] tracking-tight leading-tight">
-                    Smart AI Clipping for Creators
-                  </h1>
+                  <BlurReveal delay={0.12} duration={0.75} yOffset={14}>
+                    <h1 className="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-[#1d1d1f] tracking-tight leading-tight">
+                      Smart AI Clipping for Creators
+                    </h1>
+                  </BlurReveal>
 
-                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-lg mx-auto mt-2.5 font-normal">
-                    Drop your podcast, stream, or video below to automatically extract 8 viral moments with AI.
-                  </p>
+                  <BlurReveal delay={0.22} duration={0.7} yOffset={10}>
+                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-lg mx-auto mt-2.5 font-normal">
+                      Drop your podcast, stream, or video below to automatically extract 8 viral moments with AI.
+                    </p>
+                  </BlurReveal>
 
                   {!tutorialLock && (
-                    <p className="text-xs text-neutral-400 mt-2">
-                      Or let an agent do it:{' '}
-                      <a
-                        href={billingEnabled ? '#/account' : '#app'}
-                        onClick={(e) => { if (!billingEnabled) { e.preventDefault(); goToTab('settings'); } }}
-                        className="text-neutral-600 hover:text-[#0000fb] font-medium underline underline-offset-2 transition-colors"
-                      >
-                        connect Claude, ChatGPT or n8n →
-                      </a>
-                    </p>
+                    <BlurReveal delay={0.3} duration={0.6} yOffset={8}>
+                      <p className="text-xs text-neutral-400 mt-2">
+                        Or let an agent do it:{' '}
+                        <a
+                          href={billingEnabled ? '#/account' : '#app'}
+                          onClick={(e) => { if (!billingEnabled) { e.preventDefault(); goToTab('settings'); } }}
+                          className="text-neutral-600 hover:text-[#0000fb] font-medium underline underline-offset-2 transition-colors"
+                        >
+                          connect Claude, ChatGPT or n8n →
+                        </a>
+                      </p>
+                    </BlurReveal>
                   )}
                 </div>
 
