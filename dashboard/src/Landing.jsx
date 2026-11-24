@@ -421,7 +421,7 @@ export default function Landing({ onLaunchApp }) {
     {
       icon: Sparkles,
       title: "AI Viral Moment Detection",
-      description: "Google Gemini 3.1 Flash-Lite scores your transcript and scene cuts to extract the top 8 viral moments automatically with zero manual scrubbing."
+      description: "Google Gemini 3.1 Flash-Lite scores your transcript and scene cuts to extract the top 4 viral moments automatically with zero manual scrubbing."
     },
     {
       icon: Scissors,
@@ -524,7 +524,7 @@ export default function Landing({ onLaunchApp }) {
     },
     {
       question: "How do I turn a long-form video into TikTok or Reels clips?",
-      answer: "Upload your video or paste a link, enter your Gemini API key if self-hosting, and click Generate. Digiclip automatically transcribes, cuts 8 viral moments, tracks speakers, and burns animated subtitles ready for social media."
+      answer: "Upload your video or paste a link, enter your Gemini API key if self-hosting, and click Generate. Digiclip automatically transcribes, cuts 4 viral moments, tracks speakers, and burns animated subtitles ready for social media."
     },
     {
       question: "Can Digiclip generate YouTube thumbnails and titles for free?",
@@ -536,7 +536,7 @@ export default function Landing({ onLaunchApp }) {
     },
     {
       question: "What AI does Digiclip use for viral moment detection?",
-      answer: "Digiclip uses Google Gemini 3.1 Flash-Lite, analyzing narrative momentum, emotional shifts, and audience hooks to score and rank the 8 strongest clips."
+      answer: "Digiclip uses Google Gemini 3.1 Flash-Lite, analyzing narrative momentum, emotional shifts, and audience hooks to score and rank the 4 strongest clips."
     },
     {
       question: "Can Digiclip translate and dub videos into other languages?",
@@ -575,7 +575,7 @@ export default function Landing({ onLaunchApp }) {
                 <span className="w-2 h-2 rounded-full bg-[#0000fb] ring-4 ring-[#0000fb]/15 animate-pulse"></span>
                 <span>AI Video Clip Maker</span>
                 <span className="text-neutral-300">·</span>
-                <span className="text-neutral-600 font-medium">8 Viral Shorts Per Video</span>
+                <span className="text-neutral-600 font-medium">4 Viral Shorts Per Video</span>
               </div>
             </BlurReveal>
 
@@ -637,7 +637,7 @@ export default function Landing({ onLaunchApp }) {
                 </span>
                 <span className="text-neutral-300">·</span>
                 <span className="inline-flex items-center gap-1.5">
-                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 8 Viral Clips Guaranteed
+                  <Check size={14} className="text-[#0000fb] stroke-[2.5]" /> 4 Viral Clips Guaranteed
                 </span>
                 <span className="text-neutral-300">·</span>
                 <span className="inline-flex items-center gap-1.5">
@@ -717,7 +717,7 @@ export default function Landing({ onLaunchApp }) {
                 </div>
                 <div>
                   <div className="text-[10px] uppercase font-bold text-neutral-400 tracking-wider">Smart Reframe</div>
-                  <div className="text-xs font-bold text-neutral-900">8 Clips Ready</div>
+                  <div className="text-xs font-bold text-neutral-900">4 Clips Ready</div>
                 </div>
               </div>
             </div>
@@ -729,7 +729,7 @@ export default function Landing({ onLaunchApp }) {
       <section className="border-b border-rule bg-white/50">
         <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-y-8 md:divide-x divide-neutral-200 text-center">
           {[
-            ['8 Clips', 'Guaranteed Output Per Run'],
+            ['4 Clips', 'Guaranteed Output Per Run'],
             ['9:16', 'Smart AI Face Tracking'],
             ['30+', 'AI Dubbing Languages'],
             ['100% Free', 'Open Source Under MIT'],
@@ -794,8 +794,8 @@ export default function Landing({ onLaunchApp }) {
           The pattern the market leader opens with, shown with our own output. */}
       <section className="py-20 px-6 border-b border-rule">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader eyebrow="02 · One Video, 8 Clips" title="One 27-Minute Episode In. 8 Ready-To-Post Clips Out.">
-            No prompts, no settings and no scrubbing: the AI scored every moment, kept the eight that stand on their own and cut them with captions and a hook.
+          <SectionHeader eyebrow="02 · One Video, 4 Clips" title="One 27-Minute Episode In. 4 Ready-To-Post Clips Out.">
+            No prompts, no settings and no scrubbing: the AI scored every moment, kept the four that stand on their own and cut them with captions and a hook.
           </SectionHeader>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,15rem)_auto_minmax(0,1fr)] gap-6 items-center">
             <figure className="m-0 max-w-[16rem] lg:max-w-none">
@@ -958,7 +958,7 @@ export default function Landing({ onLaunchApp }) {
               <tbody>
                 <ComparisonRow feature="Price" digiclip={<span className="text-emerald-600 font-bold">100% Free ($0)</span>} opusclip={<span className="text-neutral-500 text-sm">$15/mo</span>} kapwing={<span className="text-neutral-500 text-sm">$24/mo</span>} />
                 <ComparisonRow feature="Subscriptions / Hidden Fees" digiclip={<span className="text-emerald-600 font-bold">Zero ($0)</span>} opusclip={<span className="text-neutral-500 text-sm">Monthly plan</span>} kapwing={<span className="text-neutral-500 text-sm">Monthly plan</span>} />
-                <ComparisonRow feature="Target 8 Clips Per Run" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">Varies</span>} kapwing={<span className="text-neutral-400 text-sm">Manual</span>} />
+                <ComparisonRow feature="Target 4 Clips Per Run" digiclip={checkIcon} opusclip={<span className="text-neutral-400 text-sm">Varies</span>} kapwing={<span className="text-neutral-400 text-sm">Manual</span>} />
                 <ComparisonRow feature="AI Viral Moment Detection" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
                 <ComparisonRow feature="Smart Vertical Cropping" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
                 <ComparisonRow feature="Auto Subtitles" digiclip={checkIcon} opusclip={checkMuted} kapwing={checkMuted} />
@@ -1137,7 +1137,7 @@ export default function Landing({ onLaunchApp }) {
       <section className="py-24 px-6 border-t border-rule bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tracking-tight mb-5">Start Creating Viral Videos Today.</h2>
-          <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">100% Free &amp; Open Source · 8 clips per run · Zero subscription · Zero watermarks.</p>
+          <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">100% Free &amp; Open Source · 4 clips per run · Zero subscription · Zero watermarks.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
               Launch Digiclip Studio

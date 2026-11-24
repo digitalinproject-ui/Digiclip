@@ -95,8 +95,8 @@ export const NAV_LINKS = [
 ]
 
 export const NAV_STRINGS = {
-  en: { cta: 'Get Free Clips', ctaHint: '100% Free and Open Source. 8 clips automatically generated with zero watermarks.', openApp: 'Open Studio', login: 'Log In', menu: 'Menu', main: 'Main', github: 'Digiclip on GitHub' },
-  es: { cta: 'Clips Gratis', ctaHint: '100% Gratis y de Código Abierto. 8 clips generados automáticamente sin marcas de agua.', openApp: 'Abrir Studio', login: 'Iniciar Sesión', menu: 'Menú', main: 'Principal', github: 'Digiclip en GitHub' },
+  en: { cta: 'Get Free Clips', ctaHint: '100% Free and Open Source. 4 clips automatically generated with zero watermarks.', openApp: 'Open Studio', login: 'Log In', menu: 'Menu', main: 'Main', github: 'Digiclip on GitHub' },
+  es: { cta: 'Clips Gratis', ctaHint: '100% Gratis y de Código Abierto. 4 clips generados automáticamente sin marcas de agua.', openApp: 'Abrir Studio', login: 'Iniciar Sesión', menu: 'Menú', main: 'Principal', github: 'Digiclip en GitHub' },
 }
 
 const pick = (v, lang) => (v && typeof v === 'object' ? v[lang] || v.en : v)

@@ -2362,7 +2362,7 @@ function App() {
 
                   <BlurReveal delay={0.22} duration={0.7} yOffset={10}>
                     <p className="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-lg mx-auto mt-2.5 font-normal">
-                      Drop your podcast, stream, or video below to automatically extract 8 viral moments with AI.
+                      Drop your podcast, stream, or video below to automatically extract 4 viral moments with AI.
                     </p>
                   </BlurReveal>
 

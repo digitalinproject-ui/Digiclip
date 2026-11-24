@@ -60,9 +60,9 @@ def clip_count_targets(n_windows):
         except ValueError:
             return current
 
-    # Target 8 clips to fill the 4x2 grid (4 across, 2 rows down in 1 screen)
-    low = _override("CLIP_TARGET_MIN", 8)
-    high = _override("CLIP_TARGET_MAX", 8)
+    # Target 4 clips (optimized for CPU speed and highest viral quality)
+    low = _override("CLIP_TARGET_MIN", 4)
+    high = _override("CLIP_TARGET_MAX", 4)
     return low, max(low, high)
 
 

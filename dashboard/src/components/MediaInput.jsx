@@ -450,7 +450,7 @@ export default function MediaInput({ onProcess, isProcessing }) {
                     ) : (
                         <>
                             <Sparkles size={18} />
-                            <span>Generate 8 Viral Clips</span>
+                            <span>Generate 4 Viral Clips</span>
                         </>
                     )}
                 </button>
