@@ -13,7 +13,7 @@ export function BlurReveal({
   blur = '12px',
   yOffset = 12,
   className = '',
-  as: Component = 'div',
+  as = 'div',
   style = {},
   ...props
 }) {
@@ -26,21 +26,21 @@ export function BlurReveal({
     return () => clearTimeout(timer);
   }, [delay]);
 
-  return (
-    <Component
-      className={className}
-      style={{
+  return React.createElement(
+    as,
+    {
+      className,
+      style: {
         ...style,
         opacity: revealed ? 1 : 0,
         filter: revealed ? 'blur(0px)' : `blur(${blur})`,
         transform: revealed ? 'translateY(0px)' : `translateY(${yOffset}px)`,
         transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1), filter ${duration}s cubic-bezier(0.16, 1, 0.3, 1), transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1)`,
         willChange: 'opacity, filter, transform',
-      }}
-      {...props}
-    >
-      {children}
-    </Component>
+      },
+      ...props,
+    },
+    children
   );
 }
 
@@ -55,32 +55,32 @@ export function BlurRevealWords({
   blur = '10px',
   yOffset = 10,
   className = '',
-  as: Component = 'span',
+  as = 'span',
   highlightIndices = [],
   highlightClass = 'text-[#0000fb]',
   ...props
 }) {
   const words = typeof text === 'string' ? text.split(' ') : [];
 
-  return (
-    <Component className={`inline-block ${className}`} {...props}>
-      {words.map((word, i) => {
-        const isHighlight = highlightIndices.includes(i);
-        return (
-          <span key={i} className={`inline-block mr-[0.28em] ${isHighlight ? highlightClass : ''}`}>
-            <BlurReveal
-              delay={delay + i * wordDelay}
-              duration={duration}
-              blur={blur}
-              yOffset={yOffset}
-              as="span"
-            >
-              {word}
-            </BlurReveal>
-          </span>
-        );
-      })}
-    </Component>
+  return React.createElement(
+    as,
+    { className: `inline-block ${className}`, ...props },
+    words.map((word, i) => {
+      const isHighlight = highlightIndices.includes(i);
+      return (
+        <span key={i} className={`inline-block mr-[0.28em] ${isHighlight ? highlightClass : ''}`}>
+          <BlurReveal
+            delay={delay + i * wordDelay}
+            duration={duration}
+            blur={blur}
+            yOffset={yOffset}
+            as="span"
+          >
+            {word}
+          </BlurReveal>
+        </span>
+      );
+    })
   );
 }
 

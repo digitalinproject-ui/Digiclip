@@ -140,7 +140,7 @@ function clearPendingJob() {
   } catch (_) { /* ignore */ }
 }
 
-const formatRetention = (seconds) => {
+const _formatRetention = (seconds) => {
   if (seconds >= 86400) return `${Math.round(seconds / 86400)} day${seconds >= 172800 ? 's' : ''}`;
   if (seconds >= 3600) return `${Math.round(seconds / 3600)} hour${seconds >= 7200 ? 's' : ''}`;
   return `${Math.max(1, Math.round(seconds / 60))} min`;
@@ -289,7 +289,7 @@ const pollJob = async (jobId) => {
 
 function App() {
   // Cloud auth/billing session (inert when billing is disabled).
-  const { billingEnabled, isManaged, isSignedIn, me, plan, refreshMe, jobRetentionSeconds, localLlm, loading: authLoading } = useAuth();
+  const { billingEnabled, isManaged, isSignedIn, me, plan, refreshMe, _jobRetentionSeconds, localLlm, loading: authLoading } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
   const [showTopUp, setShowTopUp] = useState(false);
   // Free plan: "want the watermark off?" once per job, when the clips land.
@@ -303,7 +303,7 @@ function App() {
   // only the first part of the source (the quota wall's free offer).
   const [partialJob, setPartialJob] = useState(null);
   // The free plan's first video, clipped whole past the 20-minute balance.
-  const [firstVideoJob, setFirstVideoJob] = useState(false);
+  const [_firstVideoJob, setFirstVideoJob] = useState(false);
   // {position, ahead, eta_seconds} while the job waits in line, else null.
   const [queueInfo, setQueueInfo] = useState(null);
   // A free video far back in a saturated queue: the server says later
@@ -355,7 +355,7 @@ function App() {
   // either connects a network or dismisses it. Only 2.7% of cloud users who
   // reach the social flow ever connect an account — this is the moment (clips
   // just appeared) with the best odds of moving that number.
-  const [socialNudgeDismissed, setSocialNudgeDismissed] = useState(() => {
+  const [socialNudgeDismissed, _setSocialNudgeDismissed] = useState(() => {
     try { return localStorage.getItem('os_social_nudge_dismissed') === '1'; } catch (_) { return false; }
   });
   // Autopilot nudge, same results peak, ahead of the social one: the sign-up
@@ -395,7 +395,7 @@ function App() {
   const [filterStatus, setFilterStatus] = useState('all');
   const [showSourceModal, setShowSourceModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortOption, setSortOption] = useState('newest');
+  const [_sortOption, _setSortOption] = useState('newest');
 
   const displayClips = useMemo(() => {
     let list = rankedClips;
@@ -423,7 +423,7 @@ function App() {
   // Clips picked and finished so far, read from the running job's log, so the
   // results panel can say "3/5" instead of an open-ended wait.
   const progress = useMemo(() => clipProgress(logs), [logs]);
-  const clipsMaking = status === 'processing' && progress.total > 0;
+  const _clipsMaking = status === 'processing' && progress.total > 0;
   // Collapsed on phones: the log tail is the least useful thing on a 360px
   // screen and it was pushing the actual clips a full scroll down.
   const [logsVisible, setLogsVisible] = useState(() => {
@@ -1216,7 +1216,7 @@ function App() {
       .catch(() => { /* keep the nudge */ });
   }, [status, showAutopilotNudge, plan]);
 
-  const dismissAutopilotNudge = (event) => {
+  const _dismissAutopilotNudge = (event) => {
     track(event);
     setAutopilotNudgeDismissed(true);
     try { localStorage.setItem('os_autopilot_nudge_dismissed', '1'); } catch (_) { /* ignore */ }

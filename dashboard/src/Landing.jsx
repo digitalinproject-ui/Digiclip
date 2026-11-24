@@ -2,7 +2,6 @@ import React from 'react';
 import { Sparkles, Zap, Globe, FileVideo, Subtitles, Youtube, Instagram, Shield, Github, ArrowRight, Check, ChevronDown, Monitor, Cpu, Languages, Type, Upload, Scissors, Link2, Bot } from 'lucide-react';
 import { BlurReveal } from './components/ui/BlurReveal';
 import SiteNav from './components/SiteNav';
-import { useAuth } from './contexts/AuthContext';
 import './landing.css';
 
 
@@ -383,7 +382,6 @@ function useSmoothSectionLinks() {
 export default function Landing({ onLaunchApp }) {
   useScrollToHashSection();
   useSmoothSectionLinks();
-  const { billingEnabled } = useAuth();
   const [openFaq, setOpenFaq] = React.useState(null);
   // Start from whatever was typed into the static paste box of the crawler
   // fallback (seo/landing-fallback.js) before this component mounted: the
@@ -560,7 +558,6 @@ export default function Landing({ onLaunchApp }) {
 
   const checkIcon = <Check size={16} className="text-brass mx-auto" />;
   const checkMuted = <Check size={16} className="text-muted mx-auto" />;
-  const xIcon = <span className="text-muted text-sm">Paid</span>;
 
   return (
     <div className="min-h-screen bg-paper text-ink2 overflow-x-clip">

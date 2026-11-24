@@ -66,8 +66,8 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
     // when it overflows, a hover (desktop) or tap (touch) shows the whole
     // sentence in a popover that floats over the card instead of growing it.
     const whyRef = useRef(null);
-    const [whyOpen, setWhyOpen] = useState(false);
-    const [whyClamped, setWhyClamped] = useState(false);
+    const [_whyOpen, _setWhyOpen] = useState(false);
+    const [_whyClamped, setWhyClamped] = useState(false);
     useEffect(() => {
         const el = whyRef.current;
         if (!el) return;
@@ -133,7 +133,7 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
     // A delivered clip is tens of MB, and on a slow link the old silent
     // fetch-then-save took minutes with nothing on screen, which reads as a dead
     // button. Stream it instead and report progress.
-    const [downloadPct, setDownloadPct] = useState(null);
+    const [_downloadPct, setDownloadPct] = useState(null);
 
     // Where a download pulls its bytes from: the archived copy when storage
     // holds exactly this file (the API is one busy process, and a clip through
@@ -212,7 +212,7 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
     // A reopened project seeds it from the persisted project state.
     const [serverVideoFile, setServerVideoFile] = useState(initialState?.server_file || (clip.video_url || '').split('/').pop());
     const [videoErrored, setVideoErrored] = useState(false);
-    const [resolution, setResolution] = useState(null);
+    const [_resolution, setResolution] = useState(null);
 
     // Adopt the durable copy only while it matches the current server file, and
     // pin the first signed URL seen for that file: /api/history mints a fresh
@@ -279,7 +279,7 @@ export default function ResultCard({ clip, index, jobId, durable, uploadPostKey,
     const [isTranslating, setIsTranslating] = useState(false);
     const [showHookModal, setShowHookModal] = useState(false);
     const [showTranslateModal, setShowTranslateModal] = useState(false);
-    const [editError, setEditError] = useState(null);
+    const [_editError, setEditError] = useState(null);
 
     // Pro mode: the talking-head re-edit (tighter frame on the face, dead air
     // cut, graded picture). The server renders a new file both ways, so the

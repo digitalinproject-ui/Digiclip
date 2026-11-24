@@ -11,11 +11,11 @@ export default function BatchTab() {
   const [enableHook, setEnableHook] = useState(true);
   const [badgeTag, setBadgeTag] = useState('DIGICLIP | VIRAL INSIGHT');
   const [subtitles, setSubtitles] = useState(true);
-  const [sarNormalize, setSarNormalize] = useState(true);
+  const [sarNormalize] = useState(true);
   
   // Batch Execution
   const [processing, setProcessing] = useState(false);
-  const [jobId, setJobId] = useState(null);
+  const [_jobId, setJobId] = useState(null);
   const [batchStatus, setBatchStatus] = useState(null);
 
   const handleScan = async () => {
