@@ -1904,7 +1904,7 @@ function App() {
             <div className="h-full overflow-y-auto p-4 sm:p-8 max-w-2xl mx-auto animate-fade">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
                 <div>
-                  <p className="eyebrow mb-1.5">08 · SETTINGS</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">Preferences</p>
                   <h1 className="font-display font-bold text-2xl sm:text-3xl text-neutral-900 tracking-tight">Settings</h1>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-muted mt-1">
@@ -2384,7 +2384,7 @@ function App() {
                       Clip Results
                     </h1>
                     <p className="text-xs text-neutral-500 mt-0.5">
-                      Your 8 generated clips are ready. Download, edit, or share them.
+                      Your {displayClips?.length || 4} generated clips are ready. Download, edit, or share them.
                     </p>
                   </div>
 
@@ -2525,8 +2525,8 @@ function App() {
                   )}
                 </div>
 
-                {/* 4 across, 2 rows down grid - exactly 8 clips fitting in 1 page without vertical scrolling */}
-                <div className="flex-1 min-h-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-2.5 sm:gap-3 overflow-y-auto lg:overflow-hidden pb-1">
+                {/* 4 across grid - adapts to 1 row for 4 clips or 2 rows for 8 clips */}
+                <div className={`flex-1 min-h-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ${displayClips.length > 4 ? 'lg:grid-rows-2' : ''} gap-2.5 sm:gap-3 overflow-y-auto lg:overflow-hidden pb-1`}>
                   {displayClips.slice(0, 8).map(({ clip, index: i }) => (
                     <ResultCard
                       key={`${jobId}-${i}-${clip.video_url || ''}`}
