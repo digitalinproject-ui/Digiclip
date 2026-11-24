@@ -57,7 +57,7 @@ Double click `start.bat` or run:
 ```powershell
 .\start.bat
 ```
-Open your browser at `http://localhost:5173` or `http://localhost:8000`.
+Open your browser at `http://localhost:5175`.
 
 ---
 
