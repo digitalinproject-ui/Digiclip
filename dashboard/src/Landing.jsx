@@ -1033,66 +1033,60 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Self-hosting details */}
-      <section className="py-16 px-6 border-t border-rule">
+      {/* Self-Hosting APIs Section */}
+      <section id="self-hosting" className="py-20 px-6 border-t border-rule bg-white">
         <div className="max-w-5xl mx-auto">
-          <details className="group">
-            <summary className="list-none cursor-pointer flex items-center justify-between gap-6 [&::-webkit-details-marker]:hidden">
-              <div>
-                <span className="eyebrow block mb-2 font-mono text-xs uppercase tracking-wider font-bold text-[#0000fb]">11 · Self-Hosting</span>
-                <h2 className="font-display font-bold text-2xl md:text-3xl text-neutral-900">Open Source: Run The Pipeline On Your Own Hardware</h2>
+          <SectionHeader eyebrow="Self-Hosting" title="Run on Your Own Hardware with Free APIs">
+            Digiclip is 100% open source. Self-hosters bring their own API keys (all with generous free tiers):
+          </SectionHeader>
+          <div className="grid md:grid-cols-3 gap-5">
+            <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative shadow-2xs">
+              <span className="badge-ok absolute top-4 right-4">Required</span>
+              <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+                <Cpu size={18} className="text-[#0000fb]" />
               </div>
-              <ChevronDown size={22} className="text-[#0000fb] shrink-0 transition-transform group-open:rotate-180" />
-            </summary>
-            {/* API Keys Section */}
-            <section className="pt-12">
-              <div className="max-w-5xl mx-auto">
-                <SectionHeader eyebrow="API Keys" title="Self-Hosting? Every API Has A Free Tier">
-                  Cloud plans include managed Gemini and social publishing. Self-hosters bring their own keys (all with generous free tiers):
-                </SectionHeader>
-                <div className="grid md:grid-cols-3 gap-5">
-                  <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative">
-                    <span className="badge-ok absolute top-4 right-4">Required</span>
-                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
-                      <Cpu size={18} className="text-[#0000fb]" />
-                    </div>
-                    <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">Google Gemini API</h3>
-                    <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier: 1,500 req/day</span></div>
-                    <p className="text-neutral-600 text-sm leading-relaxed">Powers viral moment detection, title generation, video effects, YouTube thumbnail creation, and description writing.</p>
-                  </div>
-                  <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative">
-                    <span className="readout absolute top-4 right-4 border border-neutral-200 rounded-full px-2.5 py-0.5 text-xs font-medium">Optional</span>
-                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
-                      <Languages size={18} className="text-[#0000fb]" />
-                    </div>
-                    <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">ElevenLabs API</h3>
-                    <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier included</span></div>
-                    <p className="text-neutral-600 text-sm leading-relaxed">Enables AI voice dubbing and translation in 30+ languages, preserving the speaker's vocal tone.</p>
-                  </div>
-                  <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative">
-                    <span className="readout absolute top-4 right-4 border border-neutral-200 rounded-full px-2.5 py-0.5 text-xs font-medium">Optional</span>
-                    <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
-                      <Globe size={18} className="text-[#0000fb]" />
-                    </div>
-                    <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">Upload-Post API</h3>
-                    <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier included</span></div>
-                    <p className="text-neutral-600 text-sm leading-relaxed">Enables direct publishing to YouTube, TikTok, and Instagram Reels straight from your dashboard.</p>
-                  </div>
-                </div>
+              <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">Google Gemini API</h3>
+              <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier: 1,500 req/day</span></div>
+              <p className="text-neutral-600 text-sm leading-relaxed">Powers viral moment detection, title generation, video effects, YouTube thumbnail creation, and description writing.</p>
+            </div>
+            <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative shadow-2xs">
+              <span className="readout absolute top-4 right-4 border border-neutral-200 rounded-full px-2.5 py-0.5 text-xs font-medium">Optional</span>
+              <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+                <Languages size={18} className="text-[#0000fb]" />
               </div>
-            </section>
-          </details>
+              <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">ElevenLabs API</h3>
+              <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier included</span></div>
+              <p className="text-neutral-600 text-sm leading-relaxed">Enables AI voice dubbing and translation in 30+ languages, preserving the speaker's vocal tone.</p>
+            </div>
+            <div className="card p-6 bg-white border border-neutral-200 rounded-2xl relative shadow-2xs">
+              <span className="readout absolute top-4 right-4 border border-neutral-200 rounded-full px-2.5 py-0.5 text-xs font-medium">Optional</span>
+              <div className="w-10 h-10 rounded-xl bg-[#0000fb]/10 flex items-center justify-center mb-4">
+                <Globe size={18} className="text-[#0000fb]" />
+              </div>
+              <h3 className="font-display font-bold text-lg text-neutral-900 mb-1">Upload-Post API</h3>
+              <div className="mb-3"><span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Free tier included</span></div>
+              <p className="text-neutral-600 text-sm leading-relaxed">Enables direct publishing to YouTube, TikTok, and Instagram Reels straight from your dashboard.</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section — Alternating Dot Grid */}
-      <section className="py-24 px-6 border-t border-rule relative overflow-hidden bg-[#fafafa]">
+      <section className="py-24 sm:py-28 px-6 border-t border-rule relative overflow-hidden bg-[#fafafa]">
         <div className="absolute inset-0 bg-dot-grid mask-radial-fade pointer-events-none opacity-80" aria-hidden="true" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tracking-tight mb-5">Start Creating Viral Videos Today.</h2>
-          <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">100% Free &amp; Open Source · 4 clips per run · Zero subscription · Zero watermarks.</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase bg-[#0000fb]/10 text-[#0000fb] border border-[#0000fb]/20 mb-6">
+            <Sparkles size={13} className="text-[#0000fb]" />
+            <span>Ready to Create?</span>
+          </div>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-neutral-900 tracking-tight mb-4">
+            Start Creating Viral Videos Today.
+          </h2>
+          <p className="text-neutral-600 mb-8 max-w-lg mx-auto leading-relaxed text-sm sm:text-base">
+            100% Free &amp; Open Source · 4 clips per run · Zero subscription · Zero watermarks.
+          </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md">
+            <button onClick={onLaunchApp} className="btn-primary whitespace-nowrap bg-[#0000fb] hover:bg-[#0000d6] text-white font-bold px-8 py-3.5 rounded-xl shadow-md transition-all hover:scale-[1.02]">
               Launch Digiclip Studio
               <ArrowRight size={16} />
             </button>
@@ -1100,7 +1094,7 @@ export default function Landing({ onLaunchApp }) {
               href="https://github.com/digitalinproject-ui/Digiclip"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-ghost whitespace-nowrap bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-800 font-semibold px-6 py-3.5 rounded-xl"
+              className="btn-ghost whitespace-nowrap bg-white border border-neutral-300 hover:bg-neutral-50 text-neutral-800 font-semibold px-6 py-3.5 rounded-xl transition-all"
             >
               <Github size={16} />
               Star on GitHub
@@ -1130,16 +1124,17 @@ export default function Landing({ onLaunchApp }) {
         </button>
       </form>
 
-      {/* Footer */}
-      <footer className="border-t border-rule py-16 px-6 bg-neutral-50/50">
+      {/* Footer — Apple HIG Quiet Grounded Footer */}
+      <footer className="border-t border-neutral-200 py-12 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <p className="font-display font-extrabold text-3xl md:text-5xl text-neutral-900 tracking-tight mb-10">Clip It Before It Scrolls Past.</p>
-          <div className="border-t border-neutral-200 pt-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="flex items-center">
                 <img src="/logo-full.png" alt="Digiclip" className="h-7 w-auto object-contain" />
               </div>
-              <span className="text-xs text-neutral-500 block mt-1.5">AI Video Clip Generator & Viral Shorts Studio</span>
+              <p className="text-xs text-neutral-500 mt-2">
+                AI Video Clip Generator &amp; Viral Shorts Studio · 100% Free &amp; Open Source
+              </p>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-neutral-600">
               <a
@@ -1147,7 +1142,7 @@ export default function Landing({ onLaunchApp }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Support & Donate Digiclip Open Source Project on Saweria"
-                className="text-rose-600 hover:text-rose-700 font-semibold bg-rose-50 px-3 py-1.5 rounded-full border border-rose-200 transition-colors flex items-center gap-1.5"
+                className="text-rose-600 hover:text-rose-700 font-semibold bg-rose-50 px-3 py-1.5 rounded-full border border-rose-200 transition-colors flex items-center gap-1.5 text-xs"
               >
                 ❤️ Support Donate (Saweria)
               </a>
@@ -1157,6 +1152,10 @@ export default function Landing({ onLaunchApp }) {
               <a href="/terms" className="hover:text-neutral-900 transition-colors whitespace-nowrap">Terms</a>
               <a href="/privacy" className="hover:text-neutral-900 transition-colors whitespace-nowrap">Privacy</a>
             </div>
+          </div>
+          <div className="border-t border-neutral-100 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+            <p>© {new Date().getFullYear()} Digiclip. Released under the MIT License.</p>
+            <p>Built for creators, streamers, and video editors.</p>
           </div>
         </div>
       </footer>
