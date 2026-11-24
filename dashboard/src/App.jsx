@@ -2339,8 +2339,9 @@ function App() {
 
           {/* View: Dashboard (Idle) */}
           {activeTab === 'dashboard' && status === 'idle' && (
-            <div className="h-full overflow-y-auto custom-scrollbar animate-fade">
-              <div className="min-h-full flex flex-col items-center justify-center px-4 py-5 sm:p-6">
+            <div className="h-full overflow-y-auto custom-scrollbar animate-fade relative bg-paper">
+              <div className="absolute inset-0 bg-dot-grid mask-radial-fade pointer-events-none" aria-hidden="true" />
+              <div className="min-h-full flex flex-col items-center justify-center px-4 py-5 sm:p-6 relative z-10">
               {/* On a phone the hero used to fill the fold on its own and push
                   the uploader — the whole point of the screen — below it. The
                   eyebrow, the display size and the gaps all shrink first. */}

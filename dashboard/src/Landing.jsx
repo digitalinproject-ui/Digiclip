@@ -567,9 +567,10 @@ export default function Landing({ onLaunchApp }) {
       {/* Navigation: the shared site nav (seo/nav.js), same items as every page */}
       <SiteNav className="fixed top-0 w-full z-50" />
 
-      {/* Hero — Apple HIG Clean Minimalist Hero */}
+      {/* Hero — Apple HIG Clean Minimalist Hero with Precision Dot Grid */}
       <section className="hero-blueprint relative overflow-clip border-b border-rule pt-28 pb-16 px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_auto] gap-12 lg:gap-16 items-center">
+        <div className="absolute inset-0 bg-dot-grid mask-radial-fade pointer-events-none" aria-hidden="true" />
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr)_auto] gap-12 lg:gap-16 items-center relative z-10">
           <div className="min-w-0">
             {/* Subtle Pill Eyebrow */}
             <BlurReveal delay={0.04} duration={0.6}>
@@ -830,8 +831,9 @@ export default function Landing({ onLaunchApp }) {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-6 border-t border-rule">
-        <div className="max-w-4xl mx-auto">
+      <section id="how-it-works" className="py-20 px-6 border-t border-rule relative overflow-hidden">
+        <div className="absolute inset-0 bg-dot-grid-subtle mask-radial-fade opacity-70 pointer-events-none" aria-hidden="true" />
+        <div className="max-w-4xl mx-auto relative z-10">
           <SectionHeader eyebrow="Workflow" title="From long video to viral clips in 5 steps">
             From long-form video to viral-ready clips in 5 automated steps.
           </SectionHeader>

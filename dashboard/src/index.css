@@ -59,6 +59,20 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
   }
 
+  /* Apple Pro / Linear precision dot grid texture */
+  .bg-dot-grid {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1.25px, transparent 1.25px);
+    background-size: 24px 24px;
+  }
+  .bg-dot-grid-subtle {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.065) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .mask-radial-fade {
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 100%);
+  }
+
   .card-hover {
     transition: transform var(--dur-short) var(--ease-out),
                 border-color var(--dur-short) var(--ease-out),

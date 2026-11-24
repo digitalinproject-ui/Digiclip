@@ -1,9 +1,22 @@
 /* Hallmark · genre: Apple HIG · macrostructure: Clean Hero · theme: Apple Minimalist Light */
 
-/* ---- hero: clean minimalist canvas with soft subtle ambient glow ---- */
+/* ---- hero: clean minimalist canvas with dot grid texture and soft ambient glow ---- */
 .hero-blueprint {
-  background: #ffffff;
-  background-image: radial-gradient(circle at 50% -10%, rgba(0, 0, 251, 0.035) 0%, transparent 65%);
+  position: relative;
+  background-color: #ffffff;
+}
+.hero-blueprint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(0, 0, 251, 0.045) 0%, transparent 65%),
+    radial-gradient(rgba(0, 0, 0, 0.1) 1.25px, transparent 1.25px);
+  background-size: 100% 100%, 24px 24px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 35%, #000 40%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ---- hero headline + brand verb landmark ---- */
