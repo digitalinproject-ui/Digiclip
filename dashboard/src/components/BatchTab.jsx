@@ -25,8 +25,14 @@ export default function BatchTab() {
     try {
       const res = await fetch(`/api/digiclip/scan?folder=${encodeURIComponent(folderPath.trim())}`);
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || 'Failed to scan folder');
+        let errMsg = 'Failed to scan folder';
+        try {
+          const err = await res.json();
+          errMsg = err.detail || err.message || errMsg;
+        } catch {
+          errMsg = `Server connection error (${res.status} ${res.statusText || 'Check backend on port 8000'})`;
+        }
+        throw new Error(errMsg);
       }
       const data = await res.json();
       setScanResult(data);
@@ -54,8 +60,14 @@ export default function BatchTab() {
         })
       });
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || 'Failed to start batch processing');
+        let errMsg = 'Failed to start batch processing';
+        try {
+          const err = await res.json();
+          errMsg = err.detail || err.message || errMsg;
+        } catch {
+          errMsg = `Server connection error (${res.status} ${res.statusText || 'Check backend on port 8000'})`;
+        }
+        throw new Error(errMsg);
       }
       const data = await res.json();
       setJobId(data.job_id);
