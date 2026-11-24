@@ -68,6 +68,10 @@
     background-image: radial-gradient(rgba(0, 0, 0, 0.065) 1px, transparent 1px);
     background-size: 20px 20px;
   }
+  .bg-dot-grid-full {
+    background-image: radial-gradient(rgba(0, 0, 0, 0.055) 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
   .mask-radial-fade {
     mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 35%, transparent 100%);

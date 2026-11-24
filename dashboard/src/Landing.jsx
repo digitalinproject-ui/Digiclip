@@ -690,9 +690,10 @@ export default function Landing({ onLaunchApp }) {
       </section>
 
       {/* By platform: one described card per source/destination, linking the
-          per-platform pages. */}
-      <section id="platforms" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+          per-platform pages. Alternating: Dot Grid Background */}
+      <section id="platforms" className="py-20 px-6 relative overflow-hidden bg-[#fafafa]">
+        <div className="absolute inset-0 bg-dot-grid-subtle pointer-events-none opacity-60" aria-hidden="true" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <SectionHeader eyebrow="Platforms" title="Made for Every Major Platform">
             One clip generator, tuned to where the video comes from and where the clips are going.
           </SectionHeader>
@@ -738,9 +739,10 @@ export default function Landing({ onLaunchApp }) {
 
       {/* One video in, many clips out: the real clips Digiclip cut from one
           CC BY episode with default settings, with the score the AI gave each.
-          The pattern the market leader opens with, shown with our own output. */}
-      <section className="py-20 px-6 border-b border-rule">
-        <div className="max-w-6xl mx-auto">
+          Alternating: Dot Grid Background */}
+      <section className="py-20 px-6 border-b border-rule relative overflow-hidden bg-[#fafafa]">
+        <div className="absolute inset-0 bg-dot-grid-subtle pointer-events-none opacity-60" aria-hidden="true" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <SectionHeader eyebrow="Curated Output" title="One episode in. Four viral clips out.">
             No prompts, no settings and no scrubbing: the AI scored every moment, kept the four that stand on their own and cut them with captions and a hook.
           </SectionHeader>
@@ -884,9 +886,10 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Comparison Table */}
-      <section id="comparison" className="py-20 px-6 border-t border-rule">
-        <div className="max-w-4xl mx-auto">
+      {/* Comparison Table: Alternating Dot Grid */}
+      <section id="comparison" className="py-20 px-6 border-t border-rule relative overflow-hidden bg-[#fafafa]">
+        <div className="absolute inset-0 bg-dot-grid-subtle pointer-events-none opacity-60" aria-hidden="true" />
+        <div className="max-w-4xl mx-auto relative z-10">
           <SectionHeader eyebrow="Comparison" title="Zero subscriptions. 100% free forever.">
             Digiclip is 100% free and open source with zero subscriptions or fees. Commercial alternatives charge $14 to $24 every month.
           </SectionHeader>
@@ -976,9 +979,10 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* Also included: the two tools that are not the clipper */}
-      <section className="py-20 px-6 border-t border-rule">
-        <div className="max-w-6xl mx-auto">
+      {/* Also included: More Tools - Alternating Dot Grid */}
+      <section className="py-20 px-6 border-t border-rule relative overflow-hidden bg-[#fafafa]">
+        <div className="absolute inset-0 bg-dot-grid-subtle pointer-events-none opacity-60" aria-hidden="true" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <SectionHeader eyebrow="More Tools" title="Extra tools included in Digiclip Studio">
             Available inside the same Digiclip Studio account, with zero extra configuration.
           </SectionHeader>
@@ -1081,9 +1085,10 @@ export default function Landing({ onLaunchApp }) {
         </div>
       </section>
 
-      {/* CTA Section — final statement */}
-      <section className="py-24 px-6 border-t border-rule bg-white">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* CTA Section — Alternating Dot Grid */}
+      <section className="py-24 px-6 border-t border-rule relative overflow-hidden bg-[#fafafa]">
+        <div className="absolute inset-0 bg-dot-grid mask-radial-fade pointer-events-none opacity-80" aria-hidden="true" />
+        <div className="max-w-3xl mx-auto text-center relative z-10">
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-neutral-900 tracking-tight mb-5">Start Creating Viral Videos Today.</h2>
           <p className="text-neutral-600 mb-10 max-w-xl mx-auto leading-relaxed text-base">100% Free &amp; Open Source · 4 clips per run · Zero subscription · Zero watermarks.</p>
           <div className="flex flex-wrap items-center justify-center gap-4">

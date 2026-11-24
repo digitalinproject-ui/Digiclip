@@ -1919,7 +1919,9 @@ function App() {
         {advancedThisTab && <AdvancedBanner needsPlan={needsPlan} onKeys={() => goToTab('settings')} />}
 
         {/* Main Workspace */}
-        <div className="flex-1 overflow-hidden relative">
+        <div className="flex-1 overflow-hidden relative bg-[#f8f9fb]">
+          {/* Global Studio Dot Grid Canvas Background */}
+          <div className="absolute inset-0 bg-dot-grid-subtle pointer-events-none opacity-50" aria-hidden="true" />
 
           {/* View: Settings */}
           {activeTab === 'settings' && (
