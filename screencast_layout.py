@@ -372,7 +372,7 @@ def detect_content_ranges(video_path, scenes, fps):
         print("   ⚠️ Screen check needs GEMINI_API_KEY.")
         return None
 
-    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-3.1-flash-lite'
+    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
     asked = shots_to_ask(scenes)
     print(f"   🔎 Screen check on {len(asked)} shot(s)…")
     try:

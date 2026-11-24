@@ -421,7 +421,7 @@ export default function Landing({ onLaunchApp }) {
     {
       icon: Sparkles,
       title: "AI Viral Moment Detection",
-      description: "Google Gemini 3.1 Flash-Lite scores your transcript and scene cuts to extract the top 4 viral moments automatically with zero manual scrubbing."
+      description: "Google Gemini 2.5 Flash scores your transcript and scene cuts to extract the top 4 viral moments automatically with zero manual scrubbing."
     },
     {
       icon: Scissors,
@@ -487,7 +487,7 @@ export default function Landing({ onLaunchApp }) {
 
   const steps = [
     { title: "Upload a Long-Form Video", description: "Paste any video link or drop video files — podcasts, webinars, livestreams, and interviews." },
-    { title: "AI Detects the Best Viral Moments", description: "Google Gemini 3.1 Flash-Lite analyzes engagement patterns to extract 8 high-potential clips." },
+    { title: "AI Detects the Best Viral Moments", description: "Google Gemini 2.5 Flash analyzes engagement patterns to extract 4 high-potential clips." },
     { title: "Smart Cropping to Vertical 9:16", description: "AI reframes horizontal footage to vertical with face tracking so speakers stay centered." },
     { title: "Add Subtitles, Hooks & Effects", description: "Auto-burn animated subtitles, hook text overlays, and optional multi-language AI dubbing." },
     { title: "Download or Post to Social Media", description: "Export your finished clips or post directly to TikTok, Instagram Reels, and YouTube Shorts." }
@@ -516,7 +516,7 @@ export default function Landing({ onLaunchApp }) {
     },
     {
       question: "What is Digiclip and how does it work?",
-      answer: "Digiclip is an advanced AI video clip generator and viral shorts studio. It converts long-form podcasts, webinars, and streams into 9:16 vertical shorts using faster-whisper for transcription, PySceneDetect for cut boundaries, and Google Gemini 3.1 Flash-Lite for viral scoring."
+      answer: "Digiclip is an advanced AI video clip generator and viral shorts studio. It converts long-form podcasts, webinars, and streams into 9:16 vertical shorts using faster-whisper for transcription, PySceneDetect for cut boundaries, and Google Gemini 2.5 Flash for viral scoring."
     },
     {
       question: "How does Digiclip compare to Opus Clip?",
@@ -536,7 +536,7 @@ export default function Landing({ onLaunchApp }) {
     },
     {
       question: "What AI does Digiclip use for viral moment detection?",
-      answer: "Digiclip uses Google Gemini 3.1 Flash-Lite, analyzing narrative momentum, emotional shifts, and audience hooks to score and rank the 4 strongest clips."
+      answer: "Digiclip uses Google Gemini 2.5 Flash, analyzing narrative momentum, emotional shifts, and audience hooks to score and rank the 4 strongest clips."
     },
     {
       question: "Can Digiclip translate and dub videos into other languages?",

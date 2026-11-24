@@ -2240,7 +2240,7 @@ def _run_gemini_stage(client, model_name, prompt, schema):
         response_mime_type="application/json",
         response_schema=schema,
     )
-    fallback_chain = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"]
+    fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
     curr_model = model_name
     fallback_idx = 0
     max_attempts = 6
@@ -2370,7 +2370,7 @@ def get_viral_clips(transcript_result, video_duration, viewer_clips=None):
                   "(set it, or point LLM_BASE_URL at an OpenAI-compatible server).")
             return None
         client = genai.Client(api_key=api_key)
-        model_name = os.environ.get("GEMINI_MODEL") or 'gemini-3.1-flash-lite'
+        model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
     print(f"\U0001f916  Model: {model_name} | language: {language}")
 
     # Full word list — ground truth for snapping cut points.
@@ -2649,7 +2649,7 @@ def _visual_pass(client, model_name, video_path, duration, language,
             response_mime_type="application/json",
             response_schema=gemini_worker.VisualResponse,
         )
-        fallback_chain = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-1.5-pro"]
+        fallback_chain = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-2.5-pro"]
         curr_model = model_name
         fallback_idx = 0
         max_attempts = 6
@@ -2721,7 +2721,7 @@ def get_visual_clips(video_path, video_duration, language="en", viewer_clips=Non
             print("❌ Error: GEMINI_API_KEY not found.")
         return None
     client = genai.Client(api_key=api_key)
-    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-3.1-flash-lite'
+    model_name = os.environ.get("GEMINI_MODEL") or 'gemini-2.5-flash'
 
     # The vision path has no scoring windows to derive a count from, so the
     # env targets (user request) apply directly over the classic 3-15.
