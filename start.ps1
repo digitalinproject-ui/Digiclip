@@ -1,5 +1,5 @@
 Write-Host "===================================================" -ForegroundColor Cyan
-Write-Host "         Memulai OpenShorts Video Clipper          " -ForegroundColor Cyan
+Write-Host "          Memulai Digiclip Video Clipper           " -ForegroundColor Cyan
 Write-Host "===================================================" -ForegroundColor Cyan
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -19,4 +19,4 @@ Start-Sleep -Seconds 3
 Write-Host "[3/3] Membuka browser..." -ForegroundColor Green
 Start-Process "http://127.0.0.1:5175"
 
-Write-Host "`nOpenShorts aktif di: http://127.0.0.1:5175" -ForegroundColor Cyan
+Write-Host "`nDigiclip aktif di: http://127.0.0.1:5175" -ForegroundColor Cyan
