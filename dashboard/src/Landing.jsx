@@ -1194,10 +1194,10 @@ export default function Landing({ onLaunchApp }) {
                 href="https://saweria.co/Digitalin"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Support Digiclip Open Source Project on Saweria"
+                title="Support & Donate Digiclip Open Source Project on Saweria"
                 className="text-rose-600 hover:text-rose-700 font-semibold bg-rose-50 px-3 py-1.5 rounded-full border border-rose-200 transition-colors flex items-center gap-1.5"
               >
-                ❤️ Support Project (Saweria)
+                ❤️ Support Donate (Saweria)
               </a>
               <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-900 transition-colors">GitHub</a>
               <a href="#features" className="hover:text-neutral-900 transition-colors">Features</a>

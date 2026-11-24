@@ -137,7 +137,6 @@ export function renderNav({ lang = 'en', signedIn = false, showLogin = true } = 
     ${login}
   </nav>
   <div class="osn-actions">
-    <a class="osn-donate" href="https://saweria.co/Digitalin" target="_blank" rel="noopener noreferrer" title="Support Digiclip Open Source Project on Saweria">❤️ <span class="osn-donate-text">Support Project</span></a>
     <a class="osn-cta" href="${APP_HREF}"${signedIn ? '' : ` title="${esc(t.ctaHint)}"`}>${esc(signedIn ? t.openApp : t.cta)}</a>
   </div>
 </div>

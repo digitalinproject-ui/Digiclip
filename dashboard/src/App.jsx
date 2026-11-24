@@ -1586,10 +1586,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2.5 px-3 py-2 text-rose-600 hover:text-rose-700 bg-rose-50/70 hover:bg-rose-100/80 rounded-xl transition-all font-semibold group"
-          title="Support Digiclip Open Source Project on Saweria"
+          title="Support & Donate Digiclip on Saweria"
         >
           <Heart size={16} className="shrink-0 text-rose-500 fill-rose-500 group-hover:scale-110 transition-transform" />
-          <span className="hidden lg:inline">Support Project</span>
+          <span className="hidden lg:inline">Support Donate</span>
           <span className="hidden lg:inline ml-auto text-[9px] font-bold uppercase bg-rose-200/80 text-rose-900 px-1.5 py-0.2 rounded-full">Saweria</span>
         </a>
         <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg hover:bg-neutral-100/60 transition-colors">
@@ -1671,10 +1671,10 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2.5 px-3 py-2 text-rose-600 bg-rose-50/70 hover:bg-rose-100/80 rounded-xl transition-all font-semibold"
-            title="Support Digiclip Open Source Project on Saweria"
+            title="Support & Donate Digiclip on Saweria"
           >
             <Heart size={16} className="text-rose-500 fill-rose-500" />
-            <span>Support Project</span>
+            <span>Support Donate</span>
             <span className="ml-auto text-[9px] font-bold uppercase bg-rose-200 text-rose-900 px-1.5 py-0.5 rounded-full">Saweria</span>
           </a>
           <a href="https://github.com/digitalinproject-ui/Digiclip" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-3 py-2 text-neutral-500 hover:text-neutral-900 rounded-lg transition-colors">
@@ -1771,18 +1771,6 @@ function App() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            {/* Support Project Button (Saweria) */}
-            <a
-              href="https://saweria.co/Digitalin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-rose-50 hover:bg-rose-100/80 border border-rose-200 text-rose-700 text-xs sm:text-sm font-semibold px-3 py-2 rounded-xl transition-all shadow-2xs shrink-0"
-              title="Support Digiclip Open Source Development on Saweria"
-            >
-              <Heart size={15} className="text-rose-500 fill-rose-500" />
-              <span className="hidden md:inline">Support Project</span>
-            </a>
-
             {/* Primary Action Button (Generate New Clip / New Project) */}
             <button
               onClick={handleReset}
