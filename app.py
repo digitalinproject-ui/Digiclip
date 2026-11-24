@@ -3372,6 +3372,7 @@ async def run_job_wrapper(job_id):
     job = jobs.get(job_id)
     interrupted = False
     started = time.monotonic()
+    slot_released = False
     try:
         if job:
             await run_job(job_id, job)
@@ -3388,31 +3389,35 @@ async def run_job_wrapper(job_id):
     except Exception as e:
          print(f"❌ Job wrapper error {job_id}: {e}")
     finally:
-        if interrupted or (_stopping and job and job.get('status') != 'completed'):
-            _release_slot(job_id)
-            print(f"♻️ Server stopping: leaving {job_id} for the next instance.")
-            if interrupted:
-                raise asyncio.CancelledError()
-            return
-        if _should_auto_retry(job):
-            _schedule_auto_retry(job_id, job)
-            _release_slot(job_id)
-            print(f"🔁 Released slot for job {job_id} (auto-retry scheduled).")
-            return
-        # The subprocess returned (success or genuine failure): a terminal
-        # state. What is left (settle, R2 archive, unmark, webhook, emails) is
-        # network I/O that never touches the card, so the GPU slot goes to the
-        # next job now and the delivery runs outside it. The job enters the
-        # delivery stage (manifest stamped, ``_delivering_jobs``) BEFORE it
-        # leaves ``_running_jobs``: a drain or a scan never sees it in neither.
+        if not slot_released:
+            if interrupted or (_stopping and job and job.get('status') != 'completed'):
+                _release_slot(job_id)
+                slot_released = True
+                print(f"♻️ Server stopping: leaving {job_id} for the next instance.")
+            elif _should_auto_retry(job):
+                _schedule_auto_retry(job_id, job)
+                _release_slot(job_id)
+                slot_released = True
+                print(f"🔁 Released slot for job {job_id} (auto-retry scheduled).")
+            else:
+                # The subprocess returned (success or genuine failure): a terminal
+                # state. What is left (settle, R2 archive, unmark, webhook, emails) is
+                # network I/O that never touches the card, so the GPU slot goes to the
+                # next job now and the delivery runs outside it. The job enters the
+                # delivery stage (manifest stamped, ``_delivering_jobs``) BEFORE it
+                # leaves ``_running_jobs``: a drain or a scan never sees it in neither.
+                if job is not None:
+                    _begin_delivery(job_id, job)
+                _release_slot(job_id)
+                slot_released = True
+                print(f"✅ Released slot for job: {job_id}")
+    if interrupted:
+        raise asyncio.CancelledError()
+    if not (_stopping and job and job.get('status') != 'completed') and not _should_auto_retry(job):
         if job is not None:
-            _begin_delivery(job_id, job)
-        _release_slot(job_id)
-        print(f"✅ Released slot for job: {job_id}")
-    if job is not None:
-        await _deliver_job(job_id, job)
-    else:
-        _clear_resume_manifest(job_id)
+            await _deliver_job(job_id, job)
+        else:
+            _clear_resume_manifest(job_id)
 
 
 # --- Delivery, outside the GPU slot -------------------------------------------
