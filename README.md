@@ -5,6 +5,37 @@ Turn long videos and raw podcast folders into viral 9:16 vertical Shorts, TikTok
 
 ---
 
+## 🖼️ Product Showcase & How It Works
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/showcase/01-paste-link-upload.jpg" alt="01 - Paste Link YouTube / Upload Video" width="100%" />
+      <br />
+      <sub><b>1. Paste Link YouTube / Upload Video</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/showcase/02-live-analysis-viral-score.jpg" alt="02 - Live Analysis & AI Viral Detection" width="100%" />
+      <br />
+      <sub><b>2. Live Analysis & AI Viral Detection</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/showcase/03-download-and-post.jpg" alt="03 - Download & Post" width="100%" />
+      <br />
+      <sub><b>3. Download & Post</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/showcase/04-jadi-clipper-overview.jpg" alt="04 - Digiclip Overview" width="100%" />
+      <br />
+      <sub><b>4. Jadi Clipper Tanpa Jago Ngedit</b></sub>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## ✨ Killer Features
 
 ### 1. 📂 Local Batch Studio (Folder-to-Clips Automation)
